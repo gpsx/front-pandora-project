@@ -32,7 +32,7 @@ div .content {
     border-radius: 10px;
 }
 
-div .content .content-wrapper-logo{
+div .content .content-wrapper-logo {
     /* Itens de alinhamento */
     align-items: center;
     display: flex;
