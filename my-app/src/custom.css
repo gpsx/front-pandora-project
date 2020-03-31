@@ -1,12 +1,21 @@
-body{
-    background-color: #F1F1F1;
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    box-sizing: border-box;
 }
 
-.cores{
+body {
+    font: 400 14px Roboto, sans-serif;
+    background-color: #F0F0F5;
+    -webkit-font-smoothing: antialiased;
+}
+
+.cores {
     color: #0B3C5D;
     color: #328CC1;
     color: #F2F2F2;
     color: #696969;
     color: #FFD700;
-
 }
