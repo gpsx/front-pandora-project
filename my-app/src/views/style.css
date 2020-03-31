@@ -75,6 +75,7 @@
     font-family: Roboto;
     text-decoration: none;
     font-size: 14px;
+    transition: border-color(0.1s);
 }
 
 #menu ul li a:hover {
@@ -91,20 +92,13 @@
 }
 
 #menu button {
-    position: relative;
-    width: 93px;
-    height: 33px;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 14px;
-    line-height: 16px;
-    border-radius: 5px;
-    box-sizing: border-box;
-    cursor: pointer;
     /* Alteráveis */
     color: #E5E5E5;
     background: #0B3C5D;
     border: none;
+}
+#menu button:hover{
+    background: #696969;
 }
 
 #menu button+button {
@@ -112,4 +106,10 @@
     border: 1px solid #E5E5E5;
     background: none;
     color: #328CC1;
+}
+
+#menu button+button:hover{
+    border: 1px solid #696969;
+    background: none;
+    color: #696969;
 }

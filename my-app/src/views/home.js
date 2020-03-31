@@ -1,6 +1,5 @@
 import React from 'react';
-import Button from './../components/Button'
-import Menu from './../components/Menu'
+import Menu from '../components/Menu'
 
 class Home extends React.Component{
 
