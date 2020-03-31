@@ -1,6 +1,7 @@
 import React from 'react'
-import Menu from './../../components/Menu'
+import Menu from '../../components/Menu'
 import LogoImg from './../../assets/logo72.png'
+import './../../custom.css'
 import './style.css'
 
 class Login extends React.Component {
@@ -10,7 +11,10 @@ class Login extends React.Component {
         return (
             <>
                 <Menu />
+                    
                 <div id='login-container'>
+
+
                     <div className='content'>
                         <div className='content-wrapper-logo'>
                             <img src={LogoImg} />
@@ -19,17 +23,22 @@ class Login extends React.Component {
                     </div>
 
                     <form className='content'>
-                        <p class='input-content'>
+                        <p class='login-input'>
                             <label>Email:</label>
-                            <br />
                             <input type="text" />
                         </p>
                         <br />
-                        <p class='input-content'>
+                        <p class='login-input'>
                             <label>Senha:</label>
-                            <br />
                             <input type="password" />
+                            <a href='' >Esqueci minha senha</a>
                         </p>
+                        <br />
+                        <div className='login-button'>
+                            <button type='submit'>ENTRAR</button>
+                            <a href='' >Não tem uma conta? Cadastre-se</a>
+                        </div>
+
                     </form>
                 </div>
             </>

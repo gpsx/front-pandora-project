@@ -2,7 +2,7 @@ import React from 'react'
 import { IoIosSearch } from 'react-icons/io'
 import logoImg from './../assets/logo.png';
 import './../custom.css';
-import './../views/style.css';
+import './style.css';
 
 
 export default function Menu() {
@@ -23,7 +23,7 @@ export default function Menu() {
                 <div className='input-content'>
                     <form onSubmit={submitForm}>
                         <IoIosSearch size={30} color='#E5E5E5' />
-                        <input type="text" placeholder="Procure por serviços..." />
+                        <input type="text" className='input-menu' placeholder="Procure por serviços..." />
                     </form>
                 </div>
 

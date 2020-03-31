@@ -42,7 +42,7 @@
     border: 1px solid #328CC1;
 }
 
-#menu .input-content input {
+#menu .input-content .input-menu {
     position: absolute;
     border: none;
     margin-left: 10px;
