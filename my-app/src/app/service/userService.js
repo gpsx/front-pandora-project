@@ -2,12 +2,15 @@ const api = require("./apiService")
 const utils = require("../src/utils/index") 
 
 module.exports = {
+
     registerProvider: async (provider) => {
         return await api.post("/users", provider)
     },
+
     registerRequester: async (requester) => {
         return await api.post("/users", requester)
     },
+    
     login: async (email, password) => {
         credentials = {
             email, 

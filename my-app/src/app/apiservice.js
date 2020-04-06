@@ -1,36 +1,23 @@
-import axios from 'axios';
+const axios = require('axios')
+const baseUrl = "http://localhost:8080"
 
-const httpClient = axios.create({
-    baseURL: 'http://localhost:8080'
-})
+module.exports = {
 
-class ApiService{
+    get: async (uri) => {
+        res = await axios.get(baseUrl + uri)
+        return res.data
+    },
 
-    constructor(apiurl){
-        this.apiurl = apiurl;
+    post: async (uri, params) => {
+        let res = await axios.post(baseUrl + uri, params);
+        return {
+            data: res.data,
+            status: res.status
+        }
+    },
+    
+    delete: async (uri) => {
+        res = await axios.delete(baseUrl + uri)
+        return res.status
     }
-
-    post(url, objeto){
-        const requestUrl = `${this.apiurl}${url}`;
-        return httpClient.post(requestUrl, objeto);
-    }
-
-    put(url, objeto){
-        const requestUrl = `${this.apiurl}${url}`;
-        return httpClient.put(url, objeto);
-    }
-
-    delete(url){
-        const requestUrl = `${this.apiurl}${url}`;
-        return httpClient.delete(url);
-    }
-
-    get(url){
-        const requestUrl = `${this.apiurl}${url}`;
-        return httpClient.get(url);
-    }
-
-
 }
-
-export default ApiService;

@@ -1,13 +1,13 @@
-const api = require("./apiService")
+const api = require("../apiService")
 
-async function showUsers(){
+async function showUsers() {
     const users = await api.get("/users")
     console.log(users);
 }
-async function newUser(){
+async function newUser() {
     user = await api.get("/users")
     params = {
-        id: user[user.length-1].id+1,
+        id: user[user.length - 1].id + 1,
         first_name: 'Freda',
         last_name: 'Blaira',
         email: 'freddyb34@gmail.coma'
@@ -16,9 +16,9 @@ async function newUser(){
     console.log(users);
 }
 
-async function deleteUser(){
+async function deleteUser() {
     user = await api.get("/users")
-    const deleted = await api.delete(`/users/${user[user.length-1].id}`)
+    const deleted = await api.delete(`/users/${user[user.length - 1].id}`)
     console.log(deleted);
 }
 
