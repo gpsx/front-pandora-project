@@ -19,3 +19,17 @@ body {
     color: #696969;
     color: #FFD700;
 }
+
+.botao-padrao{
+    position: relative;
+    width: 93px;
+    height: 33px;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 16px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+

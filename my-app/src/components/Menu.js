@@ -1,7 +1,9 @@
 import React from 'react'
 import { IoIosSearch } from 'react-icons/io'
 import logoImg from './../assets/logo.png';
-import './../views/style.css';
+import './../custom.css';
+import './style.css';
+
 
 export default function Menu() {
 
@@ -10,8 +12,6 @@ export default function Menu() {
     };
 
     return (
-
-
         <div className="menu-container">
             <nav id="menu">
 
@@ -23,24 +23,24 @@ export default function Menu() {
                 <div className='input-content'>
                     <form onSubmit={submitForm}>
                         <IoIosSearch size={30} color='#E5E5E5' />
-                        <input type="text" placeholder="Procure por serviços..." />
+                        <input type="text" className='input-menu' placeholder="Procure por serviços..." />
                     </form>
                 </div>
 
                 <div>
                     <ul>
-                        <li><a href="#">Quem somos</a></li>
-                        <li><a href="#">Categorias</a></li>
-                        <li><a href="#">Top Serviços</a></li>
+                        <li><a href="#/quemsomos">Quem somos</a></li>
+                        <li><a href="#/categorias">Categorias</a></li>
+                        <li><a href="#/topservicos">Top Serviços</a></li>
                     </ul>
                 </div>
 
                 <div className='button-content'>
-                    <button type='button' className=''>LOGIN</button>
-                    <button type='button' className=''>CADASTRO</button>
+                    <button type='button' className='botao-padrao'>LOGIN</button>
+                    <button type='button' className='botao-padrao'>CADASTRO</button>
                 </div>
             </nav>
-        </div>
 
+        </div>
     );
 }
