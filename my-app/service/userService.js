@@ -24,9 +24,13 @@ module.exports = {
 verifyUser = (users, credentials) => {
     for (const user of users) {
         if (user.email == credentials.email && user.senha == credentials.password) {
-            return true
+            user.status = 200
+            return user
         }
     }
-    return false
+    return {
+        status: 404,
+        Message: "Não encontrado"
+    }
 }
 
