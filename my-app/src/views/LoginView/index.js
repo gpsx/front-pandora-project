@@ -3,7 +3,7 @@ import Menu from '../../components/Menu'
 import LogoImg from './../../assets/logo72.png'
 import './../../custom.css'
 import './style.css'
-import UsuarioService from './../../../service/userService'
+import UsuarioService from '../../service/userService'
 import  utils from './../../utils/index'
 import LocalStorage from './../../app/service/localStorage'
 

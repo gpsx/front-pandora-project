@@ -1,5 +1,5 @@
 const api = require("./apiService")
-const utils = require("../src/utils/index") 
+const utils = require("../utils/index") 
 
 module.exports = {
     registerProvider: async (provider) => {
@@ -9,21 +9,21 @@ module.exports = {
         return await api.post("/users", requester)
     },
     login: async (email, password) => {
-        credentials = {
+        let credentials = {
             email, 
-            password = utils.encrypt(password)
+            password : utils.encrypt(password)
         }
 
-        users = await api.post("/users", requester)
+        let users = await api.get("/users")
         return verifyUser(users, credentials)
         
         //return await api.post("/login", credentials)
     },
 }
 
-verifyUser = (users, credentials) => {
+var verifyUser = (users, credentials) => {
     for (const user of users) {
-        if (user.email == credentials.email && user.senha == credentials.password) {
+        if (user.email === credentials.email && user.senha === credentials.password) {
             user.status = 200
             return user
         }

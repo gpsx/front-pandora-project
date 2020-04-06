@@ -2,7 +2,7 @@ const axios = require('axios')
 const baseUrl = "http://localhost:8080"
 module.exports = {
     get: async (uri) => {
-        res = await axios.get(baseUrl + uri)
+        let res = await axios.get(baseUrl + uri)
         return res.data
     },
     post: async (uri, params) => {
@@ -13,7 +13,7 @@ module.exports = {
         }
     },
     delete: async (uri) => {
-        res = await axios.delete(baseUrl + uri)
+        let res = await axios.delete(baseUrl + uri)
         return res.status
     }
 }
