@@ -3,25 +3,27 @@ import Menu from '../../components/Menu'
 import LogoImg from './../../assets/logo72.png'
 import './../../custom.css'
 import './style.css'
-import UsuarioService from './../../../service/userService'
+import service from './../../app/service/userService'
 import utils from './../../utils/index'
-import LocalStorage from './../../app/service/localStorage'
 
 class Login extends React.Component {
 
     state = {
-        email: '',
-        senha: '',
+        email: 'teste',
+        senha: 'teste',
         mensagemErro: null
     }
 
-    constructor() {
-        super();
-        this.service = new UsuarioService();
+    entrar = () => {
+
+        const retorno = service.login(this.state.email, this.state.senha);
+        console.log(retorno);
+
     }
 
-    entrar = () => {
-        this.service.Login({
+    /* 
+        entrar = () => {
+        service.login({
             user: this.state.email,
             password: utils.encrypt(this.state.senha)
         }).then(response => {
@@ -31,6 +33,8 @@ class Login extends React.Component {
             this.setState({ mensagemErro: erro.response.data })
         })
     }
+    */
+
 
     render() {
         return (
@@ -42,13 +46,13 @@ class Login extends React.Component {
 
                     <div className='content'>
                         <div className='content-wrapper-logo'>
-                            <img src={LogoImg} />
+                            <img src={LogoImg} alt="Imagem logo pandora" />
                             <h1>Projeto Pandora</h1>
                         </div>
                     </div>
 
-                    <form className='content'>
-                        <p class='login-input'>
+                    <form className='content' onSubmit={this.entrar}>
+                        <p className='login-input'>
                             <label>Email:</label>
                             <input
                                 type="text"
@@ -57,7 +61,7 @@ class Login extends React.Component {
                             />
                         </p>
                         <br />
-                        <p class='login-input'>
+                        <p className='login-input'>
                             <label>Senha:</label>
                             <input
                                 type="password"
