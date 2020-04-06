@@ -1,3 +1,19 @@
 {
-  "users": []
+  "users": [
+    {
+      "nome": "Massaru",
+      "senha": "senha123",
+      "email": "outroemail@gmail.com",
+      "cpf": "111111",
+      "telefone": "40028922",
+      "cnpj": "333333333",
+      "endereco": {
+        "bairro": "Jardim Bela Vista",
+        "cep": "09041370",
+        "complemento": "ap172 b1",
+        "numero": "161",
+        "rua": "são josé operario"
+      }
+    }
+  ]
 }
