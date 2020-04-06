@@ -1,23 +1,32 @@
 const api = require("./apiService")
-const CryptoJS = require("crypto-js") 
+const utils = require("../src/utils/index") 
 
-encrypt = (string) => {
-    var hash = CryptoJS.SHA256(string);
-    return hash.toString(CryptoJS.enc.Hex)
-}
 module.exports = {
     registerProvider: async (provider) => {
-        return await api.post("/registerProvider", provider)
+        return await api.post("/users", provider)
     },
     registerRequester: async (requester) => {
-        return await api.post("/registerRequester", requester)
+        return await api.post("/users", requester)
     },
-    login: async (user, password) => {
+    login: async (email, password) => {
         credentials = {
-            user, 
-            password = encrypt(password)
+            email, 
+            password = utils.encrypt(password)
         }
-        return await api.post("/login", credentials)
+
+        users = await api.post("/users", requester)
+        return verifyUser(users, credentials)
+        
+        //return await api.post("/login", credentials)
     },
+}
+
+verifyUser = (users, credentials) => {
+    for (const user of users) {
+        if (user.email == credentials.email && user.senha == credentials.password) {
+            return true
+        }
+    }
+    return false
 }
 
