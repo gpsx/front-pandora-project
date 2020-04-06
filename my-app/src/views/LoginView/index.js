@@ -4,7 +4,6 @@ import LogoImg from './../../assets/logo72.png'
 import './../../custom.css'
 import './style.css'
 import service from './../../app/service/userService'
-import utils from './../../utils/index'
 
 class Login extends React.Component {
 
@@ -15,25 +14,18 @@ class Login extends React.Component {
     }
 
     entrar = () => {
-
-        const retorno = service.login(this.state.email, this.state.senha);
-        console.log(retorno);
-
-    }
-
-    /* 
-        entrar = () => {
         service.login({
-            user: this.state.email,
-            password: utils.encrypt(this.state.senha)
+            email: this.state.email,
+            senha: this.state.senha
         }).then(response => {
             localStorage.addItem('_usuario_logado', response.data);
+            console.log(response)
             //this.props.history.push(/homeUsuario);
         }).catch(erro => {
+            console.log(erro.response.data)
             this.setState({ mensagemErro: erro.response.data })
         })
     }
-    */
 
 
     render() {

@@ -11,16 +11,19 @@ module.exports = {
         return await api.post("/users", requester)
     },
 
-    login: async (email, password) => {
+    login: async (credentials) => {
+
+           /*
         let credentials = {
             email,
-            password: utils.encrypt(password)
+            senha: password
         }
 
         const users = await api.post("/users")
         return verifyUser(users, credentials)
+        */
 
-        //return await api.post("/login", credentials)
+        return await api.get("/solicitante/login", credentials)
     },
 }
 
