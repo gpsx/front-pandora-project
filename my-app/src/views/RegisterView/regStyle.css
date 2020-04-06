@@ -4,7 +4,7 @@
 #register-container {
     position: absolute;
     width: 65%;
-    height: 165%;
+    height: 150%;
     /* Itens de alinhamento */
     align-items: center;
     display: flex;
@@ -77,6 +77,7 @@ hr {
     display: block;
     width: 288px;
     height: 33px;
+    padding: 5px;
     background: #FFFFFF;
     border: 1px solid #328CC1;
 }
