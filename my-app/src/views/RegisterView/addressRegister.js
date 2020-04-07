@@ -2,8 +2,9 @@ import React from 'react'
 import Menu from '../../components/Menu'
 import Icone from './../../assets/icone-cards.png'
 import './registerStyle.css'
+import './addressStyle.css'
 
-class Cadastro extends React.Component {
+class Endereco extends React.Component {
 
     render() {
         return (
@@ -11,8 +12,8 @@ class Cadastro extends React.Component {
         <>
             < Menu id='menu'/>   
 
-            <div id='register-container'>
-                <div id='rcontent'>
+            <div id='address-container'>
+                <div id='acontent'>
 
                     <span id="title">Estamos quase lá!</span>
                     <hr/>
@@ -22,54 +23,42 @@ class Cadastro extends React.Component {
                         para nos conhecermos e para o seu acesso às 
                         funcionalidades do Pandora.</div>
 
-                    <div id="second-title">Dados Cadastrais - Passo 1/2</div>
+                    <div id="second-title">Dados Cadastrais - Passo 2/2</div>
                     <hr/>
                     <br/><br/>
                     <form className='form-content'>
                             <p class='register-input'>
-                                <label>Nome Completo</label>
+                                <label>CEP</label>
                                 <br/>
                                 <input type="text" refs="name"/>
                             </p>
                             <br />
                             <p class='register-input'>
-                                <label>E-mail</label>
+                                <label>Nome da Rua</label>
                                 <br/>
                                 <input type="text" refs="email"/>
                             </p>
                             <br />
                             <p class='register-input'>
-                                <label>CNPJ</label>
+                                <label>Número</label>
                                 <br/>
                                 <input type="text" refs="cnpj" />
                             </p>
                             <br />
                             <p class='register-input'>
-                                <label>CPF</label>
+                                <label>Bairro</label>
                                 <br/>
                                 <input type="text" refs="cpf" />
                             </p>
                             <br />
                             <p class='register-input'>
-                                <label>Telefone</label>
+                                <label>Complemento</label>
                                 <br/>
                                 <input type="text" refs="phone" />
                             </p>
                             <br />
-                            <p class='register-input'>
-                                <label>Senha</label>
-                                <br/>
-                                <input type="password" />
-                            </p>
-                            <br />
-                            <p class='register-input'>
-                                <label>Confirmar senha</label>
-                                <br/>
-                                <input type="password" refs="password" />
-                            </p>
-                            <br />
                             <div className='register-button floatLeft'>
-                                <button id='register' type='submit' >CONTINUAR</button>
+                                <button id='register' type='submit'>CADASTRAR</button>
                             </div>
                             <div className='clear-button floatLeft'>
                                 <button id="clear" type='button'>LIMPAR CAMPOS</button>
@@ -119,4 +108,4 @@ class Cadastro extends React.Component {
 
 }
 
-export default Cadastro;
+export default Endereco;
