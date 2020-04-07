@@ -1,4 +1,4 @@
-const api = require("./../apiService")
+const api = require("../apiservice")
 const utils = require("./../../utils/index")
 
 module.exports = {
@@ -11,20 +11,19 @@ module.exports = {
         return await api.post("/users", requester)
     },
 
-    login: async (credentials) => {
+    login: async (email, senha) => {
 
-           /*
         let credentials = {
             email,
-            senha: password
+            password: utils.encrypt(senha)
         }
 
-        const users = await api.post("/users")
-        return verifyUser(users, credentials)
-        */
+        const users = await api.get("/users")
+        return await verifyUser(users, credentials)
+        
 
-        return await api.get("/solicitante/login", credentials)
-    },
+        //return await api.get("/solicitante/login", credentials)
+    }
 }
 
 function verifyUser(users, credentials) {

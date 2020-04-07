@@ -26,43 +26,43 @@ class Cadastro extends React.Component {
                     <hr/>
                     <br/><br/>
                     <form className='form-content'>
-                            <p class='register-input'>
+                            <p className='register-input'>
                                 <label>Nome Completo</label>
                                 <br/>
                                 <input type="text" refs="name"/>
                             </p>
                             <br />
-                            <p class='register-input'>
+                            <p className='register-input'>
                                 <label>E-mail</label>
                                 <br/>
                                 <input type="text" refs="email"/>
                             </p>
                             <br />
-                            <p class='register-input'>
+                            <p className='register-input'>
                                 <label>CNPJ</label>
                                 <br/>
                                 <input type="text" refs="cnpj" />
                             </p>
                             <br />
-                            <p class='register-input'>
+                            <p className='register-input'>
                                 <label>CPF</label>
                                 <br/>
                                 <input type="text" refs="cpf" />
                             </p>
                             <br />
-                            <p class='register-input'>
+                            <p className='register-input'>
                                 <label>Telefone</label>
                                 <br/>
                                 <input type="text" refs="phone" />
                             </p>
                             <br />
-                            <p class='register-input'>
+                            <p className='register-input'>
                                 <label>Senha</label>
                                 <br/>
                                 <input type="password" />
                             </p>
                             <br />
-                            <p class='register-input'>
+                            <p className='register-input'>
                                 <label>Confirmar senha</label>
                                 <br/>
                                 <input type="password" refs="password" />

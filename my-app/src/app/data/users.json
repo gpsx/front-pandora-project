@@ -1,8 +1,25 @@
 {
   "users": [
     {
+      "id": 1,
       "nome": "Massaru",
-      "senha": "senha123",
+      "senha": "55a5e9e78207b4df8699d60886fa070079463547b095d1a05bc719bb4e6cd251",
+      "email": "outroemail@gmail.com",
+      "cpf": "111111",
+      "telefone": "40028922",
+      "cnpj": "333333333",
+      "endereco": {
+        "bairro": "Jardim Bela Vista",
+        "cep": "09041370",
+        "complemento": "ap172 b1",
+        "numero": "161",
+        "rua": "são josé operario"
+      }
+    },
+    {
+      "id": 2,
+      "nome": "Massaru",
+      "senha": "55a5e9e78207b4df8699d60886fa070079463547b095d1a05bc719bb4e6cd251",
       "email": "outroemail@gmail.com",
       "cpf": "111111",
       "telefone": "40028922",

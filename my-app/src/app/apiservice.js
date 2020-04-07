@@ -1,8 +1,5 @@
 const axios = require('axios')
-
-const baseUrl = "http://localhost:8080"
-
-
+const baseUrl = "http://localhost:4000"
 
 module.exports = {
 

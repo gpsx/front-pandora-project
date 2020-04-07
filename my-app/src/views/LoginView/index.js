@@ -13,18 +13,29 @@ class Login extends React.Component {
         mensagemErro: null
     }
 
-    entrar = () => {
-        service.login({
-            email: this.state.email,
-            senha: this.state.senha
-        }).then(response => {
-            localStorage.addItem('_usuario_logado', response.data);
-            console.log(response)
-            //this.props.history.push(/homeUsuario);
-        }).catch(erro => {
-            console.log(erro.response.data)
-            this.setState({ mensagemErro: erro.response.data })
-        })
+    entrar = async () => {
+        // service.login({
+        //     email: this.state.email,
+        //     senha: this.state.senha
+        // }).then(response => {
+        //     localStorage.addItem('_usuario_logado', response.data);
+        //     console.log(response)
+        //     //this.props.history.push(/homeUsuario);
+        // }).catch(erro => {
+        //     console.log(erro)
+        //     //this.setState({ mensagemErro: erro.response.Message })
+        // })
+
+        let response = await service.login(this.state.email, this.state.senha)
+        if(response.status == 200){
+            localStorage.setItem('_usuario_logado', response.data);
+            console.log("Usuario Autenticado");
+            
+        } else {
+            this.setState({ mensagemErro: response.Message })
+            console.log(response.Message);
+        }
+        
     }
 
 
@@ -34,7 +45,6 @@ class Login extends React.Component {
                 <Menu />
 
                 <div id='login-container'>
-
 
                     <div className='content'>
                         <div className='content-wrapper-logo'>
