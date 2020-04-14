@@ -1,11 +1,17 @@
 import React from 'react';
+import Menu from '../../components/Menu';
+import ApresentacaoHome from './ApresentacaoHome.js'
+import Valores from './Valores'
 
-function Home() {
+function HomeView() {
     return (
-      <div>
+        <>
+            <Menu />
+            <ApresentacaoHome />
+            <Valores />
 
-      </div>
+        </>
     );
-  }
-  
-  export default Home;
+}
+
+export default HomeView;

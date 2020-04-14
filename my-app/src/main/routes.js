@@ -5,8 +5,7 @@ import Cadastro from '../views/RegisterView'
 import Endereco from '../views/RegisterView/addressRegister'
 import HomePrestador from '../views/HomePrestadorView'
 import Servico from '../views/RegisterView/serviceRegister'
-import Home from './../views/HomeView'
-import QuemSomos from './../views/QuemSomosView'
+import Home from './../views/HomeView/index.js'
 import Materialize from './../views/MateriaView'
 
 function Routes() {
@@ -18,7 +17,6 @@ function Routes() {
                 <Route path="/register" component={Cadastro} />
                 <Route path="/address" component={Endereco} />
                 <Route path="/prestador" component={HomePrestador} />
-                <Route path="/quemsomos" component={QuemSomos} />
                 <Route path="/first-service" component={Servico}/>
                 <Route path="/" component={Home} />
             </Switch>

@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Button from './../../components/Button';
-import Typography from './../../components/Typography';
-import ProductHeroLayout from './layout';
+import Button from '../../components/Button';
+import Typography from '../../components/Typography';
+import HomeLayout from './HomeLayout';
 import ImgFundo from './../../assets/fundo-institucional.jpg'
 
 const styles = (theme) => ({
@@ -14,10 +14,16 @@ const styles = (theme) => ({
   },
   button: {
     minWidth: 200,
-    backgroundColor: '#FFD700',
+    backgroundColor: '#0069d9',
     color: 'black',
+    '&:hover': {
+      backgroundColor: '#ffff',
+      borderColor: '#ffff',
+      boxShadow: 'none',
+    },
   },
   h5: {
+    fontFamily: 'Roboto',
     marginBottom: theme.spacing(4),
     marginTop: theme.spacing(4),
     [theme.breakpoints.up('sm')]: {
@@ -29,17 +35,21 @@ const styles = (theme) => ({
   },
 });
 
-function ProductHero(props) {
+function ApresentacaoHome(props) {
   const { classes } = props;
 
   return (
-    <ProductHeroLayout backgroundClassName={classes.background}>
+    <HomeLayout backgroundClassName={classes.background}>
       <img style={{ display: 'none' }} src={ImgFundo} alt="increase priority" />
       <Typography color="inherit" align="left" variant="h2" marked="center">
-        Upgrade your Sundays
+        Procurando um prestador de serviço?
       </Typography>
       <Typography color="inherit" align="center" variant="h5" className={classes.h5}>
-        Enjoy secret offers up to -70% off the best luxury hotels every Sunday.
+        <p>
+          Entre em nossa plataforma e encontre o profissional
+          < br />
+          Que você está procurando!
+        </p>
       </Typography>
       <Button
         variant="contained"
@@ -51,9 +61,9 @@ function ProductHero(props) {
         Cadastre-se
       </Button>
       <Typography variant="body2" color="inherit" className={classes.more}>
-        Discover the experience
+        Faça parte da nossa equipe!
       </Typography>
-    </ProductHeroLayout>
+    </HomeLayout>
   );
 }
 
@@ -61,4 +71,4 @@ ProductHero.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(ProductHero);
+export default withStyles(styles)(ApresentacaoHome);

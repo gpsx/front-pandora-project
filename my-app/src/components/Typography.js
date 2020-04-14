@@ -10,28 +10,28 @@ const styles = (theme) => ({
     width: 73,
     display: 'block',
     margin: `${theme.spacing(1)}px auto 0`,
-    backgroundColor: '#FFD700',
+    backgroundColor: '#0069d9',
   },
   markedH3Center: {
     height: 4,
     width: 55,
     display: 'block',
     margin: `${theme.spacing(1)}px auto 0`,
-    backgroundColor: '#FFD700',
+    backgroundColor: '#0069d9',
   },
   markedH4Center: {
     height: 4,
     width: 55,
     display: 'block',
     margin: `${theme.spacing(1)}px auto 0`,
-    backgroundColor: '#FFD700',
+    backgroundColor: '#0069d9',
   },
   markedH6Left: {
     height: 2,
     width: 28,
     display: 'block',
     marginTop: theme.spacing(0.5),
-    background: '#FFD700',
+    background: '#0069d9',
   },
 });
 

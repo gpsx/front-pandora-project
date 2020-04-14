@@ -48,7 +48,7 @@ const styles = (theme) => ({
   },
 });
 
-function ProductHeroLayout(props) {
+function HomeLayout(props) {
   const { backgroundClassName, children, classes } = props;
 
   return (
@@ -68,4 +68,4 @@ ProductHeroLayout.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(ProductHeroLayout);
+export default withStyles(styles)(HomeLayout);

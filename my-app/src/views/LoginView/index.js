@@ -28,7 +28,7 @@ class Login extends React.Component {
         // })
 
         let response = await service.login(this.state.email, this.state.senha)
-        if (response.status == 200) {
+        if (response.status === 200) {
             localStorage.setItem('_usuario_logado', response.data);
             console.log("Usuario Autenticado");
 
