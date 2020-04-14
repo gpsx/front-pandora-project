@@ -3,9 +3,9 @@
 
 #register-container {
     position: absolute;
-    width: 65%;
-    height: 164%;
-    margin-top:-3%;
+    width: 60%;
+    height: 180%;
+    margin-top:-3.5%;
     /* Itens de alinhamento */
     align-items: center;
     display: flex;
@@ -30,7 +30,7 @@
     padding-left:5%;
     padding-right:5%;
     margin-top: 15%;
-    margin-left: 15%;
+    margin-left: 25%;
     /* Formato do Card */
     background: #ffffff;;
     border: 1% solid #F2F2F2;
@@ -170,7 +170,7 @@ hr {
 
 .information-bar {
     position: absolute;
-    margin-top: 11%;
+    margin-top: 8%;
     margin-left: 65%;
 }
 
