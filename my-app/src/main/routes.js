@@ -4,6 +4,7 @@ import Login from '../views/LoginView'
 import Cadastro from '../views/RegisterView'
 import Endereco from '../views/RegisterView/addressRegister'
 import HomePrestador from '../views/HomePrestadorView'
+import Servico from '../views/RegisterView/serviceRegister'
 import Home from './../views/HomeView'
 import QuemSomos from './../views/QuemSomosView'
 import Materialize from './../views/MateriaView'
@@ -18,6 +19,7 @@ function Routes() {
                 <Route path="/address" component={Endereco} />
                 <Route path="/prestador" component={HomePrestador} />
                 <Route path="/quemsomos" component={QuemSomos} />
+                <Route path="/first-service" component={Servico}/>
                 <Route path="/" component={Home} />
             </Switch>
         </HashRouter>
