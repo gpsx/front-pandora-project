@@ -1,12 +1,13 @@
 #scontent {
     position: relative;
-    width: 75%;
-    height: 80%;
+    width: 70%;
+    height: 85%;
     /* Alinhamento do conteúdo */
     padding-top: 3%;
     padding-left:5%;
     padding-right:5%;
     margin-top: 15%;
+    margin-bottom: 15%;
     margin-left: 15%;
     /* Formato do Card */
     background: #ffffff;;
