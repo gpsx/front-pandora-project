@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap');
 /* estiloglobal */
 
 #menu {
@@ -97,7 +98,8 @@
     background: #0B3C5D;
     border: none;
 }
-#menu button:hover{
+
+#menu button:hover {
     background: #696969;
 }
 
@@ -108,8 +110,59 @@
     color: #328CC1;
 }
 
-#menu button+button:hover{
+#menu button+button:hover {
     border: 1px solid #696969;
     background: none;
     color: #696969;
 }
+
+/* CARD DE SOLICITAÇÃO*/
+
+#card-solicitacao {
+    width: 325px;
+    height: 158px;
+    background-color: #FFFFFF;
+    align-items: center;
+    /*Alinhamento vertical*/
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#card-solicitacao #foto-solicitante {
+    position: relative;
+    padding: 15px;
+    width: 125px;
+    height: auto;
+}
+
+#card-solicitacao img {
+    width: 100px;
+    height: 100px;
+}
+
+#card-solicitacao #solicitante-informacoes {
+    height: 100%;
+    width: 200px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    padding-left: 10px;
+    padding-top: 25px;
+    /* fontes */
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+}
+
+#nome {
+    font-size: 18px;
+}
+
+#distancia {
+    font-size: 12px;
+    color: #696969;
+}
+
+#solicitacao {}
+
+#servico {}

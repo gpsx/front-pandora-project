@@ -14,6 +14,7 @@ class Login extends React.Component {
     }
 
     entrar = async () => {
+
         // service.login({
         //     email: this.state.email,
         //     senha: this.state.senha
@@ -27,15 +28,15 @@ class Login extends React.Component {
         // })
 
         let response = await service.login(this.state.email, this.state.senha)
-        if(response.status == 200){
+        if (response.status == 200) {
             localStorage.setItem('_usuario_logado', response.data);
             console.log("Usuario Autenticado");
-            
+
         } else {
             this.setState({ mensagemErro: response.Message })
             console.log(response.Message);
         }
-        
+
     }
 
 
