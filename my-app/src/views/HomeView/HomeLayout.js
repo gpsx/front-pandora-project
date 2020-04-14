@@ -62,7 +62,7 @@ function HomeLayout(props) {
   );
 }
 
-ProductHeroLayout.propTypes = {
+HomeLayout.propTypes = {
   backgroundClassName: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
   classes: PropTypes.object.isRequired,

@@ -67,7 +67,7 @@ function ApresentacaoHome(props) {
   );
 }
 
-ProductHero.propTypes = {
+ApresentacaoHome.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
