@@ -1,14 +1,14 @@
 import React from 'react';
 import Menu from '../../components/Menu';
 import ApresentacaoHome from './ApresentacaoHome.js'
-import Valores from './Valores'
+import ComoFunciona from './ComoFunciona'
 
 function HomeView() {
     return (
         <>
             <Menu />
             <ApresentacaoHome />
-            <Valores />
+            <ComoFunciona />
 
         </>
     );
