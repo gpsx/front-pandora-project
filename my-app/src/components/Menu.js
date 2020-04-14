@@ -14,9 +14,17 @@ const styles = (theme) => ({
         fontSize: 24,
     },
 
+    image: {
+        height:'50px',
+        width: '50px',
+        maxHeight: '50px',
+        maxWidth: '50px',
+    },
+
     toolbar: {
         justifyContent: 'space-between',
     },
+
     left: {
         flex: 1,
         marginLeft: '5%',
@@ -26,7 +34,7 @@ const styles = (theme) => ({
     middle: {
         flex: 1,
         display: 'flex',
-        justifyContent: 'flex-end',
+        justifyContent: 'center',
     },
 
     middleLink: {
@@ -41,7 +49,9 @@ const styles = (theme) => ({
 
     name: {
         color: '#0B3C5D',
-        fontFamily: 'Roboto',        
+        fontFamily: 'Roboto',
+        paddingLeft: '15px',
+        paddingTop: '10px',
     },
 
     right: {
@@ -70,13 +80,9 @@ const styles = (theme) => ({
     },
 });
 
-function AppAppBar(props) {
+function Menu(props) {
 
     const { classes } = props;
-
-    function submitForm() {
-
-    };
 
     return (
         <div>
@@ -84,8 +90,8 @@ function AppAppBar(props) {
                 <Toolbar className={classes.toolbar}>
                     <div className={classes.left} >
 
-                        <img src={logoImg} alt='Logo Pandora' />
-
+                        <img src={logoImg} alt='Logo Pandora' className={classes.image} />
+                        <br />
                         <Typography align="center" variant="h5" className={classes.name}>
                             Projeto Pandora
                         </Typography>
@@ -149,8 +155,8 @@ function AppAppBar(props) {
     );
 }
 
-AppAppBar.propTypes = {
+Menu.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(AppAppBar);
+export default withStyles(styles)(Menu);
