@@ -9,7 +9,6 @@ function HomeView() {
             <Menu />
             <ApresentacaoHome />
             <ComoFunciona />
-
         </>
     );
 }

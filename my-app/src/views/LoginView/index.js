@@ -1,11 +1,25 @@
 import React from 'react'
-import Menu from '../../components/Menu'
+
+import Container from '@material-ui/core/Container';
 import LogoImg from './../../assets/logo72.png'
 import './../../custom.css'
 import './style.css'
 import service from './../../app/service/userService'
+import FormLogin from './FormLogin'
+
+
 
 class Login extends React.Component {
+
+    styles = (theme) => ({
+        container: {
+            marginTop: theme.spacing(3),
+            marginBottom: theme.spacing(14),
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          },
+    })
 
     state = {
         email: 'teste',
@@ -43,8 +57,10 @@ class Login extends React.Component {
     render() {
         return (
             <>
-                <Menu />
 
+                <Container>
+
+                </Container>
                 <div id='login-container'>
 
                     <div className='content'>
@@ -53,33 +69,13 @@ class Login extends React.Component {
                             <h1>Projeto Pandora</h1>
                         </div>
                     </div>
+                        <FormLogin />
 
-                    <form className='content' onSubmit={this.entrar}>
-                        <p className='login-input'>
-                            <label>Email:</label>
-                            <input
-                                type="text"
-                                value={this.state.email}
-                                onChange={e => this.setState({ email: e.target.value })}
-                            />
-                        </p>
-                        <br />
-                        <p className='login-input'>
-                            <label>Senha:</label>
-                            <input
-                                type="password"
-                                value={this.state.senha}
-                                onChange={e => this.setState({ senha: e.target.value })} />
-                            <a href='' >Esqueci minha senha</a>
-                        </p>
-                        <br />
-                        <div className='login-button'>
-                            <button type='submit'>ENTRAR</button>
-                            <a href='' >Não tem uma conta? Cadastre-se</a>
-                        </div>
 
-                    </form>
+
                 </div>
+
+
             </>
         )
     }

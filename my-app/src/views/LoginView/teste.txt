@@ -1,0 +1,35 @@
+ <div id='login-container'>
+
+                    <div className='content'>
+                        <div className='content-wrapper-logo'>
+                            <img src={LogoImg} alt="Imagem logo pandora" />
+                            <h1>Projeto Pandora</h1>
+                        </div>
+                    </div>
+
+                    <form className='content' onSubmit={this.entrar}>
+                        <p className='login-input'>
+                            <label>Email:</label>
+                            <input
+                                type="text"
+                                value={this.state.email}
+                                onChange={e => this.setState({ email: e.target.value })}
+                            />
+                        </p>
+                        <br />
+                        <p className='login-input'>
+                            <label>Senha:</label>
+                            <input
+                                type="password"
+                                value={this.state.senha}
+                                onChange={e => this.setState({ senha: e.target.value })} />
+                            <a href='' >Esqueci minha senha</a>
+                        </p>
+                        <br />
+                        <div className='login-button'>
+                            <button type='submit'>ENTRAR</button>
+                            <a href='' >Não tem uma conta? Cadastre-se</a>
+                        </div>
+
+                    </form>
+                </div>
