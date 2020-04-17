@@ -1,9 +1,9 @@
 import React from 'react'
 import { Route, Switch, HashRouter } from 'react-router-dom'
 import Login from '../views/LoginView'
-import Cadastro from '../views/RegisterView'
-import Endereco from '../views/RegisterView/addressRegister'
-import Servico from '../views/RegisterView/serviceRegister'
+import Cadastro from '../views/RegisterView/Register/index'
+import Endereco from '../views/RegisterView/AddressRegister/addressRegister'
+import Servico from '../views/RegisterView/ServiceRegister/serviceRegister'
 import Home from './../views/HomeView/index.js'
 import Materialize from './../views/MateriaView'
 
