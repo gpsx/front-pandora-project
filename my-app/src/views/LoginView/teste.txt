@@ -1,4 +1,25 @@
+O login certo:
+        // service.login({
+        //     email: this.state.email,
+        //     senha: this.state.senha
+        // }).then(response => {
+        //     localStorage.addItem('_usuario_logado', response.data);
+        //     console.log(response)
+        //     //this.props.history.push(/homeUsuario);
+        // }).catch(erro => {
+        //     console.log(erro)
+        //     //this.setState({ mensagemErro: erro.response.Message })
+        // }) 
+ 
+ 
+ 
  <div id='login-container'>
+
+                    <div className='content'>
+                        <div className='content-wrapper-logo'>
+                            <img src={LogoImg} alt="Imagem logo pandora" />
+                            <h1>Projeto Pandora</h1>
+                        </div>
 
                     <div className='content'>
                         <div className='content-wrapper-logo'>

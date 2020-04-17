@@ -1,25 +1,41 @@
 import React from 'react'
-
+import { withStyles, Paper, Grid } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
-import LogoImg from './../../assets/logo72.png'
-import './../../custom.css'
-import './style.css'
 import service from './../../app/service/userService'
+import LoginLogo from './LoginLogo';
 import FormLogin from './FormLogin'
 
+const useStyles = theme => ({
+    container: {
+        marginTop: '100px',
+    },
 
+    paper: {
+        paddingTop: '18%',
+        display: 'flex',
+        flexWrap: 'wrap',
+        width: '385px',
+        height: '406px',
+    },
+
+    img: {
+        width: '200px',
+        height: '200px',
+    },
+
+    h1: {
+        marginTop: '25px',
+        fontFamily: 'Roboto',
+        fontStyle: 'normal',
+        fontWeight: '80',
+        lineHeight: '42px',
+        fontSize: '36px',
+    },
+
+
+});
 
 class Login extends React.Component {
-
-    styles = (theme) => ({
-        container: {
-            marginTop: theme.spacing(3),
-            marginBottom: theme.spacing(14),
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          },
-    })
 
     state = {
         email: 'teste',
@@ -28,18 +44,6 @@ class Login extends React.Component {
     }
 
     entrar = async () => {
-
-        // service.login({
-        //     email: this.state.email,
-        //     senha: this.state.senha
-        // }).then(response => {
-        //     localStorage.addItem('_usuario_logado', response.data);
-        //     console.log(response)
-        //     //this.props.history.push(/homeUsuario);
-        // }).catch(erro => {
-        //     console.log(erro)
-        //     //this.setState({ mensagemErro: erro.response.Message })
-        // })
 
         let response = await service.login(this.state.email, this.state.senha)
         if (response.status === 200) {
@@ -53,35 +57,33 @@ class Login extends React.Component {
 
     }
 
-
     render() {
+
+        const { classes } = this.props;
+
         return (
-            <>
+            <Container className={classes.container}>
 
-                <Container>
+                <Grid container justify="center" direction="row" spacing={1}>
 
-                </Container>
-                <div id='login-container'>
+                    <Grid item>
+                        <Paper elevation={3} className={classes.paper}>
+                            <LoginLogo />
+                        </Paper>
+                    </Grid>
 
-                    <div className='content'>
-                        <div className='content-wrapper-logo'>
-                            <img src={LogoImg} alt="Imagem logo pandora" />
-                            <h1>Projeto Pandora</h1>
-                        </div>
-                    </div>
-                        <FormLogin />
+                    <Grid item>
+                        <Paper elevation={3} className={classes.paper}>
+                            <FormLogin />
+                        </Paper>
+                    </Grid>
 
+                </Grid>
 
-
-                </div>
-
-
-            </>
-        )
+            </Container>
+        );
     }
 }
 
 
-
-
-export default Login;
+export default withStyles(useStyles)(Login);

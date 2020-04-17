@@ -1,28 +1,31 @@
 import React from 'react';
-import { withStyles, Paper, Grid } from '@material-ui/core';
+import { withStyles, Grid, Link } from '@material-ui/core';
 import Input from './../../components/Input';
 import Button from './../../components/Button';
-import Typography from './../../components/Typography'
 
 const styles = (theme) => ({
-    form: {
-        
-    },
-    label: {
-        fontFamily: 'Roboto',
-        fontSize: 24,
-        color: 'black',
-    },
-    inputSize: {
-        height: '30px',
-        width: '288px',
-    },
     margin: {
-        margin: '50px',
+        paddingLeft: '30px',
+        paddingRight: '30px',
     },
-    padding: {
-        width: '385px',
-        height: '406px',
+    h1: {
+        fontFamily: 'Roboto',
+        fontStyle: 'normal',
+        fontWeight: '200',
+        lineHeight: '28px',
+        fontSize: '24px',
+    },
+    input: {
+        width: '280px',
+    },
+    link: {
+        fontFamily: 'Roboto',
+        color: '#328CC1',
+    },
+    button: {
+        fontSize: '24px',
+        width: '300px',
+        height: '50px',
     }
 });
 
@@ -37,31 +40,35 @@ function FormLogin(props) {
     }
 
     return (
+        <Grid container
+            direction="column"
+            alignItems="flex-start"
+            className={classes.margin}
+            spacing={3}>
 
-        <Paper className={classes.padding}>
-            <div className={classes.margin}>
-                <Grid container spacing={8} alignItems="flex-end">
-                    <Grid item md={true} sm={true} xs={true}>
-                        <Typography variant="h6">
-                            Email:
-                        </Typography>
-                        <Input type="email" />
-                    </Grid>
-                </Grid>
-                <Grid container spacing={8} alignItems="flex-end">
-                    <Grid item md={true} sm={true} xs={true}>
-                        <Typography variant="h6">
-                            Senha:
-                        </Typography>
-                        <Input type="password" />
-                    </Grid>
-                </Grid>
+            <Grid item>
+                <h1 className={classes.h1}>Email:</h1>
+                <Input className={classes.input} />
+            </Grid>
 
-                <Grid container justify="center" style={{ marginTop: '10px' }}>
-                    <Button>Login</Button>
-                </Grid>
-            </div>
-        </Paper>
+            <Grid item>
+                <h1 className={classes.h1}>Senha:</h1>
+                <Input className={classes.input} />
+                <Link underline='always' href="/#/esqueciasenha" className={classes.link} variant='caption text'>
+                    Esqueci minha senha
+                </Link>
+            </Grid>
+
+            <Grid item>
+                <Button className={classes.button}>ENTRAR</Button>
+                <Link underline='always' href="/#/register" className={classes.link} variant='body1'>
+                    Não tem uma conta? Cadastre-se
+                </Link>
+            </Grid>
+
+
+
+        </Grid>
     );
 }
 
