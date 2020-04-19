@@ -3,6 +3,7 @@ import { Grid, Link } from '@material-ui/core';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import H1 from './../../components/forms/h1-login'
+import { mensagemErro, mensagemSucesso } from './../../components/alerts'
 
 import service from './../../service/userService'
 import LocalStorageService from './../../service/localStorage'
@@ -13,8 +14,8 @@ const link = {
 }
 
 const button = {
-    fontSize: '24px',
-    width: '300px',
+    fontSize: '16px',
+    width: '280px',
     height: '50px',
 }
 
@@ -25,17 +26,18 @@ class FormLogin extends React.Component {
         senha: '',
     }
 
+
     entrar = () => {
         service.login({
             email: this.state.email,
             senha: this.state.senha
         }).then(response => {
             LocalStorageService.addItem('_usuario_logado', response.data)
-            console.log(response.data)
-            //this.props.history.push(/homeUsuario);
+
+            this.props.history.push('/#/userhome');
         }).catch(erro => {
-            console.log(erro.response.data)
-            //this.setState({ mensagemErro: erro.response.Message })
+            mensagemErro(erro.response.data)
+            console.log(erro.response.data);
         })
     }
 
@@ -72,11 +74,15 @@ class FormLogin extends React.Component {
 
                 <Grid item>
                     <Button style={button} onClick={this.entrar}>ENTRAR</Button>
+                    <br />
                     <Link underline='always' href="/#/register" style={link} variant='body1'>
                         Não tem uma conta? Cadastre-se
                     </Link>
                 </Grid>
 
+                <div>
+                    {this.state.error}
+                </div>
 
 
             </Grid>
