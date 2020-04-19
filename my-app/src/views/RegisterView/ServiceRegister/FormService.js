@@ -1,12 +1,28 @@
 import React from 'react';
-import { withStyles, Grid, Stepper} from '@material-ui/core';
+import { withStyles, Grid, Link} from '@material-ui/core';
 import Input from '../../../components/Input';
 import Button from '../../../components/Button';
 import Typography from '../../../components/Typography';
+import DetailedExpansionPanel from './Panel';
 
+const link = {
+    fontFamily: 'Roboto',
+    color: '#328CC1',
+}
+const button = {
+    fontSize: '24px',
+        width: '250px',
+        height: '50px',
+        float:'left',
+        '&:hover': {
+            backgroundColor: '#696969',
+        },
+}
 const styles = (theme) => ({
     margin: {
+        paddingLeft: '30px',
         paddingRight: '30px',
+        paddingTop: '30px',
     },
     h1: {
         fontFamily: 'Roboto',
@@ -17,16 +33,6 @@ const styles = (theme) => ({
     },
     input: {
         width: '160%',
-    },
-    button: {
-        fontSize: '24px',
-        width: '250px',
-        height: '50px',
-        float:'left',
-        
-        '&:hover': {
-            backgroundColor: '#696969',
-        },
     },
     clearbutton: {
         fontSize: '24px',
@@ -42,7 +48,7 @@ const styles = (theme) => ({
     }
 });
 
-function FormRegister(props) {
+function FormService(props) {
 
     const { classes } = props;
 
@@ -54,41 +60,29 @@ function FormRegister(props) {
             spacing={3}>   
 
             <Grid item>
-                <h1 className={classes.h1}>Nome Completo</h1>
+                <h1 className={classes.h1}>Nome do serviço</h1>
                 <Input className={classes.input} />
             </Grid>
 
             <Grid item>
-                <h1 className={classes.h1}>E-mail</h1>
+                <h1 className={classes.h1}>Descrição do serviço</h1>
                 <Input className={classes.input} />
             </Grid>
 
             <Grid item>
-                <h1 className={classes.h1}>CNPJ</h1>
+                <h1 className={classes.h1}>Categoria do serviço</h1>
                 <Input className={classes.input} />
+                <Link underline='always' href="/#/novacategoria" style={link} variant='caption text'>
+                        Minha categoria não está aqui!
+                </Link>
+            </Grid>
+            <Grid>
+                <Panel></Panel>
             </Grid>
 
-            <Grid item>
-                <h1 className={classes.h1}>CPF</h1>
-                <Input className={classes.input} />
-            </Grid>
 
-            <Grid item>
-                <h1 className={classes.h1}>Telefone</h1>
-                <Input className={classes.input} />
-            </Grid>
-
-            <Grid item>
-                <h1 className={classes.h1}>Confirmar senha</h1>
-                <Input className={classes.input} />
-            </Grid>
-
-            <Grid item>
-                <h1 className={classes.h1}>Senha</h1>
-                <Input className={classes.input} />
-            </Grid>
         </Grid>
     );
 }
 
-export default withStyles(styles)(FormRegister);
+export default withStyles(styles)(FormService);

@@ -4,6 +4,8 @@ import Input from '../../../components/Input';
 import Button from '../../../components/Button';
 import Typography from '../../../components/Typography';
 
+
+
 const styles = (theme) => ({
     margin: {
         paddingRight: '30px',
@@ -42,7 +44,7 @@ const styles = (theme) => ({
     }
 });
 
-function FormRegister(props) {
+function FormAddress(props) {
 
     const { classes } = props;
 
@@ -54,41 +56,32 @@ function FormRegister(props) {
             spacing={3}>   
 
             <Grid item>
-                <h1 className={classes.h1}>Nome Completo</h1>
+                <h1 className={classes.h1}>CEP</h1>
                 <Input className={classes.input} />
             </Grid>
 
             <Grid item>
-                <h1 className={classes.h1}>E-mail</h1>
+                <h1 className={classes.h1}>Nome da Rua</h1>
                 <Input className={classes.input} />
             </Grid>
 
             <Grid item>
-                <h1 className={classes.h1}>CNPJ</h1>
+                <h1 className={classes.h1}>Número</h1>
                 <Input className={classes.input} />
             </Grid>
 
             <Grid item>
-                <h1 className={classes.h1}>CPF</h1>
+                <h1 className={classes.h1}>Bairro</h1>
                 <Input className={classes.input} />
             </Grid>
 
             <Grid item>
-                <h1 className={classes.h1}>Telefone</h1>
+                <h1 className={classes.h1}>Complemento</h1>
                 <Input className={classes.input} />
             </Grid>
 
-            <Grid item>
-                <h1 className={classes.h1}>Confirmar senha</h1>
-                <Input className={classes.input} />
-            </Grid>
-
-            <Grid item>
-                <h1 className={classes.h1}>Senha</h1>
-                <Input className={classes.input} />
-            </Grid>
         </Grid>
     );
 }
 
-export default withStyles(styles)(FormRegister);
+export default withStyles(styles)(FormAddress);

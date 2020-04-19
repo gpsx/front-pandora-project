@@ -1,9 +1,10 @@
 import React from 'react'
-import { withStyles, Paper, Grid } from '@material-ui/core';
+import { withStyles, Paper, Grid} from '@material-ui/core';
 import Container from '@material-ui/core/Container';
 import Menu from '../../../components/Menu.js';
 import FormRegister from './FormRegister'
 import IntroductionRegister from './IntroductionRegister'
+import LinearStepper from '../SolicitanteRegister/Stepper';
 
 const useStyles = theme => ({
     container: {
@@ -33,9 +34,18 @@ const useStyles = theme => ({
         lineHeight: '42px',
         fontSize: '36px',
     },
-
+    stepper: {
+        iconColor: 'blue',
+        hoveredIconColor: 'blue',
+        inactiveIconColor: 'blue',
+        activeIconTextColor:'blue',
+        iconTextColor:'',
+        hoveredIconTextColor:'',
+        inactiveIconTextColor:'blue',
+  },
 
 });
+
 
 class Cadastro extends React.Component {
 
@@ -51,7 +61,7 @@ class Cadastro extends React.Component {
                     <Grid item>
                         <Paper elevation={3} className={classes.paper}>
                             <IntroductionRegister/>
-                            <FormRegister/>
+                            <LinearStepper className={classes.stepper}/>
                         </Paper>
                     </Grid>
 
