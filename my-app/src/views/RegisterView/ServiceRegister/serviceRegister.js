@@ -1,7 +1,7 @@
 import React from 'react'
 import Menu from '../../../components/Menu'
 import Icone from '../../../assets/icone-cards.png'
-import '../Register/registerStyle.css'
+import '../SolicitanteRegister/registerStyle.css'
 import './serviceStyle.css'
 
 class Servico extends React.Component {

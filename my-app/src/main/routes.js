@@ -5,7 +5,7 @@ import Cadastro from '../views/RegisterView/Register/index'
 import Servico from '../views/RegisterView/ServiceRegister/serviceRegister'
 import Home from './../views/HomeView/index.js'
 import Materialize from './../views/MateriaView'
-import HorizontalLinearStepper from '../views/RegisterView/Register/Stepper.js'
+import DetailedExpansionPanel from '../views/RegisterView/ServiceRegister/Panel.js'
 
 function Routes() {
     return (
@@ -14,7 +14,7 @@ function Routes() {
                 <Route path="/materialize" component={Materialize} />
                 <Route path="/login" component={Login} />
                 <Route path="/register" component={Cadastro} />
-                <Route path="/stepper" component={HorizontalLinearStepper} />
+                <Route path="/register" component={DetailedExpansionPanel} />
                 <Route path="/first-service" component={Servico}/>
                 <Route path="/" component={Home} />
             </Switch>

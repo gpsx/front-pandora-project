@@ -6,8 +6,8 @@ import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import FormRegister from './FormRegister.js';
-import FormAddress from '../AddressRegister/FormAddress.js';
+import FormRegister from '../Register/FormRegister.js';
+import FormService from '../AddressRegister/FormService.js';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
 const styles = theme => ({
@@ -47,13 +47,13 @@ function getStepContent(step) {
     case 0:
       return <FormRegister/>;
     case 1:
-      return <FormAddress/>;
+      return <FormService/>;
     default:
       return "Passo desconhecido";
   }
 }
 
-class LinearStepper extends React.Component {
+class PrestadorStepper extends React.Component {
   state = {
     activeStep: 0,
     skipped: new Set()
@@ -193,8 +193,8 @@ class LinearStepper extends React.Component {
   }
 }
 
-LinearStepper.propTypes = {
+PrestadorStepper.propTypes = {
   classes: PropTypes.object
 };
 
-export default withStyles(styles)(LinearStepper);
+export default withStyles(styles)(PrestadorStepper);

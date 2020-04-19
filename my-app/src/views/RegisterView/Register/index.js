@@ -4,7 +4,7 @@ import Container from '@material-ui/core/Container';
 import Menu from '../../../components/Menu.js';
 import FormRegister from './FormRegister'
 import IntroductionRegister from './IntroductionRegister'
-import LinearStepper from './Stepper';
+import LinearStepper from '../SolicitanteRegister/Stepper';
 
 const useStyles = theme => ({
     container: {
