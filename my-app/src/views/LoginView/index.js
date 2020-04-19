@@ -1,7 +1,6 @@
 import React from 'react'
 import { withStyles, Paper, Grid } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
-import service from './../../app/service/userService'
 import LoginLogo from './LoginLogo';
 import FormLogin from './FormLogin'
 
@@ -36,26 +35,6 @@ const useStyles = theme => ({
 });
 
 class Login extends React.Component {
-
-    state = {
-        email: 'teste',
-        senha: 'teste',
-        mensagemErro: null
-    }
-
-    entrar = async () => {
-
-        let response = await service.login(this.state.email, this.state.senha)
-        if (response.status === 200) {
-            localStorage.setItem('_usuario_logado', response.data);
-            console.log("Usuario Autenticado");
-
-        } else {
-            this.setState({ mensagemErro: response.Message })
-            console.log(response.Message);
-        }
-
-    }
 
     render() {
 
