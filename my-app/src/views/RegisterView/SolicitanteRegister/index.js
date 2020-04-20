@@ -2,9 +2,8 @@ import React from 'react'
 import { withStyles, Paper, Grid} from '@material-ui/core';
 import Container from '@material-ui/core/Container';
 import Menu from '../../../components/Menu.js';
-import FormRegister from './FormRegister'
 import IntroductionRegister from './IntroductionRegister'
-import LinearStepper from '../SolicitanteRegister/Stepper';
+import LinearStepper from './Stepper';
 
 const useStyles = theme => ({
     container: {
@@ -47,7 +46,7 @@ const useStyles = theme => ({
 });
 
 
-class Cadastro extends React.Component {
+class SolicitanteCadastro extends React.Component {
 
     render() {
 
@@ -73,4 +72,4 @@ class Cadastro extends React.Component {
 }
 
 
-export default withStyles(useStyles)(Cadastro);
+export default withStyles(useStyles)(SolicitanteCadastro);

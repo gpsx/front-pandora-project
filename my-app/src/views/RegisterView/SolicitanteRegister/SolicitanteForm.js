@@ -42,7 +42,7 @@ const styles = (theme) => ({
     }
 });
 
-function FormRegister(props) {
+function SolicitanteForm(props) {
 
     const { classes } = props;
 
@@ -91,4 +91,4 @@ function FormRegister(props) {
     );
 }
 
-export default withStyles(styles)(FormRegister);
+export default withStyles(styles)(SolicitanteForm);

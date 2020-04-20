@@ -6,8 +6,8 @@ import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import FormRegister from '../Register/FormRegister.js';
-import FormAddress from '../AddressRegister/FormAddress.js';
+import SolicitanteForm from './SolicitanteForm.js';
+import FormAddress from './AddressRegister/FormAddress.js';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
 const styles = theme => ({
@@ -45,7 +45,7 @@ function getSteps() {
 function getStepContent(step) {
   switch (step) {
     case 0:
-      return <FormRegister/>;
+      return <SolicitanteForm/>;
     case 1:
       return <FormAddress/>;
     default:
@@ -53,7 +53,7 @@ function getStepContent(step) {
   }
 }
 
-class LinearStepper extends React.Component {
+class SolicitanteStepper extends React.Component {
   state = {
     activeStep: 0,
     skipped: new Set()
@@ -149,7 +149,7 @@ class LinearStepper extends React.Component {
               <Typography className={classes.instructions}>
                 Agradecemos a paciência! Que tal logar para checar a ferramenta?
               </Typography>
-              <Button onClick={this.handleReset} className={classes.button}>
+              <Button onClick={this.handleReset} component="a"href="/#/login" className={classes.button}>
                 Ir para o Login
               </Button>
             </div>
@@ -193,8 +193,8 @@ class LinearStepper extends React.Component {
   }
 }
 
-LinearStepper.propTypes = {
+SolicitanteStepper.propTypes = {
   classes: PropTypes.object
 };
 
-export default withStyles(styles)(LinearStepper);
+export default withStyles(styles)(SolicitanteStepper);

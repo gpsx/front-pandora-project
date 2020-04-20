@@ -1,8 +1,8 @@
 import React from 'react';
 import { withStyles, Grid, Stepper} from '@material-ui/core';
-import Input from '../../../components/Input';
-import Button from '../../../components/Button';
-import Typography from '../../../components/Typography';
+import Input from '../../../../components/Input';
+import Button from '../../../../components/Button';
+import Typography from '../../../../components/Typography';
 
 
 
