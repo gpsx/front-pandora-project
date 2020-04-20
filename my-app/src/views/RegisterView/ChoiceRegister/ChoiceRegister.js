@@ -1,7 +1,6 @@
 import React from 'react'
 import { withStyles, Paper, Grid} from '@material-ui/core';
 import Container from '@material-ui/core/Container';
-import Menu from '../../../components/Menu.js';
 import ChoiceContent from './ChoiceContent.js';
 
 const useStyles = theme => ({

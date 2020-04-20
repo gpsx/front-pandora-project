@@ -1,8 +1,6 @@
 import React from 'react';
-import { withStyles, Grid, Stepper} from '@material-ui/core';
-import Input from '../../../components/Input';
+import { withStyles, Grid } from '@material-ui/core';
 import Button from '../../../components/Button';
-import Typography from '../../../components/Typography';
 import ChoiceLogo from './ChoiceLogo.js';
 
 const styles = (theme) => ({
@@ -10,7 +8,7 @@ const styles = (theme) => ({
         paddingRight: '30px',
     },
     h1: {
-        marginLeft:theme.spacing(29),
+        marginLeft: theme.spacing(29),
         fontFamily: 'Roboto',
         fontStyle: 'normal',
         fontWeight: '200',
@@ -18,7 +16,7 @@ const styles = (theme) => ({
         fontSize: '30px',
     },
     texto: {
-        marginLeft:theme.spacing(16),
+        marginLeft: theme.spacing(16),
         fontFamily: 'Roboto',
         fontStyle: 'normal',
         fontWeight: '200',
@@ -29,28 +27,29 @@ const styles = (theme) => ({
         width: '160%',
     },
     sbutton: {
-        marginTop:theme.spacing(),
-        marginBottom:theme.spacing(3),
-        marginLeft:theme.spacing(10),
-        marginRight:theme.spacing(15),
-        width:theme.spacing(29.5),
-        backgroundColor:'#0B3C5D',
-        float:'left',
-        color:'white',
+        marginTop: theme.spacing(),
+        marginBottom: theme.spacing(3),
+        marginLeft: theme.spacing(10),
+        marginRight: theme.spacing(15),
+        width: theme.spacing(29.5),
+        backgroundColor: '#0B3C5D',
+        float: 'left',
+        color: 'white',
         '&:hover': {
-        backgroundColor: '#328CC1',
+            backgroundColor: '#328CC1',
+        },
+        prestadorbutton: {
+            marginBottom: theme.spacing(3),
+            marginLeft: theme.spacing(100),
+            width: theme.spacing(30),
+            backgroundColor: '#0B3C5D',
+            float: 'left',
+            color: 'white',
+            '&:hover': {
+                backgroundColor: '#328CC1',
+            },
+        },
     },
-prestadorbutton: {
-        marginBottom:theme.spacing(3),
-        marginLeft:theme.spacing(100),
-        width:theme.spacing(30),
-        backgroundColor:'#0B3C5D',
-        float:'left',
-        color:'white',
-        '&:hover': {
-        backgroundColor: '#328CC1',
-    },
-},},
 });
 
 function FormRegister(props) {
@@ -65,8 +64,8 @@ function FormRegister(props) {
             spacing={3}>
 
             <Grid>
-               <ChoiceLogo/> 
-            </Grid>  
+                <ChoiceLogo />
+            </Grid>
 
             <Grid item>
                 <h1 className={classes.h1}>Seja bem-vindo(a)</h1>
@@ -76,23 +75,23 @@ function FormRegister(props) {
                 <div className={classes.texto}>Nos diga como você vai usar o Pandora.</div>
             </Grid>
             <Grid item >
-                <Button 
-                 variant="contained"
-                 size="small"
-                 component="a"
-                 href="/#/register-solicitante"
-                className={classes.sbutton}
+                <Button
+                    variant="contained"
+                    size="small"
+                    component="a"
+                    href="/#/register-solicitante"
+                    className={classes.sbutton}
                 >
                     Sou solicitante
                 </Button>
             </Grid>
             <Grid item>
-            <Button
-                variant="contained"
-                size="small"
-                component="a"
-                href="/#/register-prestador" 
-                className={classes.prestadorbutton}
+                <Button
+                    variant="contained"
+                    size="small"
+                    component="a"
+                    href="/#/register-prestador"
+                    className={classes.prestadorbutton}
                 >
                     Sou prestador
                 </Button>

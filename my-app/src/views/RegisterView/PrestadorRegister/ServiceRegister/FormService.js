@@ -1,82 +1,81 @@
 import React from 'react';
-import { withStyles, Grid, Link} from '@material-ui/core';
+import { Grid, Link } from '@material-ui/core';
 import Input from '../../../../components/Input';
-import Button from '../../../../components/Button';
-import Typography from '../../../../components/Typography';
 import LimitTags from './Panel.js';
+import service from '../../../../service/userService'
+import { mensagemErro, mensagemSucesso } from '../../../../components/alerts'
 
 const link = {
     fontFamily: 'Roboto',
-    fontSize:'12px',
+    fontSize: '12px',
     color: '#328CC1',
 }
-const button = {
-    fontSize: '24px',
-        width: '250px',
-        height: '50px',
-        float:'left',
-        '&:hover': {
-            backgroundColor: '#696969',
-        },
+
+const margin = {
+    paddingRight: '30px',
 }
-const styles = (theme) => ({
-    margin: {
-        paddingRight: '30px',
-    },
-    h1: {
-        fontFamily: 'Roboto',
-        fontStyle: 'normal',
-        fontWeight: '200',
-        lineHeight: '28px',
-        fontSize: '13px',
-    },
-    input: {
-        width: '160%',
-    },
-    clearbutton: {
-        fontSize: '24px',
-        backgroundColor:'#328CC1',
-        marginLeft:'280px',
-        marginTop:'-75px',
-        width: '250px',
-        height: '50px',
-        float:'left',
-        '&:hover': {
-            backgroundColor: '#696969',
-        },
+
+const h1 = {
+    fontFamily: 'Roboto',
+    fontStyle: 'normal',
+    fontWeight: '200',
+    lineHeight: '28px',
+    fontSize: '13px',
+}
+
+const input = {
+    width: '160%',
+}
+
+class FormService extends React.Component {
+
+    state = {
+        nome: '',
+        descricao: '',
+        categorias: '',
     }
-});
 
-function FormService(props) {
+    cadastrar = () => {
+        service.registerProvider({
+            nome: this.state.nome,
+            descricao: this.state.descricao,
+            categorias: this.state.categorias,
+        }).catch(erro => {
+            mensagemErro(erro.response.data)
+            console.log(erro.response.data);
+        })
+    }
 
-    const { classes } = props;
-
-    return (
+    render() {
+        return (
         <Grid container
             direction="column"
             alignItems="flex-start"
-            className={classes.margin}
-            spacing={3}>   
+            style={margin}
+            spacing={3}>
 
             <Grid item>
-                <h1 className={classes.h1}>Nome do serviço</h1>
-                <Input className={classes.input} />
+                <h1 style={h1}>Nome do serviço</h1>
+                <Input style={input} 
+                onChange={e => this.setState({ nome: e.target.value })}/>
             </Grid>
 
             <Grid item>
-                <h1 className={classes.h1}>Descrição do serviço</h1>
-                <Input className={classes.input} />
+                <h1 style={h1}>Descrição do serviço</h1>
+                <Input style={input} 
+                onChange={e => this.setState({ descricao: e.target.value })}/>
             </Grid>
 
             <Grid item>
-                <h1 className={classes.h1}>Categoria do serviço</h1>
-                <LimitTags/>
+                <h1 style={h1}>Categoria do serviço</h1>
+                <LimitTags 
+                onChange={e => this.setState({ categorias: e.target.value })}/>
                 <Link underline='always' href="/#/novacategoria" style={link} variant='caption text'>
-                        Minha categoria não está aqui!
+                    Minha categoria não está aqui!
                 </Link>
             </Grid>
         </Grid>
     );
-}
+}}  
 
-export default withStyles(styles)(FormService);
+export default (FormService);
