@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { withStyles } from "@material-ui/core/styles";
+import { withStyles  } from "@material-ui/core/styles";
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
@@ -8,24 +8,25 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import SolicitanteForm from './SolicitanteForm.js';
 import FormAddress from './AddressRegister/FormAddress.js';
+import StepConnector from "./../StepConnector";
 
 const styles = theme => ({
   root: {
     width: "90%"
   },
-  form:{
-    marginTop:theme.spacing(1)
+  form: {
+    marginTop: theme.spacing(1)
   },
- button: {
-        marginTop:theme.spacing(3),
-        marginBottom:theme.spacing(3),
-        marginLeft:theme.spacing(3.3),
-        width:theme.spacing(29.5),
-        backgroundColor:'#0B3C5D',
-        color:'white',
-        '&:hover': {
-        backgroundColor: '#328CC1',
-      },
+  button: {
+    marginTop: theme.spacing(3),
+    marginBottom: theme.spacing(3),
+    marginLeft: theme.spacing(3.3),
+    width: theme.spacing(29.5),
+    backgroundColor: '#0B3C5D',
+    color: 'white',
+    '&:hover': {
+      backgroundColor: '#328CC1',
+    },
   },
   instructions: {
     marginTop: theme.spacing.unit,
@@ -33,7 +34,8 @@ const styles = theme => ({
     marginLeft: theme.spacing(3.5),
   },
   stepIcon: {
-    color: "",
+    color: '',
+    backgroundColor: '',
   },
 });
 
@@ -44,9 +46,9 @@ function getSteps() {
 function getStepContent(step) {
   switch (step) {
     case 0:
-      return <SolicitanteForm/>;
+      return <SolicitanteForm />;
     case 1:
-      return <FormAddress/>;
+      return <FormAddress />;
     default:
       return "Passo desconhecido";
   }
@@ -117,7 +119,7 @@ class SolicitanteStepper extends React.Component {
 
     return (
       <div className={classes.root}>
-        <Stepper activeStep={activeStep}>
+        <Stepper activeStep={activeStep} connector={<StepConnector />}>
           {steps.map((label, index) => {
             const props = {};
             const labelProps = {};
@@ -133,7 +135,7 @@ class SolicitanteStepper extends React.Component {
               <Step key={label} {...props}>
                 <StepLabel
                   StepIconProps={{
-                    classes: { root:classes.stepIcon }
+                    classes: { root: classes.stepIcon }
                   }}
                 >
                   {label}
@@ -148,44 +150,44 @@ class SolicitanteStepper extends React.Component {
               <Typography className={classes.instructions}>
                 Agradecemos a paciência! Que tal logar para checar a ferramenta?
               </Typography>
-              <Button onClick={this.handleReset} component="a"href="/#/login" className={classes.button}>
+              <Button onClick={this.handleReset} component="a" href="/#/login" className={classes.button}>
                 Ir para o Login
               </Button>
             </div>
           ) : (
-            <div>
-              <Typography className={classes.instructions}>
-                {getStepContent(activeStep)}
-              </Typography>
               <div>
-                <Button
-                  disabled={activeStep === 0}
-                  onClick={this.handleBack}
-                  className={classes.button}
-                >
-                  Voltar
+                <Typography className={classes.instructions}>
+                  {getStepContent(activeStep)}
+                </Typography>
+                <div>
+                  <Button
+                    disabled={activeStep === 0}
+                    onClick={this.handleBack}
+                    className={classes.button}
+                  >
+                    Voltar
                 </Button>
-                {this.isStepOptional(activeStep) && (
+                  {this.isStepOptional(activeStep) && (
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={this.handleSkip}
+                      className={classes.button}
+                    >
+                      Pular
+                    </Button>
+                  )}
                   <Button
                     variant="contained"
                     color="primary"
-                    onClick={this.handleSkip}
+                    onClick={this.handleNext}
                     className={classes.button}
                   >
-                    Pular
+                    {activeStep === steps.length - 1 ? "Finalizar" : "Próximo"}
                   </Button>
-                )}
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={this.handleNext}
-                  className={classes.button}
-                >
-                  {activeStep === steps.length - 1 ? "Finalizar" : "Próximo"}
-                </Button>
+                </div>
               </div>
-            </div>
-          )}
+            )}
         </div>
       </div>
     );
