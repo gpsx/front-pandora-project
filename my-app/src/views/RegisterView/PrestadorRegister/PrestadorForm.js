@@ -1,10 +1,6 @@
 import React from 'react';
 import { withStyles, Grid, Stepper} from '@material-ui/core';
 import Input from '../../../components/Input';
-import Button from '../../../components/Button';
-import Typography from '../../../components/Typography';
-
-
 
 const styles = (theme) => ({
     margin: {
@@ -44,7 +40,7 @@ const styles = (theme) => ({
     }
 });
 
-function FormAddress(props) {
+function PrestadorForm(props) {
 
     const { classes } = props;
 
@@ -56,32 +52,41 @@ function FormAddress(props) {
             spacing={3}>   
 
             <Grid item>
-                <h1 className={classes.h1}>CEP</h1>
+                <h1 className={classes.h1}>Nome Completo</h1>
                 <Input className={classes.input} />
             </Grid>
 
             <Grid item>
-                <h1 className={classes.h1}>Nome da Rua</h1>
+                <h1 className={classes.h1}>E-mail</h1>
                 <Input className={classes.input} />
             </Grid>
 
             <Grid item>
-                <h1 className={classes.h1}>Número</h1>
+                <h1 className={classes.h1}>CNPJ</h1>
                 <Input className={classes.input} />
             </Grid>
 
             <Grid item>
-                <h1 className={classes.h1}>Bairro</h1>
+                <h1 className={classes.h1}>CPF</h1>
                 <Input className={classes.input} />
             </Grid>
 
             <Grid item>
-                <h1 className={classes.h1}>Complemento</h1>
+                <h1 className={classes.h1}>Telefone</h1>
                 <Input className={classes.input} />
             </Grid>
 
+            <Grid item>
+                <h1 className={classes.h1}>Confirmar senha</h1>
+                <Input className={classes.input} />
+            </Grid>
+
+            <Grid item>
+                <h1 className={classes.h1}>Senha</h1>
+                <Input className={classes.input} />
+            </Grid>
         </Grid>
     );
 }
 
-export default withStyles(styles)(FormAddress);
+export default withStyles(styles)(PrestadorForm);

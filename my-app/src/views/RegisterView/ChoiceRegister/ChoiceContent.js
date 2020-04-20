@@ -10,7 +10,7 @@ const styles = (theme) => ({
         paddingRight: '30px',
     },
     h1: {
-        marginLeft:theme.spacing(33),
+        marginLeft:theme.spacing(29),
         fontFamily: 'Roboto',
         fontStyle: 'normal',
         fontWeight: '200',
@@ -18,7 +18,7 @@ const styles = (theme) => ({
         fontSize: '30px',
     },
     texto: {
-        marginLeft:theme.spacing(20),
+        marginLeft:theme.spacing(16),
         fontFamily: 'Roboto',
         fontStyle: 'normal',
         fontWeight: '200',
@@ -40,11 +40,10 @@ const styles = (theme) => ({
         '&:hover': {
         backgroundColor: '#328CC1',
     },
-pbutton: {
-        marginTop:theme.spacing(-5),
+prestadorbutton: {
         marginBottom:theme.spacing(3),
         marginLeft:theme.spacing(100),
-        width:theme.spacing(29.5),
+        width:theme.spacing(30),
         backgroundColor:'#0B3C5D',
         float:'left',
         color:'white',
@@ -77,8 +76,26 @@ function FormRegister(props) {
                 <div className={classes.texto}>Nos diga como você vai usar o Pandora.</div>
             </Grid>
             <Grid item >
-                <Button className={classes.sbutton}>Sou solicitante</Button>
-                <Button className={classes.pbutton}>Sou prestador</Button>
+                <Button 
+                 variant="contained"
+                 size="small"
+                 component="a"
+                 href="/#/register-solicitante"
+                className={classes.sbutton}
+                >
+                    Sou solicitante
+                </Button>
+            </Grid>
+            <Grid item>
+            <Button
+                variant="contained"
+                size="small"
+                component="a"
+                href="/#/register-prestador" 
+                className={classes.prestadorbutton}
+                >
+                    Sou prestador
+                </Button>
             </Grid>
         </Grid>
     );

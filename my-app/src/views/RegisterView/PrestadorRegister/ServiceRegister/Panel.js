@@ -1,7 +1,7 @@
 /* eslint-disable no-use-before-define */
 import React from 'react';
 import { Autocomplete } from '@material-ui/lab';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, fade } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 
 const useStyles = makeStyles((theme) => ({

@@ -6,8 +6,8 @@ import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import FormRegister from '../Register/FormRegister.js';
-import FormService from '../ServiceRegister/FormService.js';
+import PrestadorForm from './PrestadorForm.js';
+import FormService from './ServiceRegister/FormService.js';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
 const styles = theme => ({
@@ -45,7 +45,7 @@ function getSteps() {
 function getStepContent(step) {
   switch (step) {
     case 0:
-      return <FormRegister/>;
+      return <PrestadorForm/>;
     case 1:
       return <FormService/>;
     default:
@@ -149,7 +149,7 @@ class PrestadorStepper extends React.Component {
               <Typography className={classes.instructions}>
                 Agradecemos a paciência! Que tal logar para checar a ferramenta?
               </Typography>
-              <Button onClick={this.handleReset} className={classes.button}>
+              <Button onClick={this.handleReset} component="a"href="/#/login" className={classes.button}>
                 Ir para o Login
               </Button>
             </div>

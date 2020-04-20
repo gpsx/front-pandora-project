@@ -1,12 +1,11 @@
 import React from 'react'
 import { Route, Switch, HashRouter } from 'react-router-dom'
 import Login from '../views/LoginView'
-import Cadastro from '../views/RegisterView/Register/index'
-import Servico from '../views/RegisterView/ServiceRegister/serviceRegister'
+import PrestadorCadastro from '../views/RegisterView/PrestadorRegister/index'
+import SolicitanteCadastro from '../views/RegisterView/SolicitanteRegister/index'
 import Home from './../views/HomeView/index.js'
 import Materialize from './../views/MateriaView'
 import Escolha from '../views/RegisterView/ChoiceRegister/ChoiceRegister.js'
-import PrestadorStepper from '../views/RegisterView/PrestadorRegister/Stepper.js'
 
 function Routes() {
     return (
@@ -14,10 +13,9 @@ function Routes() {
             <Switch>
                 <Route path="/materialize" component={Materialize} />
                 <Route path="/login" component={Login} />
-                <Route path="/register" component={Cadastro} />
-                <Route path="/registerchoice" component={Escolha} />
-                <Route path="/prestador" component={PrestadorStepper} />
-                <Route path="/first-service" component={Servico}/>
+                <Route path="/register-prestador" component={PrestadorCadastro} />
+                <Route path="/register-solicitante" component={SolicitanteCadastro} />
+                <Route path="/register" component={Escolha} />
                 <Route path="/" component={Home} />
             </Switch>
         </HashRouter>
