@@ -3,7 +3,6 @@ import { Grid, Link } from '@material-ui/core';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import H1 from './../../components/forms/h1-login'
-import { mensagemErro, mensagemSucesso } from './../../components/alerts'
 
 import service from './../../service/userService'
 import LocalStorageService from './../../service/localStorage'
@@ -36,7 +35,6 @@ class FormLogin extends React.Component {
 
             this.props.history.push('/#/userhome');
         }).catch(erro => {
-            mensagemErro(erro.response.data)
             console.log(erro.response.data);
         })
     }

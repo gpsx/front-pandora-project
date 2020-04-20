@@ -6,7 +6,7 @@ import Link from '@material-ui/core/Link';
 import logoImg from './../assets/logo.png';
 import Button from './Button'
 import AppBar from './AppBar';
-import Toolbar, { styles as toolbarStyles } from './Toolbar';
+import Toolbar from './Toolbar';
 
 
 const styles = (theme) => ({

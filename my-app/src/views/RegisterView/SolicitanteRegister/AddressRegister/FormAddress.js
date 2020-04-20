@@ -1,5 +1,5 @@
 import React from 'react';
-import { withStyles, Grid, Stepper } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import Input from '../../../../components/Input';
 import service from '../../../../service/userService'
 import { mensagemErro, mensagemSucesso } from '../../../../components/alerts'

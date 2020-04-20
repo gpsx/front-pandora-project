@@ -1,5 +1,4 @@
 const api = require("./apiService")
-const utils = require("../utils/index")
 
 module.exports = {
     
@@ -13,6 +12,10 @@ module.exports = {
 
     login: async (credentials) => {
         return await api.post("/solicitante/login", credentials)
+    },
+
+    registerSolicitante: async (informacoes) => {
+        return await api.post("/solicitante/cadastrar", informacoes)
     },
 }
 
