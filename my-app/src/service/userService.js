@@ -1,5 +1,4 @@
 const api = require("./apiService")
-const utils = require("../utils/index")
 
 module.exports = {
     

@@ -8,7 +8,6 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import PrestadorForm from './PrestadorForm.js';
 import FormService from './ServiceRegister/FormService.js';
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
 const styles = theme => ({
   root: {

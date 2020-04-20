@@ -7,17 +7,16 @@ const styles = (theme) => ({
     img: {
         width: '150px',
         height: '150px',
-        marginLeft:theme.spacing(40),
-        marginTop:theme.spacing(5),
+        marginTop: theme.spacing(5),
     },
 
     h1: {
-        marginTop: '35px',
+        paddingTop: '20px',
         fontFamily: 'Roboto',
         fontStyle: 'normal',
-        fontWeight: '80',
-        lineHeight: '42px',
-        fontSize: '36px',
+        fontWeight: '200',
+        lineHeight: '28px',
+        fontSize: '30px',
     },
 });
 
@@ -31,6 +30,7 @@ function ChoiceLogo(props) {
             alignItems="center"
         >
             <img className={classes.img} src={LogoImg} alt="Imagem logo pandora" />
+            <h1 className={classes.h1}>Seja bem-vindo(a)</h1>
         </Grid>
     );
 }

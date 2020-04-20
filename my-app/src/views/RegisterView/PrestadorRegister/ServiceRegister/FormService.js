@@ -1,24 +1,14 @@
 import React from 'react';
-import { withStyles, Grid, Link} from '@material-ui/core';
+import { withStyles, Grid, Link } from '@material-ui/core';
 import Input from '../../../../components/Input';
-import Button from '../../../../components/Button';
-import Typography from '../../../../components/Typography';
 import LimitTags from './Panel.js';
 
 const link = {
     fontFamily: 'Roboto',
-    fontSize:'12px',
+    fontSize: '12px',
     color: '#328CC1',
 }
-const button = {
-    fontSize: '24px',
-        width: '250px',
-        height: '50px',
-        float:'left',
-        '&:hover': {
-            backgroundColor: '#696969',
-        },
-}
+
 const styles = (theme) => ({
     margin: {
         paddingRight: '30px',
@@ -35,12 +25,12 @@ const styles = (theme) => ({
     },
     clearbutton: {
         fontSize: '24px',
-        backgroundColor:'#328CC1',
-        marginLeft:'280px',
-        marginTop:'-75px',
+        backgroundColor: '#328CC1',
+        marginLeft: '280px',
+        marginTop: '-75px',
         width: '250px',
         height: '50px',
-        float:'left',
+        float: 'left',
         '&:hover': {
             backgroundColor: '#696969',
         },
@@ -56,7 +46,7 @@ function FormService(props) {
             direction="column"
             alignItems="flex-start"
             className={classes.margin}
-            spacing={3}>   
+            spacing={3}>
 
             <Grid item>
                 <h1 className={classes.h1}>Nome do serviço</h1>
@@ -70,9 +60,9 @@ function FormService(props) {
 
             <Grid item>
                 <h1 className={classes.h1}>Categoria do serviço</h1>
-                <LimitTags/>
+                <LimitTags />
                 <Link underline='always' href="/#/novacategoria" style={link} variant='caption text'>
-                        Minha categoria não está aqui!
+                    Minha categoria não está aqui!
                 </Link>
             </Grid>
         </Grid>

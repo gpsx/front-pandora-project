@@ -1,5 +1,5 @@
 import React from 'react';
-import { withStyles, Grid, Stepper} from '@material-ui/core';
+import { withStyles, Grid } from '@material-ui/core';
 import Input from '../../../components/Input';
 
 const styles = (theme) => ({

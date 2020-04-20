@@ -3,7 +3,6 @@ import Button from '@material-ui/core/Button';
 
 export default withStyles((theme) => ({
     root: {
-        borderRadius: 0,
         fontWeight: 'bolder',
         fontFamily: 'Roboto',
         fontSize: theme.typography.pxToRem(24),
