@@ -2,7 +2,8 @@ import React from 'react'
 import { withStyles, Paper, Grid} from '@material-ui/core';
 import Container from '@material-ui/core/Container';
 import Menu from '../../../components/Menu.js';
-import ChoiceContent from './ChoiceContent.js';
+import IntroductionRegister from './IntroductionRegister'
+import LinearStepper from './Stepper';
 
 const useStyles = theme => ({
     container: {
@@ -12,11 +13,11 @@ const useStyles = theme => ({
     },
 
     paper: {
-        marginRight:theme.spacing(10),
+        paddingTop: '3%',
         display: 'flex',
         flexWrap: 'wrap',
-        width: '700px',
-        height: '400px',
+        width: '50%',
+        height: '100%',
     },
 
     img: {
@@ -32,14 +33,20 @@ const useStyles = theme => ({
         lineHeight: '42px',
         fontSize: '36px',
     },
-    choice: {
-        marginRight:"20px",
+    stepper: {
+        iconColor: 'blue',
+        hoveredIconColor: 'blue',
+        inactiveIconColor: 'blue',
+        activeIconTextColor:'blue',
+        iconTextColor:'',
+        hoveredIconTextColor:'',
+        inactiveIconTextColor:'blue',
   },
 
 });
 
 
-class Escolha extends React.Component {
+class PrestadorCadastro extends React.Component {
 
     render() {
 
@@ -47,11 +54,13 @@ class Escolha extends React.Component {
 
         return (
             <Container className={classes.container}>
+                <Menu/>
                 <Grid container justify="center" direction="row" spacing={1}>
 
                     <Grid item>
                         <Paper elevation={3} className={classes.paper}>
-                            <ChoiceContent className={classes.choice}/>
+                            <IntroductionRegister/>
+                            <LinearStepper className={classes.stepper}/>
                         </Paper>
                     </Grid>
 
@@ -63,4 +72,4 @@ class Escolha extends React.Component {
 }
 
 
-export default withStyles(useStyles)(Escolha);
+export default withStyles(useStyles)(PrestadorCadastro);
