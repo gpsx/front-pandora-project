@@ -35,14 +35,14 @@ const styles = theme => ({
     marginLeft: theme.spacing(3.5),
   },
   stepIcon: {
-    active: {
-      color: "#328CC1"
-    },
-    completed: {
-      color: "#328CC1",
-      zIndex: 1,
-      fontSize: 18
-    }
+  },
+  completed: {
+    color: "#328CC1",
+    zIndex: 1,
+    fontSize: 18
+  },
+  active: {
+    color: "#328CC1"
   },
 });
 
@@ -142,7 +142,7 @@ class PrestadorStepper extends React.Component {
               <Step key={label} {...props}>
                 <StepLabel
                   StepIconProps={{
-                    classes: { root: classes.stepIcon }
+                    classes: { root: classes.stepIcon, active: classes.active, completed: classes.completed }
                   }}
                 >
                   {label}

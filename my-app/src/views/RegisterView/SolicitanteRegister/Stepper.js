@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { withStyles  } from "@material-ui/core/styles";
+import { withStyles } from "@material-ui/core/styles";
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
@@ -33,9 +33,13 @@ const styles = theme => ({
     marginBottom: theme.spacing.unit,
     marginLeft: theme.spacing(3.5),
   },
-  stepIcon: {
+  completed: {
+    color: "#328CC1",
+    zIndex: 1,
+    fontSize: 18
+  },
+  active: {
     color: '',
-    backgroundColor: '',
   },
 });
 
@@ -135,7 +139,7 @@ class SolicitanteStepper extends React.Component {
               <Step key={label} {...props}>
                 <StepLabel
                   StepIconProps={{
-                    classes: { root: classes.stepIcon }
+                    classes: { root: classes.stepIcon, active: classes.active, completed: classes.completed }
                   }}
                 >
                   {label}
