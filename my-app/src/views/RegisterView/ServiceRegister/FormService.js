@@ -3,7 +3,7 @@ import { withStyles, Grid, Link} from '@material-ui/core';
 import Input from '../../../components/Input';
 import Button from '../../../components/Button';
 import Typography from '../../../components/Typography';
-import DetailedExpansionPanel from './Panel';
+import LimitTags from './Panel.js';
 
 const link = {
     fontFamily: 'Roboto',
@@ -71,16 +71,11 @@ function FormService(props) {
 
             <Grid item>
                 <h1 className={classes.h1}>Categoria do serviço</h1>
-                <Input className={classes.input} />
+                <LimitTags/>
                 <Link underline='always' href="/#/novacategoria" style={link} variant='caption text'>
                         Minha categoria não está aqui!
                 </Link>
             </Grid>
-            <Grid>
-                <Panel></Panel>
-            </Grid>
-
-
         </Grid>
     );
 }

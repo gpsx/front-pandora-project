@@ -5,7 +5,8 @@ import Cadastro from '../views/RegisterView/Register/index'
 import Servico from '../views/RegisterView/ServiceRegister/serviceRegister'
 import Home from './../views/HomeView/index.js'
 import Materialize from './../views/MateriaView'
-import LimitTags from '../views/RegisterView/ServiceRegister/Panel.js'
+import Escolha from '../views/RegisterView/ChoiceRegister/ChoiceRegister.js'
+import PrestadorStepper from '../views/RegisterView/PrestadorRegister/Stepper.js'
 
 function Routes() {
     return (
@@ -14,7 +15,8 @@ function Routes() {
                 <Route path="/materialize" component={Materialize} />
                 <Route path="/login" component={Login} />
                 <Route path="/register" component={Cadastro} />
-                <Route path="/prestador" component={LimitTags} />
+                <Route path="/registerchoice" component={Escolha} />
+                <Route path="/prestador" component={PrestadorStepper} />
                 <Route path="/first-service" component={Servico}/>
                 <Route path="/" component={Home} />
             </Switch>

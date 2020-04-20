@@ -7,7 +7,7 @@ import StepLabel from "@material-ui/core/StepLabel";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import FormRegister from '../Register/FormRegister.js';
-import FormService from '../AddressRegister/FormService.js';
+import FormService from '../ServiceRegister/FormService.js';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
 const styles = theme => ({
