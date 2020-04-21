@@ -5,6 +5,12 @@ import Button from '../../components/Button';
 import H1 from './../../components/forms/h1-login'
 import service from './../../service/userService'
 import LocalStorageService from './../../service/localStorage'
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const link = {
     fontFamily: 'Roboto',
@@ -17,12 +23,16 @@ const button = {
     height: '50px',
 }
 
+
 class FormLogin extends React.Component {
 
     state = {
         email: '',
         senha: '',
-        error: ''
+        error: '',
+        open: false,
+        mensagem: '',
+        severity: '',
     }
 
     entrar = () => {
@@ -30,15 +40,45 @@ class FormLogin extends React.Component {
             email: this.state.email,
             senha: this.state.senha
         }).then(response => {
+            this.sucessMessage();
             LocalStorageService.addItem('_usuario_logado', response.data)
-
-            this.props.history.push('/#/userhome');
+            //this.props.history.push('/#/userhome');
         }).catch(erro => {
-            console.log(erro.response.data);
+            try{
+                this.errorMessage(erro.response.data)
+            }catch(erro2){
+                this.errorMessage('usuário logado... bug')
+            }
+            
+        })
+    }
+
+    sucessMessage() {
+        this.setState({
+            severity: 'success',
+            mensagem: 'Usuário logado com sucesso!',
+            open: true
+        })
+    }
+
+    errorMessage(msg) {
+        this.setState({
+            severity: 'error',
+            mensagem: msg,
+            open: true
         })
     }
 
     render() {
+
+        const fecharAlerta = (event, reason) => {
+            if (reason === 'clickaway') {
+                return;
+            }
+
+            this.setState({ open: false });
+        };
+
         return (
             <Grid container
                 direction="column"
@@ -76,6 +116,13 @@ class FormLogin extends React.Component {
                         Não tem uma conta? Cadastre-se
                     </Link>
                 </Grid>
+
+                <Snackbar open={this.state.open} autoHideDuration={6000} onClose={fecharAlerta}
+                    anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+                    <Alert onClose={fecharAlerta} severity={this.state.severity}>
+                        {this.state.mensagem}
+                    </Alert>
+                </Snackbar>
 
             </Grid>
         )
