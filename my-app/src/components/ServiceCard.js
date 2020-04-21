@@ -33,7 +33,11 @@ const useStyles = makeStyles({
   button: {
     alignSelf: "flex-end",
     width: "100%",
-    margin: 10
+    margin: 10,
+    backgroundColor:'#0B3C5D',
+    '&:hover': {
+      backgroundColor: '#328CC1',
+    },
   },
   divider: {
     margin: 10

@@ -4,6 +4,7 @@ import Login from '../views/LoginView'
 import PrestadorCadastro from '../views/RegisterView/PrestadorRegister/index'
 import SolicitanteCadastro from '../views/RegisterView/SolicitanteRegister/index'
 import Home from './../views/HomeView/index.js'
+import HomeSolicitante from './../views/HomeSolicitanteView/index.js'
 import Materialize from './../views/MateriaView'
 import Escolha from '../views/RegisterView/ChoiceRegister/ChoiceRegister.js'
 import Testes from '../views/ViewDeTestes/testes.js'
@@ -18,6 +19,7 @@ function Routes() {
                 <Route path="/register-prestador" component={PrestadorCadastro} />
                 <Route path="/register-solicitante" component={SolicitanteCadastro} />
                 <Route path="/register" component={Escolha} />
+                <Route path="/home-solicitante" component={HomeSolicitante} />
                 <Route path="/" component={Home} />
             </Switch>
         </HashRouter>
