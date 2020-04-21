@@ -1,7 +1,7 @@
 const api = require("./apiService")
 
 module.exports = {
-    
+
     registerProvider: async (provider) => {
         return await api.post("/users", provider)
     },
@@ -17,5 +17,9 @@ module.exports = {
     registerSolicitante: async (informacoes) => {
         return await api.post("/solicitante/cadastrar", informacoes)
     },
+
+    registerEndereco: async (informacoes) => {
+        return await api.post("/endereco/cadastrar", informacoes)
+    }
 }
 

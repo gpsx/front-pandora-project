@@ -9,7 +9,6 @@ const styles = (theme) => ({
         paddingRight: '30px',
     },
     h1: {
-        marginLeft: theme.spacing(29),
         fontFamily: 'Roboto',
         fontStyle: 'normal',
         fontWeight: '200',
@@ -22,7 +21,6 @@ const styles = (theme) => ({
         fontWeight: '200',
         lineHeight: '28px',
         fontSize: '25px',
-        marginLeft: theme.spacing(16),
         padding: '30px',
     },
     button: {
@@ -43,7 +41,7 @@ function FormRegister(props) {
     return (
         <Container>
 
-            <Grid Grid container justify="center" direction="row" spacing={3}>
+            <Grid Grid container justify="center" direction="row" spacing={1}>
 
                 <Grid item>
                     <ChoiceLogo />

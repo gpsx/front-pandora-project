@@ -5,9 +5,8 @@ import ChoiceContent from './ChoiceContent.js';
 
 const useStyles = theme => ({
     container: {
-        marginTop: '10%',
+        marginTop: '5%',
         marginLeft: '5%',
-
     },
 
     paper: {

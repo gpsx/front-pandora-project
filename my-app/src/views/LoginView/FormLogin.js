@@ -3,7 +3,6 @@ import { Grid, Link } from '@material-ui/core';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import H1 from './../../components/forms/h1-login'
-
 import service from './../../service/userService'
 import LocalStorageService from './../../service/localStorage'
 
@@ -23,8 +22,8 @@ class FormLogin extends React.Component {
     state = {
         email: '',
         senha: '',
+        error: ''
     }
-
 
     entrar = () => {
         service.login({
@@ -77,11 +76,6 @@ class FormLogin extends React.Component {
                         Não tem uma conta? Cadastre-se
                     </Link>
                 </Grid>
-
-                <div>
-                    {this.state.error}
-                </div>
-
 
             </Grid>
         )

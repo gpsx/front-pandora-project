@@ -27,10 +27,6 @@ const input = {
     width: '160%',
 }
 
-const input = {
-    width: '160%',
-}
-
 class FormService extends React.Component {
 
     state = {
