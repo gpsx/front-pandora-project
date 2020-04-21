@@ -59,7 +59,7 @@ const QontoConnector = withStyles({
   },
   active: {
     '& $line': {
-      borderColor: '#188500',
+      borderColor: '#328CC1',
     },
   },
   completed: {
