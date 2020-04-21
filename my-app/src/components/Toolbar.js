@@ -3,10 +3,10 @@ import Toolbar from '@material-ui/core/Toolbar';
 
 export const styles = (theme) => ({
   root: {
-    height: 75,
+    height: 60,
     backgroundColor: '#FFFFFF',
     [theme.breakpoints.up('sm')]: {
-      height: 75,
+      height:60,
     },
   },
 });
