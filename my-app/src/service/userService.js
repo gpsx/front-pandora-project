@@ -20,6 +20,10 @@ module.exports = {
 
     registerEndereco: async (informacoes) => {
         return await api.post("/endereco/cadastrar", informacoes)
-    }
+    },
+
+    registerPrestador: async(prestador) => {
+        return await api.post("/prestador/cadastrar", prestador)
+    },
 }
 
