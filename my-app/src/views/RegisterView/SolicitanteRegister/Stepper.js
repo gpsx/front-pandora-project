@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { withStyles } from "@material-ui/core/styles";
+import clsx from "clsx";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
 import { Stepper, StepLabel, Step, Button, Typography } from "@material-ui/core";
 import SolicitanteForm from './SolicitanteForm.js';
 import FormAddress from './FormAddress.js';
@@ -8,6 +9,7 @@ import StepConnector from "./../StepConnector";
 import service from './../../../service/userService'
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
+import Check from '@material-ui/icons/Check';
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -49,7 +51,77 @@ const styles = theme => ({
   },
 });
 
+const QontoConnector = withStyles({
+  alternativeLabel: {
+    top: 10,
+    left: 'calc(-50% + 16px)',
+    right: 'calc(50% + 16px)',
+  },
+  active: {
+    '& $line': {
+      borderColor: '#188500',
+    },
+  },
+  completed: {
+    '& $line': {
+      borderColor: '#328CC1',
+    },
+  },
+  line: {
+    borderColor: '#eaeaf0',
+    borderTopWidth: 3,
+    borderRadius: 1,
+  },
+})(StepConnector);
 
+const useQontoStepIconStyles = makeStyles({
+  root: {
+    color: '#eaeaf0',
+    display: 'flex',
+    height: 22,
+    alignItems: 'center',
+  },
+  active: {
+    color: '#328CC1',
+  },
+  circle: {
+    width: 8,
+    height: 8,
+    borderRadius: '50%',
+    backgroundColor: 'currentColor',
+  },
+  completed: {
+    color: '#328CC1',
+    zIndex: 1,
+    fontSize: 18,
+  },
+});
+
+function QontoStepIcon(props) {
+  const classes = useQontoStepIconStyles();
+  const { active, completed } = props;
+
+  return (
+    <div
+      className={clsx(classes.root, {
+        [classes.active]: active,
+      })}
+    >
+      {completed ? <Check className={classes.completed} /> : <div className={classes.circle} />}
+    </div>
+  );
+}
+
+QontoStepIcon.propTypes = {
+  /**
+   * Whether this step is active.
+   */
+  active: PropTypes.bool,
+  /**
+   * Mark the step as completed. Is passed to child components.
+   */
+  completed: PropTypes.bool,
+};
 
 class SolicitanteStepper extends React.Component {
 
@@ -275,18 +347,19 @@ class SolicitanteStepper extends React.Component {
 
     return (
       <div className={classes.root}>
-        <Stepper activeStep={activeStep} connector={<StepConnector />}>
+        <Stepper activeStep={activeStep} connector={<QontoConnector />}>
           {steps.map((label) => {
             const props = {};
             return (
               <Step key={label} {...props}>
-                <StepLabel
+                <StepLabel StepIconComponent={QontoStepIcon}>{label}</StepLabel>
+                {/* <StepLabel
                   StepIconProps={{
                     classes: { root: classes.stepIcon, active: classes.active, completed: classes.completed }
                   }}
                 >
                   {label}
-                </StepLabel>
+                </StepLabel> */}
               </Step>
             );
           })}
