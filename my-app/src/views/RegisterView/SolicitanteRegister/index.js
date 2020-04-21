@@ -14,6 +14,7 @@ const useStyles = theme => ({
 
     paper: {
         paddingTop: '3%',
+        marginLeft: '23%',
         display: 'flex',
         flexWrap: 'wrap',
         width: '50%',
