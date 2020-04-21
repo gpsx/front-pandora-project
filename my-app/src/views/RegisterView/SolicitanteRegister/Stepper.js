@@ -6,6 +6,12 @@ import SolicitanteForm from './SolicitanteForm.js';
 import FormAddress from './FormAddress.js';
 import StepConnector from "./../StepConnector";
 import service from './../../../service/userService'
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const styles = theme => ({
   root: {
@@ -66,6 +72,11 @@ class SolicitanteStepper extends React.Component {
       complemento: '',
       cep: '',
       bairro: '',
+    },
+    alert: {
+      open: false,
+      mensagem: '',
+      severity: '',
     }
   };
 
@@ -135,7 +146,7 @@ class SolicitanteStepper extends React.Component {
 
     if (!usuario.senha || !usuario.senhaRepeticao) {
       msgs.push("Digite a senha duas vezes!")
-    } else if (this.state.senha !== this.state.senhaRepeticao) {
+    } else if (usuario.senha !== usuario.senhaRepeticao) {
       msgs.push("As senhas não coincidem")
     }
 
@@ -170,21 +181,26 @@ class SolicitanteStepper extends React.Component {
           cpf: this.state.usuario.cpf,
           telefone: this.state.usuario.telefone,
           cnpj: this.state.usuario.cnpj,
+
         }).then(response => {
+          this.sucessMessage();
           console.log(response.data)
           this.setState({
             activeStep: activeStep + 1,
             userId: response.data.id
           });
+
         }).catch(erro => {
-          //LANÇAR TOAST DE ERRO
+          this.errorMessage(erro.response.data)
           console.log(erro.response.data)
         })
+
       } else {
         erros.forEach((erro, index) => {
-          //TOAST DE ERRO
+          this.errorMessage(erro)
         });
       }
+      //Enviando serviço de cadastro de endereço
     } else if (activeStep === 1) {
       service.registerEndereco({
         rua: this.state.endereco.rua,
@@ -193,17 +209,43 @@ class SolicitanteStepper extends React.Component {
         cep: this.state.endereco.cep,
         bairro: this.state.endereco.bairro,
         usuario: this.state.userId
+
       }).then(response => {
+        this.sucessMessage();
         console.log(response.data)
         this.setState({
           activeStep: activeStep + 1,
         });
+
       }).catch(erro => {
+        this.errorMessage(erro.response.data)
         console.log(erro.response.data)
       })
     }
 
   };
+
+
+  sucessMessage() {
+    this.setState({
+      alert: {
+        severity: 'success',
+        mensagem: 'Passo Finalizado!',
+        open: true
+      }
+    })
+  }
+
+  errorMessage(msg) {
+    console.log("MENSAGEM DE ERRO")
+    this.setState({
+      alert: {
+        severity: 'error',
+        mensagem: msg,
+        open: true
+      }
+    })
+  }
 
   handleBack = () => {
     const { activeStep } = this.state;
@@ -222,6 +264,14 @@ class SolicitanteStepper extends React.Component {
     const { classes } = this.props;
     const steps = ["", ""];
     const { activeStep } = this.state;
+
+    const fecharAlerta = (event, reason) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+
+      this.setState({ alert: { open: false } });
+    };
 
     return (
       <div className={classes.root}>
@@ -276,6 +326,12 @@ class SolicitanteStepper extends React.Component {
               </div>
             )}
         </div>
+        <Snackbar open={this.state.alert.open} autoHideDuration={6000} onClose={fecharAlerta}
+          anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+          <Alert onClose={fecharAlerta} severity={this.state.alert.severity}>
+            {this.state.alert.mensagem}
+          </Alert>
+        </Snackbar>
       </div>
     );
   }
