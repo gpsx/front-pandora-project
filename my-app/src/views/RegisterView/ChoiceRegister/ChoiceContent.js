@@ -5,10 +5,8 @@ import Button from '../../../components/Button';
 import ChoiceLogo from './ChoiceLogo.js';
 
 const styles = (theme) => ({
-    margin: {
-        paddingRight: '30px',
-    },
     h1: {
+        marginLeft: theme.spacing(29),
         fontFamily: 'Roboto',
         fontStyle: 'normal',
         fontWeight: '200',
@@ -21,11 +19,14 @@ const styles = (theme) => ({
         fontWeight: '200',
         lineHeight: '28px',
         fontSize: '25px',
-        padding: '30px',
+        marginLeft: theme.spacing(3),
+        padding: '1px',
     },
     button: {
-        width: theme.spacing(29.5),
+        width: theme.spacing(30.5),
         backgroundColor: '#0B3C5D',
+        marginLeft:'12px',
+        marginTop:'15px',
         float: 'left',
         color: 'white',
         '&:hover': {
@@ -61,7 +62,7 @@ function FormRegister(props) {
                             size="small"
                             component="a"
                             href="/#/register-solicitante"
-                            className={classes.sbutton}
+                            className={classes.button}
                         >
                             Sou solicitante
                 </Button>
