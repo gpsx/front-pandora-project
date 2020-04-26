@@ -1,7 +1,8 @@
 import React from 'react';
 import { Grid, Link } from '@material-ui/core';
 import Input from '../../../../components/Input';
-import LimitTags from './Panel.js';
+import service from './../../../../service/otherService';
+import Panel from './Panel.js';
 
 const link = {
     fontFamily: 'Roboto',
@@ -27,6 +28,24 @@ const input = {
 
 class FormService extends React.Component {
 
+    state = {
+        categorias: []
+    }
+
+
+    obterCategorias = () => {
+        service.getCategorias()
+            .then(response => {
+                this.setState({ categorias: response.data })
+            }).catch(err => {
+                console.log("Erro Identificado" + err);
+            })
+    }
+
+    changeCategoria = (categ) => {
+        this.props.globalChanges("categoria", categ.idCategoria)
+    }
+
     render() {
         return (
             <Grid container
@@ -34,6 +53,8 @@ class FormService extends React.Component {
                 alignItems="flex-start"
                 style={margin}
                 spacing={3}>
+
+                {this.obterCategorias()}
 
                 <Grid item>
                     <h1 style={h1}>Titulo do serviço</h1>
@@ -49,13 +70,14 @@ class FormService extends React.Component {
 
                 <Grid item>
                     <h1 style={h1}>Categoria do serviço</h1>
-                    <LimitTags
-                        onChange={e => this.setState({ categorias: e.target.value })} />
+                    <Panel
+                        categorias={this.state.categorias}
+                        changeCategoria={this.changeCategoria} />
                     <Link underline='always' href="/#/novacategoria" style={link} variant='caption text'>
                         Minha categoria não está aqui!
                 </Link>
                 </Grid>
-            </Grid>
+            </Grid >
         );
     }
 }

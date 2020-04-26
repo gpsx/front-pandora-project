@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Autocomplete } from '@material-ui/lab';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -12,18 +12,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function LimitTags() {
+const LimitTags = (props) => {
+
   const classes = useStyles();
+  const { categorias, changeCategoria } = props;
 
   return (
     <div className={classes.root}>
       <Autocomplete
-        multiple
-        limitTags={2}
-        id="multiple-limit-tags"
-        options={top100Films}
-        getOptionLabel={(option) => option.title}
-        defaultValue={[top100Films[13], top100Films[12], top100Films[11]]}
+        options={props.categorias}
+        getOptionLabel={(option) => option.nomeServico}
+        defaultValue={[categorias[1]]}
+        onChange={(event, value) => { props.changeCategoria(value) }}
         renderInput={(params) => (
           <TextField {...params} variant="outlined" placeholder="Escolha as categorias" />
         )}
@@ -32,31 +32,4 @@ export default function LimitTags() {
   );
 }
 
-const top100Films = [
-  { title: 'Eletricista'},
-  { title: 'Encanador'},
-  { title: 'Marceneiro'},
-  { title: 'Pintor'},  
-  { title: 'Chaveiro'},
-  { title: 'Segurança'},
-  { title: 'Confeiteiro'},
-  { title: 'Motorista'},
-  { title: 'Animador de festa'},
-  { title: 'Cozinheiro'},
-  { title: 'Coach'},
-  { title: 'Babá'},
-  { title: 'Cuidador de pets'},
-  { title: 'Cuidador de pessoas idosas'},
-  { title: 'Professor Particular'},
-  { title: 'Programador'},
-  { title: 'Fotógrafo'},
-  { title: 'Músico'},
-  { title: 'Sapateiro'},
-  { title: 'Manicure'},
-  { title: 'Cabeleireiro'},
-  { title: 'Designer gráfico'},
-  { title: 'Costureira'},
-  { title: 'Maquiadora'},
-  { title: 'Massagista'},
-  { title: 'Assessor de eventos'},
-];
+export default LimitTags;

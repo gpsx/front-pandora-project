@@ -6,6 +6,7 @@ import UsuarioForm from './../forms/UsuarioForm';
 import FormService from '../forms/ServiceRegister/FormService';
 import { QontoConnector, QontoStepIcon } from './QontoStepIcon';
 import service from '../../../service/userService'
+import otherService from './../../../service/otherService'
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import { validarUsuario } from '../../../utils/validadores'
@@ -99,7 +100,11 @@ class StepperPrestador extends React.Component {
     if (key === "descricao") {
       changeServico.descricao = value;
     }
-    this.setState({ descricao: changeServico });
+    if (key === "categoria") {
+      changeServico.idCategoria = value;
+    }
+    this.setState({ sercide: changeServico });
+    console.log(this.state.service);
   }
 
   getStepContent = (step) => {
@@ -107,7 +112,7 @@ class StepperPrestador extends React.Component {
       case 0:
         return <UsuarioForm globalChanges={this.globalChanges.bind(this)} />;
       case 1:
-        return <FormService globalChanges={this.globalChangesServico.bind(this)} />;
+        return <FormService globalChanges={this.globalChangeServico.bind(this)} />;
       default:
         return "Passo desconhecido";
     }
@@ -115,60 +120,67 @@ class StepperPrestador extends React.Component {
 
   handleNext = () => {
     const { activeStep } = this.state;
+    console.log(activeStep)
 
-    this.setState({
-      activeStep: activeStep + 1,
-    });
+    //Step do primeiro cadastro de usuário
+    if (activeStep === 0) {
+      let erros = validarUsuario(this.state.usuario);
+
+      if (erros.length === 0) {
+        //Enviando serciço de cadastro de solicitante
+        service.registerPrestador({
+          nome: this.state.usuario.nome,
+          senha: this.state.usuario.senha,
+          email: this.state.usuario.email,
+          cpf: this.state.usuario.cpf,
+          telefone: this.state.usuario.telefone,
+          cnpj: this.state.usuario.cnpj,
+
+        }).then(response => {
+          this.sucessMessage("Usuário Cadastrado");
+          console.log(response.data)
+          this.setState({
+            activeStep: activeStep + 1,
+            userId: response.data.id
+          });
+
+        }).catch(erro => {
+          this.errorMessage(erro.response.data)
+          console.log(erro.response.data)
+        })
+
+      } else {
+        erros.forEach((erro, index) => {
+          this.errorMessage(erro)
+        });
+      }
+      //Enviando serviço cadastro de serviço
+    } else if (activeStep === 1) {
+      otherService.cadastrarServico({
+        descricao: this.state.service.descricao,
+        titulo: this.state.service.titulo,
+        prestador: this.state.userId,
+        categoriaServico: this.state.service.idCategoria,
+      }).then(response => {
+        this.sucessMessage("Cadastro Finalizado!")
+        console.log(response.data);
+        this.setState({
+          activeStep: activeStep + 1
+        });
+      }).catch(err => {
+        console.log(err.response.data);
+        this.errorMessage(err.response.data);
+      })
+    }
+
   };
-  // handleNext = () => {
-  //   const { activeStep } = this.state;
-  //   console.log(activeStep)
-
-  //   //Step do primeiro cadastro de usuário
-  //   if (activeStep === 0) {
-  //     let erros = validarUsuario(this.state.usuario);
-
-  //     if (erros.length === 0) {
-  //       //Enviando serciço de cadastro de solicitante
-  //       service.registerPrestador({
-  //         nome: this.state.usuario.nome,
-  //         senha: this.state.usuario.senha,
-  //         email: this.state.usuario.email,
-  //         cpf: this.state.usuario.cpf,
-  //         telefone: this.state.usuario.telefone,
-  //         cnpj: this.state.usuario.cnpj,
-
-  //       }).then(response => {
-  //         this.sucessMessage();
-  //         console.log(response.data)
-  //         this.setState({
-  //           activeStep: activeStep + 1,
-  //           userId: response.data.id
-  //         });
-
-  //       }).catch(erro => {
-  //         this.errorMessage(erro.response.data)
-  //         console.log(erro.response.data)
-  //       })
-
-  //     } else {
-  //       erros.forEach((erro, index) => {
-  //         this.errorMessage(erro)
-  //       });
-  //     }
-  //     //Enviando serviço cadastro de serviço
-  //   } else if (activeStep === 1) {
-
-  //   }
-
-  // };
 
 
-  sucessMessage() {
+  sucessMessage(msg) {
     this.setState({
       alert: {
         severity: 'success',
-        mensagem: 'Passo Finalizado!',
+        mensagem: msg,
         open: true
       }
     })

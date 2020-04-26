@@ -4,7 +4,10 @@ const baseUrl = "http://localhost:8080"
 module.exports = {
     get: async (uri) => {
         let res = await axios.get(baseUrl + uri)
-        return res.data
+        return {
+            data: res.data,
+            status: res.status
+        }
     },
     post: async (uri, params) => {
         let res = await axios.post(baseUrl + uri, params);

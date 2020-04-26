@@ -22,10 +22,9 @@ module.exports = {
         return await api.post("/endereco/cadastrar", informacoes)
     },
 
-    registerPrestador: async(prestador) => {
-        return await api.post("/prestador/cadastrar", prestador)
+    registerPrestador: async (prestador) => {
+        return await api.post("/prestadores/cadastrar", prestador)
     },
 
-    
 }
 

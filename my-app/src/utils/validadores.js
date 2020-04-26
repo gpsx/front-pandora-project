@@ -18,7 +18,7 @@ export function validarUsuario(usuario) {
 
     if (!usuario.senha || !usuario.senhaRepeticao) {
         msgs.push("Digite a senha duas vezes!")
-    } else if (this.state.senha !== this.state.senhaRepeticao) {
+    } else if (usuario.senha!== usuario.senhaRepeticao) {
         msgs.push("As senhas não coincidem")
     }
 
