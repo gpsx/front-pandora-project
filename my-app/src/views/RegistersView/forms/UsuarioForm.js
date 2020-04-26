@@ -1,5 +1,6 @@
 import React from 'react';
 import { Grid } from '@material-ui/core';
+import InputMask from 'react-input-mask';
 import Input from '../../../components/Input';
 
 const margin = {
@@ -16,7 +17,7 @@ const input = {
     width: '160%',
 }
 
-class PrestadorForm extends React.Component {
+class SolicitanteForm extends React.Component {
 
     render() {
         return (
@@ -29,6 +30,7 @@ class PrestadorForm extends React.Component {
                 <Grid item>
                     <h1 style={h1}>Nome Completo</h1>
                     <Input style={input}
+
                         onChange={(e) => { this.props.globalChanges("nome", e.target.value) }} />
                 </Grid>
 
@@ -40,20 +42,23 @@ class PrestadorForm extends React.Component {
 
                 <Grid item>
                     <h1 style={h1}>CNPJ</h1>
-                    <Input style={input}
-                        onChange={(e) => { this.props.globalChanges("cnpj", e.target.value) }} />
+                    <InputMask mask="99.999.999/9999-99" onChange={(e) => { this.props.globalChanges("cnpj", e.target.value) }}>
+                        {() => <Input style={input} />}
+                    </InputMask>
                 </Grid>
 
                 <Grid item>
                     <h1 style={h1}>CPF</h1>
-                    <Input style={input}
-                        onChange={(e) => { this.props.globalChanges("cpf", e.target.value) }} />
+                    <InputMask mask="999.999.999-99" onChange={(e) => { this.props.globalChanges("cpf", e.target.value) }}>
+                        {() => <Input style={input} />}
+                    </InputMask>
                 </Grid>
 
                 <Grid item>
                     <h1 style={h1}>Telefone</h1>
-                    <Input style={input}
-                        onChange={(e) => { this.props.globalChanges("telefone", e.target.value) }} />
+                    <InputMask mask="(99) 99999-9999" onChange={(e) => { this.props.globalChanges("telefone", e.target.value) }} >
+                        {() => <Input style={input} />}
+                    </InputMask>
                 </Grid>
 
                 <Grid item>
@@ -67,12 +72,12 @@ class PrestadorForm extends React.Component {
                     <Input style={input}
                         onChange={(e) => { this.props.globalChanges("senhaRepeticao", e.target.value) }} />
                 </Grid>
+
+
+
             </Grid>
-            
         );
     }
 }
 
-
-
-export default (PrestadorForm);
+export default (SolicitanteForm);

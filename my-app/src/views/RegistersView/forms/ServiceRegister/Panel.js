@@ -1,4 +1,3 @@
-/* eslint-disable no-use-before-define */
 import React from 'react';
 import { Autocomplete } from '@material-ui/lab';
 import { makeStyles } from '@material-ui/core/styles';
@@ -33,7 +32,6 @@ export default function LimitTags() {
   );
 }
 
-// Top 100 films as rated by IMDb users. http://www.imdb.com/chart/top
 const top100Films = [
   { title: 'Eletricista'},
   { title: 'Encanador'},

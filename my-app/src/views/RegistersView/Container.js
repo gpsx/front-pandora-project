@@ -1,9 +1,8 @@
 import React from 'react'
-import { withStyles, Paper, Grid} from '@material-ui/core';
+import { withStyles, Paper, Grid } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
-import Menu from '../../../components/Menu.js';
+import Menu from './../../components/Menu';
 import IntroductionRegister from './IntroductionRegister'
-import LinearStepper from './Stepper';
 
 const useStyles = theme => ({
     container: {
@@ -34,20 +33,10 @@ const useStyles = theme => ({
         lineHeight: '42px',
         fontSize: '36px',
     },
-    stepper: {
-        iconColor: 'blue',
-        hoveredIconColor: 'blue',
-        inactiveIconColor: 'blue',
-        activeIconTextColor:'blue',
-        iconTextColor:'',
-        hoveredIconTextColor:'',
-        inactiveIconTextColor:'blue',
-  },
-
 });
 
 
-class PrestadorCadastro extends React.Component {
+class SolicitanteCadastro extends React.Component {
 
     render() {
 
@@ -55,13 +44,13 @@ class PrestadorCadastro extends React.Component {
 
         return (
             <Container className={classes.container}>
-                <Menu/>
+                <Menu />
                 <Grid container justify="center" direction="row" spacing={1}>
 
                     <Grid item>
                         <Paper elevation={3} className={classes.paper}>
-                            <IntroductionRegister/>
-                            <LinearStepper className={classes.stepper}/>
+                            <IntroductionRegister />
+                            {this.props.children}
                         </Paper>
                     </Grid>
 
@@ -73,4 +62,4 @@ class PrestadorCadastro extends React.Component {
 }
 
 
-export default withStyles(useStyles)(PrestadorCadastro);
+export default withStyles(useStyles)(SolicitanteCadastro);

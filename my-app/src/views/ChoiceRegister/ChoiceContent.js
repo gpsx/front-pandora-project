@@ -1,7 +1,7 @@
 import React from 'react';
 import { withStyles, Grid } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
-import Button from '../../../components/Button';
+import Button from '../../components/Button';
 import ChoiceLogo from './ChoiceLogo.js';
 
 const styles = (theme) => ({

@@ -25,5 +25,7 @@ module.exports = {
     registerPrestador: async(prestador) => {
         return await api.post("/prestador/cadastrar", prestador)
     },
+
+    
 }
 

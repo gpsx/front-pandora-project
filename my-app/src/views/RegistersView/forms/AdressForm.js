@@ -1,6 +1,7 @@
 import React from 'react';
 import { Grid } from '@material-ui/core';
 import Input from '../../../components/Input';
+import InputMask from 'react-input-mask';
 
 const margin = {
     paddingRight: '30px',
@@ -39,8 +40,9 @@ class FormAddress extends React.Component {
 
                 <Grid item>
                     <h1 style={h1}>CEP</h1>
-                    <Input style={input}
-                        onChange={e => { this.props.globalChanges("cep", e.target.value) }} />
+                    <InputMask mask="99999-999" onChange={e => { this.props.globalChanges("cep", e.target.value) }} >
+                        {() => <Input style={input} />}
+                    </InputMask>
                 </Grid>
 
                 <Grid item>
