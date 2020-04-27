@@ -1,21 +1,14 @@
 import React from 'react'
+import MenuPrestador from './../../components/MenuPrestador'
 
 class Testes extends React.Component {
-
-    state = {
-        guias: [
-            {
-
-            }
-        ],
-    }
 
     render() {
 
 
         return (
             <>
-                <div></div>
+                <MenuPrestador />
             </>
         );
     }

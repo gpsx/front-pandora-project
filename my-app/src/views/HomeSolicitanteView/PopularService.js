@@ -56,7 +56,6 @@ class Popular extends React.Component {
 
         return (
             <>  
-                <div className={classes.titulo}>Serviços Populares</div>
                 <div><ListaServicos servicos={this.state.servicos} /></div>
             </>
         );

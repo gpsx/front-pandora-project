@@ -57,7 +57,6 @@ class Last extends React.Component {
 
         return (
             <>  
-                <div className={classes.titulo}>Últimos Serviços</div>
                 <div><ListaServicos className={classes.lista} servicos={this.state.servicos} /></div>
             </>
         );

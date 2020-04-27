@@ -56,7 +56,6 @@ class New extends React.Component {
 
         return (
             <>  
-                <div className={classes.titulo}>Novos Serviços</div>
                 <div><ListaServicos servicos={this.state.servicos} /></div>
             </>
         );

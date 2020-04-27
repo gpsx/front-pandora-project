@@ -1,5 +1,5 @@
 import React from 'react'
-import { withStyles, Grid} from '@material-ui/core';
+import { withStyles, Grid, Paper} from '@material-ui/core';
 import Container from '@material-ui/core/Container';
 import MenuSolicitante from '../../components/MenuSolicitante.js';
 import Popular from './PopularService.js';
@@ -9,17 +9,18 @@ import Last from './LastService.js';
 const useStyles = theme => ({
     container: {
         marginTop: '5%',
-        marginLeft: '-3%',
+        marginLeft: '0.8%',
+        marginBottom: '2%',
 
     },
-    popular:{
-        marginLeft:'-2px',
-    },
-    new:{
-        marginLeft:'-5px',
+    popular: {
+        marginTop: '50px',
+        width:'55%'
     },
     last:{
-        marginLeft:'-5px',
+        marginTop:'50px',
+        marginLeft:'6%',
+        width:'30%',
     },
     img: {
         width: '200px',
@@ -47,21 +48,23 @@ class HomeSolicitante extends React.Component {
             <Container className={classes.container}>
                 <MenuSolicitante/>
                 <Grid container justify="center" direction="row" spacing={1}>
-
-                    <Grid>
-                        <Grid item>
-                            <Popular className={classes.popular}/>
+                        <Grid item className={classes.popular}>
+                            <div>Serviços Populares</div>
+                            <Paper elevation={3}>
+                                <Popular/>
+                            </Paper>
+                            <br/><br/>
+                            <div>Novos Serviços</div>
+                            <Paper elevation={3}>
+                                <New/>
+                            </Paper>     
                         </Grid>
-
-                        <Grid item>
-                            <Last className={classes.last}/>
+                        <Grid item className={classes.last}>
+                            <div>Últimos Serviços</div>
+                            <Paper elevation={3}>
+                                <Last/>
+                            </Paper>    
                         </Grid>
-                    </Grid>
-                    
-                    <Grid item>
-                        <New className={classes.new}/>
-                    </Grid>
-
                 </Grid>
 
             </Container>
