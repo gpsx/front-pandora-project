@@ -1,6 +1,6 @@
 import React from 'react'
 import Menu from './../../../components/MenuPrestador'
-import { Grid, Link } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import Container from './../Container'
 
 function PainelGeral() {

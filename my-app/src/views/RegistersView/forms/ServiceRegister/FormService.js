@@ -1,8 +1,8 @@
 import React from 'react';
 import { Grid, Link } from '@material-ui/core';
 import Input from '../../../../components/Input';
-import service from './../../../../service/otherService';
-import Panel from './Panel.js';
+import { listarCategorias } from './../../../../utils/itens'
+import Panel from '../../../../components/PanelCategorias';
 
 const link = {
     fontFamily: 'Roboto',
@@ -32,14 +32,9 @@ class FormService extends React.Component {
         categorias: []
     }
 
-
-    obterCategorias = () => {
-        service.getCategorias()
-            .then(response => {
-                this.setState({ categorias: response.data })
-            }).catch(err => {
-                console.log("Erro Identificado" + err);
-            })
+    componentDidMount() {
+        let lista = listarCategorias();
+        this.setState({ categorias: lista })
     }
 
     changeCategoria = (categ) => {
@@ -53,8 +48,6 @@ class FormService extends React.Component {
                 alignItems="flex-start"
                 style={margin}
                 spacing={3}>
-
-                {this.obterCategorias()}
 
                 <Grid item>
                     <h1 style={h1}>Titulo do serviço</h1>

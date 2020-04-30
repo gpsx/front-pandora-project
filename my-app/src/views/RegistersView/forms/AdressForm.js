@@ -16,16 +16,7 @@ const h1 = {
 const input = {
     width: '160%',
 }
-const button = {
-    fontSize: '24px',
-    width: '250px',
-    height: '50px',
-    float: 'left',
 
-    '&:hover': {
-        backgroundColor: '#696969',
-    },
-}
 
 class FormAddress extends React.Component {
 

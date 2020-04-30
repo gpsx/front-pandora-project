@@ -1,21 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Autocomplete } from '@material-ui/lab';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: 500,
-    '& > * + *': {
-      marginTop: theme.spacing(3),
-    },
+    width: 300,
+    height: '50px',
   },
 }));
 
 const LimitTags = (props) => {
 
   const classes = useStyles();
-  const { categorias, changeCategoria } = props;
+  const { categorias } = props;
 
   return (
     <div className={classes.root}>
@@ -25,7 +23,7 @@ const LimitTags = (props) => {
         defaultValue={[categorias[1]]}
         onChange={(event, value) => { props.changeCategoria(value) }}
         renderInput={(params) => (
-          <TextField {...params} variant="outlined" placeholder="Escolha as categorias" />
+          <TextField {...params} size="small" variant="outlined" placeholder="Escolha a categoria..." />
         )}
       />
     </div>

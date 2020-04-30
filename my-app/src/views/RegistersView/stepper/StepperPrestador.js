@@ -127,7 +127,7 @@ class StepperPrestador extends React.Component {
       let erros = validarUsuario(this.state.usuario);
 
       if (erros.length === 0) {
-        //Enviando serciço de cadastro de solicitante
+        // Enviando serciço de cadastro de solicitante
         service.registerPrestador({
           nome: this.state.usuario.nome,
           senha: this.state.usuario.senha,
@@ -145,8 +145,7 @@ class StepperPrestador extends React.Component {
           });
 
         }).catch(erro => {
-          this.errorMessage(erro.response.data)
-          console.log(erro.response.data)
+          this.errorMessage(erro)
         })
 
       } else {

@@ -26,7 +26,7 @@ const useStyles = makeStyles({
     marginBottom: 12
   },
   cover: {
-    width: 150,
+    width: 100,
     margin: 10,
     borderRadius: "5%"
   },
@@ -34,7 +34,7 @@ const useStyles = makeStyles({
     alignSelf: "flex-end",
     width: "100%",
     margin: 10,
-    backgroundColor:'#0B3C5D',
+    backgroundColor: '#0B3C5D',
     '&:hover': {
       backgroundColor: '#328CC1',
     },
@@ -67,7 +67,7 @@ export default function ServiceCard(props) {
       <Box flexGrow={1}>
         <CardContent>
           <Box className={classes.root} alignItems="center">
-            <Typography variant="h5" component="h3">
+            <Typography variant="h6" component="h3">
               {props.title}
             </Typography>
           </Box>
