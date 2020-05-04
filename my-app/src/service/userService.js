@@ -15,11 +15,11 @@ module.exports = {
     },
 
     registerSolicitante: async (informacoes) => {
-        return await api.post("/solicitante/cadastrar", informacoes)
+        return await api.post("/solicitantes/cadastrar", informacoes)
     },
 
     registerEndereco: async (informacoes) => {
-        return await api.post("/endereco/cadastrar", informacoes)
+        return await api.post("/enderecos/cadastrar", informacoes)
     },
 
     registerPrestador: async (prestador) => {
