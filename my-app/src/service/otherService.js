@@ -16,7 +16,11 @@ module.exports = {
 
     filtrarServico: async (id) => {
         return await api.get(`/servicos/buscar-categoria/${id}`)
-    }
+    },
+
+    cadastrarSolicitacao: async (id, descricao) => {
+        return await api.post(`/solicitacoes/nova_solicitacao/${id}`, { descricao })
+    },
 
 
 

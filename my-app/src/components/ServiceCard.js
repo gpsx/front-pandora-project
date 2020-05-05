@@ -1,20 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
-import { CardMedia } from "@material-ui/core";
-import { Divider } from "@material-ui/core";
-import { Box } from "@material-ui/core";
-import { Avatar } from "@material-ui/core";
+import { Typography, Button, Card, CardContent } from "@material-ui/core";
+import { CardMedia, Divider, Box, Avatar } from "@material-ui/core";
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import { DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
 import Star from '@material-ui/icons/Star';
+import service from './../service/otherService';
 
 const useStyles = makeStyles({
   root: {
@@ -62,8 +54,9 @@ const useStyles = makeStyles({
 });
 
 export default function ServiceCard(props) {
+  const [descricao, setMsg] = useState();
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -74,8 +67,17 @@ export default function ServiceCard(props) {
   };
 
   const sendSolicitation = () => {
-    //
+    service.cadastrarSolicitacao(props.id, descricao)
+      .then(response => {
+        handleClose()
+        props.alertar("Cadastrado com sucesso", "success")
+      })
+      .catch(err => {
+        handleClose()
+        props.alertar("Erro ao cadastrar solicitação", "error")
+      })
   };
+
 
   const bull = <span className={classes.bullet}>•</span>;
 
@@ -115,7 +117,7 @@ export default function ServiceCard(props) {
               </Typography>
             </Box>
             <Box className={classes.root} alignItems="center">
-              <Star className={classes.star}/>
+              <Star className={classes.star} />
               <Typography variant="body2" component="p" className={classes.star}>
                 {/* {props.avaliation} */}
                 4.7
@@ -142,19 +144,20 @@ export default function ServiceCard(props) {
           <DialogContentText>
             Envie uma mensagem com a descrição do serviço desejado
         </DialogContentText>
-            <TextField
-              autoFocus
-              margin="dense"
-              id="name"
-              label="Descrição"
-              type="email"
-              fullWidth
-            />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Descrição"
+            type="email"
+            fullWidth
+            onChange={e => setMsg(e.target.value)}
+          />
         </DialogContent>
         <DialogActions>
-            <Button onClick={sendSolicitation} color="primary">
-              Enviar
-            </Button>
+          <Button onClick={sendSolicitation} color="primary">
+            Enviar
+          </Button>
         </DialogActions>
       </Dialog>
     </div>

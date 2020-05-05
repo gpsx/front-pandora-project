@@ -80,6 +80,10 @@ class HomeSolicitante extends React.Component {
         }
     }
 
+    lancarAlerta = (tipo, mensagem) => {
+
+    }
+
     naoEncontrado() {
         this.setState({ servicos: [], alerta: true })
     }
@@ -101,7 +105,7 @@ class HomeSolicitante extends React.Component {
                             <Grid item>
                                 <div className={classes.h1}>Serviços Populares</div>
 
-                                <ListaServicos servicos={this.state.servicos} />
+                                <ListaServicos servicos={this.state.servicos}/>
 
                                 {this.state.alerta ? (
                                     <div className={classes.erro}>
