@@ -7,17 +7,19 @@ import Home from './../views/HomeView/index.js'
 import HomeSolicitante from './../views/HomeSolicitanteView/index.js'
 import Escolha from '../views/ChoiceRegister/ChoiceRegister.js'
 import Testes from '../views/ViewDeTestes/testes.js'
-import PainelGeral from '../views/HomePrestadorView/PainelGeralView/PainelGeral'
+import PainelPrestador from '../views/HomePrestadorView/PainelGeralView'
+import PainelSolicitante from '../views/HomeSolicitanteView/PainelGeralView'
 
 function Routes() {
     return (
         <HashRouter>
             <Switch>
-                <Route path="/home-prestador" component={PainelGeral} />
+                <Route path="/home-prestador" component={PainelPrestador} />
                 <Route path="/login" component={Login} />
                 <Route path="/test" component={Testes} />
                 <Route path="/register-prestador" component={PrestadorCadastro} />
                 <Route path="/register-solicitante" component={SolicitanteCadastro} />
+                <Route path="/painel-solicitante" component={PainelSolicitante} />
                 <Route path="/register" component={Escolha} />
                 <Route path="/home-solicitante" component={HomeSolicitante} />
                 <Route path="/" component={Home} />
