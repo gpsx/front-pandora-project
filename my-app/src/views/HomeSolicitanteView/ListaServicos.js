@@ -36,7 +36,7 @@ export default function ListaServicos(props) {
             <Grid item>
                 <ServiceCard
                     id={servico.fkPrestador.id}
-                    imgService={ImagemGenerica}
+                    imgService={servico.imagem == null ? ImagemGenerica : servico.imagem}
                     title={servico.titulo}
                     providerName={servico.fkPrestador.nome}
                     providerRole={servico.fkCategoriaServico.nomeServico}

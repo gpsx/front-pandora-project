@@ -26,6 +26,7 @@ const useStyles = makeStyles({
   },
   cover: {
     width: 100,
+    height: 100,
     margin: 10,
     borderRadius: "5%"
   },

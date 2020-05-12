@@ -18,9 +18,34 @@ export function validarUsuario(usuario) {
 
     if (!usuario.senha || !usuario.senhaRepeticao) {
         msgs.push("Digite a senha duas vezes!")
-    } else if (usuario.senha!== usuario.senhaRepeticao) {
+    } else if (usuario.senha !== usuario.senhaRepeticao) {
         msgs.push("As senhas não coincidem")
     }
 
     return msgs;
+}
+
+export function montarUsuario(key, value, changeUser) {
+    if (key === "nome") {
+        changeUser.nome = value
+    }
+    if (key === "email") {
+        changeUser.email = value
+    }
+    if (key === "cnpj") {
+        changeUser.cnpj = value
+    }
+    if (key === "cpf") {
+        changeUser.cpf = value
+    }
+    if (key === "telefone") {
+        changeUser.telefone = value
+    }
+    if (key === "senha") {
+        changeUser.senha = value
+    }
+    if (key === "senhaRepeticao") {
+        changeUser.senhaRepeticao = value
+    }
+    return changeUser;
 }

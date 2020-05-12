@@ -9,6 +9,7 @@ module.exports = {
             status: res.status
         }
     },
+    
     post: async (uri, params) => {
         let res = await axios.post(baseUrl + uri, params);
         return {
@@ -16,8 +17,18 @@ module.exports = {
             status: res.status
         }
     },
+
     delete: async (uri) => {
         let res = await axios.delete(baseUrl + uri)
         return res.status
+    },
+
+    postImg: async (url, params, headers) => {
+        let res = await axios.post(url, params, headers);
+        return {
+            data: res.data,
+            status: res.status
+        }
     }
+
 }

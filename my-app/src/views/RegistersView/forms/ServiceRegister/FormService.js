@@ -50,25 +50,29 @@ class FormService extends React.Component {
                 spacing={3}>
 
                 <Grid item>
-                    <h1 style={h1}>Titulo do serviço</h1>
+                    <h1 style={h1}>Titulo do serviço:</h1>
                     <Input style={input}
                         onChange={(e) => { this.props.globalChanges("titulo", e.target.value) }} />
                 </Grid>
 
                 <Grid item>
-                    <h1 style={h1}>Descrição do serviço</h1>
+                    <h1 style={h1}>Descrição do serviço:</h1>
                     <Input style={input}
                         onChange={(e) => { this.props.globalChanges("descricao", e.target.value) }} />
                 </Grid>
 
                 <Grid item>
-                    <h1 style={h1}>Categoria do serviço</h1>
+                    <h1 style={h1}>Categoria do serviço:</h1>
                     <Panel
                         categorias={this.state.categorias}
                         changeCategoria={this.changeCategoria} />
                     <Link underline='always' href="/#/novacategoria" style={link} variant='caption text'>
                         Minha categoria não está aqui!
-                </Link>
+                    </Link>
+                </Grid>
+                <Grid item>
+                    <h1 style={h1}>Imagem do serviço:</h1>
+                    <input type="file" onChange={(e) => { this.props.globalChanges("imagem", e.target.files) }} />
                 </Grid>
             </Grid >
         );

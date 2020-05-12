@@ -6,10 +6,11 @@ import UsuarioForm from './../forms/UsuarioForm';
 import FormService from '../forms/ServiceRegister/FormService';
 import { QontoConnector, QontoStepIcon } from './QontoStepIcon';
 import service from '../../../service/userService'
+import imageService from '../../../service/imageService'
 import otherService from './../../../service/otherService'
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
-import { validarUsuario } from '../../../utils/validadores'
+import { validarUsuario, montarUsuario } from '../../../utils/validadores'
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -63,32 +64,12 @@ class StepperPrestador extends React.Component {
       titulo: '',
       descricao: '',
       idCategoria: '',
+      imagem: null,
     }
   };
 
   globalChanges(key, value) {
-    let changeUser = this.state.usuario;
-    if (key === "nome") {
-      changeUser.nome = value
-    }
-    if (key === "email") {
-      changeUser.email = value
-    }
-    if (key === "cnpj") {
-      changeUser.cnpj = value
-    }
-    if (key === "cpf") {
-      changeUser.cpf = value
-    }
-    if (key === "telefone") {
-      changeUser.telefone = value
-    }
-    if (key === "senha") {
-      changeUser.senha = value
-    }
-    if (key === "senhaRepeticao") {
-      changeUser.senhaRepeticao = value
-    }
+    let changeUser = montarUsuario(key, value, this.state.usuario)
     this.setState({ usuario: changeUser });
   }
 
@@ -103,8 +84,10 @@ class StepperPrestador extends React.Component {
     if (key === "categoria") {
       changeServico.idCategoria = value;
     }
+    if (key === "imagem") {
+      changeServico.imagem = value[0];
+    }
     this.setState({ sercide: changeServico });
-    console.log(this.state.service);
   }
 
   getStepContent = (step) => {
@@ -145,7 +128,7 @@ class StepperPrestador extends React.Component {
           });
 
         }).catch(erro => {
-          this.errorMessage(erro)
+          this.errorMessage(erro.response.data)
         })
 
       } else {
@@ -155,24 +138,46 @@ class StepperPrestador extends React.Component {
       }
       //Enviando serviço cadastro de serviço
     } else if (activeStep === 1) {
-      otherService.cadastrarServico({
-        descricao: this.state.service.descricao,
-        titulo: this.state.service.titulo,
-        prestador: this.state.userId,
-        categoriaServico: this.state.service.idCategoria,
-      }).then(response => {
-        this.sucessMessage("Cadastro Finalizado!")
-        console.log(response.data);
-        this.setState({
-          activeStep: activeStep + 1
-        });
-      }).catch(err => {
-        console.log(err.response.data);
-        this.errorMessage(err.response.data);
-      })
-    }
+      let img = this.state.service.imagem;
+      let imgUrl = null;
 
-  };
+      if (!(!img)) {
+        let data = new FormData();
+        data.append("image", img);
+
+        imageService.uploadImagem(data)
+          .then(response => {
+            imgUrl = response.data.data.link;
+            this.cadastrarServico(imgUrl)
+          }).catch(err => {
+            console.log(err)
+          })
+      } else {
+        this.cadastrarServico(null)
+      }
+
+    };
+
+  }
+
+  cadastrarServico(imgUrl) {
+    otherService.cadastrarServico({
+      descricao: this.state.service.descricao,
+      titulo: this.state.service.titulo,
+      prestador: this.state.userId,
+      categoriaServico: this.state.service.idCategoria,
+      imagem: imgUrl
+    }).then(response => {
+      this.sucessMessage("Cadastro Finalizado!")
+      console.log(response.data);
+      this.setState({
+        activeStep: this.state.activeStep + 1
+      });
+    }).catch(err => {
+      console.log(err)
+    })
+  }
+
 
 
   sucessMessage(msg) {
@@ -186,7 +191,6 @@ class StepperPrestador extends React.Component {
   }
 
   errorMessage(msg) {
-    console.log("MENSAGEM DE ERRO")
     this.setState({
       alert: {
         severity: 'error',
