@@ -19,6 +19,7 @@ const styles = (theme) => ({
         fontSize: '20px',
         fontWeight: '200',
         lineHeight: '50px',
+        cursor: 'pointer', 
         '&:hover': {
             color: '#0B3C5D',
         },

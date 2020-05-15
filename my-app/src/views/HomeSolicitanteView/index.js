@@ -1,5 +1,5 @@
 import React from 'react'
-import { withStyles, Grid, Paper } from '@material-ui/core';
+import { withStyles, Grid  } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
 import MenuSolicitante from '../../components/MenuSolicitante.js';
 import ListaServicos from './ListaServicos.js'
@@ -65,7 +65,6 @@ class HomeSolicitante extends React.Component {
             this.componentDidMount();
         }
         else {
-            let filtrados = []
             service.filtrarServico(id)
                 .then(response => {
                     if (!response.data) {
@@ -100,12 +99,13 @@ class HomeSolicitante extends React.Component {
                     <Grid item className={classes.popular}>
                         <Grid container justify="center" direction="column" spacing={4}>
                             <Grid item className={classes.servicos}>
+                                <div className={classes.h1}>Filtrar por:</div>
                                 <Filtro globalChange={this.filtrar.bind(this)} />
                             </Grid>
                             <Grid item>
                                 <div className={classes.h1}>Serviços Populares</div>
 
-                                <ListaServicos servicos={this.state.servicos}/>
+                                <ListaServicos servicos={this.state.servicos} />
 
                                 {this.state.alerta ? (
                                     <div className={classes.erro}>

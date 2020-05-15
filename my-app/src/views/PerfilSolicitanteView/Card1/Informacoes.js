@@ -1,11 +1,12 @@
 import React from 'react';
 import { withStyles, Grid } from '@material-ui/core';
+import LocalStorageService from '../../../service/localStorage';
 
 const styles = (theme) => ({
 
     nome: {
         fontSize: '24px',
-        width:'320px'
+        width: '320px'
 
     },
     conteudo: {
@@ -21,6 +22,7 @@ const styles = (theme) => ({
 function Informacoes(props) {
 
     const { classes } = props;
+    const usuario = LocalStorageService.obterItem("_usuario_logado")
 
     return (
         <Grid container
@@ -30,13 +32,12 @@ function Informacoes(props) {
 
             <Grid item>
 
-                <div className={classes.nome}>Nicolle Cruz dos Santos</div>
+                <div className={classes.nome}>{usuario.nome}</div>
 
                 <div className={classes.conteudo}>
-                    <div className={classes.endereco}>Endereço:</div>
-                    <div className={classes.email}>E-mail:</div>
-                    <div className={classes.telefone}>Telefone:</div>
-                    <div className={classes.CPF}>CPF/CNPJ:</div>
+                    <div className={classes.email}>E-mail: {usuario.email}</div>
+                    <div className={classes.telefone}>Telefone: {usuario.telefone}</div>
+                    <div className={classes.CPF}>CPF/CNPJ: {usuario.cpf}</div>
                 </div>
 
             </Grid>

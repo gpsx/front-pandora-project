@@ -11,7 +11,7 @@ module.exports = {
     },
 
     login: async (credentials) => {
-        return await api.post("/solicitante/login", credentials)
+        return await api.post("/solicitantes/login", credentials)
     },
 
     registerSolicitante: async (informacoes) => {

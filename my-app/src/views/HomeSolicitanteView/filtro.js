@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { makeStyles } from "@material-ui/core/styles";
 import { Paper, Grid } from '@material-ui/core';
+import FormControl from '@material-ui/core/FormControl';
+import NativeSelect from '@material-ui/core/NativeSelect';
 import Panel from '../../components/PanelCategorias';
+import Input from '../../components/Input'
 import { listarCategorias } from './../../utils/itens'
 
 const useStyles = makeStyles({
@@ -10,10 +13,6 @@ const useStyles = makeStyles({
         paddingLeft: '3%',
         paddingTop: '2px',
         fontSize: '18px',
-    },
-    input: {
-        fontSize: '14px',
-        width: '100%',
     },
     button: {
         backgroundColor: '#328CC1',
@@ -26,7 +25,13 @@ const useStyles = makeStyles({
         marginTop: '1px',
         marginLeft: '3%',
     },
+    input: {
+        marginLeft: '10px',
+        marginBottom: '6px',
+        marginRigth: '5px',
+    },
     text: {
+        marginLeft: '10px',
         marginBottom: '8px',
     },
     formControl: {
@@ -39,6 +44,7 @@ const useStyles = makeStyles({
 
 export default function Filtro(props) {
     const classes = useStyles();
+    const [filtro, setFiltro] = useState(0)
 
     function changeCategoria(categ) {
         if (!categ) {
@@ -47,6 +53,11 @@ export default function Filtro(props) {
             props.globalChange(categ.idCategoria)
         }
     }
+
+    const handleChange = (value) => {
+        setFiltro(value);
+        console.log(filtro)
+    };
 
     return (
         <Paper variant="outlined" className={classes.root}>
@@ -57,23 +68,61 @@ export default function Filtro(props) {
                 className={classes.root}
                 spacing={0}
             >
-                {/* <Grid item>
-                    <Input className={classes.input} />
-                </Grid>
-                <Grid item>
-                    <IconButton className={classes.button}>
-                        <SearchIcon />
-                    </IconButton>
-                </Grid> */}
-                <Grid item className={classes.text}>
-                    Categoria:
-                </Grid>
-                <Grid item className={classes.right}>
-                    <Panel categorias={listarCategorias()}
-                        changeCategoria={changeCategoria} />
-                </Grid>
-            </Grid>
 
+                <Grid item>
+                    <FormControl className={classes.formControl}>
+                        <NativeSelect
+                            value={filtro}
+                            onChange={(e) => handleChange(e.target.value)}
+                        >
+                            <option value={0}>Nenhum</option>
+                            <option value={1}>Texto</option>
+                            <option value={2}>Categoria</option>
+                            <option value={3}>Avaliação</option>
+                        </NativeSelect>
+                    </FormControl>
+                </Grid>
+
+                {/* <Grid item className={classes.text}>
+                    Texto:
+                </Grid>
+                <Grid item className={classes.input}>
+                    <Input />
+                </Grid> */}
+
+                {filtro === 0 ? (
+                    <div>
+
+                    </div>
+                ) : filtro === 1 ? (
+                    <div>
+
+                    </div>
+                ) : filtro === 2 ? (
+                    <div visible={false}>
+                        <Grid item className={classes.right}>
+                            <Panel categorias={listarCategorias()}
+                                changeCategoria={changeCategoria} />
+                        </Grid>
+                    </div>
+                ) : filtro === 3 ? (
+                    <div>
+                        AVALIAÇÃO
+                    </div>
+                ) : (
+                                    <div>
+                                        TA ERRADO
+                                    </div>
+                                )
+                }
+
+
+
+
+
+
+
+            </Grid>
 
         </Paper>
     );
