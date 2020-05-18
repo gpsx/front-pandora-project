@@ -47,7 +47,7 @@ class FormLogin extends React.Component {
             try{
                 this.errorMessage(erro.response.data)
             }catch(erro2){
-                this.errorMessage('usuário logado... bug')
+                this.errorMessage('erro no servidor')
             }
             
         })

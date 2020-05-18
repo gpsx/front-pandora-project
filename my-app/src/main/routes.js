@@ -15,16 +15,19 @@ function Routes() {
     return (
         <HashRouter>
             <Switch>
-                <Route path="/home-prestador" component={PainelPrestador} />
+                {/* Rotas deslogadas */}
+                <Route path="/" component={Home} />
                 <Route path="/login" component={Login} />
-                <Route path="/test" component={Testes} />
+                <Route path="/register" component={Escolha} />
                 <Route path="/register-prestador" component={PrestadorCadastro} />
                 <Route path="/register-solicitante" component={SolicitanteCadastro} />
+                <Route path="/test" component={Testes} />
+                {/* Rotas solicitante */}
                 <Route path="/painel-solicitante" component={PainelSolicitante} />
                 <Route path="/perfil-solicitante" component={PerfilSolicitante} />
-                <Route path="/register" component={Escolha} />
                 <Route path="/home-solicitante" component={HomeSolicitante} />
-                <Route path="/" component={Home} />
+                {/* Rotas Prestador */}
+                <Route path="/home-prestador" component={PainelPrestador} />
             </Switch>
         </HashRouter>
 
