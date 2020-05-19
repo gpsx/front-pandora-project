@@ -26,15 +26,14 @@ function Routes() {
                 <Route path="/test" component={Testes} />
 
                 
-                <Route path="/my-service" component={MeuServico} />
-                <Route path="/service" component={ChangeRegister} />
                 {/* Rotas solicitante */}
-                <Route path="/perfil-solicitante" component={PerfilSolicitante} />
                 <Route path="/profile-solicitante" component={PerfilSolicitante} />
                 <Route path="/home-solicitante" component={HomeSolicitante} />
                 {/* Rotas Prestador */}
                 <Route path="/profile-prestador" component={PerfilPrestador} />
                 <Route path="/home-prestador" component={PainelPrestador} />
+                <Route path="/my-service" component={MeuServico} />
+                <Route path="/service" component={ChangeRegister} />
 
                 <Route path="/" component={Home} />
             </Switch>
