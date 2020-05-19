@@ -1,6 +1,6 @@
 import React from 'react';
 import { withStyles, Grid } from '@material-ui/core';
-import Button from '../../../components/Button';
+import FormDialogReportar from '../../DialogView/Botoes/reportar';
 
 const styles = (theme) => ({
 
@@ -55,7 +55,7 @@ function Reportar(props) {
 
                     <br />
 
-                    <Button className={classes.botao}>REPORTAR USUÁRIO</Button>
+                    <FormDialogReportar/>
 
                 </div>
 

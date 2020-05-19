@@ -92,13 +92,15 @@ function FormDialogEmail(props) {
                                 fullWidth
                             />
                         </ThemeProvider>
+
                     </DialogContent>
 
                     <DialogContent>
                         <DialogContentText>
                             Digite o novo e-mail.
                         </DialogContentText>
-
+                        
+                        <ThemeProvider theme={theme}>
                         <TextField
                             autoFocus
                             margin="dense"
@@ -107,6 +109,8 @@ function FormDialogEmail(props) {
                             type="email"
                             fullWidth
                         />
+                        </ThemeProvider>
+
                     </DialogContent>
 
                     <DialogActions>

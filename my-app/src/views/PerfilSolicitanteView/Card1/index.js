@@ -1,6 +1,6 @@
 import React from 'react';
 import { withStyles, Grid, Paper } from '@material-ui/core';
-import Avatar from './Avatar';
+import EditImage from './EditImage';
 import Alteracoes from '../../DialogView/Alteracoes/index';
 import Informacoes from './Informacoes';
 
@@ -63,7 +63,7 @@ function Card1(props) {
                 <Grid item>
 
                     <div className={classes.avatar}>
-                        <Avatar />
+                        <EditImage />
                     </div>
 
                     <br />

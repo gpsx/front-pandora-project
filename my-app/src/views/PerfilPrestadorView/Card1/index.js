@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
+import React from 'react';
 import { makeStyles, Grid, Paper, Link } from '@material-ui/core';
 import Portal from '@material-ui/core/Portal';
 import Alteracoes from '../../DialogView/Alteracoes/index';
 import Informacoes from './Informacoes';
 import Servicos from './Servicos';
-import Teste from './EditarImagem';
+import EditImage from './EditImage';
 
     const card = {
         marginTop: '12%',
@@ -22,17 +22,7 @@ import Teste from './EditarImagem';
         marginTop: '-33.5%',
         opacity: '0.2',
     }
-    const alteracoes = {
-        marginTop: '-35.5%',
-        width: '100px',
-        marginLeft: '56%',
-        display:'none'
-    }
-    const servicos = {
-        marginTop: '-32.5%',
-        width: '100px',
-        marginLeft: '56%',
-    }
+    
     const avatar = {
         marginLeft: '16%',
         marginTop: '1%'
@@ -86,7 +76,7 @@ function Card1 (){
                     <Grid item>
     
                         <div style={avatar}>
-                            <Teste />
+                            <EditImage />
                         </div>
     
                         <br />

@@ -1,6 +1,6 @@
 import React from 'react';
 import { withStyles, Grid } from '@material-ui/core';
-import Button from '../../../components/Button';
+import FormDialogRelatar from '../../DialogView/Botoes/relatar';
 
 const styles = (theme) => ({
 
@@ -53,7 +53,8 @@ function Relatar(props) {
                             Houve algum problema com a nossa aplicação, que prejudicasse a sua experiência conosco?
                     </div>
                         <br />
-                        <Button className={classes.botao}>RELATAR PROBLEMA</Button></div>
+                        <FormDialogRelatar/>
+                        </div>
                 </Grid>
 
         </Grid>
