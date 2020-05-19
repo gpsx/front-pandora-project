@@ -49,11 +49,14 @@ import Teste from './EditarImagem';
         fontSize: '25px',
         fontWeight: '200',
         lineHeight: '50px',
-        marginLeft: '5.5%',
-        marginTop: '-260px',
+        marginLeft: '50%',
+        marginTop: '-590px',
     }
     const link = { 
         marginLeft:'25%',
+    }
+    const content = {
+        marginLeft:"670px"
     }
 
     const useStyles = makeStyles((theme) => ({
@@ -94,26 +97,34 @@ function Card1 (){
                         </div>
     
                         <div style={linhaVertical}></div>
+                        
                         {
                             show?
-                
+                            
                             (
+                            <Grid item>
                             <Portal container={container.current} className={classes.teste}>
                             
                                 <div style={titulo}>Alterar informações</div>
-                                <Alteracoes/>
+                                <div style={content}><Alteracoes /></div>
                 
                             </Portal>
+                            </Grid>
                             )
                             :(
+                            <Grid item>
                             <Portal container={container.current} className={classes.teste}>   
                             
                             <div style={titulo}>Serviços</div>
-                                <Servicos/>
+                            <div style={content}><Servicos /></div>
+                                
                                 
                             </Portal>
+                            </Grid>
                             )
+                            
                         }
+                        
                     </Grid>
                 </Paper>
     
