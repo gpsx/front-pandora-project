@@ -1,7 +1,7 @@
 import React from 'react';
 import { withStyles, Grid, Paper } from '@material-ui/core';
 import Avatar from './Avatar';
-import Alteracoes from '../AlteracoesView/index';
+import Alteracoes from '../../DialogView/Alteracoes/index';
 import Informacoes from './Informacoes';
 
 const styles = (theme) => ({

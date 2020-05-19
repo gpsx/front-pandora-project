@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
-import { withStyles } from '@material-ui/core';
+import { withStyles, createMuiTheme, ThemeProvider } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -31,6 +31,23 @@ const styles = (theme) => ({
     }
 
 });
+
+const theme = createMuiTheme({
+    overrides: {
+        MuiInput: {
+            underline: {
+                "&:after": {
+                    borderBottom: "2px solid #0B3C5D",
+                }
+            }
+        },
+        MuiButton: {
+            textPrimary: {
+                color: "#0B3C5D"
+            }
+        },
+    }
+})
 
 function FormDialogEmail(props) {
     const { classes } = props;
@@ -65,16 +82,18 @@ function FormDialogEmail(props) {
                             Digite o e-mail antigo.
                         </DialogContentText>
 
-                        <TextField
-                            autoFocus
-                            margin="dense"
-                            id="name"
-                            label="Antigo"
-                            type="email"
-                            fullWidth
-                        />
+                        <ThemeProvider theme={theme}>
+                            <TextField
+                                autoFocus
+                                margin="dense"
+                                id="name"
+                                label="Antigo"
+                                type="email"
+                                fullWidth
+                            />
+                        </ThemeProvider>
                     </DialogContent>
-                    
+
                     <DialogContent>
                         <DialogContentText>
                             Digite o novo e-mail.
@@ -91,12 +110,14 @@ function FormDialogEmail(props) {
                     </DialogContent>
 
                     <DialogActions>
-                        <Button onClick={handleClose} color="primary">
-                            Cancelar
+                        <ThemeProvider theme={theme}>
+                            <Button onClick={handleClose} color="primary">
+                                Cancelar
                         </Button>
-                        <Button onClick={handleClose} color="primary">
-                            Alterar
+                            <Button onClick={handleClose} color="primary">
+                                Alterar
                         </Button>
+                        </ThemeProvider>
                     </DialogActions>
 
                 </Dialog>

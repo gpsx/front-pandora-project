@@ -8,31 +8,32 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Link from '@material-ui/core/Link';
+import Estrelinhas from './estrelinhas';
 
 const styles = (theme) => ({
-   
+
     link: {
-        color: 'black',
+        color: '#328CC1',
         textDecoration: 'none',
         fontFamily: 'Roboto',
         fontStyle: 'normal',
-        fontSize: '20px',
+        fontSize: '13px',
         fontWeight: '200',
         lineHeight: '50px',
-        cursor: 'pointer', 
+        cursor: 'pointer',
         '&:hover': {
             color: '#0B3C5D',
         },
     },
-    
-    tamanho:{
-        width:'300px',
-        height:'8%'
+
+    tamanho: {
+        width: '300px',
+        height: '8%'
     }
 
 });
 
-function FormDialogTelefone(props) {
+function FormDialogAvaliar(props) {
     const { classes } = props;
     const [open, setOpen] = React.useState(false);
 
@@ -45,53 +46,53 @@ function FormDialogTelefone(props) {
     };
 
     return (
+        <div>
             <div>
 
                 <div className={classes.tamanho}>
-                    <Link onClick={handleClickOpen} style={{ textDecoration: 'none' }} className={classes.link}>
-                        Alterar telefone
-                </Link>
+                    <Link onClick={handleClickOpen} className={classes.link}>
+                        Finalizar
+                    </Link>
                 </div>
 
-                <Dialog open={open} onClose={handleClose} fullWidth="15px" maxWidth="sm" aria-labelledby="form-dialog-title">
-                    <DialogTitle id="form-dialog-title">Alterar o número de telefone</DialogTitle >
+                <Dialog open={open} onClose={handleClose} fullWidth="18px" maxWidth="sm" aria-labelledby="form-dialog-title">
+
+                    <DialogTitle id="form-dialog-title">
+                        Avaliar o Serviço
+                    </DialogTitle >
+
                     <DialogContent>
+
                         <DialogContentText>
-                            Digite o numero antigo
+                           Avalie o serviço do prestador e nos diga como foi a experiência, todo feedback é bem-vindo!
                         </DialogContentText>
+                        <br/>
+                        <Estrelinhas/>
                         <TextField
                             autoFocus
                             margin="dense"
                             id="name"
-                            label="Antigo"
-                            type="number"
+                            label="Feedback"
+                            type="text"
                             fullWidth
                         />
+
                     </DialogContent>
-                    <DialogContent>
-                        <DialogContentText>
-                            Digite o novo número de telefone.
-      </DialogContentText>
-                        <TextField
-                            autoFocus
-                            margin="dense"
-                            id="name"
-                            label="Novo"
-                            type="number"
-                            fullWidth
-                        />
-                    </DialogContent>
+
                     <DialogActions>
                         <Button onClick={handleClose} color="primary">
                             Cancelar
-      </Button>
+                        </Button>
+
                         <Button onClick={handleClose} color="primary">
-                            Alterar
-      </Button>
+                            Avaliar
+                        </Button>
+
                     </DialogActions>
                 </Dialog>
             </div>
+        </div>
     );
 }
 
-export default withStyles(styles)(FormDialogTelefone);
+export default withStyles(styles)(FormDialogAvaliar);

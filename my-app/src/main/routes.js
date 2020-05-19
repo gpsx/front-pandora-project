@@ -10,6 +10,9 @@ import Testes from '../views/ViewDeTestes/testes.js'
 import PainelPrestador from '../views/HomePrestadorView/PainelGeralView'
 import PainelSolicitante from '../views/HomeSolicitanteView/PainelGeralView'
 import PerfilSolicitante from '../views/PerfilSolicitanteView/index'
+import PerfilPrestador from '../views/PerfilPrestadorView/index'
+import MeuServico from '../views/MeuServicoView/index'
+import ChangeRegister from '../views/ServicosView/index'
 
 function Routes() {
     return (
@@ -20,8 +23,11 @@ function Routes() {
                 <Route path="/test" component={Testes} />
                 <Route path="/register-prestador" component={PrestadorCadastro} />
                 <Route path="/register-solicitante" component={SolicitanteCadastro} />
-                <Route path="/painel-solicitante" component={PainelSolicitante} />
-                <Route path="/perfil-solicitante" component={PerfilSolicitante} />
+                <Route path="/profile-solicitante" component={PainelSolicitante} />
+                <Route path="/profile-solicitante" component={PerfilSolicitante} />
+                <Route path="/profile-prestador" component={PerfilPrestador} />
+                <Route path="/my-service" component={MeuServico} />
+                <Route path="/service" component={ChangeRegister} />
                 <Route path="/register" component={Escolha} />
                 <Route path="/home-solicitante" component={HomeSolicitante} />
                 <Route path="/" component={Home} />

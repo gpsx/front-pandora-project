@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
-import { withStyles } from '@material-ui/core';
+import { withStyles, createMuiTheme, ThemeProvider } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -12,11 +12,11 @@ import Link from '@material-ui/core/Link';
 const styles = (theme) => ({
 
     link: {
-        color: 'black',
+        color: '#328CC1',
         textDecoration: 'none',
         fontFamily: 'Roboto',
         fontStyle: 'normal',
-        fontSize: '20px',
+        fontSize: '13px',
         fontWeight: '200',
         lineHeight: '50px',
         cursor: 'pointer',
@@ -32,7 +32,24 @@ const styles = (theme) => ({
 
 });
 
-function FormDialogEndereco(props) {
+const theme = createMuiTheme({
+    overrides:{
+        MuiInput:{
+          underline:{
+            "&:after":{
+              borderBottom:"2px solid #0B3C5D",
+            }
+          }
+        },
+        MuiButton:{
+            textPrimary:{
+                color:"#0B3C5D"
+            }
+        },
+    }
+  })
+
+function FormDialogCategoria(props) {
     const { classes } = props;
     const [open, setOpen] = React.useState(false);
 
@@ -49,81 +66,39 @@ function FormDialogEndereco(props) {
             <div>
 
                 <div className={classes.tamanho}>
-                    <Link onClick={handleClickOpen} style={{ textDecoration: 'none' }} className={classes.link}>
-                        Alterar endereço
+                    <Link onClick={handleClickOpen} className={classes.link}>
+                        Minha categoria não está aqui!
                     </Link>
                 </div>
 
                 <Dialog open={open} onClose={handleClose} fullWidth="18px" maxWidth="sm" aria-labelledby="form-dialog-title">
 
                     <DialogTitle id="form-dialog-title">
-                        Alterar o endereço
+                        Sugerir Categoria
                     </DialogTitle >
 
                     <DialogContent>
 
                         <DialogContentText>
-                            Digite as informações do novo endereço abaixo
+                           Se está faltando a categoria que mais combina com o seu serviço, sugira para nós abaixo qual seria a mais apropriada,
+                           e a equipe Pandora irá verificar se há a possibilidade de adiciona-la.
                         </DialogContentText>
 
+                        <ThemeProvider theme={theme}>
                         <TextField
                             autoFocus
                             margin="dense"
                             id="name"
-                            label="CEP"
+                            label="Categoria do Serviço"
                             type="text"
                             fullWidth
                         />
+                        </ThemeProvider>
 
-                    </DialogContent>
-
-                    <DialogContent>
-
-                        <TextField
-                            autoFocus
-                            margin="dense"
-                            id="name"
-                            label="Rua"
-                            type="text"
-                            fullWidth
-                        />
-
-                    </DialogContent>
-
-                    <DialogContent>
-                        <TextField
-                            autoFocus
-                            margin="dense"
-                            id="name"
-                            label="Número"
-                            type="number"
-                            fullWidth
-                        />
-                    </DialogContent>
-
-                    <DialogContent>
-                        <TextField
-                            autoFocus
-                            margin="dense"
-                            id="name"
-                            label="Bairro"
-                            type="text"
-                            fullWidth
-                        />
-                    </DialogContent>
-
-                    <DialogContent>
-                        <TextField
-                            autoFocus
-                            margin="dense"
-                            id="name"
-                            label="Complemento"
-                            type="text"
-                            fullWidth
-                        />
                     </DialogContent>
 
                     <DialogActions>
+                    <ThemeProvider theme={theme}>
                         <Button onClick={handleClose} color="primary">
                             Cancelar
                         </Button>
@@ -131,7 +106,7 @@ function FormDialogEndereco(props) {
                         <Button onClick={handleClose} color="primary">
                             Alterar
                         </Button>
-
+                    </ThemeProvider>
                     </DialogActions>
                 </Dialog>
             </div>
@@ -139,4 +114,4 @@ function FormDialogEndereco(props) {
     );
 }
 
-export default withStyles(styles)(FormDialogEndereco);
+export default withStyles(styles)(FormDialogCategoria);
