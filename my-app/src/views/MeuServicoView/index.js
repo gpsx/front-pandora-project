@@ -12,14 +12,27 @@ const styles = (theme) => ({
         marginTop: "40%"
     },
     paper: {
-        width: "60%",
+        width: "50%",
         height: "400px",
         marginLeft: "20%",
-        marginTop: "5%"
+        marginTop:"-19.5%"
     },
     footer: {
         marginBottom:"-1"
+    },
+    titulo:{
+        color: 'black',
+        fontFamily: 'Roboto',
+        fontStyle: 'normal',
+        fontSize: '17px',
+        fontWeight: '200',
+        marginTop:'5%',
+        marginLeft:'20%',
+    },
+    div:{
+        width:'100%'
     }
+
 
 
 });
@@ -40,6 +53,8 @@ function MeuServico(props) {
 
             </Grid>
 
+            <div className={classes.div}>
+            <h1 className={classes.titulo}>Meus Serviços</h1>
             <Paper className={classes.paper}>
                 <Grid item>
                     <div className={classes.adicionar}>
@@ -48,7 +63,9 @@ function MeuServico(props) {
                     </div>
                 </Grid>
             </Paper>
+            </div>
             <br /><br />
+            
 
             <Footer className={classes.footer} />
         </Grid>

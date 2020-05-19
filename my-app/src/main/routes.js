@@ -12,6 +12,7 @@ import PainelPrestador from '../views/HomePrestadorView/PainelGeralView'
 import PerfilSolicitante from '../views/PerfilSolicitanteView/index'
 import PerfilPrestador from '../views/PerfilPrestadorView/index'
 import MeuServico from '../views/MeuServicoView/index'
+import Avaliacoes from '../views/AvaliacoesView/index'
 import ChangeRegister from '../views/ServicosView/index'
 
 function Routes() {
@@ -33,6 +34,7 @@ function Routes() {
                 <Route path="/profile-prestador" component={PerfilPrestador} />
                 <Route path="/home-prestador" component={PainelPrestador} />
                 <Route path="/my-service" component={MeuServico} />
+                <Route path="/my-rating" component={Avaliacoes} />
                 <Route path="/service" component={ChangeRegister} />
 
                 <Route path="/" component={Home} />
