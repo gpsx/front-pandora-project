@@ -16,7 +16,6 @@ function Routes() {
         <HashRouter>
             <Switch>
                 {/* Rotas deslogadas */}
-                <Route path="/" component={Home} />
                 <Route path="/login" component={Login} />
                 <Route path="/register" component={Escolha} />
                 <Route path="/register-prestador" component={PrestadorCadastro} />
@@ -28,6 +27,8 @@ function Routes() {
                 <Route path="/home-solicitante" component={HomeSolicitante} />
                 {/* Rotas Prestador */}
                 <Route path="/home-prestador" component={PainelPrestador} />
+
+                <Route path="/" component={Home} />
             </Switch>
         </HashRouter>
 
