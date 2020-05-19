@@ -53,8 +53,8 @@ function Relatar(props) {
                             Houve algum problema com a nossa aplicação, que prejudicasse a sua experiência conosco?
                     </div>
                         <br />
-                        <FormDialogRelatar/>
-                        </div>
+                     <FormDialogRelatar/>
+                     </div>   
                 </Grid>
 
         </Grid>

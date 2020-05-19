@@ -1,5 +1,5 @@
 import React from 'react';
-import { withStyles, Grid } from '@material-ui/core';
+import { withStyles, Grid} from '@material-ui/core';
 import MenuSolicitante from './../../components/MenuSolicitante';
 import Footer from './../../components/Footer';
 import Card1 from './Card1/index';

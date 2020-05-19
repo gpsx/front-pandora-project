@@ -1,6 +1,7 @@
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Card, CardContent } from "@material-ui/core";
-import { CardMedia, Divider, Box, Avatar } from "@material-ui/core";
+import { CardMedia, Divider, Box } from "@material-ui/core";
 import Star from '@material-ui/icons/Star';
 
 const useStyles = makeStyles({
