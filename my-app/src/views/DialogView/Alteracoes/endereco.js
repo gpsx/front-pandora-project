@@ -9,12 +9,12 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Link from '@material-ui/core/Link';
 import LocalStorage from '../../../service/localStorage'
-import service from '../../../service/otherService';
+import service from '../../../service/alteracoesService';
+import Alerta from '../../../components/Alerta'
 
 const styles = (theme) => ({
 
     link: {
-        color: 'black',
         textDecoration: 'none',
         fontFamily: 'Roboto',
         fontStyle: 'normal',
@@ -55,16 +55,20 @@ function FormDialogEndereco(props) {
     const { classes } = props;
     const [open, setOpen] = useState(false);
     const [endereco, setEndereco] = useState({});
-    const [cep, setCEP] = useState(null);
-    const [rua, setRua] = useState(null);
-    const [numero, setNumero] = useState(null);
-    const [bairro, setBairro] = useState(null);
-    const [complemento, setComplemento] = useState(null);
+    const [cep, setCEP] = useState('');
+    const [rua, setRua] = useState('');
+    const [numero, setNumero] = useState(0);
+    const [bairro, setBairro] = useState('');
+    const [complemento, setComplemento] = useState('');
 
     const handleClickOpen = () => {
         service.getEndereco(LocalStorage.obterIdUsuario())
             .then(response => {
-                setEndereco(response.data[0])
+                setRua(response.data[0].rua)
+                setComplemento(response.data[0].complemento)
+                setCEP(response.data[0].cep)
+                setBairro(response.data[0].bairro)
+                setNumero(response.data[0].numero)
                 setOpen(true);
             }).catch(err => {
                 console.log(err)
@@ -76,41 +80,22 @@ function FormDialogEndereco(props) {
     };
 
     const alterarInformacoes = () => {
-        verificar()
+        const id = LocalStorage.obterIdUsuario()
         const alteracoes = {
-            "usuario": LocalStorage.obterIdUsuario(),
+            "usuario": id,
             rua,
             complemento,
             cep,
             bairro,
             numero,
         }
-        console.log(alteracoes)
+        service.changeAdress(alteracoes, id)
+            .then(response => {
+                console.log('Alterado com sucesso!')
+                setOpen(false)
+            })
     }
 
-    function verificar() {
-        let al;
-        if (!rua) {
-            al = endereco.rua
-            setRua(al)
-        }
-        if (!complemento) {
-            al = endereco.complemento
-            setComplemento(al)
-        }
-        if (!cep) {
-            al = endereco.cep
-            setCEP(al)
-        }
-        if (!bairro) {
-            al = endereco.bairro
-            setBairro(al)
-        }
-        if (!numero) {
-            al = endereco.numero
-            setNumero(al)
-        }
-    }
 
     return (
         <div>
@@ -136,7 +121,7 @@ function FormDialogEndereco(props) {
 
                         <ThemeProvider theme={theme}>
                             <TextField
-                                defaultValue={endereco.cep}
+                                defaultValue={cep}
                                 autoFocus
                                 margin="dense"
                                 id="name"
@@ -153,7 +138,7 @@ function FormDialogEndereco(props) {
 
                         <ThemeProvider theme={theme}>
                             <TextField
-                                defaultValue={endereco.rua}
+                                defaultValue={rua}
                                 autoFocus
                                 margin="dense"
                                 id="name"
@@ -169,7 +154,7 @@ function FormDialogEndereco(props) {
                     <DialogContent>
                         <ThemeProvider theme={theme}>
                             <TextField
-                                defaultValue={endereco.numero}
+                                defaultValue={numero}
                                 autoFocus
                                 margin="dense"
                                 id="name"
@@ -186,7 +171,7 @@ function FormDialogEndereco(props) {
 
                         <ThemeProvider theme={theme}>
                             <TextField
-                                defaultValue={endereco.bairro}
+                                defaultValue={bairro}
                                 autoFocus
                                 margin="dense"
                                 id="name"
@@ -203,7 +188,7 @@ function FormDialogEndereco(props) {
 
                         <ThemeProvider theme={theme}>
                             <TextField
-                                defaultValue={endereco.complemento}
+                                defaultValue={complemento}
                                 autoFocus
                                 margin="dense"
                                 id="name"
@@ -230,6 +215,7 @@ function FormDialogEndereco(props) {
 
                     </DialogActions>
                 </Dialog>
+                <Alerta open={true} severity={'sucess'} message={'Isso'}/>
             </div>
         </div>
     );

@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { withRouter } from 'react-router-dom'
 import { withStyles, Grid, Paper } from '@material-ui/core';
 import MenuPrestador from '../../components/MenuPrestador';
 import Footer from '../../components/Footer';
@@ -17,7 +18,7 @@ const styles = (theme) => ({
     },
 
     form: {
-        width:'100%'
+        width: '100%'
     }
 
 });
@@ -25,6 +26,15 @@ const styles = (theme) => ({
 function ChangeRegister(props) {
 
     const { classes } = props;
+
+    const [atualizando, setAtual] = useState(false)
+
+    useEffect(() => {
+        const params = props.match.params
+        if (params.id) {
+            setAtual(true);
+        }
+    })
 
     return (
         <Grid container
@@ -38,7 +48,7 @@ function ChangeRegister(props) {
 
             <Paper className={classes.paper}>
                 <div className={classes.divForm}>
-                    <FormServices className={classes.form}/>
+                    <FormServices atualizando={atualizando} className={classes.form} />
                     <br />
                 </div>
             </Paper>
@@ -49,4 +59,4 @@ function ChangeRegister(props) {
     );
 }
 
-export default withStyles(styles)(ChangeRegister);
+export default withRouter(withStyles(styles)(ChangeRegister));

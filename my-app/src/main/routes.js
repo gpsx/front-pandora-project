@@ -34,7 +34,8 @@ function Routes() {
                 <Route path="/home-prestador" component={PainelPrestador} />
                 <Route path="/my-service" component={MeuServico} />
                 <Route path="/my-rating" component={Avaliacoes} />
-                <Route path="/service" component={ChangeRegister} />
+                {/* O parâmetro ID é opicional */}
+                <Route path="/service/:id?" component={ChangeRegister} />
 
                 <Route path="/" component={Home} />
             </Switch>
