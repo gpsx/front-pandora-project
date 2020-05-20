@@ -8,7 +8,6 @@ import HomeSolicitante from './../views/HomeSolicitanteView/index.js'
 import Escolha from '../views/ChoiceRegister/ChoiceRegister.js'
 import Testes from '../views/ViewDeTestes/testes.js'
 import PainelPrestador from '../views/HomePrestadorView/PainelGeralView'
-// import PainelSolicitante from '../views/HomeSolicitanteView/PainelGeralView'
 import PerfilSolicitante from '../views/PerfilSolicitanteView/index'
 import PerfilPrestador from '../views/PerfilPrestadorView/index'
 import MeuServico from '../views/MeuServicoView/index'
@@ -25,10 +24,10 @@ function Routes() {
                 <Route path="/register-solicitante" component={SolicitanteCadastro} />
                 <Route path="/test" component={Testes} />
 
-                
                 {/* Rotas solicitante */}
                 <Route path="/profile-solicitante" component={PerfilSolicitante} />
                 <Route path="/home-solicitante" component={HomeSolicitante} />
+                
                 {/* Rotas Prestador */}
                 <Route path="/profile-prestador" component={PerfilPrestador} />
                 <Route path="/home-prestador" component={PainelPrestador} />

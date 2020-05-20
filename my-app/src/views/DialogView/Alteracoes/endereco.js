@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import { withStyles, createMuiTheme, ThemeProvider } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
@@ -8,6 +8,8 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Link from '@material-ui/core/Link';
+import LocalStorage from '../../../service/localStorage'
+import service from '../../../service/otherService';
 
 const styles = (theme) => ({
 
@@ -51,15 +53,64 @@ const theme = createMuiTheme({
 
 function FormDialogEndereco(props) {
     const { classes } = props;
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
+    const [endereco, setEndereco] = useState({});
+    const [cep, setCEP] = useState(null);
+    const [rua, setRua] = useState(null);
+    const [numero, setNumero] = useState(null);
+    const [bairro, setBairro] = useState(null);
+    const [complemento, setComplemento] = useState(null);
 
     const handleClickOpen = () => {
-        setOpen(true);
+        service.getEndereco(LocalStorage.obterIdUsuario())
+            .then(response => {
+                setEndereco(response.data[0])
+                setOpen(true);
+            }).catch(err => {
+                console.log(err)
+            })
     };
 
     const handleClose = () => {
         setOpen(false);
     };
+
+    const alterarInformacoes = () => {
+        verificar()
+        const alteracoes = {
+            "usuario": LocalStorage.obterIdUsuario(),
+            rua,
+            complemento,
+            cep,
+            bairro,
+            numero,
+        }
+        console.log(alteracoes)
+    }
+
+    function verificar() {
+        let al;
+        if (!rua) {
+            al = endereco.rua
+            setRua(al)
+        }
+        if (!complemento) {
+            al = endereco.complemento
+            setComplemento(al)
+        }
+        if (!cep) {
+            al = endereco.cep
+            setCEP(al)
+        }
+        if (!bairro) {
+            al = endereco.bairro
+            setBairro(al)
+        }
+        if (!numero) {
+            al = endereco.numero
+            setNumero(al)
+        }
+    }
 
     return (
         <div>
@@ -85,12 +136,14 @@ function FormDialogEndereco(props) {
 
                         <ThemeProvider theme={theme}>
                             <TextField
+                                defaultValue={endereco.cep}
                                 autoFocus
                                 margin="dense"
                                 id="name"
                                 label="CEP"
                                 type="text"
                                 fullWidth
+                                onChange={(e) => setCEP(e.target.value)}
                             />
                         </ThemeProvider>
 
@@ -100,12 +153,14 @@ function FormDialogEndereco(props) {
 
                         <ThemeProvider theme={theme}>
                             <TextField
+                                defaultValue={endereco.rua}
                                 autoFocus
                                 margin="dense"
                                 id="name"
                                 label="Rua"
                                 type="text"
                                 fullWidth
+                                onChange={(e) => { setRua(e.target.value) }}
                             />
                         </ThemeProvider>
 
@@ -114,12 +169,14 @@ function FormDialogEndereco(props) {
                     <DialogContent>
                         <ThemeProvider theme={theme}>
                             <TextField
+                                defaultValue={endereco.numero}
                                 autoFocus
                                 margin="dense"
                                 id="name"
                                 label="Número"
                                 type="number"
                                 fullWidth
+                                onChange={(e) => { setNumero(e.target.value) }}
                             />
                         </ThemeProvider>
 
@@ -129,12 +186,14 @@ function FormDialogEndereco(props) {
 
                         <ThemeProvider theme={theme}>
                             <TextField
+                                defaultValue={endereco.bairro}
                                 autoFocus
                                 margin="dense"
                                 id="name"
                                 label="Bairro"
                                 type="text"
                                 fullWidth
+                                onChange={(e) => { setBairro(e.target.value) }}
                             />
                         </ThemeProvider>
 
@@ -144,12 +203,14 @@ function FormDialogEndereco(props) {
 
                         <ThemeProvider theme={theme}>
                             <TextField
+                                defaultValue={endereco.complemento}
                                 autoFocus
                                 margin="dense"
                                 id="name"
                                 label="Complemento"
                                 type="text"
                                 fullWidth
+                                onChange={(e) => { setComplemento(e.target.value) }}
                             />
                         </ThemeProvider>
 
@@ -162,11 +223,11 @@ function FormDialogEndereco(props) {
                                 Cancelar
                             </Button>
 
-                            <Button onClick={handleClose} color="primary">
+                            <Button onClick={alterarInformacoes} color="primary">
                                 Alterar
                             </Button>
                         </ThemeProvider>
-                        
+
                     </DialogActions>
                 </Dialog>
             </div>

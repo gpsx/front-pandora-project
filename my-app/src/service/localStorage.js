@@ -7,5 +7,10 @@ export default class LocalStorageService{
         const item =  localStorage.getItem(chave);
         return JSON.parse(item);
     }
+
+    static obterIdUsuario(){
+        const usuario = this.obterItem("_usuario_logado");
+        return usuario.id
+    }
 }
 
