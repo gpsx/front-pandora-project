@@ -33,7 +33,11 @@ const noop = () => {};
 
 const Icon = ({ value, onChange = noop, ...rest }) => (
   <div>
-   
+
+    {/* {Boolean(value.length) && (
+        <div>Selected files: {value.map(f => f.name).join(", ")}</div>
+    )} */}
+    
     <label>
         <EditIcon style={{color:"white"}} />
       <input

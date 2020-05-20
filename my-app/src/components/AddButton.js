@@ -33,7 +33,7 @@ export default function BotaoAdicionar() {
     return (
         <div className={classes.root}>
             <ThemeProvider theme={theme}>
-                <Fab size="medium" color="secondary" aria-label="add">
+                <Fab size="medium" href="/#/service" color="secondary" aria-label="add">
                     <AddIcon />
                 </Fab>
             </ThemeProvider>

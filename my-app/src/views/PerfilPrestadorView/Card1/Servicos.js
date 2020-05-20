@@ -39,7 +39,7 @@ function Servicos(props) {
                 <Grid item className={classes.links}>
                     <Typography >
                         <div>
-                        <Link href="#" onClick={preventDefault} style={{ textDecoration: 'none' }} className={classes.link}>
+                        <Link href="/#/service"  style={{ textDecoration: 'none' }} className={classes.link}>
                             Adicionar serviço
                         </Link>
                         </div>

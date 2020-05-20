@@ -104,7 +104,7 @@ function Menu(props) {
                             variant="h6"
                             underline="none"
                             className={classes.middleLink}
-                            href="/home-solicitante"
+                            href="/#/home-solicitante"
                         >
                             {'Home'}
                         </Link>
@@ -113,7 +113,7 @@ function Menu(props) {
                             variant="h6"
                             underline="none"
                             className={classes.middleLink}
-                            href="/"
+                            href="/#/my-service"
                         >
                             {'Meus Serviços'}
                         </Link>
@@ -133,7 +133,7 @@ function Menu(props) {
                             size="small"
                             className={classes.whiteButton}
                             component="a"
-                            href="/#/login"
+                            href="/#/profile-solicitante"
                         >
                             Perfil
                         </Button>
