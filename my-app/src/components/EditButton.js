@@ -7,6 +7,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
       margin: theme.spacing(1),
+      paddingTop:theme.spacing(1)
     },
   },
   extendedIcon: {
@@ -28,6 +29,25 @@ const theme = createMuiTheme({
   }
 })
 
+const noop = () => {};
+
+const Icon = ({ value, onChange = noop, ...rest }) => (
+  <div>
+   
+    <label>
+        <EditIcon style={{color:"white"}} />
+      <input
+        {...rest}
+        style={{ display: "none" }}
+        type="file"
+        onChange={e => {
+          onChange([...e.target.files]);
+        }}
+      />
+    </label>
+  </div>
+)
+
 export default function Botao() {
   const classes = useStyles();
 
@@ -35,7 +55,7 @@ export default function Botao() {
     <div className={classes.root}>
       <ThemeProvider theme={theme}>
       <Fab size="small" color='secondary' aria-label="edit">
-        <EditIcon />
+        <Icon className={classes.icone}/>
       </Fab>
       </ThemeProvider>
       
