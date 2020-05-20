@@ -1,8 +1,8 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom'
 import { Grid } from '@material-ui/core';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
-import Alerta from '../../components/Alerta'
 import FormDialogCategoria from '../DialogView/Servicos/categoria';
 import { listarCategorias } from './../../utils/itens'
 import ImageEdit from './ImageEdit'
@@ -11,6 +11,7 @@ import service from '../../service/otherService'
 import LocalStorage from '../../service/localStorage'
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
+import imgService from '../../service/imageService'
 
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -61,6 +62,7 @@ class FormServices extends React.Component {
         categoria: null,
         titulo: '',
         descricao: '',
+        imagem: '',
         alerta: {
             message: '',
             severity: '',
@@ -88,11 +90,25 @@ class FormServices extends React.Component {
     }
 
     cancelar = () => {
-        // this.props.history.push('/my-service')
+        this.props.history.push('/my-service')
     }
 
     atualizar = () => {
 
+    }
+
+    changeImage = (imagem) => {
+        let imgUrl = null;
+        let data = new FormData();
+        data.append("image", imagem[0]);
+        imgService.uploadImagem(data)
+            .then(response => {
+                imgUrl = response.data.data.link;
+                this.setState({ imagem: imgUrl });
+                this.msgSucesso("Upload da imagem realizado")
+            }).catch(err => {
+                this.msgErro("Erro no upload da imagem")
+            })
     }
 
     cadastrar = () => {
@@ -101,26 +117,35 @@ class FormServices extends React.Component {
             "titulo": this.state.titulo,
             "prestador": this.id,
             "categoriaServico": this.state.categoria,
+            "imagem": this.state.imagem
         }
         service.cadastrarServico(novo)
             .then(response => {
-                console.log('oba')
-                this.setState({
-                    alerta: {
-                        message: 'Cadastrado com sucesso!',
-                        severity: 'success',
-                        open: true,
-                    }
-                })
-            }).catch(errr => {
-                this.setState({
-                    alerta: {
-                        message: 'Erro ao cadastrar serviço',
-                        severity: 'error',
-                        open: true,
-                    }
-                })
+                this.msgSucesso("Cadastrado com sucesso!")
+                setTimeout(this.props.history.push('/my-service'), 10000);
+            }).catch((errr) => {
+                this.msgErro("Erro ao cadastrar serviço")
             })
+    }
+
+    msgSucesso = (msg) => {
+        this.setState({
+            alerta: {
+                message: msg,
+                severity: 'success',
+                open: true,
+            }
+        })
+    }
+
+    msgErro = (msg) => {
+        this.setState({
+            alerta: {
+                message: msg,
+                severity: 'error',
+                open: true,
+            }
+        })
     }
 
     render() {
@@ -143,7 +168,7 @@ class FormServices extends React.Component {
                     </Grid>
 
                     <Grid item>
-                        <ImageEdit />
+                        <ImageEdit changeImage={this.changeImage.bind(this)} />
                     </Grid>
 
                     <Grid item>
@@ -192,4 +217,4 @@ class FormServices extends React.Component {
     }
 }
 
-export default (FormServices);
+export default withRouter(FormServices);

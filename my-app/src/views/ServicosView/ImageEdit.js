@@ -1,6 +1,6 @@
 import React from 'react';
 import Badge from '@material-ui/core/Badge';
-import { makeStyles} from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Botao from '../../components/EditButton';
 import Image from './Image';
 
@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-export default function ImageEdit() {
+export default function ImageEdit(props) {
   const classes = useStyles();
 
   return (
@@ -25,7 +25,7 @@ export default function ImageEdit() {
           vertical: 'bottom',
           horizontal: 'right',
         }}
-        badgeContent={<Botao />}
+        badgeContent={<Botao changeImage={props.changeImage.bind(this)} />}
       >
         <Image className={classes.imagem} />
       </Badge>

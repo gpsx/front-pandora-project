@@ -29,15 +29,8 @@ const theme = createMuiTheme({
   }
 })
 
-const noop = () => { };
-
-const Icon = ({ value, onChange = noop, ...rest }) => (
+const Icon = ({ changeImage, Imagevalue, ...rest }) => (
   <div>
-
-    {/* {Boolean(value.length) && (
-        <div>Selected files: {value.map(f => f.name).join(", ")}</div>
-    )} */}
-
     <label>
       <EditIcon style={{ color: "white" }} />
       <input
@@ -45,23 +38,25 @@ const Icon = ({ value, onChange = noop, ...rest }) => (
         style={{ display: "none" }}
         type="file"
         onChange={e => {
-          onChange([...e.target.files]);
+          changeImage([...e.target.files]);
         }}
       />
     </label>
   </div>
 )
 
-export default function Botao() {
+
+export default function Botao(props) {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
       <ThemeProvider theme={theme}>
         <Fab size="small" color='secondary' aria-label="edit">
-          <Icon className={classes.icone} />
+          <Icon changeImage={props.changeImage.bind(this)} className={classes.icone} />
         </Fab>
       </ThemeProvider>
+
     </div>
   );
 }
