@@ -10,7 +10,6 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Link from '@material-ui/core/Link';
 import LocalStorage from '../../../service/localStorage'
 import service from '../../../service/alteracoesService';
-import Alerta from '../../../components/Alerta'
 
 const styles = (theme) => ({
 
@@ -53,7 +52,7 @@ const theme = createMuiTheme({
 
 function FormDialogEndereco(props) {
     const { classes } = props;
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState();
     const [endereco, setEndereco] = useState({});
     const [cep, setCEP] = useState('');
     const [rua, setRua] = useState('');
@@ -69,9 +68,9 @@ function FormDialogEndereco(props) {
                 setCEP(response.data[0].cep)
                 setBairro(response.data[0].bairro)
                 setNumero(response.data[0].numero)
-                setOpen(true);
+                setOpen(true)
             }).catch(err => {
-                console.log(err)
+                setOpen(true)
             })
     };
 
@@ -215,7 +214,6 @@ function FormDialogEndereco(props) {
 
                     </DialogActions>
                 </Dialog>
-                <Alerta open={true} severity={'sucess'} message={'Isso'}/>
             </div>
         </div>
     );

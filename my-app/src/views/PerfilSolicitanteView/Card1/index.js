@@ -53,6 +53,20 @@ function Card1(props) {
 
     const { classes } = props;
 
+    function changeImage(imagem) {
+        let imgUrl = null;
+        let data = new FormData();
+        data.append("image", imagem[0]);
+        // imgService.uploadImagem(data)
+        //     .then(response => {
+        //         imgUrl = response.data.data.link;
+        //         this.setState({ imagem: imgUrl });
+        //         this.msgSucesso("Upload da imagem realizado")
+        //     }).catch(err => {
+        //         this.msgErro("Erro no upload da imagem")
+        //     })
+    }
+
     return (
         <Grid container
             direction="column"
@@ -63,7 +77,7 @@ function Card1(props) {
                 <Grid item>
 
                     <div className={classes.avatar}>
-                        <EditImage />
+                        <EditImage changeImage={changeImage.bind(this)} />
                     </div>
 
                     <br />

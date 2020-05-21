@@ -46,8 +46,8 @@ class SolicitanteStepper extends React.Component {
     usuario: {
       nome: '',
       email: '',
-      cnpj: '',
-      cpf: '',
+      cnpj: null,
+      cpf: null,
       telefone: '',
       senha: '',
       senhaRepeticao: '',
@@ -133,27 +133,32 @@ class SolicitanteStepper extends React.Component {
       let erros = validarUsuario(this.state.usuario);
 
       if (erros.length === 0) {
-        //Enviando serciço de cadastro de solicitante
-        service.registerSolicitante({
+        let novoUsuario = {
           nome: this.state.usuario.nome,
           senha: this.state.usuario.senha,
           email: this.state.usuario.email,
           cpf: this.state.usuario.cpf,
           telefone: this.state.usuario.telefone,
-          cnpj: this.state.usuario.cnpj,
+        }
+        if (!(!this.state.usuario.cnpj)) {
+          novoUsuario = {
+            ...novoUsuario,
+            cnpj: this.state.usuario.cnpj,
+          }
+        }
+        service.registerSolicitante(novoUsuario)
+          .then(response => {
+            this.sucessMessage();
+            console.log(response.data)
+            this.setState({
+              activeStep: activeStep + 1,
+              userId: response.data.id
+            });
 
-        }).then(response => {
-          this.sucessMessage();
-          console.log(response.data)
-          this.setState({
-            activeStep: activeStep + 1,
-            userId: response.data.id
-          });
-
-        }).catch(erro => {
-          this.errorMessage(erro.response.data)
-          console.log(erro.response.data)
-        })
+          }).catch(erro => {
+            this.errorMessage(erro.response.data)
+            console.log(erro.response.data)
+          })
 
       } else {
         erros.forEach((erro, index) => {

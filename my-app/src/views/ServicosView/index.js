@@ -5,6 +5,7 @@ import MenuPrestador from '../../components/MenuPrestador';
 import Footer from '../../components/Footer';
 import FormServices from './FormServices';
 
+
 const styles = (theme) => ({
     paper: {
         width: '38%',
@@ -29,12 +30,14 @@ function ChangeRegister(props) {
 
     const [atualizando, setAtual] = useState(false)
 
+    const id = () => {
+        return props.match.params.id
+    }
+
     useEffect(() => {
         const params = props.match.params
-        if (params.id) {
-            setAtual(true);
-        }
-    })
+        if (id() != null) { setAtual(true); }
+    }, [])
 
     return (
         <Grid container
@@ -48,7 +51,11 @@ function ChangeRegister(props) {
 
             <Paper className={classes.paper}>
                 <div className={classes.divForm}>
-                    <FormServices atualizando={atualizando} className={classes.form} />
+                    <FormServices
+                        titulo={"AAAAAAAAAA"}
+                        id={id()}
+                        atualizando={atualizando}
+                        className={classes.form} />
                     <br />
                 </div>
             </Paper>

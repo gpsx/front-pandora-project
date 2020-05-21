@@ -9,14 +9,7 @@ import ImageEdit from './ImageEdit'
 import Panel from '../../components/PanelCategorias';
 import service from '../../service/otherService'
 import LocalStorage from '../../service/localStorage'
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
-import imgService from '../../service/imageService'
-
-function Alert(props) {
-    return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
-
+import imgService from '../../service/imageService';
 
 const h1 = {
     fontFamily: 'Roboto',
@@ -57,9 +50,10 @@ class FormServices extends React.Component {
     id = LocalStorage.obterIdUsuario();
 
     state = {
+        id: null,
         categorias: [],
         atualizando: this.props.atualizando,
-        categoria: null,
+        categoriaServico: null,
         titulo: '',
         descricao: '',
         imagem: '',
@@ -80,13 +74,28 @@ class FormServices extends React.Component {
     componentDidMount() {
         let lista = listarCategorias();
         this.setState({ categorias: lista })
-        if (!this.props.atualizando) {
-            // Colocar os defaults values aqui
+
+        if (this.props.id != null) {
+            service.getServico(this.props.id)
+                .then(response => {
+                    let service = response.data[0]
+                    this.mudarState(service)
+                }).catch(err => {
+                    console.log('Erro ao recuperar serviço')
+                })
         }
     }
 
+    mudarState = (service) => {
+        this.setState({
+            ...service,
+            categoriaServico: service.fkCategoriaServico.idCategoria
+        })
+        console.log(this.state)
+    }
+
     changeCategoria = (categ) => {
-        this.setState({ categoria: categ.idCategoria })
+        this.setState({ categoriaServico: categ.idCategoria })
     }
 
     cancelar = () => {
@@ -94,7 +103,17 @@ class FormServices extends React.Component {
     }
 
     atualizar = () => {
+        const { categoriaServico, titulo, descricao, imagem } = this.state
 
+        service.updateServico(this.props.id,
+            {
+                categoriaServico, titulo, descricao, imagem,
+                prestador: this.id,
+            }).then(response => {
+                console.log('Atualizado!')
+            }).catch(err => {
+                console.log('erro')
+            })
     }
 
     changeImage = (imagem) => {
@@ -112,17 +131,14 @@ class FormServices extends React.Component {
     }
 
     cadastrar = () => {
+        const { descricao, titulo, imagem, categoriaServico } = this.state;
         const novo = {
-            "descricao": this.state.descricao,
-            "titulo": this.state.titulo,
+            descricao, titulo, imagem, categoriaServico,
             "prestador": this.id,
-            "categoriaServico": this.state.categoria,
-            "imagem": this.state.imagem
         }
         service.cadastrarServico(novo)
             .then(response => {
-                this.msgSucesso("Cadastrado com sucesso!")
-                setTimeout(this.props.history.push('/my-service'), 10000);
+                console.log('Cadastrado com sucesso')
             }).catch((errr) => {
                 this.msgErro("Erro ao cadastrar serviço")
             })
@@ -148,7 +164,12 @@ class FormServices extends React.Component {
         })
     }
 
+
+    titulo = this.state.titulo
+    descricao = this.state.descricao
+
     render() {
+
         return (
             <Grid container
                 direction="column"
@@ -173,14 +194,20 @@ class FormServices extends React.Component {
 
                     <Grid item>
                         <h1 style={h1}>Nome do Serviço</h1>
-                        <Input style={input} onChange={(e) => this.setState({ titulo: e.target.value })} />
+                        <Input
+                            defaultValue={this.props.titulo}
+                            style={input}
+                            onChange={(e) => this.setState({ titulo: e.target.value })} />
                     </Grid>
 
                     <br />
 
                     <Grid item>
                         <h1 style={h1}>Descrição do Serviço</h1>
-                        <Input style={input} onChange={(e) => this.setState({ descricao: e.target.value })} />
+                        <Input
+                            defaultValue={this.state.descricao}
+                            style={input}
+                            onChange={(e) => this.setState({ descricao: e.target.value })} />
                     </Grid>
 
                     <br />
@@ -188,6 +215,7 @@ class FormServices extends React.Component {
                     <Grid item>
                         <h1 style={h1}>Categorias do Serviço</h1>
                         <Panel
+                            // default={idCategoria - 1}
                             categorias={this.state.categorias}
                             changeCategoria={this.changeCategoria} />
                         <FormDialogCategoria />
@@ -203,13 +231,6 @@ class FormServices extends React.Component {
                             )}
 
                     </Grid>
-
-                    <Snackbar open={this.state.alerta.open} autoHideDuration={6000} onClose={this.fecharAlerta}
-                        anchorOrigin={{ vertical: 'top', horizontal: 'right' }} >
-                        <Alert onClose={this.fecharAlerta} severity={this.state.alerta.severity}>
-                            {this.state.alerta.message}
-                        </Alert>
-                    </Snackbar >
                 </div>
                 <br />
             </Grid>

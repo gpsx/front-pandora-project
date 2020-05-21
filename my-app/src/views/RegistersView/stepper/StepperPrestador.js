@@ -111,25 +111,31 @@ class StepperPrestador extends React.Component {
 
       if (erros.length === 0) {
         // Enviando serciço de cadastro de solicitante
-        service.registerPrestador({
+        let novoUsuario = {
           nome: this.state.usuario.nome,
           senha: this.state.usuario.senha,
           email: this.state.usuario.email,
           cpf: this.state.usuario.cpf,
           telefone: this.state.usuario.telefone,
-          cnpj: this.state.usuario.cnpj,
+        }
+        if (!(!this.state.usuario.cnpj)) {
+          novoUsuario = {
+            ...novoUsuario,
+            cnpj: this.state.usuario.cnpj,
+          }
+        }
+        service.registerPrestador(novoUsuario)
+          .then(response => {
+            this.sucessMessage("Usuário Cadastrado");
+            console.log(response.data)
+            this.setState({
+              activeStep: activeStep + 1,
+              userId: response.data.id
+            });
 
-        }).then(response => {
-          this.sucessMessage("Usuário Cadastrado");
-          console.log(response.data)
-          this.setState({
-            activeStep: activeStep + 1,
-            userId: response.data.id
-          });
-
-        }).catch(erro => {
-          this.errorMessage(erro.response.data)
-        })
+          }).catch(erro => {
+            this.errorMessage(erro.response.data)
+          })
 
       } else {
         erros.forEach((erro, index) => {
