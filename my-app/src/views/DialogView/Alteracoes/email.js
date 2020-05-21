@@ -1,13 +1,16 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
+import { withRouter } from 'react-router-dom'
+import { Button, TextField, Link } from '@material-ui/core';
 import { withStyles, createMuiTheme, ThemeProvider } from '@material-ui/core';
-import TextField from '@material-ui/core/TextField';
+import { SnackbarContent, Snackbar } from '@material-ui/core';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import Link from '@material-ui/core/Link';
+import LocalStorageService from '../../../service/localStorage'
+import alterarService from '../../../service/alteracoesService'
+import userService from '../../../service/userService'
 
 const styles = (theme) => ({
 
@@ -50,8 +53,18 @@ const theme = createMuiTheme({
 })
 
 function FormDialogEmail(props) {
+    const usuario = LocalStorageService.obterItem("_usuario_logado");
+    const type = LocalStorageService.getUserType();
+
     const { classes } = props;
     const [open, setOpen] = React.useState(false);
+    const [openAlert, setOpenAlert] = React.useState(false);
+
+    const [error, setError] = React.useState(false);
+    const [message, setMessage] = React.useState(null);
+
+    const [eAntigo, setEAntigo] = React.useState('');
+    const [email, setEmail] = React.useState('');
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -61,9 +74,50 @@ function FormDialogEmail(props) {
         setOpen(false);
     };
 
+    const action = (
+        <Button color="secondary" size="small" onClick={logoff}>
+            Okay
+        </Button >
+    );
+
+    function logoff() {
+        LocalStorageService.logOff();
+        props.history.push('/login');
+        userService.logoff();
+    }
+
+
+    const validar = () => {
+        let email = usuario.email;
+        if (email != eAntigo) {
+            setError(true)
+            setMessage("Digite seu e-mail atual")
+        }
+        else {
+            if (type == 'solicitante') {
+                alterarSolicitante()
+            } else {
+                alterarPrestador()
+            }
+        }
+    }
+
+    const alterarSolicitante = () => {
+        alterarService.emailSolicitante(
+            { "email": email }
+        ).then(setOpenAlert(true))
+    }
+
+    const alterarPrestador = () => {
+        alterarService.emaiPrestador(
+            { "email": email }
+        ).then(setOpenAlert(true))
+    }
+
     return (
         <div>
             <div>
+
                 <div className={classes.tamanho}>
 
                     <Link onClick={handleClickOpen} style={{ textDecoration: 'none' }} className={classes.link}>
@@ -84,12 +138,15 @@ function FormDialogEmail(props) {
 
                         <ThemeProvider theme={theme}>
                             <TextField
+                                helperText={message}
+                                error={error}
                                 autoFocus
                                 margin="dense"
                                 id="name"
                                 label="Antigo"
                                 type="email"
                                 fullWidth
+                                onChange={(e) => setEAntigo(e.target.value)}
                             />
                         </ThemeProvider>
 
@@ -99,16 +156,17 @@ function FormDialogEmail(props) {
                         <DialogContentText>
                             Digite o novo e-mail.
                         </DialogContentText>
-                        
+
                         <ThemeProvider theme={theme}>
-                        <TextField
-                            autoFocus
-                            margin="dense"
-                            id="name"
-                            label="Novo"
-                            type="email"
-                            fullWidth
-                        />
+                            <TextField
+                                autoFocus
+                                margin="dense"
+                                id="name"
+                                label="Novo"
+                                type="email"
+                                fullWidth
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
                         </ThemeProvider>
 
                     </DialogContent>
@@ -118,15 +176,29 @@ function FormDialogEmail(props) {
                             <Button onClick={handleClose} color="primary">
                                 Cancelar
                         </Button>
-                            <Button onClick={handleClose} color="primary">
+                            <Button onClick={validar} color="primary">
                                 Alterar
                         </Button>
                         </ThemeProvider>
                     </DialogActions>
+
+                    <Snackbar
+                        anchorOrigin={{ "vertical": "top", "horizontal": "center" }}
+                        open={openAlert}
+                        // onClose={handleClose}
+                        message="I love snacks">
+
+                        <SnackbarContent
+
+                            message={'Seu e-mail foi trocado, necessário refazer o login'}
+                            action={action}
+                        />
+                    </Snackbar>
+
 
                 </Dialog>
             </div>
         </div>
     );
 }
-export default withStyles(styles)(FormDialogEmail);
+export default withRouter(withStyles(styles)(FormDialogEmail));

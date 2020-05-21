@@ -24,7 +24,7 @@ function ChangeRegister(props) {
 
     const { classes } = props;
     const [atualizando, setAtual] = useState(false)
-    const [titulo, setTitulo] = useState('testinho')
+    const [titulo, setTitulo] = useState('aaa')
 
     const id = () => {
         return props.match.params.id;
@@ -33,8 +33,9 @@ function ChangeRegister(props) {
     useEffect(() => {
         if (id() != null) {
             setAtual(true);
+            setTitulo('bbb')
         }
-    }, [])
+    }, [titulo])
 
     return (
         <Grid container
@@ -49,9 +50,7 @@ function ChangeRegister(props) {
             <Paper className={classes.paper}>
                 <div className={classes.divForm}>
                     <FormServices
-                        titulo={props.titulo}
-                        descricao={props.descricao}
-                        idCateg={props.idCateg}
+                        titulo={titulo}
                         id={id()}
                         atualizando={atualizando}
                         className={classes.form} />

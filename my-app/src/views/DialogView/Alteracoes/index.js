@@ -5,7 +5,7 @@ import FormDialogEmail from './email';
 import FormDialogTelefone from './telefone';
 import FormDialogEndereco from './endereco';
 
-export default function Alteracoes() {
+export default function Alteracoes(props) {
 
     return (
         <Grid container
@@ -16,10 +16,15 @@ export default function Alteracoes() {
             <Grid item>
                 < FormDialogTelefone />
                 < FormDialogSenha />
-                < FormDialogEndereco />
+                {props.endereco == false ? (
+                    <>
+                    </>
+                ) : (
+                        < FormDialogEndereco />
+                    )}
                 < FormDialogEmail />
             </Grid>
 
-        </Grid>
+        </Grid >
     );
 }

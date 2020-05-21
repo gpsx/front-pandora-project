@@ -2,6 +2,7 @@ import React from 'react';
 import { withStyles, Grid, Paper } from '@material-ui/core';
 import EditImage from './EditImage';
 import Alteracoes from '../../DialogView/Alteracoes/index';
+import imageService from '../../../service/imageService'
 import Informacoes from './Informacoes';
 
 const styles = (theme) => ({
@@ -57,15 +58,16 @@ function Card1(props) {
         let imgUrl = null;
         let data = new FormData();
         data.append("image", imagem[0]);
-        // imgService.uploadImagem(data)
-        //     .then(response => {
-        //         imgUrl = response.data.data.link;
-        //         this.setState({ imagem: imgUrl });
-        //         this.msgSucesso("Upload da imagem realizado")
-        //     }).catch(err => {
-        //         this.msgErro("Erro no upload da imagem")
-        //     })
+        imageService.uploadImagem(data)
+            .then(response => {
+                imgUrl = response.data.data.link;
+                console.log('imagem carregada')
+                //Aqui chama o mudar imagem
+            }).catch(err => {
+                console.log(err)
+            })
     }
+
 
     return (
         <Grid container

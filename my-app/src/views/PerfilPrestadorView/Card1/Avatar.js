@@ -1,5 +1,6 @@
 import React from 'react';
 import { withStyles, Grid } from '@material-ui/core';
+import LocalStorageService from '../../../service/localStorage';
 import perfil from './../../../assets/icone-teste.png'
 import Avatar from '@material-ui/core/Avatar';
 
@@ -16,6 +17,7 @@ const styles = (theme) => ({
 function Foto(props) {
 
     const { classes } = props;
+    const img = LocalStorageService.obterItem("_usuario_logado").imagem;
 
     return (
         <Grid container
@@ -26,7 +28,7 @@ function Foto(props) {
             <Grid item>
 
                 <div>
-                    <Avatar alt="Perfil" src={perfil} className={classes.foto} />
+                    <Avatar alt="Perfil" src={img === null ? perfil : img} className={classes.foto} />
                 </div>
 
             </Grid>

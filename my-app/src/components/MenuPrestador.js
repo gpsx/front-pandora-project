@@ -104,7 +104,7 @@ function Menu(props) {
                             variant="h6"
                             underline="none"
                             className={classes.middleLink}
-                            href="/"
+                            href="/#/home-prestador"
                         >
                             {'Painel Geral'}
                         </Link>

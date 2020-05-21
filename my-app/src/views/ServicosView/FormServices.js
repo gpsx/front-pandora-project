@@ -54,7 +54,7 @@ class FormServices extends React.Component {
         categorias: [],
         atualizando: this.props.atualizando,
         categoriaServico: null,
-        titulo: this.props.titulo,
+        titulo: '',
         descricao: '',
         imagem: '',
     }
@@ -80,6 +80,13 @@ class FormServices extends React.Component {
                 })
         }
     }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.titulo !== prevProps.titulo) {
+            console.log(this.props.titulo);
+        }
+    }
+
 
     mudarState = (service) => {
         this.setState({
@@ -169,7 +176,7 @@ class FormServices extends React.Component {
                     <Grid item>
                         <h1 style={h1}>Nome do Serviço</h1>
                         <Input
-                            defaultValue={this.props.titulo}
+                            defaultValue={this.state.titulo}
                             style={input}
                             onChange={(e) => this.setState({ titulo: e.target.value })} />
                     </Grid>

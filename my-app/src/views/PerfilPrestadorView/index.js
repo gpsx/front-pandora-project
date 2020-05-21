@@ -1,10 +1,9 @@
 import React from 'react';
 import { withStyles, Grid} from '@material-ui/core';
-import MenuSolicitante from './../../components/MenuSolicitante';
+import MenuPrestador from './../../components/MenuPrestador';
 import Footer from './../../components/Footer';
 import Card1 from './Card1/index';
 import Card2 from './Card2/index';
-
 
 const styles = (theme) => ({
     card1: {
@@ -32,7 +31,7 @@ function PerfilSolicitante(props) {
             alignItems="flex-start"
             spacing={3}
             >
-            <Grid><MenuSolicitante /></Grid>
+            <Grid><MenuPrestador /></Grid>
 
                 <Grid item>
                    

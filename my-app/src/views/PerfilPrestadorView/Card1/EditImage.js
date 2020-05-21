@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function EditImage() {
+export default function EditImage(props) {
   const classes = useStyles();
 
   return (
@@ -24,7 +24,7 @@ export default function EditImage() {
           vertical: 'bottom',
           horizontal: 'right',
         }}
-        badgeContent={<Botao className={classes.botao} />}
+        badgeContent={<Botao changeImage={props.changeImage.bind(this)} className={classes.botao} />}
       >
         <Foto className={classes.imagem} />
       </Badge>

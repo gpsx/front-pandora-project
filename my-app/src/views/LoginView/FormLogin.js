@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import { Grid, Link } from '@material-ui/core';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
@@ -42,14 +43,18 @@ class FormLogin extends React.Component {
         }).then(response => {
             this.sucessMessage();
             LocalStorageService.addItem('_usuario_logado', response.data)
-            //this.props.history.push('/#/userhome');
+            if (response.data.solicitante) {
+                this.props.history.push('/home-solicitante')
+            } else {
+                this.props.history.push('/home-prestador')
+            }
         }).catch(erro => {
-            try{
+            try {
                 this.errorMessage(erro.response.data)
-            }catch(erro2){
+            } catch (erro2) {
                 this.errorMessage('erro no servidor')
             }
-            
+
         })
     }
 
@@ -130,4 +135,4 @@ class FormLogin extends React.Component {
 
 }
 
-export default (FormLogin);
+export default withRouter(FormLogin);
