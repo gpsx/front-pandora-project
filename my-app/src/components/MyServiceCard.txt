@@ -74,7 +74,7 @@ export default function ServiceCard(props) {
                 Editar
               </Button>
               <Button variant="contained" color="primary" className={classes.button} onClick={handleClickOpen}>
-                Excluir
+                Cancelar
               </Button>
             </Box>
           </CardContent>
@@ -89,10 +89,7 @@ export default function ServiceCard(props) {
         <DialogTitle id="alert-dialog-slide-title">{props.cancelText}</DialogTitle>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
-            Sim
-          </Button>
-          <Button onClick={handleClose} color="primary">
-            Não
+            Cancelar Serviço
           </Button>
         </DialogActions>
       </Dialog>
