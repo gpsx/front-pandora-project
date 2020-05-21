@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Button, Card, CardContent } from "@material-ui/core";
 import { CardMedia, Divider, Box, Avatar } from "@material-ui/core";
+import { createMuiTheme, ThemeProvider } from "@material-ui/core";
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import { DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
@@ -37,6 +38,16 @@ const useStyles = makeStyles({
   }
 });
 
+const theme = createMuiTheme({
+  overrides: {
+      MuiButton: {
+          textPrimary: {
+              color: "#0B3C5D"
+          }
+      },
+  }
+})
+
 export default function ServiceCard(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
@@ -70,12 +81,14 @@ export default function ServiceCard(props) {
                 {props.avaliationText}
             </Typography>
             <Box className={classes.root} flexDirection="row-reverse">
+            <ThemeProvider theme={theme}>
               <Button variant="contained" color="primary" className={classes.button}>
                 Editar
               </Button>
               <Button variant="contained" color="primary" className={classes.button} onClick={handleClickOpen}>
                 Excluir
               </Button>
+              </ThemeProvider>
             </Box>
           </CardContent>
         </Box>
