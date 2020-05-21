@@ -12,6 +12,6 @@ module.exports = {
 
     uploadImagem: async (params) => {
         return await api.postImg(imgURL, params, headers);
-    }
+    },
 
 }

@@ -54,14 +54,9 @@ class FormServices extends React.Component {
         categorias: [],
         atualizando: this.props.atualizando,
         categoriaServico: null,
-        titulo: '',
+        titulo: this.props.titulo,
         descricao: '',
         imagem: '',
-        alerta: {
-            message: '',
-            severity: '',
-            open: false,
-        }
     }
 
     fecharAlerta = (event, reason) => {
@@ -91,7 +86,6 @@ class FormServices extends React.Component {
             ...service,
             categoriaServico: service.fkCategoriaServico.idCategoria
         })
-        console.log(this.state)
     }
 
     changeCategoria = (categ) => {
@@ -124,9 +118,8 @@ class FormServices extends React.Component {
             .then(response => {
                 imgUrl = response.data.data.link;
                 this.setState({ imagem: imgUrl });
-                this.msgSucesso("Upload da imagem realizado")
             }).catch(err => {
-                this.msgErro("Erro no upload da imagem")
+
             })
     }
 
@@ -144,31 +137,12 @@ class FormServices extends React.Component {
             })
     }
 
-    msgSucesso = (msg) => {
-        this.setState({
-            alerta: {
-                message: msg,
-                severity: 'success',
-                open: true,
-            }
-        })
-    }
-
-    msgErro = (msg) => {
-        this.setState({
-            alerta: {
-                message: msg,
-                severity: 'error',
-                open: true,
-            }
-        })
-    }
-
-
-    titulo = this.state.titulo
-    descricao = this.state.descricao
-
     render() {
+
+        const getTitulo = () => {
+            console.log(this.state.titulo)
+            return this.state.titulo
+        }
 
         return (
             <Grid container
@@ -205,7 +179,7 @@ class FormServices extends React.Component {
                     <Grid item>
                         <h1 style={h1}>Descrição do Serviço</h1>
                         <Input
-                            defaultValue={this.state.descricao}
+                            defaultValue={this.props.descricao}
                             style={input}
                             onChange={(e) => this.setState({ descricao: e.target.value })} />
                     </Grid>

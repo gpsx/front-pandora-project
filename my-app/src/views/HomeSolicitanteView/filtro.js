@@ -4,7 +4,6 @@ import { Paper, Grid } from '@material-ui/core';
 import FormControl from '@material-ui/core/FormControl';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import Panel from '../../components/PanelCategorias';
-import Input from '../../components/Input'
 import { listarCategorias } from './../../utils/itens'
 
 const useStyles = makeStyles({

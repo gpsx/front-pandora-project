@@ -53,7 +53,6 @@ const theme = createMuiTheme({
 function FormDialogEndereco(props) {
     const { classes } = props;
     const [open, setOpen] = useState();
-    const [endereco, setEndereco] = useState({});
     const [cep, setCEP] = useState('');
     const [rua, setRua] = useState('');
     const [numero, setNumero] = useState(0);
