@@ -89,7 +89,7 @@ function FormDialogEmail(props) {
 
     const validar = () => {
         let email = usuario.email;
-        if (email != eAntigo) {
+        if (email !== eAntigo) {
             setError(true)
             setMessage("Digite seu e-mail atual")
         }

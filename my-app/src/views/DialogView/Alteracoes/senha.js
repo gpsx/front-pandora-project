@@ -1,11 +1,13 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom'
+import LocalStorageService from '../../../service/localStorage'
+import alteracoesService from '../../../service/alteracoesService'
+import userService from '../../../service/userService'
 import Button from '@material-ui/core/Button';
 import { withStyles, createMuiTheme, ThemeProvider } from '@material-ui/core';
+import { SnackbarContent, Snackbar } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
+import { Dialog, DialogActions, DialogContent, DialogContentText } from '@material-ui/core';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Link from '@material-ui/core/Link';
 
@@ -50,8 +52,22 @@ const theme = createMuiTheme({
 })
 
 function FormDialogSenha(props) {
+    const usuario = LocalStorageService.obterItem("_usuario_logado");
+    const type = LocalStorageService.getUserType();
+
     const { classes } = props;
     const [open, setOpen] = React.useState(false);
+    const [error, setError] = React.useState(false);
+    const [msgError, setMsgError] = React.useState('');
+    const [erroSenha, setErroSenha] = React.useState(false);
+    const [erroSenhaMsg, setErroSenhaMsg] = React.useState('');
+
+    const [senha, setSenha] = React.useState('');
+    const [senhaNova, setSenhaNova] = React.useState('');
+    const [senhaConfirma, setConfirma] = React.useState('');
+
+    const [openAlert, setOpenAlert] = React.useState(false);
+    const [alertMessage, setAlertMessage] = React.useState('');
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -61,12 +77,68 @@ function FormDialogSenha(props) {
         setOpen(false);
     };
 
+    const action = (
+        <Button color="secondary" size="small" onClick={logoff}>
+            Okay
+        </Button >
+    );
+
+    function logoff() {
+        LocalStorageService.logOff();
+        props.history.push('/login');
+        userService.logoff();
+    }
+
+    const verificar = () => {
+        let temErro = false;
+        if (senha !== usuario.senha) {
+            temErro = true;
+            setMsgError("A senha está errada")
+            setError(true);
+        } else {
+            setMsgError('')
+            setError(false);
+        }
+        if (senhaNova !== senhaConfirma) {
+            temErro = true;
+            setErroSenhaMsg("As senhas não coincidem")
+            setErroSenha(true);
+        } else {
+            setErroSenhaMsg('')
+            setErroSenha(false);
+        }
+        if (!temErro) {
+            alterar();
+        }
+    }
+
+    const alterar = () => {
+        if (type === 'solicitante') {
+            alteracoesService.senhaSolicitante
+                ({ "senha": senhaNova }, usuario.id)
+                .then(() => {
+                    alertar();
+                })
+        } else {
+            alteracoesService.senhaPrestador
+                ({ "senha": senhaNova }, usuario.id)
+                .then(() => {
+                    alertar();
+                })
+        }
+    }
+
+    const alertar = () => {
+        setAlertMessage("Senha alterada, por favor refassa seu login");
+        setOpenAlert(true)
+    }
+
     return (
         <div>
             <div className={classes.tamanho}>
                 <Link onClick={handleClickOpen} style={{ textDecoration: 'none' }} className={classes.link}>
                     Alterar senha
-                    </Link>
+                </Link>
             </div>
 
             <Dialog open={open} onClose={handleClose} fullWidth="15px" maxWidth="sm" aria-labelledby="form-dialog-title">
@@ -80,12 +152,15 @@ function FormDialogSenha(props) {
 
                     <ThemeProvider theme={theme}>
                         <TextField
+                            helperText={msgError}
+                            error={error}
                             autoFocus
                             margin="dense"
                             id="name"
                             label="Antiga"
                             type="password"
                             fullWidth
+                            onChange={(e) => setSenha(e.target.value)}
                         />
                     </ThemeProvider>
 
@@ -105,6 +180,7 @@ function FormDialogSenha(props) {
                             label="Nova"
                             type="password"
                             fullWidth
+                            onChange={(e) => setSenhaNova(e.target.value)}
                         />
                     </ThemeProvider>
 
@@ -118,12 +194,15 @@ function FormDialogSenha(props) {
 
                     <ThemeProvider theme={theme}>
                         <TextField
+                            helperText={erroSenhaMsg}
+                            error={erroSenha}
                             autoFocus
                             margin="dense"
                             id="name"
                             label="Confirmar"
                             type="password"
                             fullWidth
+                            onChange={(e) => setConfirma(e.target.value)}
                         />
                     </ThemeProvider>
 
@@ -136,15 +215,24 @@ function FormDialogSenha(props) {
                             Cancelar
                         </Button>
 
-                        <Button onClick={handleClose} color="primary">
+                        <Button onClick={verificar} color="primary">
                             Alterar
                         </Button>
                     </ThemeProvider>
 
                 </DialogActions>
+
+                <Snackbar
+                    anchorOrigin={{ "vertical": "top", "horizontal": "center" }}
+                    open={openAlert} >
+                    <SnackbarContent
+                        message={alertMessage}
+                        action={action}
+                    />
+                </Snackbar>
             </Dialog>
         </div>
     );
 }
 
-export default withStyles(styles)(FormDialogSenha);
+export default withRouter(withStyles(styles)(FormDialogSenha));

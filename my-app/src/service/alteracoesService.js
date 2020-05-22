@@ -17,4 +17,13 @@ module.exports = {
     emailSolicitante: async (email, id) => {
         return await api.put(`/solicitantes/alterar_email/${id}`, email)
     },
+
+    senhaPrestador: async (senha, id) => {
+        return await api.put(`/prestadores/alterar_senha/${id}`, senha)
+    },
+
+    senhaSolicitante: async (senha, id) => {
+        return await api.put(`/solicitantes/alterar_senha/${id}`, senha)
+    },
+
 }
