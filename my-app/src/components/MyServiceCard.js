@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { withRouter } from 'react-router-dom';
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Button, Card, CardContent } from "@material-ui/core";
 import { CardMedia, Divider, Box, Avatar } from "@material-ui/core";
@@ -7,10 +8,13 @@ import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import { DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
 import Star from '@material-ui/icons/Star';
+import servicesService from '../service/servicesService'
 
 const useStyles = makeStyles({
   root: {
-    display: "flex"
+    display: "flex",
+    maxHeight: 130
+    ,
   },
   title: {
     fontSize: 12,
@@ -20,13 +24,14 @@ const useStyles = makeStyles({
     marginBottom: 12
   },
   cover: {
-    width: 150,
-    margin: 10,
+    width: 100,
+    height: 100,
+    margin: 15,
     borderRadius: "5%"
   },
   button: {
     alignSelf: "flex-end",
-    width: "100%",
+    width: "20%",
     margin: 10,
     backgroundColor: '#0B3C5D',
     '&:hover': {
@@ -40,15 +45,15 @@ const useStyles = makeStyles({
 
 const theme = createMuiTheme({
   overrides: {
-      MuiButton: {
-          textPrimary: {
-              color: "#0B3C5D"
-          }
-      },
+    MuiButton: {
+      textPrimary: {
+        color: "#0B3C5D"
+      }
+    },
   }
 })
 
-export default function ServiceCard(props) {
+function ServiceCard(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -59,6 +64,18 @@ export default function ServiceCard(props) {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const editar = () => {
+    props.history.push(`/service/${props.id}`);
+  }
+
+  const excluir = () => {
+    servicesService.deleteService(props.id)
+      .then(console.log("Deletado"))
+      .then(handleClose)
+      .then(window.location.reload());
+  }
+
   return (
     <div>
       <Card className={classes.root}>
@@ -66,7 +83,7 @@ export default function ServiceCard(props) {
           component="img"
           className={classes.cover}
           alt={props.name}
-          image={props.img}
+          image={props.image}
           title={props.name}
         />
         <Divider orientation="vertical" flexItem className={classes.divider} />
@@ -78,15 +95,15 @@ export default function ServiceCard(props) {
               </Typography>
             </Box>
             <Typography variant="body2" color="textSecondary" gutterBottom>
-                {props.avaliationText}
+              {props.avaliationText}
             </Typography>
             <Box className={classes.root} flexDirection="row-reverse">
-            <ThemeProvider theme={theme}>
-              <Button variant="contained" color="primary" className={classes.button}>
-                Editar
+              <ThemeProvider theme={theme}>
+                <Button variant="contained" color="primary" className={classes.button} onClick={editar}>
+                  Editar
               </Button>
-              <Button variant="contained" color="primary" className={classes.button} onClick={handleClickOpen}>
-                Excluir
+                <Button variant="contained" color="primary" className={classes.button} onClick={handleClickOpen}>
+                  Excluir
               </Button>
               </ThemeProvider>
             </Box>
@@ -101,7 +118,7 @@ export default function ServiceCard(props) {
       >
         <DialogTitle id="alert-dialog-slide-title">{props.cancelText}</DialogTitle>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={excluir} color="primary">
             Sim
           </Button>
           <Button onClick={handleClose} color="primary">
@@ -112,3 +129,5 @@ export default function ServiceCard(props) {
     </div>
   );
 }
+
+export default withRouter(ServiceCard);

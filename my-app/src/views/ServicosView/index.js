@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { withRouter } from 'react-router-dom'
 import { withStyles, Grid, Paper } from '@material-ui/core';
+import Container from '../../components/Container';
 import MenuPrestador from '../../components/MenuPrestador';
 import Footer from '../../components/Footer';
 import FormServices from './FormServices';
+import servicesService from '../../service/servicesService';
 
 const styles = (theme) => ({
     paper: {
-        width: '38%',
-        marginLeft: '30%',
-        marginTop: '8%'
+        width: 'auto',
+        margin: '10%'
     },
     divForm: {
         marginLeft: '110px',
@@ -23,8 +24,8 @@ const styles = (theme) => ({
 function ChangeRegister(props) {
 
     const { classes } = props;
-    const [atualizando, setAtual] = useState(false)
-    const [titulo, setTitulo] = useState('aaa')
+    const [atualizando, setAtualizando] = useState(false)
+    const [servico, setServico] = useState({})
 
     const id = () => {
         return props.match.params.id;
@@ -32,35 +33,40 @@ function ChangeRegister(props) {
 
     useEffect(() => {
         if (id() != null) {
-            setAtual(true);
-            setTitulo('bbb')
+            setAtualizando(true);
+            servicesService.getServicoById(id())
+                .then(response => {
+                    setServico(response.data[0])
+                })
         }
-    }, [titulo])
+    }, [])
+
+    const globalChanges = () => {
+
+    }
 
     return (
-        <Grid container
-            direction="column"
-            alignItems="flex-start"
-            spacing={3}
-        >
-            <Grid>
-                <MenuPrestador />
-            </Grid>
 
-            <Paper className={classes.paper}>
-                <div className={classes.divForm}>
+        <Container>
+            <MenuPrestador />
+
+            <Grid container
+                direction="column"
+                alignItems="flex-start"
+                spacing={3}
+            >
+                <Paper className={classes.paper}>
                     <FormServices
-                        titulo={titulo}
-                        id={id()}
+                        servico={servico}
                         atualizando={atualizando}
+                        globalChanges={globalChanges.bind(this)}
                         className={classes.form} />
-                    <br />
-                </div>
-            </Paper>
-            <br />
-
+                </Paper>
+            </Grid>
             <Footer />
-        </Grid>
+
+        </Container>
+
     );
 }
 

@@ -1,75 +1,114 @@
 import React from 'react';
-import { withStyles, Grid, Paper } from '@material-ui/core';
+import { withStyles, Grid, Paper, Container } from '@material-ui/core';
 import MenuPrestador from './../../components/MenuPrestador';
 import Footer from './../../components/Footer';
 import BotaoAdicionar from './../../components/AddButton'
 import FormDialogAvaliar from '../DialogView/Servicos/avaliar'
+import Alert from '@material-ui/lab/Alert';
+import ListaServicos from './ListaServicos'
+import service from '../../service/otherService'
+import LocalStorage from '../../service/localStorage'
 
 const styles = (theme) => ({
+    container: {
+        marginTop: '5%',
+        paddingTop: '50px',
+        marginBottom: '2%',
+    },
     adicionar: {
         position: "relative",
         marginLeft: "90%",
-        marginTop: "40%"
+        marginBottom: '10px',
+    },
+    popular: {
+        width: '75%',
+        height: 'auto',
     },
     paper: {
         width: "50%",
         height: "400px",
         marginLeft: "20%",
-        marginTop:"-19.5%"
+        marginTop: "-19.5%"
     },
     footer: {
-        marginBottom:"-1"
+        marginBottom: "-1"
     },
-    titulo:{
-        color: 'black',
-        fontFamily: 'Roboto',
-        fontStyle: 'normal',
-        fontSize: '17px',
-        fontWeight: '200',
-        marginTop:'5%',
-        marginLeft:'20%',
+    h1: {
+        marginLeft: '2px',
+        lineHeight: '25px',
+        fontSize: '14px',
     },
-    div:{
-        width:'100%'
+    div: {
+        width: '100%'
     }
 
 
 
 });
 
-function MeuServico(props) {
+class MeuServico extends React.Component {
 
-    const { classes } = props;
+    id = LocalStorage.obterIdUsuario();
 
-    return (
-        <Grid container
-            direction="column"
-            alignItems="flex-start"
-            spacing={3}
-        >
-            <Grid><MenuPrestador /></Grid>
-            <br />
-            <Grid item>
+    state = {
+        servicos: [],
+    }
 
-            </Grid>
+    componentDidMount() {
+        service.meusServicos(this.id)
+            .then(response => {
+                this.setState({ servicos: response.data });
+            })
+    }
 
-            <div className={classes.div}>
-            <h1 className={classes.titulo}>Meus Serviços</h1>
-            <Paper className={classes.paper}>
-                <Grid item>
+    render() {
+
+        const { classes } = this.props;
+
+        return (
+            <Container className={classes.container}>
+                <MenuPrestador />
+
+                <Grid container justify="center" direction="row" spacing={6}>
+
+                    <Grid item className={classes.popular}>
+                        <div className={classes.h1}>Meus serviços</div>
+                        {this.state.servicos.length > 0 ? (
+
+                            <ListaServicos servicos={this.state.servicos} />
+                        ) : (
+                                <Alert severity="error">
+                                    Você não possui serviços cadastrados, cadastre um agora!
+                                </Alert>
+                            )}
+
+                    </Grid>
+
                     <div className={classes.adicionar}>
                         <BotaoAdicionar />
-                        <FormDialogAvaliar />
                     </div>
-                </Grid>
-            </Paper>
-            </div>
-            <br /><br />
-            
 
-            <Footer className={classes.footer} />
-        </Grid>
-    );
+                </Grid>
+
+                {/* <Footer className={classes.footer} /> */}
+            </Container>
+
+
+            // {/* <Paper className={classes.paper}>
+            //         <Grid item>
+
+            //         </Grid>
+            //         <Grid item>
+            //             <ListaServicos servicos={this.state.servicos} />
+            //             <div className={classes.adicionar}>
+            //                 
+            //                 <FormDialogAvaliar />
+            //             </div>
+            //         </Grid>
+            //     </Paper> */}
+        )
+    }
 }
 
-export default withStyles(styles)(MeuServico);
+
+export default withStyles(styles)(MeuServico)

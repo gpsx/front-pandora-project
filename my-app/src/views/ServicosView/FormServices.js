@@ -7,7 +7,6 @@ import FormDialogCategoria from '../DialogView/Servicos/categoria';
 import { listarCategorias } from './../../utils/itens'
 import ImageEdit from './ImageEdit'
 import Panel from '../../components/PanelCategorias';
-import service from '../../service/otherService'
 import LocalStorage from '../../service/localStorage'
 import imgService from '../../service/imageService';
 
@@ -30,7 +29,7 @@ const input = {
 }
 const botao = {
     fontSize: '13px',
-    width: '48%',
+    width: '45%',
     '&:hover': {
         backgroundColor: '#328CC1',
     },
@@ -69,52 +68,49 @@ class FormServices extends React.Component {
     componentDidMount() {
         let lista = listarCategorias();
         this.setState({ categorias: lista })
-
-        if (this.props.id != null) {
-            service.getServico(this.props.id)
-                .then(response => {
-                    let service = response.data[0]
-                    this.mudarState(service)
-                }).catch(err => {
-                    console.log('Erro ao recuperar serviço')
-                })
+        if (this.props.servico != null) {
+            console.log(this.props.servico)
         }
+        // if (this.props.id != null) {
+        //     service.getServico(this.props.id)
+        //         .then(response => {
+        //             let service = response.data[0]
+        //             this.mudarState(service)
+        //         }).catch(err => {
+        //             console.log('Erro ao recuperar serviço')
+        //         })
+        // }
     }
 
-    componentDidUpdate(prevProps) {
-        if (this.props.titulo !== prevProps.titulo) {
-            console.log(this.props.titulo);
-        }
-    }
 
 
-    mudarState = (service) => {
-        this.setState({
-            ...service,
-            categoriaServico: service.fkCategoriaServico.idCategoria
-        })
-    }
+    // mudarState = (service) => {
+    //     this.setState({
+    //         ...service,
+    //         categoriaServico: service.fkCategoriaServico.idCategoria
+    //     })
+    // }
 
-    changeCategoria = (categ) => {
-        this.setState({ categoriaServico: categ.idCategoria })
-    }
+    // changeCategoria = (categ) => {
+    //     this.setState({ categoriaServico: categ.idCategoria })
+    // }
 
     cancelar = () => {
         this.props.history.push('/my-service')
     }
 
     atualizar = () => {
-        const { categoriaServico, titulo, descricao, imagem } = this.state
+        // const { categoriaServico, titulo, descricao, imagem } = this.state
 
-        service.updateServico(this.props.id,
-            {
-                categoriaServico, titulo, descricao, imagem,
-                prestador: this.id,
-            }).then(response => {
-                console.log('Atualizado!')
-            }).catch(err => {
-                console.log('erro')
-            })
+        // service.updateServico(this.props.id,
+        //     {
+        //         categoriaServico, titulo, descricao, imagem,
+        //         prestador: this.id,
+        //     }).then(response => {
+        //         console.log('Atualizado!')
+        //     }).catch(err => {
+        //         console.log('erro')
+        //     })
     }
 
     changeImage = (imagem) => {
@@ -125,23 +121,24 @@ class FormServices extends React.Component {
             .then(response => {
                 imgUrl = response.data.data.link;
                 this.setState({ imagem: imgUrl });
+                console.log('uou')
             }).catch(err => {
 
             })
     }
 
     cadastrar = () => {
-        const { descricao, titulo, imagem, categoriaServico } = this.state;
-        const novo = {
-            descricao, titulo, imagem, categoriaServico,
-            "prestador": this.id,
-        }
-        service.cadastrarServico(novo)
-            .then(response => {
-                console.log('Cadastrado com sucesso')
-            }).catch((errr) => {
-                this.msgErro("Erro ao cadastrar serviço")
-            })
+        // const { descricao, titulo, imagem, categoriaServico } = this.state;
+        // const novo = {
+        //     descricao, titulo, imagem, categoriaServico,
+        //     "prestador": this.id,
+        // }
+        // service.cadastrarServico(novo)
+        //     .then(response => {
+        //         console.log('Cadastrado com sucesso')
+        //     }).catch((errr) => {
+        //         this.msgErro("Erro ao cadastrar serviço")
+        //     })
     }
 
     render() {
@@ -155,65 +152,57 @@ class FormServices extends React.Component {
             <Grid container
                 direction="column"
                 alignItems="flex-start"
-                spacing={3}
+                spacing={2}
             >
-                <div>
-                    <br />
-                    <Grid item>
-                        <h1 style={titulo}>{this.props.atualizando ?
-                            (
-                                "Atualizando Serviço"
-                            ) : (
-                                "Cadastrando Serviço"
-                            )
-                        }</h1>
-                    </Grid>
+                <Grid item>
+                    <h1 style={titulo}>{this.props.atualizando ?
+                        (
+                            "Atualizando Serviço"
+                        ) : (
+                            "Cadastrando Serviço"
+                        )
+                    }</h1>
+                </Grid>
 
-                    <Grid item>
-                        <ImageEdit changeImage={this.changeImage.bind(this)} />
-                    </Grid>
+                <Grid item>
+                    <ImageEdit changeImage={this.changeImage.bind(this)} />
+                </Grid>
 
-                    <Grid item>
-                        <h1 style={h1}>Nome do Serviço</h1>
-                        <Input
-                            defaultValue={this.state.titulo}
-                            style={input}
-                            onChange={(e) => this.setState({ titulo: e.target.value })} />
-                    </Grid>
+                <Grid item>
+                    <h1 style={h1}>Nome do Serviço</h1>
+                    <Input
+                        defaultValue={this.state.titulo}
+                        style={input}
+                        onChange={(e) => this.setState({ titulo: e.target.value })} />
+                </Grid>
 
-                    <br />
+                <Grid item>
+                    <h1 style={h1}>Descrição do Serviço</h1>
+                    <Input
+                        defaultValue={this.state.descricao}
+                        style={input}
+                        onChange={(e) => this.setState({ descricao: e.target.value })} />
+                </Grid>
 
-                    <Grid item>
-                        <h1 style={h1}>Descrição do Serviço</h1>
-                        <Input
-                            defaultValue={this.props.descricao}
-                            style={input}
-                            onChange={(e) => this.setState({ descricao: e.target.value })} />
-                    </Grid>
+                <Grid item>
+                    <h1 style={h1}>Categorias do Serviço</h1>
+                    <Panel
+                        // default={idCategoria - 1}
+                        categorias={this.state.categorias}
+                        changeCategoria={this.changeCategoria} />
+                    <FormDialogCategoria />
+                </Grid>
 
-                    <br />
+                <Grid item>
+                    <Button style={botao} onClick={this.cancelar}>Cancelar</Button>
+                    {this.props.atualizando ?
+                        (
+                            <Button onClick={this.atualizar} style={cancelar}>Atualizar</Button>
+                        ) : (
+                            <Button onClick={this.cadastrar} style={cancelar}>Cadastrar</Button>
+                        )}
 
-                    <Grid item>
-                        <h1 style={h1}>Categorias do Serviço</h1>
-                        <Panel
-                            // default={idCategoria - 1}
-                            categorias={this.state.categorias}
-                            changeCategoria={this.changeCategoria} />
-                        <FormDialogCategoria />
-                    </Grid>
-
-                    <Grid item>
-                        <Button style={botao} onClick={this.cancelar}>Cancelar</Button>
-                        {this.props.atualizando ?
-                            (
-                                <Button onClick={this.atualizar} style={cancelar}>Atualizar</Button>
-                            ) : (
-                                <Button onClick={this.cadastrar} style={cancelar}>Cadastrar</Button>
-                            )}
-
-                    </Grid>
-                </div>
-                <br />
+                </Grid>
             </Grid>
         );
     }

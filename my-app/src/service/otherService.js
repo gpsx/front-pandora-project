@@ -2,7 +2,6 @@ const api = require("./apiService");
 
 module.exports = {
 
-
     cadastrarServico: async (servico) => {
         return await api.post("/servicos/cadastrar", servico)
     },
@@ -11,8 +10,8 @@ module.exports = {
         return await api.get("/servicos/todos")
     },
 
-    getServico: async (id) => {
-        return await api.get(`/servicos/por-id/${id}`)
+    meusServicos: async (id) => {
+        return await api.get(`/servicos/meus-servicos/${id}`)
     },
 
     updateServico: async (id, update) => {

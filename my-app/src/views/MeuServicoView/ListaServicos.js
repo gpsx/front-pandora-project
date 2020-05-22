@@ -9,8 +9,6 @@ function Alert(props) {
     return <MuiAlert elevation={0} variant="filled" {...props} />;
 }
 
-
-
 export default function ListaMeusServicos(props) {
 
     const [openAlert, setOpenAlert] = useState(false);
@@ -36,10 +34,10 @@ export default function ListaMeusServicos(props) {
             <Grid item>
                 <ServiceCard
                     id={servico.idServico}
-                    imgService={servico.imagem == null ? ImagemGenerica : servico.imagem}
+                    image={servico.imagem == null ? ImagemGenerica : servico.imagem}
                     name={servico.titulo}
                     avaliationText={servico.descricao}
-                    cancelText={"Você tem certeza que deseja cancelar o servico '"+servico.titulo+"' ?"}
+                    cancelText={"Você tem certeza que deseja cancelar o servico '" + servico.titulo + "' ?"}
                     alertar={alertar.bind(this)}
                 />
 
