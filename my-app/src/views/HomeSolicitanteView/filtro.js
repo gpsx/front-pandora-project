@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import { Paper, Grid } from '@material-ui/core';
 import FormControl from '@material-ui/core/FormControl';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import Panel from '../../components/PanelCategorias';
 import { listarCategorias } from './../../utils/itens'
+import Input from '../../components/Input';
+import Estrelinhas from '../../components/RatingStars';
 
 const useStyles = makeStyles({
     root: {
@@ -39,6 +41,16 @@ const useStyles = makeStyles({
 
         }
     },
+})
+
+const theme = createMuiTheme({
+    overrides: {
+        MuiTypography: {
+            body1: {
+                display:"none"
+            }
+        },
+    }
 })
 
 export default function Filtro(props) {
@@ -89,37 +101,35 @@ export default function Filtro(props) {
                     <Input />
                 </Grid> */}
 
-                {filtro === 0 ? (
+                {filtro == 0 ? (
                     <div>
 
                     </div>
-                ) : filtro === 1 ? (
+                ) : filtro == 1 ? (
                     <div>
-
+                        <Grid item className={classes.input}>
+                            <Input />
+                        </Grid>
                     </div>
-                ) : filtro === 2 ? (
+                ) : filtro == 2 ? (
                     <div visible={false}>
                         <Grid item className={classes.right}>
                             <Panel categorias={listarCategorias()}
                                 changeCategoria={changeCategoria} />
                         </Grid>
                     </div>
-                ) : filtro === 3 ? (
-                    <div>
-                        AVALIAÇÃO
-                    </div>
+                ) : filtro == 3 ? (
+                    <Grid item >
+                        <ThemeProvider theme={theme}>
+                            <Estrelinhas  />
+                        </ThemeProvider>
+                    </Grid>
                 ) : (
                                     <div>
-                                        TA ERRADO
+                                        Error 404
                                     </div>
                                 )
                 }
-
-
-
-
-
-
 
             </Grid>
 
