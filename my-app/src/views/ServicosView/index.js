@@ -9,16 +9,8 @@ import servicesService from '../../service/servicesService';
 
 const styles = (theme) => ({
     paper: {
-        width: 'auto',
-        margin: '10%'
+        width: '40%',
     },
-    divForm: {
-        marginLeft: '110px',
-        marginTop: '10px',
-    },
-    form: {
-        width: '100%'
-    }
 });
 
 function ChangeRegister(props) {
@@ -41,10 +33,6 @@ function ChangeRegister(props) {
         }
     }, [])
 
-    const globalChanges = () => {
-
-    }
-
     return (
 
         <Container>
@@ -52,19 +40,20 @@ function ChangeRegister(props) {
 
             <Grid container
                 direction="column"
-                alignItems="flex-start"
-                spacing={3}
+                alignItems="center"
             >
-                <Paper className={classes.paper}>
-                    <FormServices
-                        servico={servico}
-                        atualizando={atualizando}
-                        globalChanges={globalChanges.bind(this)}
-                        className={classes.form} />
-                </Paper>
-            </Grid>
-            <Footer />
+                <Grid item className={classes.paper}>
+                    <Paper >
+                        <FormServices
+                            servico={servico}
+                            atualizando={atualizando}
+                        />
+                    </Paper>
+                </Grid>
 
+            </Grid>
+
+            {/* <Footer /> */}
         </Container>
 
     );
