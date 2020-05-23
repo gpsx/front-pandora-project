@@ -5,11 +5,12 @@ import { Grid } from '@material-ui/core';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import FormDialogCategoria from '../DialogView/Servicos/categoria';
-import { listarCategorias } from './../../utils/itens'
+import { listarCategorias, getServico } from './../../utils/itens'
 import ImageEdit from './ImageEdit'
 import Panel from '../../components/PanelCategorias';
 import LocalStorage from '../../service/localStorage'
 import imgService from '../../service/imageService';
+import servicesService from '../../service/servicesService';
 
 const h1 = {
     fontWeight: '200',
@@ -34,23 +35,60 @@ const button = {
 
 class FormServices extends React.Component {
 
+    id = LocalStorage.obterIdUsuario();
+
+    state = {
+        service: {},
+    }
+
+    componentDidMount() {
+    }
+
     changeImage = (imagem) => { }
+
+    cancelar = () => {
+        this.props.history.push('/my-service')
+    }
+
+    atualizar = () => {
+        const { categoriaServico, titulo, descricao, imagem } = this.state
+        servicesService.update(this.props.id,
+            {
+                categoriaServico, titulo, descricao, imagem,
+                prestador: this.id,
+            }).then(response => {
+                console.log('Atualizado!')
+            }).catch(err => {
+                console.log('erro')
+            })
+    }
+
+    cadastrar = () => {
+        const { descricao, titulo, imagem, categoriaServico } = this.state;
+        const novo = {
+            descricao, titulo, imagem, categoriaServico,
+            "prestador": this.id,
+        }
+        servicesService.cadastrar(novo)
+            .then(response => {
+                console.log('Cadastrado com sucesso')
+            }).catch((error) => {
+                console.log("Erro ao cadastrar serviço")
+            })
+    }
 
     render() {
 
+        const categorias = listarCategorias();
+        const servico = getServico(this.props.id);
+
         return (
-            <Grid container
-                direction="column"
-                alignItems="center"
-                spacing={1}
-            >
+            <Grid container direction="column" alignItems="center" spacing={1} >
+
                 <Grid item>
                     <h1 style={titulo}>{this.props.atualizando ?
-                        (
-                            "Atualizando Serviço"
-                        ) : (
-                            "Cadastrando Serviço"
-                        )
+                        ("Atualizando Serviço") :
+                        ("Cadastrando Serviço")
                     }</h1>
                 </Grid>
 
@@ -61,25 +99,25 @@ class FormServices extends React.Component {
                 <Grid item>
                     <h1 style={h1}>Nome do Serviço</h1>
                     <Input
-                        // defaultValue={this.state.titulo}
+                        // defaultValue={servico.titulo}
                         style={input}
-                    // onChange={(e) => this.setState({ titulo: e.target.value })} 
+                        // onChange={(e) => this.setState({ titulo: e.target.value })} 
                     />
                 </Grid>
 
                 <Grid item>
                     <h1 style={h1}>Descrição do Serviço</h1>
                     <Input
-                        // defaultValue={this.state.descricao}
+                        // defaultValue={servico.descricao}
                         style={input}
-                    // onChange={(e) => this.setState({ descricao: e.target.value })}
+                        // onChange={(e) => this.setState({ descricao: e.target.value })}
                     />
                 </Grid>
 
                 <Grid item>
                     <h1 style={h1}>Categorias do Serviço</h1>
                     <Panel
-                        // categorias={this.state.categorias}
+                        categorias={categorias}
                         changeCategoria={this.changeCategoria} />
                     <FormDialogCategoria />
                 </Grid>

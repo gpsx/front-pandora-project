@@ -5,7 +5,6 @@ import Container from '../../components/Container';
 import MenuPrestador from '../../components/MenuPrestador';
 import Footer from '../../components/Footer';
 import FormServices from './FormServices';
-import servicesService from '../../service/servicesService';
 
 const styles = (theme) => ({
     paper: {
@@ -26,10 +25,6 @@ function ChangeRegister(props) {
     useEffect(() => {
         if (id() != null) {
             setAtualizando(true);
-            servicesService.getServicoById(id())
-                .then(response => {
-                    setServico(response.data[0])
-                })
         }
     }, [])
 
@@ -45,7 +40,7 @@ function ChangeRegister(props) {
                 <Grid item className={classes.paper}>
                     <Paper >
                         <FormServices
-                            servico={servico}
+                            id={id()}
                             atualizando={atualizando}
                         />
                     </Paper>
