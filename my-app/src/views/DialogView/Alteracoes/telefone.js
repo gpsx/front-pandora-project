@@ -8,6 +8,8 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Link from '@material-ui/core/Link';
+import LocalStorageService from '../../../service/localStorage'
+import alterarService from '../../../service/alteracoesService'
 
 const styles = (theme) => ({
 
@@ -50,8 +52,12 @@ const theme = createMuiTheme({
 })
 
 function FormDialogTelefone(props) {
+    const usuario = LocalStorageService.obterItem("_usuario_logado");
+    const type = LocalStorageService.getUserType();
+
     const { classes } = props;
     const [open, setOpen] = React.useState(false);
+    const [telefone, setTelefone] = React.useState('');
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -59,6 +65,19 @@ function FormDialogTelefone(props) {
 
     const handleClose = () => {
         setOpen(false);
+    };
+
+    const alterar = () => {
+        const novo = { "telefone": telefone }
+        if (type === 'prestador') {
+            alterarService.telefonePrestador(novo, usuario.id)
+                .then(handleClose())
+                .catch(err => console.log(err));
+        } else {
+            alterarService.telefoneSolicitante(novo, usuario.id)
+                .then(handleClose())
+                .catch(err => console.log(err));
+        }
     };
 
     return (
@@ -106,6 +125,7 @@ function FormDialogTelefone(props) {
                             label="Novo"
                             type="number"
                             fullWidth
+                            onChange={(e) => setTelefone(e.target.value)}
                         />
                     </ThemeProvider>
 
@@ -117,7 +137,7 @@ function FormDialogTelefone(props) {
                         <Button onClick={handleClose} color="primary">
                             Cancelar
                         </Button>
-                        <Button onClick={handleClose} color="primary">
+                        <Button onClick={alterar} color="primary">
                             Alterar
                         </Button>
                     </ThemeProvider>

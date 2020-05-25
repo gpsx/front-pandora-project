@@ -26,4 +26,16 @@ module.exports = {
         return await api.put(`/solicitantes/alterar_senha/${id}`, senha)
     },
 
+    telefonePrestador: async (telefone, id) => {
+        return await api.put(`/prestadores/alterar_telefone/${id}`, telefone)
+    },
+
+    telefoneSolicitante: async (telefone, id) => {
+        return await api.put(`/solicitantes/alterar_telefone/${id}`, telefone)
+    },
+
+    
+
+
+
 }
