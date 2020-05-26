@@ -9,8 +9,6 @@ function Alert(props) {
     return <MuiAlert elevation={0} variant="filled" {...props} />;
 }
 
-
-
 export default function ListaServicos(props) {
 
     const [openAlert, setOpenAlert] = useState(false);

@@ -41,9 +41,6 @@ const styles = (theme) => ({
     div: {
         width: '100%'
     }
-
-
-
 });
 
 class MeuServico extends React.Component {

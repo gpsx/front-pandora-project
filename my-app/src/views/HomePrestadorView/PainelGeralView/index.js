@@ -1,80 +1,140 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Menu from '../../../components/MenuPrestador'
-import TabPrestador from './TabPrestador'
 import { Grid, withStyles, Paper } from '@material-ui/core';
-import Container from '../Container'
+import TabPrestador from './TabPrestador'
+import Container from '../../../components/Container';
+import Erro from '../../../components/AlertaErro'
+import localStorage from '../../../service/localStorage';
+import solicitacoesService from '../../../service/solicitacoesService';
+import ListaSolicitacoes from './ListaSolicitacoes'
 
 const styles = (theme) => ({
-    container: {
-        marginTop: '10%',
-
-    },
     paper: {
-        width: '1100px'
+        width: '1100px',
+        height: 'auto',
     }
 });
 
-function PainelPrestador(props) {
+class PainelPrestador extends React.Component {
+    id = localStorage.obterIdUsuario();
 
-    let tabs = {
+    state = {
+        solicitados: [],
+        aprovados: [],
+        execucao: [],
+        finalizados: [],
+    }
+
+    getSolicitados = () => {
+        solicitacoesService.getSolicitados(this.id)
+            .then(response => {
+                this.setState({ solicitados: response.data })
+            })
+    }
+
+    getAprovados = () => {
+        solicitacoesService.getAprovados(this.id)
+            .then(response => {
+                this.setState({ aprovados: response.data })
+            })
+    }
+
+    getExecucao = () => {
+        solicitacoesService.getExecucao(this.id)
+            .then(response => {
+                this.setState({ execucao: response.data })
+            })
+    }
+
+    getFinalizados = () => {
+        solicitacoesService.getFinalizados(this.id)
+            .then(response => {
+                this.setState({ finalizados: response.data })
+            })
+    }
+
+    componentDidMount() {
+        this.getSolicitados();
+        this.getAprovados();
+        this.getExecucao();
+        this.getFinalizados();
+    }
+
+    tabs = {
         pages: [
             {
                 title: "SOLICITADOS",
                 content: () => {
-                    return (
-                        "Retornar algum conteúdo para essa tab"
-                    );
+                    if (this.state.solicitados.length == 0) {
+                        return (<Erro mensagem="Você não tem novas solicitações" />)
+                    } else {
+                        return (<ListaSolicitacoes
+                            solicitacoes={this.state.solicitados}
+                            status={"SOLICITADO"} />)
+                    }
                 }
             },
             {
                 title: "APROVADOS",
                 content: () => {
-                    return (
-                        "Retornar algum conteúdo para essa tab"
-                    );
+                    if (this.state.aprovados.length == 0) {
+                        return (<Erro mensagem="Você não tem serviços em aprovação" />)
+                    } else {
+                        return (
+                            <ListaSolicitacoes
+                                solicitacoes={this.state.aprovados}
+                                status={"APROVADO"} />)
+                    }
                 }
             },
             {
                 title: "EM EXECUÇÃO",
                 content: () => {
-                    return (
-                        "Retornar algum conteúdo para essa tab"
-                    );
+                    if (this.state.execucao.length == 0) {
+                        return (<Erro mensagem="Sem servicos em execução" />)
+                    } else {
+                        return (< ListaSolicitacoes
+                            solicitacoes={this.state.execucao}
+                            status={"FINALIZAR"} />)
+                    }
                 }
             },
             {
                 title: "FINALIZADOS",
                 content: () => {
-                    return (
-                        "Retornar algum conteúdo para essa tab"
-                    );
+                    if (this.state.finalizados.length == 0) {
+                        return (<Erro mensagem="Você ainda não teve serviços finalizados" />)
+                    } else {
+                        return (
+                            <ListaSolicitacoes
+                                solicitacoes={this.state.finalizados}
+                                status={"ACABOU"} />)
+                    }
                 }
             }
         ]
     };
 
-    const { classes } = props;
-
-    return (
-        <>
-            <Menu />
+    render() {
+        const { classes } = this.props;
+        return (
             <Container>
+                <Menu />
                 <Grid container
                     direction="column"
                     justify="center"
                     alignItems="center"
-                    className={classes.container}
                 >
-                    <Grid item >
-                        <Paper className={classes.paper}>
-                            <TabPrestador tabs={tabs} />
-                        </Paper>
+                    <Grid item className={classes.paper}>
+                        <TabPrestador tabs={this.tabs} />
                     </Grid>
 
                 </Grid>
             </Container>
-        </>
-    );
+        )
+    }
+
+
 }
 
 export default withStyles(styles)(PainelPrestador);

@@ -2,6 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Card, CardContent } from "@material-ui/core";
 import { CardMedia, Divider, Box, Button } from "@material-ui/core";
+import solicitacoesService from '../service/solicitacoesService'
 
 const useStyles = makeStyles({
   root: {
@@ -16,43 +17,64 @@ const useStyles = makeStyles({
     fontSize: 12,
     margin: 0
   },
-  pos: {
-    marginBottom: 12
-  },
   cover: {
-    width: 150,
+    width: 100,
+    height: 80,
     margin: 10,
     borderRadius: "5%"
   },
   button: {
     alignSelf: "flex-end",
-    width: "100%",
+    width: "20%",
     margin: 10,
     backgroundColor: '#0B3C5D',
     '&:hover': {
       backgroundColor: '#328CC1',
     },
   },
+  cancel: {
+    alignSelf: "flex-end",
+    width: "20%",
+    margin: 10,
+    backgroundColor: '#C40233',
+    '&:hover': {
+      backgroundColor: '#808080',
+    },
+  },
   divider: {
     margin: 10
   },
-  avatar: {
-    height: 15,
-    width: 15,
-    alignSelf: "flex-center",
-    margin: 3
-  }
 });
 
 export default function ServiceCard(props) {
+
   const classes = useStyles();
+
+  const aprovar = () => {
+    solicitacoesService.aprovarSolicitacao(props.id)
+      .then(console.log('aprovado'))
+      .catch(console.log('reprovado'))
+  }
+
+  const executar = () => {
+    solicitacoesService.executarSolicitacao(props.id)
+      .then(console.log('em execução'))
+      .catch(console.log('erro'))
+  }
+
+  const cancelar = () => {
+    solicitacoesService.cancelarSolicitacao(props.id)
+      .then(console.log('em execução'))
+      .catch(console.log('erro'))
+  }
+
   return (
     <div>
       <Card className={classes.root}>
         <CardMedia
           component="img"
           className={classes.cover}
-          alt={props.name}
+          alt={"Imagem"}
           image={props.img}
           title={props.name}
         />
@@ -65,14 +87,32 @@ export default function ServiceCard(props) {
               </Typography>
             </Box>
             <Typography variant="body2" color="textSecondary" gutterBottom>
-                {props.requestText}
+              {props.requestText}
             </Typography>
             <Box className={classes.root} flexDirection="row-reverse">
+              {
+                props.serviceState === 'SOLICITADO' ?
+                  (
+                    <>
+                      <Button variant="contained" color="primary" className={classes.button} onClick={aprovar}>
+                        APROVAR
+                      </Button>
+                      <Button variant="contained" color="primary" className={classes.cancel} onClick={cancelar}>
+                        DESCARTAR
+                      </Button>
+                    </>
+                  ) : props.serviceState === 'APROVADO' ?
+                    (
+                      <Button variant="contained" color="primary" className={classes.button} onClick={executar}>
+                        EXECUTAR
+                      </Button>
+                    ) : (
+                      <>
+                      </>
+                    )
+              }
               <Button variant="contained" color="primary" className={classes.button}>
                 Chamar no Chat
-              </Button>
-              <Button variant="contained" color="primary" className={classes.button}>
-                {props.serviceState}
               </Button>
             </Box>
           </CardContent>

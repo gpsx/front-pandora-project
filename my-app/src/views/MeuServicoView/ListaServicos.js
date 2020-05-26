@@ -37,7 +37,7 @@ export default function ListaMeusServicos(props) {
                     image={servico.imagem == null ? ImagemGenerica : servico.imagem}
                     name={servico.titulo}
                     avaliationText={servico.descricao}
-                    cancelText={"Você tem certeza que deseja cancelar o servico '" + servico.titulo + "' ?"}
+                    cancelText={"Você tem certeza que deseja excluir o servico '" + servico.titulo + "' ?"}
                     alertar={alertar.bind(this)}
                 />
 
