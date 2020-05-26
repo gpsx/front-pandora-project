@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import { withRouter } from 'react-router-dom';
 import ExitToAppRoundedIcon from '@material-ui/icons/ExitToAppRounded';
+import LocalStorageService from '../service/localStorage';
+import userService from '../service/userService';
 import Typography from './Typography';
 import Link from '@material-ui/core/Link';
 import logoImg from './../assets/logo.png';
@@ -101,6 +104,12 @@ function Menu(props) {
 
     const { classes } = props;
 
+    function logoff() {
+        LocalStorageService.logOff();
+        props.history.push('/login');
+        userService.logoff();
+    }
+
     return (
         <div>
             <AppBar position="fixed">
@@ -168,7 +177,7 @@ function Menu(props) {
                             size="small"
                             className={classes.redButton}
                             component="a"
-                            href="/#/"
+                            onClick={logoff}
                         >
                              <ExitToAppRoundedIcon/>
                         </Button>
@@ -184,4 +193,4 @@ Menu.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Menu);
+export default withRoutes(withStyles(styles)(Menu));
