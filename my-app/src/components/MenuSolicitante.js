@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import ExitToAppRoundedIcon from '@material-ui/icons/ExitToAppRounded';
 import Typography from './Typography';
 import Link from '@material-ui/core/Link';
 import logoImg from './../assets/logo.png';
@@ -73,6 +74,22 @@ const styles = (theme) => ({
         '&:hover': {
             color: '#FFFFFF',
             boxShadow: 'none',
+            backgroundColor:"#328CC1",
+        },
+        '&:active, &:focus': {
+            boxShadow: 'none',
+        },
+    },
+    redButton: {
+        marginLeft: theme.spacing(1),
+        backgroundColor: '#FFFFFF',
+        border: '1px solid #C40233',
+        color: '#C40233',
+        '&:hover': {
+            color: '#FFFFFF',
+            boxShadow: 'none',
+            backgroundColor:"#C40233",
+            border: '1px solid #C40233',
         },
         '&:active, &:focus': {
             boxShadow: 'none',
@@ -136,6 +153,15 @@ function Menu(props) {
                             href="/#/profile-solicitante"
                         >
                             Perfil
+                        </Button>
+                        <Button
+                            variant="contained"
+                            size="small"
+                            className={classes.redButton}
+                            component="a"
+                            href="/#/"
+                        >
+                             <ExitToAppRoundedIcon/>
                         </Button>
 
                     </div>
