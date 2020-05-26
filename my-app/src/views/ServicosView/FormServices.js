@@ -37,22 +37,28 @@ class FormServices extends React.Component {
 
     id = LocalStorage.obterIdUsuario();
 
-    state = {
-        service: {},
-        titulo: 'jxknd'
-    }
+    constructor() {
+        super();
+        this.state = { data: [] };
+      }
 
-    serviceData = {};
+
     componentDidMount() {
-        console.log('eu')
-        let serviceData
-        servicesService.getServicoById(this.props.id)
+        let obj = {}
+        servicesService.getServicoById(1)
             .then(response => {
-                console.log(response.data[0])
-                serviceData = response.data[0];
+                obj = {
+                    titulo: response.data[0].titulo,
+                    descricao: response.data[0].descricao
+                }
+                console.log(obj);
+                this.setState({data: obj})
+            }).catch(err => {
+                console.log(err)
             })
-        console.log(serviceData)
-    }
+    }  
+
+    
 
     changeImage = (imagem) => { }
 
@@ -88,13 +94,10 @@ class FormServices extends React.Component {
     }
 
     render() {
-
         const categorias = listarCategorias();
-        const servico = getServico(this.props.id);
-
+        
         return (
             <Grid container direction="column" alignItems="center" spacing={1} >
-
                 <Grid item>
                     <h1 style={titulo}>{this.props.atualizando ?
                         ("Atualizando Serviço") :
@@ -107,9 +110,9 @@ class FormServices extends React.Component {
                 </Grid>
 
                 <Grid item>
-                    <h1 style={h1}>Nome do Serviço</h1>
+                    <h1 style={h1}>Nome do serviço</h1>
                     <Input
-                        defaultValue={this.state.service.titulo}
+                        placeholder={this.state.data.titulo}
                         style={input}
                     // onChange={(e) => this.setState({ titulo: e.target.value })} 
                     />
@@ -118,7 +121,7 @@ class FormServices extends React.Component {
                 <Grid item>
                     <h1 style={h1}>Descrição do Serviço</h1>
                     <Input
-                        // defaultValue={servico.descricao}
+                        placeholder={this.state.data.descricao}
                         style={input}
                     // onChange={(e) => this.setState({ descricao: e.target.value })}
                     />

@@ -184,4 +184,4 @@ Menu.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withRoutes(withStyles(styles)(Menu));
+export default withRouter(withStyles(styles)(Menu));
