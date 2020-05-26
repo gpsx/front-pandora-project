@@ -113,7 +113,7 @@ function Menu(props) {
                             variant="h6"
                             underline="none"
                             className={classes.middleLink}
-                            href="/#/home-solicitante"
+                            href="/#/meus-servicos"
                         >
                             {'Meus Serviços'}
                         </Link>

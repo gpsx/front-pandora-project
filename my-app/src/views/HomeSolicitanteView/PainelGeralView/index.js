@@ -1,80 +1,162 @@
 import React from 'react'
-import Menu from '../../../components/MenuPrestador'
+import Menu from '../../../components/MenuSolicitante'
 import TabSolicitante from './TabSolicitante'
 import { Grid, withStyles, Paper } from '@material-ui/core';
-import Container from '../Container'
+import Container from '../../../components/Container';
+import Erro from '../../../components/AlertaErro'
+import solicitacoesService from '../../../service/solicitacoesService';
+import ListaSolicitacoes from './ListaSolicitacoes'
+import localStorage from './../../../service/localStorage'
 
 const styles = (theme) => ({
-    container: {
-        marginTop: '10%',
-
-    },
     paper: {
-        width: '1100px'
+        width: '1100px',
+        heigth: 'auto',
     }
 });
 
-function PainelSolicitante(props) {
+class PainelSolicitante extends React.Component {
+    id = localStorage.obterIdUsuario();
+    tipo = localStorage.getUserType();
 
-    let tabs = {
+    state = {
+        solicitados: [],
+        aprovados: [],
+        execucao: [],
+        finalizados: [],
+        cancelados: [],
+    }
+
+    getSolicitados = () => {
+        solicitacoesService.getSolicitados(this.id, this.tipo)
+            .then(response => {
+                this.setState({ solicitados: response.data })
+            })
+    }
+
+    getAprovados = () => {
+        solicitacoesService.getAprovados(this.id, this.tipo)
+            .then(response => {
+                this.setState({ aprovados: response.data })
+            })
+    }
+
+    getExecucao = () => {
+        solicitacoesService.getExecucao(this.id, this.tipo)
+            .then(response => {
+                this.setState({ execucao: response.data })
+            })
+    }
+
+    getFinalizados = () => {
+        solicitacoesService.getFinalizados(this.id, this.tipo)
+            .then(response => {
+                this.setState({ finalizados: response.data })
+            })
+    }
+
+    getCancelados = () => {
+        solicitacoesService.getCancelados(this.id, this.tipo)
+            .then(response => {
+                this.setState({ cancelados: response.data })
+            })
+    }
+
+    componentDidMount() {
+        this.getSolicitados();
+        this.getAprovados();
+        this.getExecucao();
+        this.getFinalizados();
+        this.getCancelados();
+    }
+
+
+    tabs = {
         pages: [
             {
                 title: "SOLICITADOS",
                 content: () => {
-                    return (
-                        "Retornar algum conteúdo para essa tab"
-                    );
+                    if (this.state.solicitados.length == 0) {
+                        return (<Erro mensagem="Você não tem novas solicitações" />)
+                    } else {
+                        return (<ListaSolicitacoes
+                            solicitacoes={this.state.solicitados}
+                            status={"SOLICITADO"} />)
+                    }
                 }
             },
             {
                 title: "APROVADOS",
                 content: () => {
-                    return (
-                        "Retornar algum conteúdo para essa tab"
-                    );
+                    if (this.state.aprovados.length == 0) {
+                        return (<Erro mensagem="Você não tem serviços em aprovação" />)
+                    } else {
+                        return (
+                            <ListaSolicitacoes
+                                solicitacoes={this.state.aprovados}
+                                status={"APROVADO"} />)
+                    }
                 }
             },
             {
                 title: "EM EXECUÇÃO",
                 content: () => {
-                    return (
-                        "Retornar algum conteúdo para essa tab"
-                    );
+                    if (this.state.execucao.length == 0) {
+                        return (<Erro mensagem="Sem servicos em execução" />)
+                    } else {
+                        return (< ListaSolicitacoes
+                            solicitacoes={this.state.execucao}
+                            status={"EXECUCAO"} />)
+                    }
                 }
             },
             {
                 title: "FINALIZADOS",
                 content: () => {
-                    return (
-                        "Retornar algum conteúdo para essa tab"
-                    );
+                    if (this.state.finalizados.length == 0) {
+                        return (<Erro mensagem="Você ainda não teve serviços finalizados" />)
+                    } else {
+                        return (
+                            <ListaSolicitacoes
+                                solicitacoes={this.state.finalizados}
+                                status={"FINALIZADO"} />)
+                    }
+                }
+            },
+            {
+                title: "CANCELADOS",
+                content: () => {
+                    if (this.state.cancelados.length == 0) {
+                        return (<Erro mensagem="Você ainda não teve serviços finalizados" />)
+                    } else {
+                        return (
+                            <ListaSolicitacoes
+                                solicitacoes={this.state.cancelados}
+                                status={"CANCELADO"} />)
+                    }
                 }
             }
         ]
     };
+    render() {
+        const { classes } = this.props;
 
-    const { classes } = props;
-
-    return (
-        <>
-            <Menu />
+        return (
             <Container>
+                <Menu />
                 <Grid container
                     direction="column"
                     justify="center"
                     alignItems="center"
                     className={classes.container}
                 >
-                    <Grid item >
-                        <Paper className={classes.paper}>
-                            <TabSolicitante tabs={tabs} />
-                        </Paper>
+                    <Grid item className={classes.paper}>
+                        <TabSolicitante tabs={this.tabs} />
                     </Grid>
-
                 </Grid>
             </Container>
-        </>
-    );
+        );
+    }
 }
 
 export default withStyles(styles)(PainelSolicitante);

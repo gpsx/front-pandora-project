@@ -89,20 +89,6 @@ class MeuServico extends React.Component {
 
                 {/* <Footer className={classes.footer} /> */}
             </Container>
-
-
-            // {/* <Paper className={classes.paper}>
-            //         <Grid item>
-
-            //         </Grid>
-            //         <Grid item>
-            //             <ListaServicos servicos={this.state.servicos} />
-            //             <div className={classes.adicionar}>
-            //                 
-            //                 <FormDialogAvaliar />
-            //             </div>
-            //         </Grid>
-            //     </Paper> */}
         )
     }
 }

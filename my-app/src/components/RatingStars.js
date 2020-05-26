@@ -3,7 +3,7 @@ import Rating from '@material-ui/lab/Rating';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 
-export default function Estrelinhas() {
+export default function Estrelinhas(props) {
   const [value, setValue] = React.useState(2);
 
   return (
@@ -15,6 +15,7 @@ export default function Estrelinhas() {
           value={value}
           onChange={(event, newValue) => {
             setValue(newValue);
+            props.getValue(newValue);
           }}
         />
       </Box>

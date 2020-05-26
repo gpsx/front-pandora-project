@@ -2,13 +2,11 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import { withStyles, createMuiTheme, ThemeProvider } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
 import Link from '@material-ui/core/Link';
 import Estrelinhas from '../../../components/RatingStars';
+import avaliacoesService from '../../../service/avaliacoesService';
+import solicitacoesService from '../../../service/solicitacoesService'
 
 const styles = (theme) => ({
 
@@ -25,12 +23,15 @@ const styles = (theme) => ({
             color: '#0B3C5D',
         },
     },
-
-    tamanho: {
-        width: '300px',
-        height: '8%'
-    }
-
+    button: {
+        alignSelf: "flex-end",
+        width: "100px",
+        margin: 10,
+        backgroundColor: '#0B3C5D',
+        '&:hover': {
+            backgroundColor: '#328CC1',
+        },
+    },
 });
 
 const theme = createMuiTheme({
@@ -53,6 +54,8 @@ const theme = createMuiTheme({
 function FormDialogAvaliar(props) {
     const { classes } = props;
     const [open, setOpen] = React.useState(false);
+    const [nota, setNota] = React.useState(0);
+    const [feedback, setFeedback] = React.useState('');
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -62,59 +65,69 @@ function FormDialogAvaliar(props) {
         setOpen(false);
     };
 
+    const getValorEstrelas = (nota) => {
+        setNota(nota);
+    };
+
+    const avaliar = () => {
+        avaliacoesService.avaliar({
+            "nota": nota,
+            "avaliacao": feedback
+        }).then(
+            solicitacoesService.finalizarSolicitacao(props.id)
+                .then(handleClose()))
+    };
+
     return (
         <div>
-            <div>
+            <Button variant="contained" color="primary" className={classes.button} onClick={handleClickOpen}>
+                FINALIZAR
+            </Button>
 
-                <div className={classes.tamanho}>
-                    <Link onClick={handleClickOpen} className={classes.link}>
-                        Finalizar
-                    </Link>
-                </div>
+            <Dialog open={open} onClose={handleClose} fullWidth="18px" maxWidth="sm" aria-labelledby="form-dialog-title">
 
-                <Dialog open={open} onClose={handleClose} fullWidth="18px" maxWidth="sm" aria-labelledby="form-dialog-title">
+                <DialogTitle id="form-dialog-title">
+                    Avaliar o Serviço
+                </DialogTitle >
 
-                    <DialogTitle id="form-dialog-title">
-                        Avaliar o Serviço
-                    </DialogTitle >
+                <DialogContent>
 
-                    <DialogContent>
-
-                        <DialogContentText>
-                            Avalie o serviço do prestador e nos diga como foi a experiência, todo feedback é bem-vindo!
+                    <DialogContentText>
+                        Antes de finalizar o serviço, avalie o prestador! Isso pode nos ajudar
+                        a refinar nossas pesquisas!
                         </DialogContentText>
-                        <br />
-                        <Estrelinhas />
+                    <br />
+                    <Estrelinhas getValue={getValorEstrelas.bind(this)} />
 
-                        <ThemeProvider theme={theme}>
-                            <TextField
-                                autoFocus
-                                margin="dense"
-                                id="name"
-                                label="Feedback"
-                                multiline="true"
-                                type="text"
-                                fullWidth
-                            />
-                        </ThemeProvider>
+                    <ThemeProvider theme={theme}>
+                        <TextField
+                            autoFocus
+                            margin="dense"
+                            id="name"
+                            label="Feedback"
+                            multiline="true"
+                            type="text"
+                            fullWidth
+                            onChange={(e) => setFeedback(e.target.value)}
+                        />
+                    </ThemeProvider>
 
-                    </DialogContent>
+                </DialogContent>
 
-                    <DialogActions>
+                <DialogActions>
 
-                        <ThemeProvider theme={theme}>
-                            <Button onClick={handleClose} color="primary">
-                                Cancelar
+                    <ThemeProvider theme={theme}>
+                        <Button onClick={handleClose} color="primary">
+                            Cancelar
                         </Button>
 
-                            <Button onClick={handleClose} color="primary">
-                                Avaliar
+                        <Button onClick={avaliar} color="primary">
+                            Avaliar
                         </Button>
-                        </ThemeProvider>
+                    </ThemeProvider>
 
-                    </DialogActions>
-                </Dialog>
-            </div>
+                </DialogActions>
+            </Dialog>
         </div>
     );
 }

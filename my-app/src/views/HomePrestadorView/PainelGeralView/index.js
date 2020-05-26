@@ -17,6 +17,7 @@ const styles = (theme) => ({
 
 class PainelPrestador extends React.Component {
     id = localStorage.obterIdUsuario();
+    tipo = localStorage.getUserType();
 
     state = {
         solicitados: [],
@@ -26,28 +27,28 @@ class PainelPrestador extends React.Component {
     }
 
     getSolicitados = () => {
-        solicitacoesService.getSolicitados(this.id)
+        solicitacoesService.getSolicitados(this.id, this.tipo)
             .then(response => {
                 this.setState({ solicitados: response.data })
             })
     }
 
     getAprovados = () => {
-        solicitacoesService.getAprovados(this.id)
+        solicitacoesService.getAprovados(this.id, this.tipo)
             .then(response => {
                 this.setState({ aprovados: response.data })
             })
     }
 
     getExecucao = () => {
-        solicitacoesService.getExecucao(this.id)
+        solicitacoesService.getExecucao(this.id, this.tipo)
             .then(response => {
                 this.setState({ execucao: response.data })
             })
     }
 
     getFinalizados = () => {
-        solicitacoesService.getFinalizados(this.id)
+        solicitacoesService.getFinalizados(this.id, this.tipo)
             .then(response => {
                 this.setState({ finalizados: response.data })
             })
@@ -128,7 +129,6 @@ class PainelPrestador extends React.Component {
                     <Grid item className={classes.paper}>
                         <TabPrestador tabs={this.tabs} />
                     </Grid>
-
                 </Grid>
             </Container>
         )

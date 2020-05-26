@@ -1,22 +1,27 @@
+// import localStorage from './localStorage'
 const api = require('./apiService');
 const url = "/solicitacoes";
 
 module.exports = {
 
-    getAprovados: async (id) => {
-        return await api.get(`${url}/prestador/buscar/${id}?status=aprovado`);
+    getAprovados: async (id, tipo) => {
+        return await api.get(`${url}/${tipo}/buscar/${id}?status=aprovado`);
     },
 
-    getSolicitados: async (id) => {
-        return await api.get(`${url}/prestador/buscar/${id}?status=solicitado`);
+    getSolicitados: async (id, tipo) => {
+        return await api.get(`${url}/${tipo}/buscar/${id}?status=solicitado`);
     },
 
-    getExecucao: async (id) => {
-        return await api.get(`${url}/prestador/buscar/${id}?status=execucao`);
+    getExecucao: async (id, tipo) => {
+        return await api.get(`${url}/${tipo}/buscar/${id}?status=execucao`);
     },
 
-    getFinalizados: async (id) => {
-        return await api.get(`${url}/prestador/buscar/${id}?status=finalizado`);
+    getFinalizados: async (id, tipo) => {
+        return await api.get(`${url}/${tipo}/buscar/${id}?status=fechado`);
+    },
+
+    getCancelados: async (id, tipo) => {
+        return await api.get(`${url}/${tipo}/buscar/${id}?status=cancelado`);
     },
 
     aprovarSolicitacao: async (id) => {
@@ -32,7 +37,7 @@ module.exports = {
     },
 
     finalizarSolicitacao: async (id) => {
-        return await api.put(`${url}/atualizar_solicitacao/${id}`, { "status": "finalizado" })
+        return await api.put(`${url}/atualizar_solicitacao/${id}`, { "status": "fechado" })
     },
 
 }

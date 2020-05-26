@@ -5,6 +5,7 @@ import PrestadorCadastro from './../views/RegistersView/Prestador'
 import SolicitanteCadastro from './../views/RegistersView/Solicitante'
 import Home from './../views/HomeView/index.js'
 import HomeSolicitante from './../views/HomeSolicitanteView/index.js'
+import PainelSolicitante from './../views/HomeSolicitanteView/PainelGeralView/index.js'
 import Escolha from '../views/ChoiceRegister/ChoiceRegister.js'
 import Testes from '../views/ViewDeTestes/testes.js'
 import PainelPrestador from '../views/HomePrestadorView/PainelGeralView'
@@ -28,6 +29,7 @@ function Routes() {
                 {/* Rotas solicitante */}
                 <Route path="/profile-solicitante" component={PerfilSolicitante} />
                 <Route path="/home-solicitante" component={HomeSolicitante} />
+                <Route path="/meus-servicos" component={PainelSolicitante} />
                 
                 {/* Rotas Prestador */}
                 <Route path="/profile-prestador" component={PerfilPrestador} />
