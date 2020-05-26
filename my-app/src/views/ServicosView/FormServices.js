@@ -39,9 +39,19 @@ class FormServices extends React.Component {
 
     state = {
         service: {},
+        titulo: 'jxknd'
     }
 
+    serviceData = {};
     componentDidMount() {
+        console.log('eu')
+        let serviceData
+        servicesService.getServicoById(this.props.id)
+            .then(response => {
+                console.log(response.data[0])
+                serviceData = response.data[0];
+            })
+        console.log(serviceData)
     }
 
     changeImage = (imagem) => { }
@@ -99,9 +109,9 @@ class FormServices extends React.Component {
                 <Grid item>
                     <h1 style={h1}>Nome do Serviço</h1>
                     <Input
-                        // defaultValue={servico.titulo}
+                        defaultValue={this.state.service.titulo}
                         style={input}
-                        // onChange={(e) => this.setState({ titulo: e.target.value })} 
+                    // onChange={(e) => this.setState({ titulo: e.target.value })} 
                     />
                 </Grid>
 
@@ -110,7 +120,7 @@ class FormServices extends React.Component {
                     <Input
                         // defaultValue={servico.descricao}
                         style={input}
-                        // onChange={(e) => this.setState({ descricao: e.target.value })}
+                    // onChange={(e) => this.setState({ descricao: e.target.value })}
                     />
                 </Grid>
 
