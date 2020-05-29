@@ -19,8 +19,6 @@ const styles = (theme) => ({
         marginTop:'12%',
         marginLeft:'23%'
     }
-        
-
 });
 
 function Avaliacoes(props) {

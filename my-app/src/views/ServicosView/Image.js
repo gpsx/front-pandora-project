@@ -13,24 +13,25 @@ const useStyles = makeStyles((theme) => ({
   rounded: {
     color: '#fff',
     backgroundColor: "#0B3C5D",
-    width:'140px',
-    height:'140px'
+    width: '140px',
+    height: '140px'
   },
   icon: {
-    width:'70px',
-    height:'70px'
+    width: '70px',
+    height: '70px'
   },
-  
+
 }));
 
-export default function Image() {
+export default function Image(props) {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      <Avatar variant="rounded" className={classes.rounded}>
-        <AssignmentIcon className={classes.icon}/>
+      <Avatar src={props.defaultImage !== null ? props.defaultImage : null}
+        variant="rounded" className={classes.rounded}>
+        <AssignmentIcon className={classes.icon} />
       </Avatar>
-    </div>
+    </div >
   );
 }

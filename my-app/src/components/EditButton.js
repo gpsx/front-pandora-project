@@ -32,7 +32,7 @@ const theme = createMuiTheme({
 const Icon = ({ changeImage, Imagevalue, ...rest }) => (
   <div>
     <label>
-      <EditIcon style={{ color: "white" }} />
+      <EditIcon style={{ color: "white", cursor: "pointer" }} />
       <input
         {...rest}
         style={{ display: "none" }}

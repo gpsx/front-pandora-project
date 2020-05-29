@@ -9,24 +9,9 @@ import { SnackbarContent, Snackbar } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import { Dialog, DialogActions, DialogContent, DialogContentText } from '@material-ui/core';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import Link from '@material-ui/core/Link';
+import Link from './../../../components/Link';
 
 const styles = (theme) => ({
-
-    link: {
-        color: 'black',
-        textDecoration: 'none',
-        fontFamily: 'Roboto',
-        fontStyle: 'normal',
-        fontSize: '20px',
-        fontWeight: '200',
-        lineHeight: '50px',
-        cursor: 'pointer',
-        '&:hover': {
-            color: '#0B3C5D',
-        },
-    },
-
     tamanho: {
         width: '300px',
         height: '8%'
@@ -136,7 +121,7 @@ function FormDialogSenha(props) {
     return (
         <div>
             <div className={classes.tamanho}>
-                <Link onClick={handleClickOpen} style={{ textDecoration: 'none' }} className={classes.link}>
+                <Link onClick={handleClickOpen} style={{ textDecoration: 'none' }}>
                     Alterar senha
                 </Link>
             </div>

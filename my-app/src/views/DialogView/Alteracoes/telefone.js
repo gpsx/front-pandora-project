@@ -7,31 +7,15 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import Link from '@material-ui/core/Link';
+import Link from './../../../components/Link';
 import LocalStorageService from '../../../service/localStorage'
 import alterarService from '../../../service/alteracoesService'
 
 const styles = (theme) => ({
-
-    link: {
-        color: 'black',
-        textDecoration: 'none',
-        fontFamily: 'Roboto',
-        fontStyle: 'normal',
-        fontSize: '20px',
-        fontWeight: '200',
-        lineHeight: '50px',
-        cursor: 'pointer',
-        '&:hover': {
-            color: '#0B3C5D',
-        },
-    },
-
     tamanho: {
         width: '300px',
         height: '8%'
     }
-
 });
 
 const theme = createMuiTheme({
@@ -84,7 +68,7 @@ function FormDialogTelefone(props) {
         <div>
 
             <div className={classes.tamanho}>
-                <Link onClick={handleClickOpen} style={{ textDecoration: 'none' }} className={classes.link}>
+                <Link onClick={handleClickOpen} style={{ textDecoration: 'none' }}>
                     Alterar telefone
                 </Link>
             </div>

@@ -1,4 +1,4 @@
-const api = require('./apiService');
+const api = require('../apiService');
 
 const headers = {
     headers: {
@@ -11,6 +11,10 @@ const imgURL = "https://api.imgur.com/3/image"
 module.exports = {
 
     uploadImagem: async (params) => {
+        return await api.postImg(imgURL, params, headers);
+    },
+
+    upload: async (params) => {
         return await api.postImg(imgURL, params, headers);
     },
 

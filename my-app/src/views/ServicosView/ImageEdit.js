@@ -27,7 +27,7 @@ export default function ImageEdit(props) {
         }}
         badgeContent={<Botao changeImage={props.changeImage.bind(this)} />}
       >
-        <Image className={classes.imagem} />
+        <Image defaultImage={props.defaultImage} className={classes.imagem} />
       </Badge>
     </div>
   );

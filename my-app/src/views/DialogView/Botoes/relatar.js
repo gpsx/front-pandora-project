@@ -14,10 +14,8 @@ const styles = (theme) => ({
         fontSize: '11px',
         width: '50%',
         height: '20%',
-        '&:hover': {
-            backgroundColor: '#328CC1',
-        },
     },
+    
     botaoClose: {
         fontSize: '11px',
         width: '20%',

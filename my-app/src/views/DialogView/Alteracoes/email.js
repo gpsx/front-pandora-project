@@ -1,6 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom'
-import { Button, TextField, Link } from '@material-ui/core';
+import { Button, TextField } from '@material-ui/core';
 import { withStyles, createMuiTheme, ThemeProvider } from '@material-ui/core';
 import { SnackbarContent, Snackbar } from '@material-ui/core';
 import Dialog from '@material-ui/core/Dialog';
@@ -9,6 +9,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import LocalStorageService from '../../../service/localStorage'
+import Link from '../../../components/Link'
 import alterarService from '../../../service/alteracoesService'
 import userService from '../../../service/userService'
 
@@ -94,7 +95,7 @@ function FormDialogEmail(props) {
             setMessage("Digite seu e-mail atual")
         }
         else {
-            if (type == 'solicitante') {
+            if (type === 'solicitante') {
                 alterarSolicitante()
             } else {
                 alterarPrestador()
@@ -120,7 +121,7 @@ function FormDialogEmail(props) {
 
                 <div className={classes.tamanho}>
 
-                    <Link onClick={handleClickOpen} style={{ textDecoration: 'none' }} className={classes.link}>
+                    <Link onClick={handleClickOpen} style={{ textDecoration: 'none' }} >
                         Alterar e-mail
                     </Link>
 

@@ -6,7 +6,7 @@ import UsuarioForm from './../forms/UsuarioForm';
 import FormService from '../forms/ServiceRegister/FormService';
 import { QontoConnector, QontoStepIcon } from './QontoStepIcon';
 import service from '../../../service/userService'
-import imageService from '../../../service/imageService'
+import imageService from '../../../service/image/imageService'
 import otherService from './../../../service/otherService'
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
@@ -165,7 +165,7 @@ class StepperPrestador extends React.Component {
     };
 
   }
-
+  
   cadastrarServico(imgUrl) {
     otherService.cadastrarServico({
       descricao: this.state.service.descricao,

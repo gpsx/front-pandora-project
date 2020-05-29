@@ -24,30 +24,24 @@ const styles = (theme) => ({
             color: '#0B3C5D',
         },
     },
-
-    tamanho: {
-        width: '300px',
-        height: '8%'
-    }
-
 });
 
 const theme = createMuiTheme({
-    overrides:{
-        MuiInput:{
-          underline:{
-            "&:after":{
-              borderBottom:"2px solid #0B3C5D",
+    overrides: {
+        MuiInput: {
+            underline: {
+                "&:after": {
+                    borderBottom: "2px solid #0B3C5D",
+                }
             }
-          }
         },
-        MuiButton:{
-            textPrimary:{
-                color:"#0B3C5D"
+        MuiButton: {
+            textPrimary: {
+                color: "#0B3C5D"
             }
         },
     }
-  })
+})
 
 function FormDialogCategoria(props) {
     const { classes } = props;
@@ -64,12 +58,9 @@ function FormDialogCategoria(props) {
     return (
         <div>
             <div>
-
-                <div className={classes.tamanho}>
-                    <Link onClick={handleClickOpen} className={classes.link}>
-                        Minha categoria não está aqui!
-                    </Link>
-                </div>
+                <Link onClick={handleClickOpen} className={classes.link}>
+                    Minha categoria não está aqui!
+                </Link>
 
                 <Dialog open={open} onClose={handleClose} fullWidth="18px" maxWidth="sm" aria-labelledby="form-dialog-title">
 
@@ -80,33 +71,33 @@ function FormDialogCategoria(props) {
                     <DialogContent>
 
                         <DialogContentText>
-                           Se está faltando a categoria que mais combina com o seu serviço, sugira para nós abaixo qual seria a mais apropriada,
-                           e a equipe Pandora irá verificar se há a possibilidade de adiciona-la.
+                            Se está faltando a categoria que mais combina com o seu serviço, sugira para nós abaixo qual seria a mais apropriada,
+                            e a equipe Pandora irá verificar se há a possibilidade de adiciona-la.
                         </DialogContentText>
 
                         <ThemeProvider theme={theme}>
-                        <TextField
-                            autoFocus
-                            margin="dense"
-                            id="name"
-                            label="Categoria do Serviço"
-                            type="text"
-                            fullWidth
-                        />
+                            <TextField
+                                autoFocus
+                                margin="dense"
+                                id="name"
+                                label="Categoria do Serviço"
+                                type="text"
+                                fullWidth
+                            />
                         </ThemeProvider>
 
                     </DialogContent>
 
                     <DialogActions>
-                    <ThemeProvider theme={theme}>
-                        <Button onClick={handleClose} color="primary">
-                            Cancelar
+                        <ThemeProvider theme={theme}>
+                            <Button onClick={handleClose} color="primary">
+                                Cancelar
                         </Button>
 
-                        <Button onClick={handleClose} color="primary">
-                            Alterar
+                            <Button onClick={handleClose} color="primary">
+                                Alterar
                         </Button>
-                    </ThemeProvider>
+                        </ThemeProvider>
                     </DialogActions>
                 </Dialog>
             </div>

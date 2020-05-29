@@ -24,9 +24,7 @@ const button = {
     height: '50px',
 }
 
-
 class FormLogin extends React.Component {
-
     state = {
         email: '',
         senha: '',
@@ -75,7 +73,6 @@ class FormLogin extends React.Component {
     }
 
     render() {
-
         const fecharAlerta = (event, reason) => {
             if (reason === 'clickaway') {
                 return;
@@ -83,7 +80,7 @@ class FormLogin extends React.Component {
 
             this.setState({ open: false });
         };
-
+        
         return (
             <Grid container
                 direction="column"
@@ -107,8 +104,8 @@ class FormLogin extends React.Component {
                     <Input
                         style={{ width: '280px' }}
                         onChange={e => this.setState({ senha: e.target.value })}
-                        type='password'
-                    />
+                        type='password'/>
+                        
                     <Link underline='always' href="/#/esqueciasenha" style={link} variant='caption text'>
                         Esqueci minha senha
                     </Link>
@@ -128,7 +125,6 @@ class FormLogin extends React.Component {
                         {this.state.mensagem}
                     </Alert>
                 </Snackbar>
-
             </Grid>
         )
     }

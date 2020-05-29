@@ -1,16 +1,16 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom'
-import { withStyles } from '@material-ui/core/styles';
 import { Grid } from '@material-ui/core';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import FormDialogCategoria from '../DialogView/Servicos/categoria';
-import { listarCategorias, getServico } from './../../utils/itens'
+import { listarCategorias } from './../../utils/itens'
 import ImageEdit from './ImageEdit'
 import Panel from '../../components/PanelCategorias';
 import LocalStorage from '../../service/localStorage'
-import imgService from '../../service/imageService';
+import imageService from '../../service/image/imageService';
 import servicesService from '../../service/servicesService';
+import Backdrop from '../../components/Backdrop'
 
 const h1 = {
     fontWeight: '200',
@@ -19,7 +19,7 @@ const h1 = {
 }
 
 const titulo = {
-    marginTop: '10px',
+    marginTop: '25px',
     fontWeight: '200',
     lineHeight: '28px',
     fontSize: '22px',
@@ -31,61 +31,104 @@ const input = {
 
 const button = {
     fontSize: '15px',
+    marginBottom: '20px',
 }
 
-class FormServices extends React.Component {
 
+
+class FormServices extends React.Component {
     id = LocalStorage.obterIdUsuario();
+
+    state = {
+        titulo: '',
+        descricao: '',
+        categoria: '',
+        imagem: '',
+        openBackdrop: false,
+    }
 
     constructor() {
         super();
         this.state = { data: [] };
-      }
-
+    }
 
     componentDidMount() {
         let obj = {}
-        servicesService.getServicoById(1)
+        servicesService.getServicoById(this.props.id)
             .then(response => {
                 obj = {
                     titulo: response.data[0].titulo,
-                    descricao: response.data[0].descricao
+                    descricao: response.data[0].descricao,
+                    categoria: response.data[0].fkCategoriaServico.idCategoria,
                 }
-                console.log(obj);
-                this.setState({data: obj})
+                this.setState({ data: obj })
+                this.setState({ imagem: response.data[0].imagem })
             }).catch(err => {
                 console.log(err)
             })
-    }  
+    }
 
-    
+    changeBackdrop = () => {
+        this.setState({ openBackdrop: !this.state.openBackdrop });
+    }
 
-    changeImage = (imagem) => { }
+    changeImage = async (imagem) => {
+        this.changeBackdrop()
+        let data = new FormData();
+        data.append("image", imagem[0]);
+        imageService.upload(data)
+            .then(res => {
+                this.setState({ imagem: res.data.data.link });
+                this.changeBackdrop();
+            })
+    }
+
+    changeCategoria = (categ) => {
+        this.setState({ categoria: categ.idCategoria })
+    }
 
     cancelar = () => {
         this.props.history.push('/my-service')
     }
 
     atualizar = () => {
-        const { categoriaServico, titulo, descricao, imagem } = this.state
-        servicesService.update(this.props.id,
-            {
-                categoriaServico, titulo, descricao, imagem,
-                prestador: this.id,
-            }).then(response => {
-                console.log('Atualizado!')
-            }).catch(err => {
-                console.log('erro')
-            })
+        let servico = this.construir();
+        console.log(servico)
+        servicesService.update(this.props.id, servico
+        ).then(response => {
+            console.log('Atualizado!')
+        }).catch(err => {
+            console.log('erro')
+        })
+    }
+
+    construir = () => {
+        let { titulo, descricao, imagem, categoria } = this.state
+        if ((!titulo)) {
+            titulo = this.state.data.titulo;
+        }
+        if ((!descricao)) {
+            descricao = this.state.data.descricao;
+        }
+        if ((!categoria)) {
+            categoria = this.state.data.categoria;
+        }
+        const atualizacao = {
+            titulo, descricao, imagem,
+            "categoriaServico": categoria,
+            prestador: this.id
+        }
+        return atualizacao;
     }
 
     cadastrar = () => {
-        const { descricao, titulo, imagem, categoriaServico } = this.state;
-        const novo = {
-            descricao, titulo, imagem, categoriaServico,
+        const { descricao, titulo, imagem } = this.state;
+        const servico = {
+            descricao, titulo, imagem,
+            "categoriaServico": this.state.categoria,
             "prestador": this.id,
         }
-        servicesService.cadastrar(novo)
+        servicesService.cadastrar(servico)
             .then(response => {
                 console.log('Cadastrado com sucesso')
             }).catch((error) => {
@@ -95,7 +138,7 @@ class FormServices extends React.Component {
 
     render() {
         const categorias = listarCategorias();
-        
+
         return (
             <Grid container direction="column" alignItems="center" spacing={1} >
                 <Grid item>
@@ -106,7 +149,9 @@ class FormServices extends React.Component {
                 </Grid>
 
                 <Grid item>
-                    <ImageEdit changeImage={this.changeImage.bind(this)} />
+                    <ImageEdit
+                        changeImage={this.changeImage.bind(this)}
+                        defaultImage={this.state.imagem} />
                 </Grid>
 
                 <Grid item>
@@ -114,7 +159,7 @@ class FormServices extends React.Component {
                     <Input
                         placeholder={this.state.data.titulo}
                         style={input}
-                    // onChange={(e) => this.setState({ titulo: e.target.value })} 
+                        onChange={(e) => this.setState({ titulo: e.target.value })}
                     />
                 </Grid>
 
@@ -123,13 +168,14 @@ class FormServices extends React.Component {
                     <Input
                         placeholder={this.state.data.descricao}
                         style={input}
-                    // onChange={(e) => this.setState({ descricao: e.target.value })}
+                        onChange={(e) => this.setState({ descricao: e.target.value })}
                     />
                 </Grid>
 
                 <Grid item>
                     <h1 style={h1}>Categorias do Serviço</h1>
                     <Panel
+                        default={this.state.data.categoria}
                         categorias={categorias}
                         changeCategoria={this.changeCategoria} />
                     <FormDialogCategoria />
@@ -138,7 +184,10 @@ class FormServices extends React.Component {
                 <Grid item>
                     <Grid container direction="row" spacing={1} >
                         <Grid item>
-                            <Button style={button} onClick={this.cancelar}>Cancelar</Button>
+                            <Button style={button}
+                                onClick={() => this.props.history.push('/my-service')}>
+                                Cancelar
+                            </Button>
                         </Grid>
                         <Grid item>
                             {this.props.atualizando ?
@@ -150,7 +199,7 @@ class FormServices extends React.Component {
                         </Grid>
                     </Grid>
                 </Grid>
-
+                <Backdrop open={this.state.openBackdrop} />
             </Grid>
         );
     }

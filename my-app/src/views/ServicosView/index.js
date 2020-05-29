@@ -3,12 +3,14 @@ import { withRouter } from 'react-router-dom'
 import { withStyles, Grid, Paper } from '@material-ui/core';
 import Container from '../../components/Container';
 import MenuPrestador from '../../components/MenuPrestador';
-import Footer from '../../components/Footer';
+// import Footer from '../../components/Footer';
 import FormServices from './FormServices';
+import Snackbar from  './teste';
 
 const styles = (theme) => ({
     paper: {
-        width: '40%',
+        width: '100%',
+        maxWidth: '500px',
     },
 });
 
@@ -27,7 +29,7 @@ function ChangeRegister(props) {
             setAtualizando(true);
         }
     }, [])
-
+    
     return (
 
         <Container>
@@ -48,6 +50,7 @@ function ChangeRegister(props) {
 
             </Grid>
 
+            <Snackbar />
             {/* <Footer /> */}
         </Container>
 

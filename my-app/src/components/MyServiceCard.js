@@ -90,7 +90,7 @@ function ServiceCard(props) {
         <Box flexGrow={1}>
           <CardContent>
             <Box className={classes.root} alignItems="center">
-              <Typography variant="h5" component="h3">
+              <Typography variant="h6" component="h3">
                 {props.name}
               </Typography>
             </Box>

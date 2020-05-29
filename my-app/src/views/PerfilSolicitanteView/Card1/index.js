@@ -2,7 +2,7 @@ import React from 'react';
 import { withStyles, Grid, Paper } from '@material-ui/core';
 import EditImage from './EditImage';
 import Alteracoes from '../../DialogView/Alteracoes/index';
-import imageService from '../../../service/imageService'
+import imageService from '../../../service/image/imageService'
 import Informacoes from './Informacoes';
 
 const styles = (theme) => ({

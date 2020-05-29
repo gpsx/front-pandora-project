@@ -13,14 +13,3 @@ export function listarCategorias() {
         })
     return lista;
 }
-
-export function getServico() {
-    let lista = [];
-    servicesService.getServicoById(1)
-        .then(response => {
-            lista.push(response.data[0])
-        }).catch(err => {
-            console.log(err)
-        })
-    return lista;
-}

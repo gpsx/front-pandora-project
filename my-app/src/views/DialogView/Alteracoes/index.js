@@ -16,12 +16,7 @@ export default function Alteracoes(props) {
             <Grid item>
                 < FormDialogTelefone />
                 < FormDialogSenha />
-                {props.endereco == false ? (
-                    <>
-                    </>
-                ) : (
-                        < FormDialogEndereco />
-                    )}
+                {props.endereco ? (< FormDialogEndereco />) : (<></>)}
                 < FormDialogEmail />
             </Grid>
 

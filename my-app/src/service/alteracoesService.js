@@ -34,8 +34,12 @@ module.exports = {
         return await api.put(`/solicitantes/alterar_telefone/${id}`, telefone)
     },
 
-    
+    imgPrestador: async (imagem, id) => {
+        return await api.put(`/prestadores/alterar_imagem/${id}`, imagem)
+    },
 
-
+    imgSolicitante: async (imagem, id) => {
+        return await api.put(`/solicitantes/alterar_imagem/${id}`, imagem)
+    },
 
 }

@@ -3,26 +3,11 @@ import Button from '@material-ui/core/Button';
 import { withStyles, createMuiTheme, ThemeProvider } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
-import Link from '@material-ui/core/Link';
 import Estrelinhas from '../../../components/RatingStars';
 import avaliacoesService from '../../../service/avaliacoesService';
 import solicitacoesService from '../../../service/solicitacoesService'
 
 const styles = (theme) => ({
-
-    link: {
-        color: '#328CC1',
-        textDecoration: 'none',
-        fontFamily: 'Roboto',
-        fontStyle: 'normal',
-        fontSize: '13px',
-        fontWeight: '200',
-        lineHeight: '50px',
-        cursor: 'pointer',
-        '&:hover': {
-            color: '#0B3C5D',
-        },
-    },
     button: {
         alignSelf: "flex-end",
         width: "100px",

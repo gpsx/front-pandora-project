@@ -18,13 +18,13 @@ const LimitTags = (props) => {
   return (
     <div className={classes.root}>
       <Autocomplete
-        options={props.categorias}
+        options={categorias}
         getOptionLabel={(option) => option.nomeServico}
-        defaultValue={(props.default === null) ? [props.categoria[props.default]] : null}
+        defaultValue={categorias[0]}
         onChange={(event, value) => { props.changeCategoria(value) }}
         renderInput={(params) => (
-          <TextField {...params} size="small" variant="outlined" placeholder="Escolha a categoria..." />
-        )}
+        <TextField {...params} size="small" variant="outlined" placeholder="Escolha a categoria..." />
+      )}
       />
     </div>
   );
