@@ -1,45 +1,31 @@
 import React, { useState } from 'react'
 import { makeStyles, createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
-import { Paper, Grid } from '@material-ui/core';
-import FormControl from '@material-ui/core/FormControl';
-import NativeSelect from '@material-ui/core/NativeSelect';
 import Panel from '../../components/PanelCategorias';
-import { listarCategorias } from './../../utils/itens'
-import Input from '../../components/Input';
 import Estrelinhas from '../../components/RatingStars';
+import { listarCategorias } from './../../utils/itens'
+import { Paper, Grid, TextField, Select } from '@material-ui/core';
+import { MenuItem, FormControl } from "@material-ui/core";
+import IconButton from '@material-ui/core/IconButton';
+import Search from '@material-ui/icons/Search';
 
 const useStyles = makeStyles({
     root: {
-        height: '60px',
-        paddingLeft: '3%',
-        paddingTop: '2px',
+        height: '80px',
+        paddingLeft: '2%',
         fontSize: '18px',
     },
-    button: {
-        backgroundColor: '#328CC1',
-        borderRadius: '3px',
-        width: '33px',
-        height: '33px',
-        paddingTop: '4px',
+    padrao: {
+        height: '40px',
     },
-    right: {
-        marginTop: '1px',
-        marginLeft: '3%',
+    categorias: {
+        marginTop: '6px',
+        marginBottom: '-3px',
     },
-    input: {
-        marginLeft: '10px',
-        marginBottom: '6px',
-        marginRigth: '5px',
+    iconButton: {
+        marginLeft: '-22px',
     },
-    text: {
-        marginLeft: '10px',
-        marginBottom: '8px',
-    },
-    formControl: {
-        minWidth: 120,
-        "& open": {
-
-        }
+    estrelas: {
+        marginTop: '25px',
     },
 })
 
@@ -47,7 +33,7 @@ const theme = createMuiTheme({
     overrides: {
         MuiTypography: {
             body1: {
-                display:"none"
+                display: "none"
             }
         },
     }
@@ -56,84 +42,86 @@ const theme = createMuiTheme({
 export default function Filtro(props) {
     const classes = useStyles();
     const [filtro, setFiltro] = useState(0)
+    const [texto, setTexto] = useState(null)
+
+    const handleChange = event => {
+        setFiltro(event.target.value);
+    };
 
     function changeCategoria(categ) {
         if (!categ) {
-            props.globalChange();
+            props.globalChanges(null);
         } else {
-            props.globalChange(categ.idCategoria)
+            props.globalChanges("categoria", categ.idCategoria)
         }
     }
 
-    const handleChange = (value) => {
-        setFiltro(value);
-        console.log(filtro)
-    };
-
     return (
-        <Paper variant="outlined" className={classes.root}>
-            <Grid container
-                direction="row"
-                justify="flex-start"
-                alignItems="center"
-                className={classes.root}
-                spacing={0}
+        <Paper variant="outlined" >
+            <Grid container className={classes.root}
+                direction="row" justify="flex-start"
+                alignItems="center" spacing={3}
             >
 
                 <Grid item>
-                    <FormControl className={classes.formControl}>
-                        <NativeSelect
+                    <FormControl variant="outlined">
+                        <Select
+                            className={classes.padrao}
                             value={filtro}
-                            onChange={(e) => handleChange(e.target.value)}
+                            onChange={handleChange}
                         >
-                            <option value={0}>Nenhum</option>
-                            <option value={1}>Texto</option>
-                            <option value={2}>Categoria</option>
-                            <option value={3}>Avaliação</option>
-                        </NativeSelect>
+                            <MenuItem value={0}>Categoria</MenuItem>
+                            <MenuItem value={1}>Texto</MenuItem>
+                            <MenuItem value={2}>Avaliação</MenuItem>
+                        </Select>
                     </FormControl>
                 </Grid>
 
-                {/* <Grid item className={classes.text}>
-                    Texto:
-                </Grid>
-                <Grid item className={classes.input}>
-                    <Input />
-                </Grid> */}
 
                 {filtro == 0 ? (
-                    <div>
-
-                    </div>
-                ) : filtro == 1 ? (
-                    <div>
-                        <Grid item className={classes.input}>
-                            <Input />
-                        </Grid>
-                    </div>
-                ) : filtro == 2 ? (
-                    <div visible={false}>
-                        <Grid item className={classes.right}>
+                    <div className={classes.categorias}>
+                        <Grid item>
                             <Panel categorias={listarCategorias()}
                                 changeCategoria={changeCategoria} />
                         </Grid>
                     </div>
-                ) : filtro == 3 ? (
-                    <Grid item >
-                        <ThemeProvider theme={theme}>
-                            <Estrelinhas  />
-                        </ThemeProvider>
-                    </Grid>
-                ) : (
-                                    <div>
-                                        Error 404
-                                    </div>
-                                )
-                }
 
+                ) : filtro == 1 ? (
+                    <>
+                        <Grid item>
+                            <TextField
+                                size="small"
+                                className={classes.padrao}
+                                onChange={(e) => setTexto(e.target.value)}
+                                variant="outlined" />
+                        </Grid>
+                        <Grid item>
+                            <IconButton className={classes.iconButton}
+                                color="primary" aria-label="serarch" component="span"
+                                onClick={() => props.globalChanges("palavra", texto)}>
+                                <Search />
+                            </IconButton>
+                        </Grid>
+                    </>
+
+                ) : filtro == 2 ? (
+                    <div className={classes.estrelas}>
+                        <Grid item>
+                            <ThemeProvider theme={theme}>
+                                <Estrelinhas getValue={(e) => console.log(e)} />
+                            </ThemeProvider>
+                        </Grid>
+                    </div>
+
+                ) : (
+                                <div>
+                                    Error 404
+                                </div>
+                            )
+                }
             </Grid>
 
-        </Paper>
+        </Paper >
     );
 }
 

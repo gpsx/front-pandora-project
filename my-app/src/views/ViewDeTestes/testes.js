@@ -1,4 +1,5 @@
 import React from 'react'
+import Filtro from '../HomeSolicitanteView/filtro'
 
 class Testes extends React.Component {
 
@@ -15,7 +16,7 @@ class Testes extends React.Component {
 
         return (
             <>
-                <div></div>
+                <Filtro />
             </>
         );
     }
