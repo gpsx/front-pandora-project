@@ -11,6 +11,7 @@ import LocalStorage from '../../service/localStorage'
 import imageService from '../../service/image/imageService';
 import servicesService from '../../service/servicesService';
 import Backdrop from '../../components/Backdrop'
+import Alerta from '../../components/Alerta';
 
 const h1 = {
     fontWeight: '200',
@@ -45,12 +46,19 @@ class FormServices extends React.Component {
         categoria: '',
         imagem: '',
         openBackdrop: false,
+        alert: false,
+        severity: '',
+        message: '',
     }
 
     constructor() {
         super();
         this.state = { data: [] };
     }
+
+    fecharAlerta() {
+        this.setState({ alert: false })
+    };
 
     componentDidMount() {
         let obj = {}
@@ -96,9 +104,13 @@ class FormServices extends React.Component {
         console.log(servico)
         servicesService.update(this.props.id, servico
         ).then(response => {
-            console.log('Atualizado!')
+            this.props.history.push('/my-service');
         }).catch(err => {
-            console.log('erro')
+            this.setState({
+                alert: true,
+                message: 'Erro ao atualizar serviço',
+                severity: 'error',
+            })
         })
     }
 
@@ -130,9 +142,13 @@ class FormServices extends React.Component {
         }
         servicesService.cadastrar(servico)
             .then(response => {
-                console.log('Cadastrado com sucesso')
+                this.props.history.push('/my-service');
             }).catch((error) => {
-                console.log("Erro ao cadastrar serviço")
+                this.setState({
+                    alert: true,
+                    message: 'Erro ao cadastrar serviço',
+                    severity: 'error',
+                })
             })
     }
 
@@ -200,6 +216,11 @@ class FormServices extends React.Component {
                     </Grid>
                 </Grid>
                 <Backdrop open={this.state.openBackdrop} />
+                <Alerta
+                    open={this.state.alert}
+                    message={this.state.message}
+                    severity={this.state.severity}
+                    close={this.fecharAlerta.bind(this)} />
             </Grid>
         );
     }

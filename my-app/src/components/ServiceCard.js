@@ -79,6 +79,10 @@ export default function ServiceCard(props) {
       })
   };
 
+  const obterRating = () => {
+    
+  };
+
 
   const bull = <span className={classes.bullet}>•</span>;
 
@@ -122,10 +126,6 @@ export default function ServiceCard(props) {
               <Typography variant="body2" component="p" className={classes.star}>
                 {/* {props.avaliation} */}
                 4.7
-              </Typography>
-              {bull}
-              <Typography className={classes.title} color="textSecondary" gutterBottom>
-                Está há 200m
               </Typography>
             </Box>
             <Typography variant="body2" component="p">

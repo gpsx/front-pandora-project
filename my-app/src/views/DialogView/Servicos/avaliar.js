@@ -57,10 +57,12 @@ function FormDialogAvaliar(props) {
     const avaliar = () => {
         avaliacoesService.avaliar({
             "nota": nota,
-            "avaliacao": feedback
+            "avaliacao": feedback,
+            "idSolicitacao": props.id
         }).then(
             solicitacoesService.finalizarSolicitacao(props.id)
                 .then(handleClose()))
+                .then(window.location.reload())
     };
 
     return (

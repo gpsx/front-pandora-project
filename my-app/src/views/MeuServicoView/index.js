@@ -1,13 +1,12 @@
 import React from 'react';
-import { withStyles, Grid, Paper, Container } from '@material-ui/core';
+import { withStyles, Grid, Container } from '@material-ui/core';
 import MenuPrestador from './../../components/MenuPrestador';
-import Footer from './../../components/Footer';
 import BotaoAdicionar from './../../components/AddButton'
-import FormDialogAvaliar from '../DialogView/Servicos/avaliar'
 import Alert from '@material-ui/lab/Alert';
 import ListaServicos from './ListaServicos'
 import service from '../../service/otherService'
 import LocalStorage from '../../service/localStorage'
+import Alerta from '../../components/Alerta';
 
 const styles = (theme) => ({
     container: {
@@ -49,6 +48,9 @@ class MeuServico extends React.Component {
 
     state = {
         servicos: [],
+        alert: false,
+        severity: '',
+        message: '',
     }
 
     componentDidMount() {
@@ -56,6 +58,20 @@ class MeuServico extends React.Component {
             .then(response => {
                 this.setState({ servicos: response.data });
             })
+    }
+
+
+    fecharAlerta() {
+        this.setState({ alert: false })
+    };
+
+    alerta(message, status) {
+        console.log('chegou aqui')
+        this.setState({
+            alert: true,
+            severity: status,
+            message: message
+        })
     }
 
     render() {
@@ -72,7 +88,8 @@ class MeuServico extends React.Component {
                         <div className={classes.h1}>Meus serviços</div>
                         {this.state.servicos.length > 0 ? (
 
-                            <ListaServicos servicos={this.state.servicos} />
+                            <ListaServicos alert={this.alerta.bind(this)}
+                                servicos={this.state.servicos} />
                         ) : (
                                 <Alert severity="error">
                                     Você não possui serviços cadastrados, cadastre um agora!
@@ -87,7 +104,12 @@ class MeuServico extends React.Component {
 
                 </Grid>
 
-                {/* <Footer className={classes.footer} /> */}
+                <Alerta
+                    open={this.state.alert}
+                    message={this.state.message}
+                    severity={this.state.severity}
+                    close={this.fecharAlerta.bind(this)} />
+
             </Container>
         )
     }

@@ -8,20 +8,20 @@ function Alert(props) {
 
 export default function Alerta(props) {
 
-    const [open, setOpen] = React.useState(props.open)
+    const { message, severity, open } = props;
 
     const fecharAlerta = (event, reason) => {
         if (reason === 'clickaway') {
             return;
         }
-        setOpen(false)
+        props.close();
     };
 
     return (
         <Snackbar open={open} autoHideDuration={6000} onClose={fecharAlerta}
             anchorOrigin={{ vertical: 'top', horizontal: 'right' }} >
-            <Alert onClose={fecharAlerta} severity={props.severity}>
-                {props.mensagem}
+            <Alert onClose={fecharAlerta} severity={severity}>
+                {message}
             </Alert>
         </Snackbar >
     )

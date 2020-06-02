@@ -49,22 +49,25 @@ const useStyles = makeStyles({
 export default function ServiceCard(props) {
 
   const classes = useStyles();
-
+  
+  const recarregar = () => {
+    window.location.reload();
+  }
   const aprovar = () => {
     solicitacoesService.aprovarSolicitacao(props.id)
-      .then(console.log('aprovado'))
+      .then(recarregar())
       .catch(console.log('reprovado'))
   }
 
   const executar = () => {
     solicitacoesService.executarSolicitacao(props.id)
-      .then(console.log('em execução'))
+      .then(recarregar())
       .catch(console.log('erro'))
   }
 
   const cancelar = () => {
     solicitacoesService.cancelarSolicitacao(props.id)
-      .then(console.log('em execução'))
+      .then(recarregar())
       .catch(console.log('erro'))
   }
 

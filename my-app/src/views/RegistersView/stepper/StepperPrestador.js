@@ -8,6 +8,7 @@ import { QontoConnector, QontoStepIcon } from './QontoStepIcon';
 import service from '../../../service/userService'
 import imageService from '../../../service/image/imageService'
 import otherService from './../../../service/otherService'
+import servicesService from './../../../service/servicesService'
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import { validarUsuario, montarUsuario } from '../../../utils/validadores'
@@ -167,7 +168,7 @@ class StepperPrestador extends React.Component {
   }
   
   cadastrarServico(imgUrl) {
-    otherService.cadastrarServico({
+    servicesService.cadastrar({
       descricao: this.state.service.descricao,
       titulo: this.state.service.titulo,
       prestador: this.state.userId,

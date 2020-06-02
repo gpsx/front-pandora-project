@@ -71,9 +71,14 @@ function ServiceCard(props) {
 
   const excluir = () => {
     servicesService.deleteService(props.id)
-      .then(console.log("Deletado"))
-      .then(handleClose)
-      .then(window.location.reload());
+      .then(response => {
+        handleClose();
+        window.location.reload();
+        props.alert("Serviço excluido", "success");
+      }).catch(err => {
+        handleClose()
+        props.alert("Erro ao excluir servico", "error")
+      });
   }
 
   return (
