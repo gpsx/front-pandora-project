@@ -10,8 +10,8 @@ import solicitacoesService from '../../../service/solicitacoesService'
 const styles = (theme) => ({
     button: {
         alignSelf: "flex-end",
-        width: "100px",
-        margin: 10,
+        width: "15%",
+        marginRight: '5px',
         backgroundColor: '#0B3C5D',
         '&:hover': {
             backgroundColor: '#328CC1',
@@ -67,7 +67,7 @@ function FormDialogAvaliar(props) {
 
     return (
         <div>
-            <Button variant="contained" color="primary" className={classes.button} onClick={handleClickOpen}>
+            <Button size="small" variant="contained" color="primary" className={classes.button} onClick={handleClickOpen}>
                 FINALIZAR
             </Button>
 

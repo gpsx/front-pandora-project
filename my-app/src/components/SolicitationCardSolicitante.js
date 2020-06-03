@@ -2,14 +2,13 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Card, CardContent } from "@material-ui/core";
 import { CardMedia, Divider, Box, Button } from "@material-ui/core";
-import solicitacoesService from '../service/solicitacoesService'
-import FormDialogAvaliar from './../views/DialogView/Servicos/avaliar'
-// import FormDialogAvaliar from '../DialogView/Servicos/avaliar'
+import FormDialogAvaliar from './../views/DialogView/Servicos/avaliar';
 
 
 const useStyles = makeStyles({
     root: {
-        display: "flex"
+        display: "flex",
+        marginBottom: "-14px",
     },
     bullet: {
         display: "inline-block",
@@ -22,18 +21,21 @@ const useStyles = makeStyles({
     },
     cover: {
         width: 100,
-        height: 80,
+        height: 100,
         margin: 10,
         borderRadius: "5%"
     },
     button: {
         alignSelf: "flex-end",
-        width: "20%",
-        margin: 10,
+        width: "15%",
+        marginRight: '5px',
         backgroundColor: '#0B3C5D',
         '&:hover': {
             backgroundColor: '#328CC1',
         },
+    },
+    margin: {
+        marginBottom: '5px',
     },
     divider: {
         margin: 10
@@ -58,7 +60,7 @@ export default function ServiceCard(props) {
                 <Box flexGrow={1}>
                     <CardContent>
                         <Box className={classes.root} alignItems="center">
-                            <Typography variant="h5" component="h3">
+                            <Typography className={classes.margin} variant="h5" component="h3">
                                 {props.name}
                             </Typography>
                         </Box>
@@ -75,7 +77,7 @@ export default function ServiceCard(props) {
                                         </>
                                     )
                             }
-                            <Button variant="contained" color="primary" className={classes.button}>
+                            <Button size="small" variant="contained" color="primary" className={classes.button}>
                                 Chamar no Chat
                             </Button>
                         </Box>

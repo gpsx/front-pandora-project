@@ -11,6 +11,7 @@ const styles = (theme) => ({
         fontSize: '20px',
         fontWeight: '200',
         lineHeight: '50px',
+        width: '300px',
     },
     botao: {
         fontSize: '11px',
@@ -27,11 +28,7 @@ const styles = (theme) => ({
         fontSize: '14px',
         fontWeight: '200',
         lineHeight: '20px',
-        width: '70%'
-    },
-    reportar: {
-        float: 'left',
-        width: '100%',
+        paddingBottom: '5px',
     },
 
 });
@@ -44,23 +41,17 @@ function Reportar(props) {
         <Grid container
             direction="column"
             alignItems="flex-start"
-            spacing={3}>
+            justify="center">
 
             <Grid item>
-                <div className={classes.reportar}>
-                    <div className={classes.titulo}>Reportar</div>
-                    <div className={classes.texto}>
-                        Algum dos usuários do Pandora te ofendeu ou derespeitou de alguma maneira?
-                            </div>
-
+                <div className={classes.titulo}>Reportar</div>
+                <div className={classes.texto}>
+                    Algum dos usuários do Pandora te <br />ofendeu ou derespeitou
                     <br />
-
-                    <FormDialogReportar/>
-
+                    de alguma maneira?
                 </div>
-
+                <FormDialogReportar />
             </Grid>
-
         </Grid>
     );
 }

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import SolicitationCard from './../../../components/SolicitationCardSolicitante'
 import { Grid } from '@material-ui/core';
+import ImagemGenerica from './../../../assets/servicos/generico.jpg'
 
 export default function ListaServicos(props) {
 
@@ -12,6 +13,7 @@ export default function ListaServicos(props) {
                     requestText={solicitacao.descricao}
                     name={solicitacao.fkPrestador.nome}
                     serviceState={props.status}
+                    img={solicitacao.fkPrestador.imagem == null ? ImagemGenerica : solicitacao.fkPrestador.imagem}
                 />
             </Grid>
         )

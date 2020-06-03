@@ -22,5 +22,9 @@ module.exports = {
         return await api.post(`/solicitacoes/nova_solicitacao/${id}`, { descricao })
     },
 
+    pegarAvaliacao: async (id) => {
+        return await api.get(`/avaliacoes/media/${id}`)
+    },
+
 
 }

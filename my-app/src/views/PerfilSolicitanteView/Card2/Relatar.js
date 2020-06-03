@@ -11,6 +11,7 @@ const styles = (theme) => ({
         fontSize: '20px',
         fontWeight: '200',
         lineHeight: '50px',
+        width: '300px',
     },
     botao: {
         fontSize: '11px',
@@ -27,11 +28,10 @@ const styles = (theme) => ({
         fontSize: '14px',
         fontWeight: '200',
         lineHeight: '20px',
-        width: '70%'
+        paddingBottom: '5px',
     },
     relatar: {
         float: 'left',
-        width:'70%',
     },
 
 });
@@ -44,19 +44,17 @@ function Relatar(props) {
         <Grid container
             direction="column"
             alignItems="flex-start"
-            spacing={3}>
+            justify="center">
 
-                <Grid item>
-                    <div className={classes.relatar}>
-                        <div className={classes.titulo}>Problemas</div>
-                        <div className={classes.texto}>
-                            Houve algum problema com a nossa aplicação, que prejudicasse a sua experiência conosco?
-                    </div>
-                        <br />
-                        <FormDialogRelatar/>
-                        </div>
-                </Grid>
-
+            <Grid item>
+                <div className={classes.titulo}>Problemas</div>
+                <div className={classes.texto}>
+                    Houve algum problema com <br />
+                    a nossa aplicação, que prejudicasse <br />
+                              a sua experiência conosco?
+                </div>
+                <FormDialogRelatar />
+            </Grid>
         </Grid>
     );
 }

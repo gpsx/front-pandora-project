@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Button, Card, CardContent } from "@material-ui/core";
 import { CardMedia, Divider, Box, Avatar } from "@material-ui/core";
@@ -58,6 +58,7 @@ export default function ServiceCard(props) {
   const [descricao, setMsg] = useState();
   const classes = useStyles();
   const [open, setOpen] = useState(false);
+  const [avaliation, setAvaliation] = useState(null);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -71,17 +72,20 @@ export default function ServiceCard(props) {
     service.cadastrarSolicitacao(props.id, descricao)
       .then(response => {
         handleClose()
-        props.alertar("Cadastrado com sucesso", "success")
+        props.alertar("Sua solicitação foi enviada!", "success")
       })
       .catch(err => {
         handleClose()
-        props.alertar("Erro ao cadastrar solicitação", "error")
+        props.alertar("Erro ao enviar solicitação", "error")
       })
   };
 
-  const obterRating = () => {
-    
-  };
+  useEffect(() => {
+    service.pegarAvaliacao(props.id)
+      .then(response => {
+        setAvaliation(response.data.toFixed(1));
+      })
+  }, [])
 
 
   const bull = <span className={classes.bullet}>•</span>;
@@ -124,8 +128,7 @@ export default function ServiceCard(props) {
             <Box className={classes.root} alignItems="center">
               <Star className={classes.star} />
               <Typography variant="body2" component="p" className={classes.star}>
-                {/* {props.avaliation} */}
-                4.7
+                {avaliation}
               </Typography>
             </Box>
             <Typography variant="body2" component="p">

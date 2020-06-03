@@ -1,25 +1,16 @@
 import React from 'react';
 import { withStyles, Grid } from '@material-ui/core';
 import MenuSolicitante from './../../components/MenuSolicitante';
-import Footer from './../../components/Footer';
+import Container from './../../components/Container'
 import Card1 from './Card1/index';
 import Card2 from './Card2/index';
 
 
 const styles = (theme) => ({
-    card1: {
-        marginLeft: '20%',
+    card: {
         width: '60%',
         height: '300px',
     },
-    card2: {
-        marginTop: '0.5%',
-        marginLeft: '20%',
-        width: '60%',
-        height: '300px',
-    },
-
-
 });
 
 function PerfilSolicitante(props) {
@@ -27,28 +18,26 @@ function PerfilSolicitante(props) {
     const { classes } = props;
 
     return (
-        <Grid container
-            direction="column"
-            alignItems="flex-start"
-            spacing={3}
+        <Container>
+            <MenuSolicitante />
+
+            <Grid container
+                direction="column"
+                alignItems="center"
+                justify="center"
+                spacing={1}
             >
-            <Grid><MenuSolicitante /></Grid>
 
                 <Grid item>
-                   
-                <Card1 className={classes.card1}/>
-
+                    <Card1 className={classes.card} />
                 </Grid>
 
                 <Grid item>
-                    
-                <Card2 className={classes.card2}/>
-
+                    <Card2 className={classes.card} />
                 </Grid>
 
-                <br/>
-            <Footer/>
-        </Grid>
+            </Grid>
+        </Container>
     );
 }
 

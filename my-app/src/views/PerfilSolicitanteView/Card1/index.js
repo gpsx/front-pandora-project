@@ -7,19 +7,17 @@ import Informacoes from './Informacoes';
 
 const styles = (theme) => ({
     card: {
-        marginTop: '12%',
-        marginLeft: '34%',
         width: '800px',
-        height: '290px'
+        minWidth: '400px',
+        maxWidth: '800px',
+        height: '310px'
     },
-
     linhaVertical: {
         height: '250px',
         borderLeft: '2px solid',
         borderLeftColor: '#696969',
         float: 'left',
-        marginLeft: '48%',
-        marginTop: '-31.5%',
+        marginTop: '-33.5%',
         opacity: '0.2',
     },
     alteracoes: {
@@ -27,10 +25,10 @@ const styles = (theme) => ({
         width: '100px',
         marginLeft: '56%'
     },
-
     avatar: {
-        marginLeft: '16%',
-        marginTop: '2%'
+        marginTop: '1%',
+        width: '300px',
+        paddingLeft: '28%',
     },
     informacoes: {
         marginLeft: '5%',
@@ -39,13 +37,11 @@ const styles = (theme) => ({
     titulo: {
         color: 'black',
         fontFamily: 'Roboto',
-        width: '300px',
         fontStyle: 'normal',
         fontSize: '25px',
         fontWeight: '200',
         lineHeight: '50px',
-        marginLeft: '5.5%',
-        marginTop: '-260px',
+        cursor: 'pointer',
     },
 
 });
@@ -70,38 +66,31 @@ function Card1(props) {
 
 
     return (
-        <Grid container
-            direction="column"
-            alignItems="flex-start"
-            spacing={3}>
-
-            <Paper className={classes.card}>
+        <Paper className={classes.card}>
+            <Grid container direction="row"
+                justify="space-evenly"
+                alignItems="center"
+                className={classes.card}
+            >
                 <Grid item>
-
                     <div className={classes.avatar}>
                         <EditImage changeImage={changeImage.bind(this)} />
                     </div>
-
-                    <br />
-
-                    <div className={classes.informacoes}>
-                        <Informacoes />
-                    </div>
-
-                    <div className={classes.linhaVertical}></div>
-
-                    <div className={classes.alteracoes}>
-
-                        <div className={classes.titulo}>Alterar informações</div>
-
-                        <Alteracoes />
-
-                    </div>
-
+                    <Informacoes />
                 </Grid>
-            </Paper>
 
-        </Grid>
+                <Grid item>
+                    <div className={classes.linhaVertical} />
+                </Grid>
+
+                <Grid item>
+                    <div className={classes.titulo}>Alterações</div>
+                    <Alteracoes />
+                </Grid>
+
+            </Grid>
+        </Paper>
+
     );
 }
 

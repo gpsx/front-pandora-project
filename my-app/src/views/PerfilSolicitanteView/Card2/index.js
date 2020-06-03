@@ -5,19 +5,18 @@ import Reportar from './Reportar';
 
 const styles = (theme) => ({
     card: {
-        marginTop: '1%',
-        marginLeft: '32.5%',
         width: '800px',
+        minWidth: '400px',
+        maxWidth: '800px',
         height: '200px'
     },
 
     linhaVertical: {
-        height: '120px',
+        height: '150px',
         borderLeft: '2px solid',
         borderLeftColor: '#696969',
-        float: 'left',
-        marginLeft: '48%',
-        marginTop: '-15.5%',
+        marginTop: '-33.5%',
+        marginLeft: '20px',
         opacity: '0.2',
     },
     botao: {
@@ -52,28 +51,26 @@ function Card2(props) {
     const { classes } = props;
 
     return (
-        <Grid container
-            direction="column"
-            alignItems="flex-start"
-            spacing={3}>
+        <Paper className={classes.card}>
+            <Grid container direction="row"
+                justify="space-evenly"
+                alignItems="center"
+                className={classes.card}>
 
-            <Grid item>
+                <Grid item>
+                    <Relatar />
+                </Grid>
 
-                <Paper className={classes.card}>
-                    <div className={classes.relatar}>
-                        <Relatar />
-                    </div>
-
+                <Grid item>
                     <div className={classes.linhaVertical}></div>
+                </Grid>
+                <Grid item>
+                    <Reportar />
+                </Grid>
 
-                    <div className={classes.reportar}>
-                        <Reportar />
-                    </div>
-                    
-                </Paper>
             </Grid>
+        </Paper >
 
-        </Grid>
     );
 }
 

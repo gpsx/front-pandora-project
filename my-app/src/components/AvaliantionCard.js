@@ -21,7 +21,8 @@ const useStyles = makeStyles({
     marginBottom: 12
   },
   cover: {
-    width: 150,
+    width: 100,
+    height: 100,
     margin: 10,
     borderRadius: "5%"
   },
@@ -75,8 +76,7 @@ export default function ServiceCard(props) {
               </Typography>
               <Star className={classes.star} />
               <Typography variant="body2" component="p" className={classes.star}>
-                {/* {props.avaliation} */}
-                4.7
+                {props.avaliation}
               </Typography>
             </Box>
             <Typography variant="body2" color="textSecondary" gutterBottom>

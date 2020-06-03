@@ -1,49 +1,69 @@
 import React from 'react';
-import { withStyles, Grid, Paper} from '@material-ui/core';
+import { withStyles, Grid } from '@material-ui/core';
+import Alert from '@material-ui/lab/Alert';
 import MenuPrestador from '../../components/MenuPrestador';
+import Container from '../../components/Container';
 import Footer from '../../components/Footer';
+import avaliacoesService from '../../service/avaliacoesService'
+import LocalStorageService from '../../service/localStorage'
+import ListaAvaliacoes from './ListaAvaliacoes';
 
 const styles = (theme) => ({
-    paper:{
+    paper: {
         marginTop: '-1.8%',
         marginLeft: '23%',
         width: '800px',
         height: '810px'
     },
-    titulo:{
-        color: 'black',
-        fontFamily: 'Roboto',
-        fontStyle: 'normal',
-        fontSize: '17px',
-        fontWeight: '200',
-        marginTop:'12%',
-        marginLeft:'23%'
+    h1: {
+        marginLeft: '2px',
+        lineHeight: '25px',
+        fontSize: '14px',
+    },
+    avaliacoes: {
+        width: '75%',
+        height: 'auto',
     }
 });
 
-function Avaliacoes(props) {
+class Avaliacoes extends React.Component {
+    id = LocalStorageService.obterIdUsuario();
 
-    const { classes } = props;
+    state = {
+        data: []
+    }
 
-    return (
-        <Grid container
-            direction="column"
-            alignItems="flex-start"
-            spacing={3}
-            >
-            <Grid><MenuPrestador /></Grid>
-            
-            <div>
-            <h1 className={classes.titulo}>Avaliações</h1>
-            <br/>
-            <Paper className={classes.paper}>
-                
-            </Paper>
-            </div>
-                <br/>
-            <Footer/>
-        </Grid>
-    );
+    componentDidMount() {
+        avaliacoesService.obterPorPrestador(this.id)
+            .then(response => {
+                this.setState({ data: response.data });
+            })
+    }
+
+    render() {
+        const { classes } = this.props;
+
+        return (
+            <Container>
+                <MenuPrestador />
+                <Grid container justify="center" direction="row" spacing={6}>
+
+                    <Grid item className={classes.avaliacoes}>
+                        <div className={classes.h1}>Minhas Avaliações</div>
+                        {this.state.data.length > 0 ? (
+                            <ListaAvaliacoes avaliacoes={this.state.data} />
+                        ) : (
+                                <Alert severity="error">
+                                    Você ainda não foi avaliado, continue trabalhando!
+                                </Alert>
+                            )}
+                    </Grid>
+                </Grid>
+
+            </Container>
+
+        );
+    }
 }
 
 export default withStyles(styles)(Avaliacoes);
