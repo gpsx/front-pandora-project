@@ -16,6 +16,7 @@
     "bootswatch": "^4.4.1",
     "clsx": "^1.1.0",
     "crypto-js": "^4.0.0",
+    "eslint-plugin-flowtype": "^3.13.0",
     "notistack": "^0.9.11",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",

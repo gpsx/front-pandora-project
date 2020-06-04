@@ -2,6 +2,7 @@ import React from 'react';
 import Menu from '../../components/Menu';
 import ApresentacaoHome from './ApresentacaoHome.js'
 import ComoFunciona from './ComoFunciona'
+import QuemSomos from './QuemSomos'
 
 function HomeView() {
     return (
@@ -9,6 +10,7 @@ function HomeView() {
             <Menu />
             <ApresentacaoHome />
             <ComoFunciona />
+            <QuemSomos />
         </>
     );
 }
