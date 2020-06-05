@@ -2,7 +2,6 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import AppBar from '@material-ui/core/AppBar';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
@@ -73,15 +72,8 @@ const useStyles = makeStyles((theme) => ({
   text: {
     padding: theme.spacing(2, 2, 0),
   },
-  paperChat: {
-    paddingBottom: 50,
-    width:'60%',
-    marginTop:'-100px',
-    display:'inline-block'
-  },
   paperLista: {
-    paddingBottom: 50,
-    width:'40%'
+    width: '80%'
   },
   list: {
     marginBottom: theme.spacing(2),
@@ -111,11 +103,7 @@ export default function Teste() {
 
   return (
     <React.Fragment>
-      <CssBaseline />
-      <Paper square className={classes.paperLista}>
-        <Typography className={classes.text} variant="h5" gutterBottom>
-          Chat Pandora
-        </Typography>
+      {/* <Paper className={classes.paperLista}> */}
         <List className={classes.list}>
           {messages.map(({ id, primary, secondary, person }) => (
             <React.Fragment key={id}>
@@ -130,7 +118,7 @@ export default function Teste() {
             </React.Fragment>
           ))}
         </List>
-      </Paper>
+      {/* </Paper> */}
       {/* <AppBar position="fixed" color="primary" className={classes.appBar}>
         <Toolbar>
           <IconButton edge="start" color="inherit" aria-label="open drawer">
@@ -148,7 +136,7 @@ export default function Teste() {
           </IconButton>
         </Toolbar>
       </AppBar> */}
-      
+
     </React.Fragment>
   );
 }

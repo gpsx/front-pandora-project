@@ -1,5 +1,5 @@
 import React from 'react';
-import { withStyles, Grid, Paper} from '@material-ui/core';
+import { withStyles, Grid, Paper } from '@material-ui/core';
 import MenuPrestador from '../../components/MenuPrestador';
 import Container from '../../components/Container';
 import Typography from '../../components/Typography';
@@ -7,26 +7,28 @@ import Teste from './Teste';
 import ChatPandora from './Chat';
 
 const styles = (theme) => ({
-    paper:{
-        marginTop: '-1.8%',
-        marginLeft: '23%',
-        width: '800px',
-        height: '810px'
-    },
-    titulo:{
+    titulo: {
         color: 'black',
         fontFamily: 'Roboto',
         fontStyle: 'normal',
         fontSize: '17px',
         fontWeight: '200',
-        marginTop:'12%',
-        marginLeft:'23%'
+        marginTop: '12%',
+        marginLeft: '23%'
     },
-    container:{
-        display:'flex',
+    h1: {
+        marginLeft: '2px',
+        lineHeight: '25px',
+        fontSize: '14px',
+    },
+    container: {
+        display: 'flex',
     },
     paperChat: {
-        width:'60%'
+        width: '80%'
+    },
+    paper: {
+        width: "40%",
     }
 });
 
@@ -37,29 +39,33 @@ function Chat(props) {
     return (
         <Container>
             <MenuPrestador />
-            <Grid container
-                direction="row"
-                justify="center"
-                className={classes.container}
-                alignItems="center"
-                spacing={3}
-            >
-            
-            <Grid item> 
-                <Typography>
-                    Pandora Chat
-                </Typography>
-            </Grid>
-            <Grid item >
-                    <Teste/>    
-            </Grid>
-            <Grid item>
-                <Paper className={classes.paperChat}>
-                    <ChatPandora/>
-                </Paper>
-            </Grid>
+            <Grid container direction="column" justify="flex-start" spacing={3}>
+                <Grid item>
+                    <div className={classes.h1}>Pandora Chat</div>
+                </Grid>
+                <Grid item>
+                    <Grid container
+                        direction="row"
+                        justify="center"
+                        className={classes.container}
+                        alignItems="center"
+                        spacing={4}
+                    >
+                        <Paper className={classes.paper}>
+                            <Grid item xs >
+                                <Teste />
+                            </Grid>
+                        </Paper>
+                        <Grid item xs>
+                            <Paper className={classes.paperChat}>
+                                <ChatPandora />
+                            </Paper>
+                        </Grid>
 
-        </Grid>
+                    </Grid>
+
+                </Grid>
+            </Grid>
         </Container>
     );
 }

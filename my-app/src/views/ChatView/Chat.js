@@ -15,73 +15,29 @@ import Fab from '@material-ui/core/Fab';
 import SendIcon from '@material-ui/icons/Send';
 
 const useStyles = makeStyles({
-  table: {
-    minWidth: 650,
-  },
-  chatSection: {
-    width: '100%',
-    height: '80vh'
-  },
-  headBG: {
-      backgroundColor: '#e0e0e0'
-  },
-  borderRight500: {
-      borderRight: '1px solid #e0e0e0'
-  },
-  messageArea: {
-    height: '70vh',
-    overflowY: 'auto'
-  }
+    chatSection: {
+        marginTop: '-145px',
+        paddingTop: '50px',
+        width: '130%',
+        height: 'auto'
+    },
+    gridPadding: {
+        paddingLeft: 50,
+        paddingRight: 50,
+    },
+    messageArea: {
+        height: '70vh',
+        overflowY: 'auto'
+    },
+
 });
 
 const ChatPandora = () => {
-  const classes = useStyles();
+    const classes = useStyles();
 
-  return (
-      <div>
-        {/* <Grid container>
-            <Grid item xs={12} >
-                <Typography variant="h5" className="header-message">Chat</Typography>
-            </Grid>
-        </Grid> */}
-        {/* <Grid container component={Paper} className={classes.chatSection}>
-            <Grid item xs={3} className={classes.borderRight500}> */}
-                {/* <List>
-                    <ListItem button key="RemySharp">
-                        <ListItemIcon>
-                        <Avatar alt="Remy Sharp" src="https://material-ui.com/static/images/avatar/1.jpg" />
-                        </ListItemIcon>
-                        <ListItemText primary="John Wick"></ListItemText>
-                    </ListItem>
-                </List>
-                <Divider />
-                <Grid item xs={12} style={{padding: '10px'}}>
-                    <TextField id="outlined-basic-email" label="Search" variant="outlined" fullWidth />
-                </Grid>
-                <Divider /> */}
-                {/* <List>
-                    <ListItem button key="RemySharp">
-                        <ListItemIcon>
-                            <Avatar alt="Remy Sharp" src="https://material-ui.com/static/images/avatar/1.jpg" />
-                        </ListItemIcon>
-                        <ListItemText primary="Remy Sharp">Remy Sharp</ListItemText>
-                        <ListItemText secondary="online" align="right"></ListItemText>
-                    </ListItem>
-                    <ListItem button key="Alice">
-                        <ListItemIcon>
-                            <Avatar alt="Alice" src="https://material-ui.com/static/images/avatar/3.jpg" />
-                        </ListItemIcon>
-                        <ListItemText primary="Alice">Alice</ListItemText>
-                    </ListItem>
-                    <ListItem button key="CindyBaker">
-                        <ListItemIcon>
-                            <Avatar alt="Cindy Baker" src="https://material-ui.com/static/images/avatar/2.jpg" />
-                        </ListItemIcon>
-                        <ListItemText primary="Cindy Baker">Cindy Baker</ListItemText>
-                    </ListItem>
-                </List> */}
-           {/*  </Grid> */}
-            <Grid item xs={9}>
+    return (
+        <Grid container component={Paper} className={classes.chatSection}>
+            <Grid item xs={12} className={classes.gridPadding}>
                 <List className={classes.messageArea}>
                     <ListItem key="1">
                         <Grid container>
@@ -115,17 +71,17 @@ const ChatPandora = () => {
                     </ListItem>
                 </List>
                 <Divider />
-                <Grid container style={{padding: '20px'}}>
+                <Grid container style={{ padding: '20px' }}>
                     <Grid item xs={11}>
-                        <TextField id="outlined-basic-email" label="Type Something" fullWidth />
+                        <TextField id="outlined-basic-email" label="Digite sua mensagem" fullWidth />
                     </Grid>
                     <Grid xs={1} align="right">
-                        <Fab color="primary" aria-label="add"><SendIcon /></Fab>
+                        <Fab size="medium" color="primary" aria-label="add"><SendIcon /></Fab>
                     </Grid>
                 </Grid>
             </Grid>
-      </div>
-  );
+        </Grid>
+    );
 }
 
 export default ChatPandora;
