@@ -33,10 +33,10 @@ export function montarUsuario(key, value, changeUser) {
         changeUser.email = value
     }
     if (key === "cnpj") {
-        changeUser.cnpj = value
+        changeUser.cnpj = value.replace(/[^\d]+/g,'')
     }
     if (key === "cpf") {
-        changeUser.cpf = value
+        changeUser.cpf = value.replace(/[^\d]+/g,'')
     }
     if (key === "telefone") {
         changeUser.telefone = value
