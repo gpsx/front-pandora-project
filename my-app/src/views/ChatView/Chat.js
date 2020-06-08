@@ -1,35 +1,59 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
 import Divider from '@material-ui/core/Divider';
 import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import Avatar from '@material-ui/core/Avatar';
 import Fab from '@material-ui/core/Fab';
 import SendIcon from '@material-ui/icons/Send';
+import ListSubheader from '@material-ui/core/ListSubheader';
 
 const useStyles = makeStyles({
     chatSection: {
-        marginTop: '-145px',
-        paddingTop: '50px',
+        marginTop: '-0.5%',
+        paddingTop: '10px',
         width: '130%',
         height: 'auto'
     },
     gridPadding: {
-        paddingLeft: 50,
-        paddingRight: 50,
+        paddingLeft: 20,
+        paddingRight: 20,
     },
     messageArea: {
-        height: '70vh',
+        height: '77.5vh',
         overflowY: 'auto'
     },
+    titulo: {
+        color: 'black',
+        fontFamily: 'Roboto',
+        fontStyle: 'normal',
+        fontSize: '17px',
+        fontWeight: '200',
+    },
 
+});
+
+const theme = createMuiTheme({
+    overrides: {
+        MuiFab: {
+            secondary: {
+                backgroundColor: "#0B3C5D",
+                "&:hover": {
+                    backgroundColor: "#696969"
+                }
+            }
+        },
+        MuiInput: {
+            underline: {
+                "&:after": {
+                    borderBottom: "2px solid #0B3C5D",
+                }
+            }
+        }
+    }
 });
 
 const ChatPandora = () => {
@@ -38,7 +62,17 @@ const ChatPandora = () => {
     return (
         <Grid container component={Paper} className={classes.chatSection}>
             <Grid item xs={12} className={classes.gridPadding}>
-                <List className={classes.messageArea}>
+                <List
+                    component="nav"
+                    aria-labelledby="nested-list-subheader"
+                    subheader={
+                        <ListSubheader component="div" className={classes.titulo} id="nested-list-subheader">
+                            Fulano de tal
+                  </ListSubheader>
+                    }
+                    className={classes.messageArea}>
+                    <Divider component="li" />
+                    <br />
                     <ListItem key="1">
                         <Grid container>
                             <Grid item xs={12}>
@@ -73,10 +107,14 @@ const ChatPandora = () => {
                 <Divider />
                 <Grid container style={{ padding: '20px' }}>
                     <Grid item xs={11}>
-                        <TextField id="outlined-basic-email" label="Digite sua mensagem" fullWidth />
+                        <ThemeProvider theme={theme}>
+                            <TextField id="outlined-basic-email" label="Digite sua mensagem" fullWidth />
+                        </ThemeProvider>
                     </Grid>
                     <Grid xs={1} align="right">
-                        <Fab size="medium" color="primary" aria-label="add"><SendIcon /></Fab>
+                        <ThemeProvider theme={theme}>
+                            <Fab size="medium" color="secondary" aria-label="add"><SendIcon /></Fab>
+                        </ThemeProvider>
                     </Grid>
                 </Grid>
             </Grid>

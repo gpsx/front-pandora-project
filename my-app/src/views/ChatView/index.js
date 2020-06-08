@@ -2,8 +2,7 @@ import React from 'react';
 import { withStyles, Grid, Paper } from '@material-ui/core';
 import MenuPrestador from '../../components/MenuPrestador';
 import Container from '../../components/Container';
-import Typography from '../../components/Typography';
-import Teste from './Teste';
+import Mensagens from './Mensagens';
 import ChatPandora from './Chat';
 
 const styles = (theme) => ({
@@ -17,18 +16,19 @@ const styles = (theme) => ({
         marginLeft: '23%'
     },
     h1: {
-        marginLeft: '2px',
-        lineHeight: '25px',
+        marginLeft: '-15px',
+        lineHeight: '5px',
         fontSize: '14px',
     },
     container: {
         display: 'flex',
     },
+    
     paperChat: {
         width: '80%'
     },
     paper: {
-        width: "40%",
+        width: "30%",
     }
 });
 
@@ -51,11 +51,13 @@ function Chat(props) {
                         alignItems="center"
                         spacing={4}
                     >
+                        
                         <Paper className={classes.paper}>
                             <Grid item xs >
-                                <Teste />
+                                <Mensagens />
                             </Grid>
                         </Paper>
+                    
                         <Grid item xs>
                             <Paper className={classes.paperChat}>
                                 <ChatPandora />
