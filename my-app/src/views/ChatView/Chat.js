@@ -5,12 +5,11 @@ import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
 import TextField from '@material-ui/core/TextField';
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
 import Fab from '@material-ui/core/Fab';
 import SendIcon from '@material-ui/icons/Send';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import io from "socket.io-client";
+import ListaConversa from './ListaConversa'
 
 const socket = io("http://localhost:4001");
 
@@ -42,11 +41,32 @@ class ChatPandora extends React.Component {
             {
                 Person: "",
                 messages: [],
-                
+
             }
         ],
     }
-    setListener = () => socket.on("new-msg", (data)=>{
+
+    //isso tem que estar no state, ser atualizado pelo set listener
+    conversa = [
+        {
+            id: "1",
+            mensagem: "Hey man, What's up ?",
+            hora: "09:30"
+        },
+        {
+            id: "2",
+            mensagem: "Hey, Iam Good! What about you ?",
+            hora: "09:32"
+        },
+        {
+            id: "1",
+            mensagem: "Cool. i am good, let's catch up!",
+            hora: "09:35"
+        },
+    ]
+
+
+    setListener = () => socket.on("new-msg", (data) => {
         console.log(data);
     })
     sendMessage = () => {
@@ -55,7 +75,7 @@ class ChatPandora extends React.Component {
         socket.emit("msg", this.state.currentMessage)
     }
 
-    render () {
+    render() {
 
         const classes = {
             chatSection: {
@@ -79,7 +99,7 @@ class ChatPandora extends React.Component {
                 fontSize: '17px',
                 fontWeight: '200',
             },
-        
+
         };
 
         return (
@@ -91,51 +111,22 @@ class ChatPandora extends React.Component {
                         subheader={
                             <ListSubheader component="div" className={classes.titulo} id="nested-list-subheader">
                                 Fulano de tal
-                    </ListSubheader>
+                             </ListSubheader>
                         }
                         className={classes.messageArea}>
                         <Divider component="li" />
                         <br />
-                        <ListItem key="1">
-                            <Grid container>
-                                <Grid item xs={12}>
-                                    <ListItemText align="right" primary="Hey man, What's up ?"></ListItemText>
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <ListItemText align="right" secondary="09:30"></ListItemText>
-                                </Grid>
-                            </Grid>
-                        </ListItem>
-                        <ListItem key="2">
-                            <Grid container>
-                                <Grid item xs={12}>
-                                    <ListItemText align="left" primary="Hey, Iam Good! What about you ?"></ListItemText>
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <ListItemText align="left" secondary="09:31"></ListItemText>
-                                </Grid>
-                            </Grid>
-                        </ListItem>
-                        <ListItem key="3">
-                            <Grid container>
-                                <Grid item xs={12}>
-                                    <ListItemText align="right" primary="Cool. i am good, let's catch up!"></ListItemText>
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <ListItemText align="right" secondary="10:30"></ListItemText>
-                                </Grid>
-                            </Grid>
-                        </ListItem>
+                        <ListaConversa conversas={this.conversa} />
                     </List>
                     <Divider />
                     <Grid container style={{ padding: '20px' }}>
                         <Grid item xs={11}>
                             <ThemeProvider theme={theme}>
-                                <TextField 
-                                id="text" 
-                                label="Digite sua mensagem" 
-                                fullWidth  
-                                onChange={e => this.setState({ currentMessage: e.target.value })}/>
+                                <TextField
+                                    id="text"
+                                    label="Digite sua mensagem"
+                                    fullWidth
+                                    onChange={e => this.setState({ currentMessage: e.target.value })} />
                             </ThemeProvider>
                         </Grid>
                         <Grid xs={1} align="right">
