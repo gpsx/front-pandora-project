@@ -14,6 +14,7 @@ import PerfilPrestador from '../views/PerfilPrestadorView/index'
 import MeuServico from '../views/MeuServicoView/index'
 import Avaliacoes from '../views/AvaliacoesView/index'
 import ChangeRegister from '../views/ServicosView/index'
+import Chat from '../views/ChatView/index'
 
 function Routes() {
     return (
@@ -36,10 +37,12 @@ function Routes() {
                 <Route path="/home-prestador" component={PainelPrestador} />
                 <Route path="/my-service" component={MeuServico} />
                 <Route path="/my-rating" component={Avaliacoes} />
+                <Route path="/chat" component={Chat} />
                 {/* O parâmetro ID é opicional */}
                 <Route path="/service/:id?" component={ChangeRegister} />
 
                 <Route path="/" component={Home} />
+                
             </Switch>
         </HashRouter>
 

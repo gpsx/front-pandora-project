@@ -9,7 +9,6 @@ import ImgNicolle from './../../assets/NicolleCruz.jpg'
 import ImgGuilherme from './../../assets/GuilhermeSantos.jpeg'
 import ImgJuliana from './../../assets/JulianaBezerra.JPG'
 
-
 class Testes extends React.Component {
 
     state = {
