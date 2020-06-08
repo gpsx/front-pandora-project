@@ -10,32 +10,32 @@ import Avatar from '@material-ui/core/Avatar';
 const messages = [
   {
     id: 1,
-    primary: 'Brunch this week?',
+    primary: 'Joao',
     secondary: "I'll be in the neighbourhood this week. Let's grab a bite to eat",
     person: '/static/images/avatar/5.jpg',
   },
   {
     id: 2,
-    primary: 'Birthday Gift',
+    primary: 'Maria das dores',
     secondary: `Do you have a suggestion for a good present for John on his work
       anniversary. I am really confused & would love your thoughts on it.`,
     person: '/static/images/avatar/1.jpg',
   },
   {
     id: 3,
-    primary: 'Recipe to try',
+    primary: 'José',
     secondary: 'I am try out this new BBQ recipe, I think this might be amazing',
     person: '/static/images/avatar/2.jpg',
   },
   {
     id: 4,
-    primary: 'Yes!',
+    primary: 'Gabriela',
     secondary: 'I have the tickets to the ReactConf for this year.',
     person: '/static/images/avatar/3.jpg',
   },
   {
     id: 5,
-    primary: "Doctor's Appointment",
+    primary: "Amanda dias",
     secondary: 'My appointment for the doctor was rescheduled for next Saturday.',
     person: '/static/images/avatar/4.jpg',
   },
@@ -78,12 +78,10 @@ export default function Mensagens() {
 
   return (
     <React.Fragment>
-      {/* <Paper className={classes.paperLista}> */}
         <List className={classes.list}>
           {messages.map(({ id, primary, secondary, person }) => (
             <React.Fragment key={id}>
-              {id === 1 && <ListSubheader className={classes.subheader}>Hoje</ListSubheader>}
-              {id === 3 && <ListSubheader className={classes.subheader}>Ontem</ListSubheader>}
+              {id === 1 && <ListSubheader className={classes.subheader}>Pandora Chat</ListSubheader>}
               <ListItem button>
                 <ListItemAvatar>
                   <Avatar alt="Profile Picture" src={person} />
@@ -93,25 +91,6 @@ export default function Mensagens() {
             </React.Fragment>
           ))}
         </List>
-      {/* </Paper> */}
-      {/* <AppBar position="fixed" color="primary" className={classes.appBar}>
-        <Toolbar>
-          <IconButton edge="start" color="inherit" aria-label="open drawer">
-            <MenuIcon />
-          </IconButton>
-          <Fab color="secondary" aria-label="add" className={classes.fabButton}>
-            <AddIcon />
-          </Fab>
-          <div className={classes.grow} />
-          <IconButton color="inherit">
-            <SearchIcon />
-          </IconButton>
-          <IconButton edge="end" color="inherit">
-            <MoreIcon />
-          </IconButton>
-        </Toolbar>
-      </AppBar> */}
-
     </React.Fragment>
   );
 }
