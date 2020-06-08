@@ -20,11 +20,11 @@ const styles = (theme) => ({
   },
 
   container: {
-    marginTop: theme.spacing(0),
-    marginBottom: theme.spacing(0),
+    marginTop: theme.spacing(10),
+    marginBottom: theme.spacing(10),
     position: 'right',
     display: 'flex',
-    flexDirection: 'columm',
+    flexDirection: 'row',
     alignItems: 'center',
   },
 
@@ -66,13 +66,11 @@ function QuemSomos(props) {
     <QuemSomosLayout backgroundClassName={classes.background}>
       <Container className={classes.container}>
          <img style={{ display: 'none' }} src={ImgFundoLogo} alt="increase priority" />
-         <Typography variant="h4" marked="rigth" className={classes.title} component="h2">
-          Quem somos?
-         </Typography>
+         <Typography variant="h4" marked="center" className={classes.title} component="h2">
+          Quem Somos?
+        </Typography>
            <Grid item xs={12} md={6}>
-             <Typography variant="h5" marked="right" className={classes.h5} component='h6'>
-          
-             </Typography>
+             
         </Grid>
             <Grid item xs={12} md={8}>
               <Typography variant="h6" marked="right" className={classes.h6} component='h6'>

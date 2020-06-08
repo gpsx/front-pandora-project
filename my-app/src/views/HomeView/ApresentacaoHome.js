@@ -14,9 +14,8 @@ const styles = (theme) => ({
   },
   button: {
     minWidth: 200,
-    backgroundColor: '#0069d9',
-    color: 'black',
-    '&:hover': {
+    backgroundColor: '#0B3C5D',
+    color:{
       backgroundColor: '#ffff',
       borderColor: '#ffff',
       boxShadow: 'none',

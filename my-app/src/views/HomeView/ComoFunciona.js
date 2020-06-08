@@ -64,7 +64,7 @@ function ComoFunciona(props) {
           Como funciona
         </Typography>
         <div>
-          <Grid container spacing={5}>
+          <Grid container spacing={3}>
             <Grid item xs={12} md={4}>
               <div className={classes.item}>
                 <img

@@ -1,0 +1,140 @@
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
+import Container from '@material-ui/core/Container';
+import Avatar from '@material-ui/core/Avatar';
+
+import ImgSueto from './../../assets/FelipeSueto.jpg'
+import ImgVitoria from './../../assets/VitoriaCristina.jpeg'
+import ImgGiulia from './../../assets/GiuliaMaia.jpeg'
+import ImgNicolle from './../../assets/NicolleCruz.jpg'
+import ImgGuilherme from './../../assets/GuilhermeSantos.jpeg'
+import ImgJuliana from './../../assets/JulianaBezerra.JPG'
+
+
+
+const useStyles = makeStyles((theme) => ({
+  container: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(12, 1fr)',
+    gridGap: theme.spacing(3),
+    root: {
+    minWidth: 275,
+    foto: {
+        display: 'inline-block',
+        width: theme.spacing(14),
+        height: theme.spacing(14),
+    },
+
+  },
+
+  container: {
+    marginTop: theme.spacing(10),
+    marginBottom: theme.spacing(10),
+    position: 'relative',
+    display: 'flex',
+    flexDirection: 'columm',
+    alignItems: 'center',
+  },
+
+  item: {
+        display: 'flex',
+        flexDirection: 'columm',
+        alignItems: 'center',
+        padding: theme.spacing(0, 5),
+      },
+      title: {
+        marginBottom: theme.spacing(8),
+      },
+      image: {
+        height: 70,
+        marginTop: theme.spacing(4),
+        marginBottom: theme.spacing(4),
+
+      },
+      button: {
+        marginTop: theme.spacing(8),
+      },
+
+  divider: {
+    margin: theme.spacing(2, 0),
+  },
+}));
+
+export default function ImgMediaCard() {
+  const classes = useStyles();
+
+  return (
+    <Container className={classes.container}>
+      <div>
+      <Typography variant="subtitle1" gutterBottom>
+      </Typography>
+      <Grid container spacing={9}>
+        <Grid item xs={4}>
+        <Grid item>
+         <div className={classes.item}>
+                  <Avatar src={ImgSueto} className={classes.foto}/>
+                   <Typography variant="h6" align="center">
+                    Felipe Massaru
+                  </Typography>
+                </div>
+          </Grid>
+        </Grid>
+         <Grid item xs={4}>
+        <Grid item>
+         <div className={classes.item}>
+                  <Avatar src={ImgGiulia} className={classes.foto}/>
+                   <Typography variant="h6" align="center">
+                    Felipe Massaru
+                  </Typography>
+                </div>
+          </Grid>
+        </Grid>
+           <Grid item xs={4}>
+        <Grid item>
+         <div className={classes.item}>
+                  <Avatar src={ImgGuilherme} className={classes.foto}/>
+                   <Typography variant="h6" align="center">
+                    Felipe Massaru
+                  </Typography>
+                </div>
+          </Grid>
+        </Grid>
+         <Grid item xs={4}>
+        <Grid item>
+         <div className={classes.item}>
+                  <Avatar src=ImgJuliana className={classes.foto}/>
+                   <Typography variant="h6" align="center">
+                    Felipe Massaru
+                  </Typography>
+                </div>
+          </Grid>
+        </Grid>
+         <Grid item xs={4}>
+        <Grid item>
+         <div className={classes.item}>
+                  <Avatar src={ImgNicolle} className={classes.foto}/>
+                   <Typography variant="h6" align="center">
+                    Felipe Massaru
+                  </Typography>
+                </div>
+          </Grid>
+        </Grid>
+         <Grid item xs={4}>
+        <Grid item>
+         <div className={classes.item}>
+                  <Avatar src={ImgVitoria} className={classes.foto}/>
+                   <Typography variant="h6" align="center">
+                    Felipe Massaru
+                  </Typography>
+                </div>
+          </Grid>
+        </Grid>
+
+         
+        </Grid>
+    </div>
+    </Container>
+  );
+}
