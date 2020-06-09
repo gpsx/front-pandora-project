@@ -16,19 +16,23 @@ const styles = (theme) => ({
         marginLeft: '23%'
     },
     h1: {
-        marginLeft: '-15px',
+        marginLeft: '8px',
+        marginTop:'-2.8%',
         lineHeight: '5px',
         fontSize: '14px',
     },
     container: {
         display: 'flex',
     },
-    
+
     paperChat: {
-        width: '80%'
+        width: '80%',
+        marginTop: '-5%'
     },
     paper: {
         width: "30%",
+        marginLeft: '2%',
+        marginTop: '-3%'
     }
 });
 
@@ -51,21 +55,19 @@ function Chat(props) {
                         alignItems="center"
                         spacing={4}
                     >
-                        
+
                         <Paper className={classes.paper}>
                             <Grid item xs >
                                 <Mensagens />
                             </Grid>
                         </Paper>
-                    
+
                         <Grid item xs>
                             <Paper className={classes.paperChat}>
                                 <ChatPandora />
                             </Paper>
                         </Grid>
-
                     </Grid>
-
                 </Grid>
             </Grid>
         </Container>

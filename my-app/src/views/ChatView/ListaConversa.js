@@ -7,13 +7,13 @@ import Grid from '@material-ui/core/Grid';
 // const idUsuario = LocalStorageService.obterIdUsuario();
 const idUsuario = 1;
 
-export default function ListaConversa({ conversas }) {
+export default function ListaConversa(props) {
 
     const [key, setKey] = useState(1);
 
     return (
         <React.Fragment>
-            {conversas.map(({ id, mensagem, hora }) => (
+            {props.conversas.map(({ id, mensagem, hora }) => (
                 <ListItem key={key}>
                     <Grid container>
                         <Grid item xs={12}>

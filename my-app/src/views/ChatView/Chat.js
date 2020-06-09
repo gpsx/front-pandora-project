@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import { withStyles, createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
@@ -12,6 +12,29 @@ import io from "socket.io-client";
 import ListaConversa from './ListaConversa'
 
 const socket = io("http://localhost:4001");
+
+const styles = (theme) =>({
+    chatSection: {
+        paddingTop: '10px',
+        width: '124%',
+        height: 'auto',
+    },
+    gridPadding: {
+        paddingLeft: 20,
+        paddingRight: 20,
+    },
+    messageArea: {
+        height: '65vh',
+        overflowY: 'auto'
+    },
+    titulo: {
+        color: 'black',
+        fontFamily: 'Roboto',
+        fontStyle: 'normal',
+        fontSize: '17px',
+        fontWeight: '200',
+    }
+});
 
 const theme = createMuiTheme({
     overrides: {
@@ -35,72 +58,66 @@ const theme = createMuiTheme({
 
 class ChatPandora extends React.Component {
 
-    state = {
-        currentMessage: "",
-        conversation: [
-            {
-                Person: "",
-                messages: [],
-
-            }
-        ],
+    constructor(props){
+        super(props)
+        this.state = {
+            empty: "",
+            currentMessage: "",
+            conversation: [
+                {
+                    Person: "",
+                    messages: [],
+    
+                }
+            ],
+            conversa : [
+                {
+                    id: "1",
+                    mensagem: "Hey man, What's up ?",
+                    hora: "09:30"
+                },
+                {
+                    id: "2",
+                    mensagem: "Hey, Iam Good! What about you ?",
+                    hora: "09:32"
+                },
+                {
+                    id: "1",
+                    mensagem: "Cool. i am good, let's catch up!",
+                    hora: "09:35"
+                },
+            ]
+        }
     }
-
+    componentDidMount() {
+        this.setListener()
+    }
     //isso tem que estar no state, ser atualizado pelo set listener
-    conversa = [
-        {
-            id: "1",
-            mensagem: "Hey man, What's up ?",
-            hora: "09:30"
-        },
-        {
-            id: "2",
-            mensagem: "Hey, Iam Good! What about you ?",
-            hora: "09:32"
-        },
-        {
-            id: "1",
-            mensagem: "Cool. i am good, let's catch up!",
-            hora: "09:35"
-        },
-    ]
 
 
     setListener = () => socket.on("new-msg", (data) => {
         console.log(data);
+        let newMessage = {
+            id: "2",
+            mensagem: data,
+            hora: new Date().toLocaleString()
+        }
+        this.setState({conversa: [...this.state.conversa, newMessage]})
     })
     sendMessage = () => {
-        this.setListener()
-        console.log(this.state.currentMessage);
+        let newMessage = {
+            id: "1",
+            mensagem: this.state.currentMessage,
+            hora: new Date().toLocaleString()
+        }
+        this.setState({ currentMessage: "" })
+        this.setState({conversa: [...this.state.conversa, newMessage]})
         socket.emit("msg", this.state.currentMessage)
     }
 
     render() {
 
-        const classes = {
-            chatSection: {
-                marginTop: '-0.5%',
-                paddingTop: '10px',
-                width: '130%',
-                height: 'auto'
-            },
-            gridPadding: {
-                paddingLeft: 20,
-                paddingRight: 20,
-            },
-            messageArea: {
-                height: '77.5vh',
-                overflowY: 'auto'
-            },
-            titulo: {
-                color: 'black',
-                fontFamily: 'Roboto',
-                fontStyle: 'normal',
-                fontSize: '17px',
-                fontWeight: '200',
-            },
-
-        };
+        const { classes } = this.props;
 
         return (
             <Grid container component={Paper} className={classes.chatSection}>
@@ -110,13 +127,13 @@ class ChatPandora extends React.Component {
                         aria-labelledby="nested-list-subheader"
                         subheader={
                             <ListSubheader component="div" className={classes.titulo} id="nested-list-subheader">
-                                Fulano de tal
+                                João
                              </ListSubheader>
                         }
                         className={classes.messageArea}>
                         <Divider component="li" />
                         <br />
-                        <ListaConversa conversas={this.conversa} />
+                        <ListaConversa conversas={this.state.conversa} />
                     </List>
                     <Divider />
                     <Grid container style={{ padding: '20px' }}>
@@ -124,9 +141,11 @@ class ChatPandora extends React.Component {
                             <ThemeProvider theme={theme}>
                                 <TextField
                                     id="text"
+                                    value={this.state.currentMessage}
                                     label="Digite sua mensagem"
                                     fullWidth
-                                    onChange={e => this.setState({ currentMessage: e.target.value })} />
+                                    onChange={e => this.setState({ currentMessage: e.target.value })}
+                                    />
                             </ThemeProvider>
                         </Grid>
                         <Grid xs={1} align="right">
@@ -141,4 +160,4 @@ class ChatPandora extends React.Component {
     }
 }
 
-export default ChatPandora;
+export default withStyles(styles)(ChatPandora);
