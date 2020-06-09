@@ -6,11 +6,12 @@ import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } 
 import Estrelinhas from '../../../components/RatingStars';
 import avaliacoesService from '../../../service/avaliacoesService';
 import solicitacoesService from '../../../service/solicitacoesService'
+import Alerta from '../../../components/Alerta.js'
 
 const styles = (theme) => ({
     button: {
         alignSelf: "flex-end",
-        width: "15%",
+        width: "100px",
         marginRight: '5px',
         backgroundColor: '#0B3C5D',
         '&:hover': {
@@ -41,9 +42,14 @@ function FormDialogAvaliar(props) {
     const [open, setOpen] = React.useState(false);
     const [nota, setNota] = React.useState(0);
     const [feedback, setFeedback] = React.useState('');
+    const [alertOpen, setAlertOpen] = React.useState(false);
 
     const handleClickOpen = () => {
         setOpen(true);
+    };
+
+    const fecharAlerta = () => {
+        setAlertOpen(false)
     };
 
     const handleClose = () => {
@@ -54,20 +60,34 @@ function FormDialogAvaliar(props) {
         setNota(nota);
     };
 
+    const finalizar = () => {
+        solicitacoesService.finalizarSolicitacao(props.id)
+            .then(response => {
+                console.log(response);
+                handleClickOpen();
+            }).catch(err => {
+                console.log(err)
+            })
+
+    }
+
     const avaliar = () => {
         avaliacoesService.avaliar({
             "nota": nota,
             "avaliacao": feedback,
             "idSolicitacao": props.id
-        }).then(
-            solicitacoesService.finalizarSolicitacao(props.id)
-                .then(handleClose()))
-                .then(window.location.reload())
+        }).then(resp => {
+            handleClose();
+            window.location.reload();
+        }).catch(err => {
+            console.log(err)
+            handleClose();
+        });
     };
 
     return (
         <div>
-            <Button size="small" variant="contained" color="primary" className={classes.button} onClick={handleClickOpen}>
+            <Button size="small" variant="contained" color="primary" className={classes.button} onClick={finalizar}>
                 FINALIZAR
             </Button>
 
@@ -115,6 +135,8 @@ function FormDialogAvaliar(props) {
 
                 </DialogActions>
             </Dialog>
+            <Alerta message="Não foi possível fazer a avaliação!"
+                severity="error" open={alertOpen} close={fecharAlerta.bind(this)} />
         </div>
     );
 }

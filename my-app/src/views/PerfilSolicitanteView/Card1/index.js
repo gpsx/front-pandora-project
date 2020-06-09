@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { withStyles, Grid, Paper } from '@material-ui/core';
 import EditImage from './EditImage';
 import Alteracoes from '../../DialogView/Alteracoes/index';
 import imageService from '../../../service/image/imageService'
+import alteracoesService from '../../../service/alteracoesService'
+import Backdrop from '../../../components/Backdrop'
 import Informacoes from './Informacoes';
+import localStorage from '../../../service/localStorage';
 
 const styles = (theme) => ({
     card: {
@@ -47,26 +50,41 @@ const styles = (theme) => ({
 });
 
 function Card1(props) {
+    const id = localStorage.obterIdUsuario();
+    const [openBackdrop, setOpenBackdrop] = React.useState(false);
 
     const { classes } = props;
 
-    function changeImage(imagem) {
-        let imgUrl = null;
+    const handleBackdrop = () => {
+        setOpenBackdrop(!openBackdrop);
+    };
+
+    function uploadImage(imagem) {
+        setOpenBackdrop(true);
         let data = new FormData();
         data.append("image", imagem[0]);
-        imageService.uploadImagem(data)
-            .then(response => {
-                imgUrl = response.data.data.link;
-                console.log('imagem carregada')
-                //Aqui chama o mudar imagem
+        imageService.upload(data)
+            .then(res => {
+                let imagem = res.data.data.link;
+                changeImage(imagem);
             }).catch(err => {
-                console.log(err)
+                console.log('erro ao upload da imagem')
+            })
+    }
+
+    function changeImage(imagem) {
+        const alteracao = { "imagem": imagem }
+        alteracoesService.imgSolicitante
+            (alteracao, id)
+            .then(response => {
+                setOpenBackdrop(false);
             })
     }
 
 
     return (
         <Paper className={classes.card}>
+            <Backdrop open={openBackdrop} />
             <Grid container direction="row"
                 justify="space-evenly"
                 alignItems="center"
@@ -74,7 +92,7 @@ function Card1(props) {
             >
                 <Grid item>
                     <div className={classes.avatar}>
-                        <EditImage changeImage={changeImage.bind(this)} />
+                        <EditImage changeImage={uploadImage.bind(this)} />
                     </div>
                     <Informacoes />
                 </Grid>

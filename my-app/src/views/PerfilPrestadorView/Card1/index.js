@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles, Grid, Paper, Link } from '@material-ui/core';
 import Portal from '@material-ui/core/Portal';
 import Alteracoes from '../../DialogView/Alteracoes/index';
@@ -64,12 +64,13 @@ const useStyles = makeStyles((theme) => ({
 
 function Card1(props) {
     const id = localStorage.obterIdUsuario();
-    const tipo = localStorage.getUserType();
-
-    const classes = useStyles();
     const [show, setShow] = React.useState(false);
     const [openBackdrop, setOpenBackdrop] = React.useState(false);
     const portalRef = React.useRef();
+
+    const handleBackdrop = () => {
+        setOpenBackdrop(!openBackdrop);
+    };
 
     const handleClick = () => {
         setShow(!show);
@@ -77,9 +78,10 @@ function Card1(props) {
 
     useEffect(() => {
         handleClick();
-    }, [] );
+    }, []);
 
     function uploadImage(imagem) {
+        handleBackdrop();
         let data = new FormData();
         data.append("image", imagem[0]);
         imageService.upload(data)
@@ -91,18 +93,19 @@ function Card1(props) {
 
     function changeImage(imagem) {
         const alteracao = { "imagem": imagem }
-        if (tipo === 'prestador') {
-            alteracoesService.imgPrestador
-                (alteracao, id)
-        } else {
-            alteracoesService.imgSolicitante
-                (alteracao, id)
-        }
+        alteracoesService.imgPrestador
+            (alteracao, id)
+            .then(response => {
+                handleBackdrop();
+            })
     }
 
     return (
 
         <Paper style={card}>
+
+            <Backdrop open={openBackdrop} />
+
             <Grid container direction="row"
                 justify="space-evenly"
                 alignItems="center"

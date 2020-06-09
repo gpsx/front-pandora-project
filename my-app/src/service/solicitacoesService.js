@@ -37,7 +37,7 @@ module.exports = {
     },
 
     finalizarSolicitacao: async (id) => {
-        return await api.put(`${url}/atualizar_solicitacao/${id}`, { "status": "fechado" })
+        return await api.put(`${url}/atualizar_solicitacao/${id}`, { "status": "FECHADO" })
     },
 
 }
