@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import { withStyles, createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
@@ -12,6 +12,29 @@ import io from "socket.io-client";
 import ListaConversa from './ListaConversa'
 
 const socket = io("http://localhost:4001");
+
+const styles = (theme) =>({
+    chatSection: {
+        paddingTop: '10px',
+        width: '124%',
+        height: 'auto',
+    },
+    gridPadding: {
+        paddingLeft: 20,
+        paddingRight: 20,
+    },
+    messageArea: {
+        height: '65vh',
+        overflowY: 'auto'
+    },
+    titulo: {
+        color: 'black',
+        fontFamily: 'Roboto',
+        fontStyle: 'normal',
+        fontSize: '17px',
+        fontWeight: '200',
+    }
+});
 
 const theme = createMuiTheme({
     overrides: {
@@ -94,29 +117,7 @@ class ChatPandora extends React.Component {
 
     render() {
 
-        const classes = {
-            chatSection: {
-                marginTop: '-0.5%',
-                paddingTop: '10px',
-                width: '130%',
-                height: 'auto'
-            },
-            gridPadding: {
-                paddingLeft: 20,
-                paddingRight: 20,
-            },
-            messageArea: {
-                height: '77.5vh',
-                overflowY: 'auto'
-            },
-            titulo: {
-                color: 'black',
-                fontFamily: 'Roboto',
-                fontStyle: 'normal',
-                fontSize: '17px',
-                fontWeight: '200',
-            }
-        };
+        const { classes } = this.props;
 
         return (
             <Grid container component={Paper} className={classes.chatSection}>
@@ -143,7 +144,8 @@ class ChatPandora extends React.Component {
                                     value={this.state.currentMessage}
                                     label="Digite sua mensagem"
                                     fullWidth
-                                    onChange={e => this.setState({ currentMessage: e.target.value })} />
+                                    onChange={e => this.setState({ currentMessage: e.target.value })}
+                                    />
                             </ThemeProvider>
                         </Grid>
                         <Grid xs={1} align="right">
@@ -158,4 +160,4 @@ class ChatPandora extends React.Component {
     }
 }
 
-export default ChatPandora;
+export default withStyles(styles)(ChatPandora);

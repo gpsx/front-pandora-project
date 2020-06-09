@@ -39,6 +39,12 @@ const messages = [
     secondary: 'My appointment for the doctor was rescheduled for next Saturday.',
     person: '/static/images/avatar/4.jpg',
   },
+  {
+    id: 5,
+    primary: "Amanda dias",
+    secondary: 'My appointment for the doctor was rescheduled for next Saturday.',
+    person: '/static/images/avatar/4.jpg',
+  },
   
 ];
 
@@ -46,15 +52,14 @@ const useStyles = makeStyles((theme) => ({
   text: {
     padding: theme.spacing(2, 2, 0),
   },
-  paperLista: {
-    width: '80%',
-    height:'10px'
-  },
   list: {
-    marginBottom: theme.spacing(2),
+    height: '82vh',
+    overflowY: 'auto'
   },
   subheader: {
     backgroundColor: theme.palette.background.paper,
+    height:'10%'
+
   },
   appBar: {
     top: 'auto',
@@ -81,7 +86,7 @@ export default function Mensagens() {
         <List className={classes.list}>
           {messages.map(({ id, primary, secondary, person }) => (
             <React.Fragment key={id}>
-              {id === 1 && <ListSubheader className={classes.subheader}>Pandora Chat</ListSubheader>}
+              {id === 1 }
               <ListItem button>
                 <ListItemAvatar>
                   <Avatar alt="Profile Picture" src={person} />
