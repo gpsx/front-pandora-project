@@ -4,7 +4,9 @@ import ApresentacaoHome from './ApresentacaoHome.js'
 import ComoFunciona from './ComoFunciona'
 import QuemSomos from './QuemSomos'
 import Cards from './Card'
-import Time from './Time'
+import Equipe from './Equipe'
+import FaleConosco from './FaleConosco'
+import Footer from '../../components/Footer'
 
 function HomeView() {
     return (
@@ -14,7 +16,9 @@ function HomeView() {
             <ComoFunciona />
             <QuemSomos />
             <Cards />
-            <Time />
+            <Equipe />
+            <FaleConosco />
+            <Footer/>
         </>
     );
 }

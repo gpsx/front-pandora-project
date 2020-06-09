@@ -44,9 +44,6 @@ const styles = (theme) => ({
     position: 'absolute',
     top: -180,
   },
-  button: {
-    marginTop: theme.spacing(8),
-  },
 });
 
 function ComoFunciona(props) {

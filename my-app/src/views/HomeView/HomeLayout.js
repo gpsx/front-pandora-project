@@ -6,7 +6,8 @@ import Container from '@material-ui/core/Container';
 
 const styles = (theme) => ({
   root: {
-    marginTop: '75px',
+    overflow:'hidden',
+    marginTop: '64px',
     color: theme.palette.common.white,
     position: 'relative',
     display: 'flex',

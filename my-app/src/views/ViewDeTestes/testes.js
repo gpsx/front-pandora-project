@@ -7,7 +7,7 @@ import ImgVitoria from './../../assets/VitoriaCristina.jpeg'
 import ImgGiulia from './../../assets/GiuliaMaia.jpeg'
 import ImgNicolle from './../../assets/NicolleCruz.jpg'
 import ImgGuilherme from './../../assets/GuilhermeSantos.jpeg'
-import ImgJuliana from './../../assets/JulianaBezerra.JPG'
+import ImgJuliana from './../../assets/JulianaBezerra.jpeg'
 
 class Testes extends React.Component {
 
