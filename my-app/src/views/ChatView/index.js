@@ -41,9 +41,6 @@ function Chat(props) {
             <MenuPrestador />
             <Grid container direction="column" justify="flex-start" spacing={3}>
                 <Grid item>
-                    <div className={classes.h1}>Pandora Chat</div>
-                </Grid>
-                <Grid item>
                     <Grid container
                         direction="row"
                         justify="center"
@@ -51,7 +48,6 @@ function Chat(props) {
                         alignItems="center"
                         spacing={4}
                     >
-                        
                         <Paper className={classes.paper}>
                             <Grid item xs >
                                 <Mensagens />

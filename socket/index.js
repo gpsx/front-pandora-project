@@ -7,7 +7,7 @@ io.on("connection", function(socket) {
     
     socket.on("msg", function(data) {
         console.log(data)
-        socket.emit("new-msg", data)
+        socket.broadcast.emit("new-msg", data)
     });
 });
 

@@ -35,43 +35,60 @@ const theme = createMuiTheme({
 
 class ChatPandora extends React.Component {
 
-    state = {
-        currentMessage: "",
-        conversation: [
-            {
-                Person: "",
-                messages: [],
-
-            }
-        ],
+    constructor(props){
+        super(props)
+        this.state = {
+            empty: "",
+            currentMessage: "",
+            conversation: [
+                {
+                    Person: "",
+                    messages: [],
+    
+                }
+            ],
+            conversa : [
+                {
+                    id: "1",
+                    mensagem: "Hey man, What's up ?",
+                    hora: "09:30"
+                },
+                {
+                    id: "2",
+                    mensagem: "Hey, Iam Good! What about you ?",
+                    hora: "09:32"
+                },
+                {
+                    id: "1",
+                    mensagem: "Cool. i am good, let's catch up!",
+                    hora: "09:35"
+                },
+            ]
+        }
     }
-
+    componentDidMount() {
+        this.setListener()
+    }
     //isso tem que estar no state, ser atualizado pelo set listener
-    conversa = [
-        {
-            id: "1",
-            mensagem: "Hey man, What's up ?",
-            hora: "09:30"
-        },
-        {
-            id: "2",
-            mensagem: "Hey, Iam Good! What about you ?",
-            hora: "09:32"
-        },
-        {
-            id: "1",
-            mensagem: "Cool. i am good, let's catch up!",
-            hora: "09:35"
-        },
-    ]
 
 
     setListener = () => socket.on("new-msg", (data) => {
         console.log(data);
+        let newMessage = {
+            id: "2",
+            mensagem: data,
+            hora: new Date().toLocaleString()
+        }
+        this.setState({conversa: [...this.state.conversa, newMessage]})
     })
     sendMessage = () => {
-        this.setListener()
-        console.log(this.state.currentMessage);
+        let newMessage = {
+            id: "1",
+            mensagem: this.state.currentMessage,
+            hora: new Date().toLocaleString()
+        }
+        this.setState({ currentMessage: "" })
+        this.setState({conversa: [...this.state.conversa, newMessage]})
         socket.emit("msg", this.state.currentMessage)
     }
 
@@ -98,8 +115,7 @@ class ChatPandora extends React.Component {
                 fontStyle: 'normal',
                 fontSize: '17px',
                 fontWeight: '200',
-            },
-
+            }
         };
 
         return (
@@ -110,13 +126,13 @@ class ChatPandora extends React.Component {
                         aria-labelledby="nested-list-subheader"
                         subheader={
                             <ListSubheader component="div" className={classes.titulo} id="nested-list-subheader">
-                                Fulano de tal
+                                João
                              </ListSubheader>
                         }
                         className={classes.messageArea}>
                         <Divider component="li" />
                         <br />
-                        <ListaConversa conversas={this.conversa} />
+                        <ListaConversa conversas={this.state.conversa} />
                     </List>
                     <Divider />
                     <Grid container style={{ padding: '20px' }}>
@@ -124,6 +140,7 @@ class ChatPandora extends React.Component {
                             <ThemeProvider theme={theme}>
                                 <TextField
                                     id="text"
+                                    value={this.state.currentMessage}
                                     label="Digite sua mensagem"
                                     fullWidth
                                     onChange={e => this.setState({ currentMessage: e.target.value })} />
