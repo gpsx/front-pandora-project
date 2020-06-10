@@ -9,6 +9,7 @@ import service from '../../../service/userService'
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import { validarUsuario } from '../../../utils/validadores'
+import Backdrop from '../../../components/Backdrop'
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -53,18 +54,13 @@ class SolicitanteStepper extends React.Component {
       senhaRepeticao: '',
     },
     userId: '',
-    endereco: {
-      rua: '',
-      numero: '',
-      complemento: '',
-      cep: '',
-      bairro: '',
-    },
+    endereco: {},
     alert: {
       open: false,
       mensagem: '',
       severity: '',
-    }
+    },
+    backdrop: false,
   };
 
   globalChanges(key, value) {
@@ -94,23 +90,12 @@ class SolicitanteStepper extends React.Component {
   }
 
   globalChangesEndereco(key, value) {
-    let changeAdress = this.state.endereco;
-    if (key === "rua") {
-      changeAdress.rua = value;
+    if (key === "erro") {
+      this.errorMessage(value)
     }
-    if (key === "numero") {
-      changeAdress.numero = value;
+    if (key === "endereco") {
+      this.state.endereco = value;
     }
-    if (key === "complemento") {
-      changeAdress.complemento = value;
-    }
-    if (key === "cep") {
-      changeAdress.cep = value;
-    }
-    if (key === "bairro") {
-      changeAdress.bairro = value;
-    }
-    this.setState({ endereco: changeAdress })
   }
 
   getStepContent = (step) => {
@@ -133,6 +118,7 @@ class SolicitanteStepper extends React.Component {
       let erros = validarUsuario(this.state.usuario);
 
       if (erros.length === 0) {
+        this.setState({backdrop: true});
         let novoUsuario = {
           nome: this.state.usuario.nome,
           senha: this.state.usuario.senha,
@@ -148,6 +134,7 @@ class SolicitanteStepper extends React.Component {
         }
         service.registerSolicitante(novoUsuario)
           .then(response => {
+            this.setState({backdrop: false});
             this.sucessMessage();
             console.log(response.data)
             this.setState({
@@ -156,6 +143,7 @@ class SolicitanteStepper extends React.Component {
             });
 
           }).catch(erro => {
+            this.setState({backdrop: false});
             this.errorMessage(erro.response.data)
             console.log(erro.response.data)
           })
@@ -165,8 +153,9 @@ class SolicitanteStepper extends React.Component {
           this.errorMessage(erro)
         });
       }
-      //Enviando serviço de cadastro de endereço
+      // Enviando serviço de cadastro de endereço
     } else if (activeStep === 1) {
+      this.setState({backdrop: true});
       service.registerEndereco({
         rua: this.state.endereco.rua,
         numero: this.state.endereco.numero,
@@ -176,6 +165,7 @@ class SolicitanteStepper extends React.Component {
         usuario: this.state.userId
 
       }).then(response => {
+        this.setState({backdrop: false});
         this.sucessMessage();
         console.log(response.data)
         this.setState({
@@ -183,8 +173,8 @@ class SolicitanteStepper extends React.Component {
         });
 
       }).catch(erro => {
-        this.errorMessage(erro.response.data)
-        console.log(erro.response.data)
+        this.setState({backdrop: false});
+        this.errorMessage("Não foi possível cadastrar endereço")
       })
     }
 
@@ -240,6 +230,7 @@ class SolicitanteStepper extends React.Component {
 
     return (
       <div>
+        <Backdrop open={this.state.backdrop}/>
         <Stepper activeStep={activeStep} connector={<QontoConnector />}>
           {steps.map((label) => {
             const props = {};

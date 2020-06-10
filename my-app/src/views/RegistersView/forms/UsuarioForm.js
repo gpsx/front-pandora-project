@@ -63,13 +63,13 @@ class SolicitanteForm extends React.Component {
 
                 <Grid item>
                     <h1 style={h1}>Senha</h1>
-                    <Input style={input}
+                    <Input style={input} type="password"
                         onChange={(e) => { this.props.globalChanges("senha", e.target.value) }} />
                 </Grid>
 
                 <Grid item>
                     <h1 style={h1}>Confirmar senha</h1>
-                    <Input style={input}
+                    <Input style={input} type="password"
                         onChange={(e) => { this.props.globalChanges("senhaRepeticao", e.target.value) }} />
                 </Grid>
 

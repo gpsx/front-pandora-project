@@ -1,10 +1,9 @@
-import {
-    fade,
-    withStyles,
-} from '@material-ui/core/styles';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { fade, withStyles } from '@material-ui/core/styles';
 import InputBase from '@material-ui/core/InputBase';
 
-export default withStyles((theme) => ({
+const styles = ((theme) => ({
     root: {
         'label + &': {
             marginTop: theme.spacing(3),
@@ -22,5 +21,22 @@ export default withStyles((theme) => ({
             boxShadow: `${fade('#328CC1', 0.25)} 0 0 0 0.1rem`,
             borderColor: '#328CC1',
         },
+        '&:disabled': {
+            backgroundColor: '#d3d3d3',
+        },
     },
-}))(InputBase);
+}));
+
+function Input(props) {
+    const { children, ...other } = props;
+    return (
+        <InputBase {...other}>
+            {children}
+        </InputBase>
+    );
+}
+
+Input.propTypes = {
+    children: PropTypes.node
+};
+export default withStyles(styles)(Input);

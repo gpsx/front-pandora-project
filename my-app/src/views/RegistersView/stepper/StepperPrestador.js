@@ -12,6 +12,7 @@ import servicesService from './../../../service/servicesService'
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import { validarUsuario, montarUsuario } from '../../../utils/validadores'
+import Backdrop from '../../../components/Backdrop'
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -66,7 +67,9 @@ class StepperPrestador extends React.Component {
       descricao: '',
       idCategoria: '',
       imagem: null,
-    }
+    },
+    backdrop: false,
+
   };
 
   globalChanges(key, value) {
@@ -111,6 +114,7 @@ class StepperPrestador extends React.Component {
       let erros = validarUsuario(this.state.usuario);
 
       if (erros.length === 0) {
+        this.setState({ backdrop: true });
         // Enviando serciço de cadastro de solicitante
         let novoUsuario = {
           nome: this.state.usuario.nome,
@@ -127,6 +131,7 @@ class StepperPrestador extends React.Component {
         }
         service.registerPrestador(novoUsuario)
           .then(response => {
+            this.setState({ backdrop: false });
             this.sucessMessage("Usuário Cadastrado");
             console.log(response.data)
             this.setState({
@@ -135,6 +140,7 @@ class StepperPrestador extends React.Component {
             });
 
           }).catch(erro => {
+            this.setState({ backdrop: false });
             this.errorMessage(erro.response.data)
           })
 
@@ -145,6 +151,7 @@ class StepperPrestador extends React.Component {
       }
       //Enviando serviço cadastro de serviço
     } else if (activeStep === 1) {
+      this.setState({ backdrop: true });
       let img = this.state.service.imagem;
       let imgUrl = null;
 
@@ -166,7 +173,7 @@ class StepperPrestador extends React.Component {
     };
 
   }
-  
+
   cadastrarServico(imgUrl) {
     servicesService.cadastrar({
       descricao: this.state.service.descricao,
@@ -175,12 +182,14 @@ class StepperPrestador extends React.Component {
       categoriaServico: this.state.service.idCategoria,
       imagem: imgUrl
     }).then(response => {
+      this.setState({ backdrop: false });
       this.sucessMessage("Cadastro Finalizado!")
       console.log(response.data);
       this.setState({
         activeStep: this.state.activeStep + 1
       });
     }).catch(err => {
+      this.setState({ backdrop: false });
       console.log(err)
     })
   }
@@ -235,6 +244,7 @@ class StepperPrestador extends React.Component {
 
     return (
       <div>
+        <Backdrop open={this.state.backdrop} />
         <Stepper activeStep={activeStep} connector={<QontoConnector />}>
           {steps.map((label) => {
             const props = {};
