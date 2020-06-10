@@ -66,11 +66,11 @@ function FaleConosco(props) {
              saber como poderíamos deixar o Pandora para você.
 
             <br/><br/>
-            E-mail: pandora.suporte@gmail.com
+            E-mail: projetopandora.help@gmail.com
             <br/>
             Facebook: Projeto Pandora
             <br/>
-            Telefone: (11) 98745-5000
+            Telefone: (11) 94287-7049
             
           </Typography>
     </FaleConoscoLayout>
