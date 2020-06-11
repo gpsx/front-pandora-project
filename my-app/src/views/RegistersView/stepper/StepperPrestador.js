@@ -8,6 +8,7 @@ import { QontoConnector, QontoStepIcon } from './QontoStepIcon';
 import service from '../../../service/userService'
 import imageService from '../../../service/image/imageService'
 import otherService from './../../../service/otherService'
+import emailService from './../../../service/emailService'
 import servicesService from './../../../service/servicesService'
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
@@ -115,37 +116,51 @@ class StepperPrestador extends React.Component {
 
       if (erros.length === 0) {
         this.setState({ backdrop: true });
-        // Enviando serciço de cadastro de solicitante
-        let novoUsuario = {
-          nome: this.state.usuario.nome,
-          senha: this.state.usuario.senha,
-          email: this.state.usuario.email,
-          cpf: this.state.usuario.cpf,
-          telefone: this.state.usuario.telefone,
-        }
-        if (!(!this.state.usuario.cnpj)) {
-          novoUsuario = {
-            ...novoUsuario,
-            cnpj: this.state.usuario.cnpj,
-          }
-        }
-        service.registerPrestador(novoUsuario)
+        //validar e-mail
+        emailService.validarEmail({ "email": this.state.usuario.email })
           .then(response => {
-            this.setState({ backdrop: false });
-            this.sucessMessage("Usuário Cadastrado");
-            console.log(response.data)
-            this.setState({
-              activeStep: activeStep + 1,
-              userId: response.data.id
-            });
+            let deuCerto = response.data.mx_found;
+            console.log(deuCerto)
+            if (!deuCerto) {
+              this.setState({ backdrop: false });
+              this.errorMessage("O e-mail não é um e-mail válido")
+            } else {
+              // Enviando serviço de cadastro de solicitante
+              let novoUsuario = {
+                nome: this.state.usuario.nome,
+                senha: this.state.usuario.senha,
+                email: this.state.usuario.email,
+                cpf: this.state.usuario.cpf,
+                telefone: this.state.usuario.telefone,
+              }
+              if (!(!this.state.usuario.cnpj)) {
+                novoUsuario = {
+                  ...novoUsuario,
+                  cnpj: this.state.usuario.cnpj,
+                }
+              }
+              service.registerPrestador(novoUsuario)
+                .then(response => {
+                  this.setState({ backdrop: false });
+                  this.sucessMessage("Usuário Cadastrado");
+                  console.log(response.data)
+                  this.setState({
+                    activeStep: activeStep + 1,
+                    userId: response.data.id
+                  });
 
-          }).catch(erro => {
-            this.setState({ backdrop: false });
-            this.errorMessage(erro.response.data)
+                }).catch(erro => {
+                  this.setState({ backdrop: false });
+                  this.errorMessage(erro.response.data)
+                })
+            }
+          }).catch(err => {
+            this.errorMessage("Erro na api de e-mails.")
           })
 
       } else {
         erros.forEach((erro, index) => {
+          this.setState({ backdrop: false });
           this.errorMessage(erro)
         });
       }
