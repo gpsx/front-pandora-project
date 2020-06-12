@@ -8,6 +8,7 @@ import service from './../../service/userService'
 import LocalStorageService from './../../service/localStorage'
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
+import RecuperarSenha from '../DialogView/Servicos/RecuperarSenha'
 
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -80,7 +81,7 @@ class FormLogin extends React.Component {
 
             this.setState({ open: false });
         };
-        
+
         return (
             <Grid container
                 direction="column"
@@ -104,11 +105,9 @@ class FormLogin extends React.Component {
                     <Input
                         style={{ width: '280px' }}
                         onChange={e => this.setState({ senha: e.target.value })}
-                        type='password'/>
-                        
-                    <Link underline='always' href="/#/esqueciasenha" style={link} variant='caption text'>
-                        Esqueci minha senha
-                    </Link>
+                        type='password' />
+
+                    <RecuperarSenha />
                 </Grid>
 
                 <Grid item>
