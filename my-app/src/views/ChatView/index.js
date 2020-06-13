@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { withStyles, Grid, Paper } from '@material-ui/core';
 import MenuPrestador from '../../components/MenuPrestador';
 import Container from '../../components/Container';
@@ -17,7 +17,7 @@ const styles = (theme) => ({
     },
     h1: {
         marginLeft: '8px',
-        marginTop:'-2.8%',
+        marginTop: '-2.8%',
         lineHeight: '5px',
         fontSize: '14px',
     },
@@ -37,6 +37,12 @@ function Chat(props) {
 
     const { classes } = props;
 
+    const [id, setId] = useState('');
+
+    const changeId = (novoId) => {
+        setId(novoId);
+    }
+
     return (
         <Container>
             <MenuPrestador />
@@ -51,7 +57,7 @@ function Chat(props) {
                     >
                         <Grid item xs={4} >
                             <Paper>
-                                <Mensagens />
+                                <Mensagens changeId={changeId.bind(this)} />
                             </Paper>
                         </Grid>
 

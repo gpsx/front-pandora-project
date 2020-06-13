@@ -74,7 +74,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Mensagens() {
+export default function Mensagens({changeId, ...props}) {
   const classes = useStyles();
 
   return (
@@ -83,7 +83,7 @@ export default function Mensagens() {
           {messages.map(({ id, primary, secondary, person }) => (
             <React.Fragment key={id}>
               {id === 1 && <ListSubheader className={classes.subheader}>Pandora Chat</ListSubheader>}
-              <ListItem button>
+              <ListItem button onClick={(e) => changeId(id)}>
                 <ListItemAvatar>
                   <Avatar alt="Profile Picture" src={person} />
                 </ListItemAvatar>
