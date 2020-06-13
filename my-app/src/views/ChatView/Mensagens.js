@@ -49,9 +49,6 @@ const messages = [
 ];
 
 const useStyles = makeStyles((theme) => ({
-  text: {
-    padding: theme.spacing(2, 2, 0),
-  },
   list: {
     height: '82vh',
     overflowY: 'auto'
@@ -59,7 +56,6 @@ const useStyles = makeStyles((theme) => ({
   subheader: {
     backgroundColor: theme.palette.background.paper,
     height:'10%'
-
   },
   appBar: {
     top: 'auto',
@@ -86,7 +82,7 @@ export default function Mensagens() {
         <List className={classes.list}>
           {messages.map(({ id, primary, secondary, person }) => (
             <React.Fragment key={id}>
-              {id === 1 }
+              {id === 1 && <ListSubheader className={classes.subheader}>Pandora Chat</ListSubheader>}
               <ListItem button>
                 <ListItemAvatar>
                   <Avatar alt="Profile Picture" src={person} />

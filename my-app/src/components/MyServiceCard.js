@@ -14,7 +14,6 @@ const useStyles = makeStyles({
   root: {
     display: "flex",
     maxHeight: 130
-    ,
   },
   title: {
     fontSize: 12,

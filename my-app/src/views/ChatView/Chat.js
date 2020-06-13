@@ -28,6 +28,7 @@ const styles = (theme) =>({
         overflowY: 'auto'
     },
     titulo: {
+        backgroundColor: "#fff",
         color: 'black',
         fontFamily: 'Roboto',
         fontStyle: 'normal',
@@ -128,10 +129,10 @@ class ChatPandora extends React.Component {
                         subheader={
                             <ListSubheader component="div" className={classes.titulo} id="nested-list-subheader">
                                 João
+                                <Divider component="li" />
                              </ListSubheader>
                         }
                         className={classes.messageArea}>
-                        <Divider component="li" />
                         <br />
                         <ListaConversa conversas={this.state.conversa} />
                     </List>

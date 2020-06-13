@@ -26,13 +26,10 @@ const styles = (theme) => ({
     },
 
     paperChat: {
-        width: '80%',
-        marginTop: '-5%'
+        display: "flex"
     },
     paper: {
-        width: "30%",
-        marginLeft: '2%',
-        marginTop: '-3%'
+        display: "flex"
     }
 });
 
@@ -43,10 +40,7 @@ function Chat(props) {
     return (
         <Container>
             <MenuPrestador />
-            <Grid container direction="column" justify="flex-start" spacing={3}>
-                <Grid item>
-                    <div className={classes.h1}>Pandora Chat</div>
-                </Grid>
+            <Grid container direction="column" justify="flex-start">
                 <Grid item>
                     <Grid container
                         direction="row"
@@ -55,14 +49,13 @@ function Chat(props) {
                         alignItems="center"
                         spacing={4}
                     >
-
-                        <Paper className={classes.paper}>
-                            <Grid item xs >
+                        <Grid item xs={4} >
+                            <Paper>
                                 <Mensagens />
-                            </Grid>
-                        </Paper>
+                            </Paper>
+                        </Grid>
 
-                        <Grid item xs>
+                        <Grid item xs={8}>
                             <Paper className={classes.paperChat}>
                                 <ChatPandora />
                             </Paper>
