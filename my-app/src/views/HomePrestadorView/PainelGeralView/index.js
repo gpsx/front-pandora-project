@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import Menu from '../../../components/MenuPrestador'
-import { Grid, withStyles, Paper } from '@material-ui/core';
+import { Grid, withStyles } from '@material-ui/core';
 import TabPrestador from './TabPrestador'
 import Container from '../../../components/Container';
 import Erro from '../../../components/AlertaErro'
@@ -66,7 +66,7 @@ class PainelPrestador extends React.Component {
             {
                 title: "SOLICITADOS",
                 content: () => {
-                    if (this.state.solicitados.length == 0) {
+                    if (this.state.solicitados.length === 0) {
                         return (<Erro mensagem="Você não tem novas solicitações" />)
                     } else {
                         return (<ListaSolicitacoes
@@ -78,7 +78,7 @@ class PainelPrestador extends React.Component {
             {
                 title: "APROVADOS",
                 content: () => {
-                    if (this.state.aprovados.length == 0) {
+                    if (this.state.aprovados.length === 0) {
                         return (<Erro mensagem="Você não tem serviços em aprovação" />)
                     } else {
                         return (
@@ -91,7 +91,7 @@ class PainelPrestador extends React.Component {
             {
                 title: "EM EXECUÇÃO",
                 content: () => {
-                    if (this.state.execucao.length == 0) {
+                    if (this.state.execucao.length === 0) {
                         return (<Erro mensagem="Sem servicos em execução" />)
                     } else {
                         return (< ListaSolicitacoes
@@ -103,7 +103,7 @@ class PainelPrestador extends React.Component {
             {
                 title: "FINALIZADOS",
                 content: () => {
-                    if (this.state.finalizados.length == 0) {
+                    if (this.state.finalizados.length === 0) {
                         return (<Erro mensagem="Você ainda não teve serviços finalizados" />)
                     } else {
                         return (

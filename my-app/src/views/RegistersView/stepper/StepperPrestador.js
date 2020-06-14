@@ -7,7 +7,6 @@ import FormService from '../forms/ServiceRegister/FormService';
 import { QontoConnector, QontoStepIcon } from './QontoStepIcon';
 import service from '../../../service/userService'
 import imageService from '../../../service/image/imageService'
-import otherService from './../../../service/otherService'
 import emailService from './../../../service/emailService'
 import servicesService from './../../../service/servicesService'
 import Snackbar from '@material-ui/core/Snackbar';

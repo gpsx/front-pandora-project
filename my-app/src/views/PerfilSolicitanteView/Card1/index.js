@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { withStyles, Grid, Paper } from '@material-ui/core';
 import EditImage from './EditImage';
 import Alteracoes from '../../DialogView/Alteracoes/index';

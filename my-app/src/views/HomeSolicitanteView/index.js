@@ -55,9 +55,9 @@ class HomeSolicitante extends React.Component {
     filtrar = (filtro, valor) => {
         if (filtro == null) {
             this.carregarServicos();
-        } else if (filtro == 'categoria') {
+        } else if (filtro === 'categoria') {
             this.filtroCategoria(valor);
-        }else if(filtro == 'palavra'){
+        }else if(filtro === 'palavra'){
             this.filtroTexto(valor)
         }
         console.log(filtro)

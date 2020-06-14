@@ -54,14 +54,6 @@ const margin = {
 
 }
 
-const useStyles = makeStyles((theme) => ({
-    alert: {
-        padding: theme.spacing(1),
-        margin: theme.spacing(1, 0),
-        border: '1px solid',
-    },
-}));
-
 function Card1(props) {
     const id = localStorage.obterIdUsuario();
     const [show, setShow] = React.useState(false);

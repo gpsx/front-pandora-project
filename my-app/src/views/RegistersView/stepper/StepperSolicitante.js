@@ -94,7 +94,7 @@ class SolicitanteStepper extends React.Component {
       this.errorMessage(value)
     }
     if (key === "endereco") {
-      this.state.endereco = value;
+      this.setState({endereco: value});
     }
   }
 

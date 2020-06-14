@@ -18,7 +18,6 @@ function ChangeRegister(props) {
 
     const { classes } = props;
     const [atualizando, setAtualizando] = useState(false)
-    const [servico, setServico] = useState({})
 
     const id = () => {
         return props.match.params.id;
@@ -28,7 +27,7 @@ function ChangeRegister(props) {
         if (id() != null) {
             setAtualizando(true);
         }
-    }, [])
+    }, [id])
     
     return (
 

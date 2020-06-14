@@ -36,10 +36,6 @@ class FormLogin extends React.Component {
         severity: '',
     }
 
-    constructor() {
-        super();
-    }
-
     entrar = () => {
         userService.login({
             email: this.state.email,

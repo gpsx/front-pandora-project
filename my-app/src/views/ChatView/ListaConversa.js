@@ -17,10 +17,10 @@ export default function ListaConversa(props) {
                 <ListItem key={key}>
                     <Grid container>
                         <Grid item xs={12}>
-                            <ListItemText align={id == idUsuario ? "right" : "left"} primary={mensagem}></ListItemText>
+                            <ListItemText align={id === idUsuario ? "right" : "left"} primary={mensagem}></ListItemText>
                         </Grid>
                         <Grid item xs={12}>
-                            <ListItemText align={id == idUsuario ? "right" : "left"} secondary={hora}></ListItemText>
+                            <ListItemText align={id === idUsuario ? "right" : "left"} secondary={hora}></ListItemText>
                         </Grid>
                     </Grid>
                 </ListItem>

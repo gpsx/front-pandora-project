@@ -78,7 +78,7 @@ export default function Filtro(props) {
                 </Grid>
 
 
-                {filtro == 0 ? (
+                {filtro === 0 ? (
                     <div className={classes.categorias}>
                         <Grid item>
                             <Panel categorias={listarCategorias()}
@@ -86,7 +86,7 @@ export default function Filtro(props) {
                         </Grid>
                     </div>
 
-                ) : filtro == 1 ? (
+                ) : filtro === 1 ? (
                     <>
                         <Grid item>
                             <TextField
@@ -104,7 +104,7 @@ export default function Filtro(props) {
                         </Grid>
                     </>
 
-                ) : filtro == 2 ? (
+                ) : filtro === 2 ? (
                     <div className={classes.estrelas}>
                         <Grid item>
                             <ThemeProvider theme={theme}>

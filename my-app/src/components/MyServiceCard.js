@@ -1,13 +1,11 @@
-import React, { useState } from "react";
+import React  from "react";
 import { withRouter } from 'react-router-dom';
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Button, Card, CardContent } from "@material-ui/core";
-import { CardMedia, Divider, Box, Avatar } from "@material-ui/core";
+import { CardMedia, Divider, Box} from "@material-ui/core";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core";
-import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
-import { DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
-import Star from '@material-ui/icons/Star';
+import { DialogActions,  DialogTitle } from '@material-ui/core';
 import servicesService from '../service/servicesService'
 
 const useStyles = makeStyles({
