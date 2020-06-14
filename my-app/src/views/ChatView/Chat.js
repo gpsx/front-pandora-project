@@ -13,7 +13,7 @@ import ListaConversa from './ListaConversa'
 
 const socket = io("http://localhost:4001");
 
-const styles = (theme) =>({
+const styles = (theme) => ({
     chatSection: {
         paddingTop: '10px',
         width: '124%',
@@ -58,26 +58,26 @@ const theme = createMuiTheme({
 });
 
 class ChatPandora extends React.Component {
-    
 
-    constructor(props){
+
+    constructor(props) {
         super(props)
-        console.log(props);
-        
-        this.state = {
-            empty: "",
-            currentMessage: "",
-            title: "",
-            chatId: props.Conversation.chatId,
-            conversa : props.Conversation.chat
-        }
-        console.log(this.state);
-        
+        console.log(props.Conversation.chat)
     }
+
+    state = {
+        empty: "",
+        currentMessage: "",
+        title: "",
+        chatId: this.props.Conversation.chatId,
+        conversa: this.props.Conversation.chat,
+    }
+
     componentDidMount() {
         this.setListener()
+        this.setState({ conversa: this.props.Conversation.chat });
+        console.log(this.state.conversa)
     }
-    //isso tem que estar no state, ser atualizado pelo set listener
 
 
     setListener = () => socket.on("new-msg", (data) => {
@@ -87,7 +87,7 @@ class ChatPandora extends React.Component {
             mensagem: data,
             hora: new Date().toLocaleString()
         }
-        this.setState({conversa: [...this.state.conversa, newMessage]})
+        this.setState({ conversa: [...this.state.conversa, newMessage] })
     })
     sendMessage = () => {
         let newMessage = {
@@ -96,7 +96,7 @@ class ChatPandora extends React.Component {
             hora: new Date().toLocaleString()
         }
         this.setState({ currentMessage: "" })
-        this.setState({conversa: [...this.state.conversa, newMessage]})
+        this.setState({ conversa: [...this.state.conversa, newMessage] })
         socket.emit("msg", this.state.currentMessage)
     }
 
@@ -114,7 +114,7 @@ class ChatPandora extends React.Component {
                             <ListSubheader component="div" className={classes.titulo} id="nested-list-subheader">
                                 {this.state.title}
                                 <Divider component="li" />
-                             </ListSubheader>
+                            </ListSubheader>
                         }
                         className={classes.messageArea}>
                         <br />
@@ -130,7 +130,7 @@ class ChatPandora extends React.Component {
                                     label="Digite sua mensagem"
                                     fullWidth
                                     onChange={e => this.setState({ currentMessage: e.target.value })}
-                                    />
+                                />
                             </ThemeProvider>
                         </Grid>
                         <Grid xs={1} align="right">

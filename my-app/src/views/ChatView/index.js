@@ -38,33 +38,26 @@ const styles = (theme) => ({
 
 function Chat(props) {
 
-    const setListener = () => {
-        socket.on("selectedConversation", (data) => {
-            let title = data.users[0].nome;
-            setConversation({
-                title,
-                id: data.id,
-                chat: data.chat
-            })           
-        })
-    }
-
-    useEffect(() => {
-        setListener()
-    });
-
     const { classes } = props;
 
-    const [id, setId] = useState('');
+    const [id, setId] = useState(null);
 
     const [conversation, setConversation] = useState({
         chat: [],
-        title: "" 
+        title: ""
     });
 
     const changeId = (novoId) => {
         socket.emit("getConversation", novoId)
-        setId(novoId);
+        socket.on("selectedConversation", (data) => {
+            let title = data.users[0].nome;
+            setConversation({
+                title,
+                chat: data.chat
+            })
+            setId(data.id);
+        })
+        console.log("ATUALIZOU")
     }
 
     return (
@@ -87,7 +80,14 @@ function Chat(props) {
 
                         <Grid item xs={8}>
                             <Paper className={classes.paperChat}>
-                                <ChatPandora Conversation={conversation}/>
+                                {id === null ? (
+                                    <Paper>
+                                        TELA VAZIA
+                                    </Paper>
+                                ) : (
+                                        <ChatPandora Conversation={conversation} />
+                                    )}
+
                             </Paper>
                         </Grid>
                     </Grid>
