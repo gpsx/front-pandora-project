@@ -1,3 +1,6 @@
+let msgs = require("./data")
+console.log(msgs);
+
 module.exports = {
     addConversation: (users) => {
         msgs.conversations.push({
@@ -25,19 +28,27 @@ module.exports = {
         return chatPosition
     },
     findChatById: (id) => {
-        isChat = false
-        for (let i = 0; i < msgs.conversations; i++) {
+        for (let i = 0; i < msgs.conversations.length; i++) {  
             if (id == msgs.conversations[i].id) {
                 return msgs.conversations[i]
             }
         }
         return -1
     },
-    addMessage: (message) => {
-        chatId = this.findByUserChatId(message.userId)
-        msgs.conversations[chatId].chat.push()
+    findChatId: () => {
+        isChat = false
+        for (let i = 0; i < msgs.conversations; i++) {
+            if (id == msgs.conversations[i].id) {
+                return i
+            }
+        }
+        return -1
     },
-    userConversation: () => {
+    addMessage: (message) => {
+        chatId = this.findByChatId(message.id)
+        msgs.conversations[chatId].chat.push(message)
+    },
+    userConversation: (id) => {
         isChat = false
         userConversations = []
         for (let i = 0; i < msgs.conversations; i++) {
@@ -51,7 +62,7 @@ module.exports = {
                 isChat = false
             }
         }
-        return chatPosition
+        return userConversations
     }
 }
 

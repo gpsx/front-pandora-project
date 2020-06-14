@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { withStyles, Grid, Paper } from '@material-ui/core';
 import MenuPrestador from '../../components/MenuPrestador';
 import Container from '../../components/Container';
 import Mensagens from './Mensagens';
 import ChatPandora from './Chat';
+import io from "socket.io-client";
+
+const socket = io("http://localhost:4001");
 
 const styles = (theme) => ({
     titulo: {
@@ -35,11 +38,32 @@ const styles = (theme) => ({
 
 function Chat(props) {
 
+    const setListener = () => {
+        socket.on("selectedConversation", (data) => {
+            let title = data.users[0].nome;
+            setConversation({
+                title,
+                id: data.id,
+                chat: data.chat
+            })           
+        })
+    }
+
+    useEffect(() => {
+        setListener()
+    });
+
     const { classes } = props;
 
     const [id, setId] = useState('');
 
+    const [conversation, setConversation] = useState({
+        chat: [],
+        title: "" 
+    });
+
     const changeId = (novoId) => {
+        socket.emit("getConversation", novoId)
         setId(novoId);
     }
 
@@ -63,7 +87,7 @@ function Chat(props) {
 
                         <Grid item xs={8}>
                             <Paper className={classes.paperChat}>
-                                <ChatPandora />
+                                <ChatPandora Conversation={conversation}/>
                             </Paper>
                         </Grid>
                     </Grid>

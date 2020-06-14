@@ -58,37 +58,21 @@ const theme = createMuiTheme({
 });
 
 class ChatPandora extends React.Component {
+    
 
     constructor(props){
         super(props)
+        console.log(props);
+        
         this.state = {
             empty: "",
             currentMessage: "",
-            conversation: [
-                {
-                    Person: "",
-                    messages: [],
-    
-                }
-            ],
-            conversa : [
-                {
-                    id: "1",
-                    mensagem: "Hey man, What's up ?",
-                    hora: "09:30"
-                },
-                {
-                    id: "2",
-                    mensagem: "Hey, Iam Good! What about you ?",
-                    hora: "09:32"
-                },
-                {
-                    id: "1",
-                    mensagem: "Cool. i am good, let's catch up!",
-                    hora: "09:35"
-                },
-            ]
+            title: "",
+            chatId: props.Conversation.chatId,
+            conversa : props.Conversation.chat
         }
+        console.log(this.state);
+        
     }
     componentDidMount() {
         this.setListener()
@@ -128,7 +112,7 @@ class ChatPandora extends React.Component {
                         aria-labelledby="nested-list-subheader"
                         subheader={
                             <ListSubheader component="div" className={classes.titulo} id="nested-list-subheader">
-                                João
+                                {this.state.title}
                                 <Divider component="li" />
                              </ListSubheader>
                         }
