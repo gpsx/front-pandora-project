@@ -1,26 +1,34 @@
-export default class LocalStorageService{
-    static addItem(chave, valor){
+export default class LocalStorageService {
+    static addItem(chave, valor) {
         localStorage.setItem(chave, JSON.stringify(valor));
     }
 
-    static logOff() {
-        localStorage.removeItem("_usuario_logado");
+    static removeItem(chave){
+        localStorage.removeItem(chave);
     }
 
-
-    static obterItem(chave){
-        const item =  localStorage.getItem(chave);
+    static obterItem(chave) {
+        const item = localStorage.getItem(chave);
         return JSON.parse(item);
     }
 
-    static obterIdUsuario(){
+    static obterIdUsuario() {
         const usuario = this.obterItem("_usuario_logado");
         return usuario.id
     }
 
-    static getUserType(){
+    static getUserType() {
         const usuario = this.obterItem("_usuario_logado");
-        return usuario.solicitante ? "solicitante" : "prestador"
+        if (usuario === null) {
+            return null;
+        } else {
+            return usuario.solicitante ? "solicitante" : "prestador"
+        }
+    }
+
+    static isLogado() {
+        const usuario = this.obterItem("_usuario_logado");
+        return usuario === null;
     }
 }
 

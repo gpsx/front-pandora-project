@@ -4,11 +4,11 @@ import { Grid, Link } from '@material-ui/core';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import H1 from './../../components/forms/h1-login'
-import service from './../../service/userService'
-import LocalStorageService from './../../service/localStorage'
+import userService from './../../service/userService'
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import RecuperarSenha from '../DialogView/Servicos/RecuperarSenha'
+import { AuthContext } from '../../main/ProvedorAutenticacao';
 
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -26,6 +26,7 @@ const button = {
 }
 
 class FormLogin extends React.Component {
+    
     state = {
         email: '',
         senha: '',
@@ -35,13 +36,16 @@ class FormLogin extends React.Component {
         severity: '',
     }
 
+    constructor() {
+        super();
+    }
+
     entrar = () => {
-        service.login({
+        userService.login({
             email: this.state.email,
             senha: this.state.senha
         }).then(response => {
-            this.sucessMessage();
-            LocalStorageService.addItem('_usuario_logado', response.data)
+            this.context.iniciarSessao(response.data);
             if (response.data.solicitante) {
                 this.props.history.push('/home-solicitante')
             } else {
@@ -49,9 +53,11 @@ class FormLogin extends React.Component {
             }
         }).catch(erro => {
             try {
-                this.errorMessage(erro.response.data)
+                console.log(erro)
+                // this.errorMessage(erro.response.data)
             } catch (erro2) {
-                this.errorMessage('erro no servidor')
+                console.log(erro2);
+                this.errorMessage('Erro no servidor')
             }
 
         })
@@ -130,4 +136,5 @@ class FormLogin extends React.Component {
 
 }
 
-export default withRouter(FormLogin);
+FormLogin.contextType = AuthContext
+export default withRouter(FormLogin)
