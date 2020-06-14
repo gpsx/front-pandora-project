@@ -5,9 +5,7 @@ import Container from '../../components/Container';
 import Mensagens from './Mensagens';
 import ChatPandora from './Chat';
 import io from "socket.io-client";
-
 const socket = io("http://localhost:4001");
-
 const styles = (theme) => ({
     titulo: {
         color: 'black',
@@ -38,17 +36,7 @@ const styles = (theme) => ({
 
 function Chat(props) {
 
-    const { classes } = props;
-
-    const [id, setId] = useState(null);
-
-    const [conversation, setConversation] = useState({
-        chat: [],
-        title: ""
-    });
-
-    const changeId = (novoId) => {
-        socket.emit("getConversation", novoId)
+    const setListeners = () =>{
         socket.on("selectedConversation", (data) => {
             let title = data.users[0].nome;
             setConversation({
@@ -57,6 +45,41 @@ function Chat(props) {
             })
             setId(data.id);
         })
+
+        socket.on("userConversations", chats => {
+            for (let i = 0; i < chats.length; i++) {
+                for (let j = 0; j < chats[i].users.length; j++) {
+                    if (chats[i].users[j].id != 3) {
+                        chats[i].otherUser = {
+                            img: chats[i].users[j].img,
+                            name: chats[i].users[j].nome
+                        }
+                    }
+                }
+            }
+            console.log(chats);
+            setChats(chats)
+        })
+    }
+
+    const { classes } = props;
+
+    const [id, setId] = useState(null);
+
+    const [chats, setChats] = useState([]);
+
+    const [conversation, setConversation] = useState({
+        chat: [],
+        title: ""
+    });
+
+    useEffect(() => {
+        socket.emit("getUserConversation", 1)
+        setListeners()
+    },[]);
+
+    const changeId = (novoId) => {
+        socket.emit("getConversation", novoId)
         console.log("ATUALIZOU")
     }
 
@@ -74,7 +97,7 @@ function Chat(props) {
                     >
                         <Grid item xs={4} >
                             <Paper>
-                                <Mensagens changeId={changeId.bind(this)} />
+                                <Mensagens changeId={changeId.bind(this)} chats={chats} userId={1}/>
                             </Paper>
                         </Grid>
 

@@ -73,15 +73,16 @@ class ChatPandora extends React.Component {
         }
     }
 
-
     componentDidMount() {
         this.setListener()
+        this.setState({ title: this.props.Conversation.title })
         this.setState({ conversa: this.props.Conversation.chat });
         console.log(this.state.conversa)
     }
 
     componentDidUpdate(prevProps){
         if(prevProps != this.props){
+            this.setState({ title: this.props.Conversation.title })
             this.setState({chatId: this.props.Conversation.chatId});
             this.setState({ conversa: this.props.Conversation.chat });
         }
@@ -91,7 +92,7 @@ class ChatPandora extends React.Component {
     setListener = () => socket.on("new-msg", (data) => {
         console.log(data);
         let newMessage = {
-            id: "2",
+            userId: "2",
             mensagem: data,
             hora: new Date().toLocaleString()
         }
@@ -99,7 +100,7 @@ class ChatPandora extends React.Component {
     })
     sendMessage = () => {
         let newMessage = {
-            id: "1",
+            userId: "1",
             mensagem: this.state.currentMessage,
             hora: new Date().toLocaleString()
         }
@@ -130,7 +131,7 @@ class ChatPandora extends React.Component {
                     </List>
                     <Divider />
                     <Grid container style={{ padding: '20px' }}>
-                        <Grid item xs={11}>
+                        <Grid item={true} xs={11}>
                             <ThemeProvider theme={theme}>
                                 <TextField
                                     id="text"
@@ -141,7 +142,7 @@ class ChatPandora extends React.Component {
                                 />
                             </ThemeProvider>
                         </Grid>
-                        <Grid xs={1} align="right">
+                        <Grid item={true} xs={1} align="right">
                             <ThemeProvider theme={theme}>
                                 <Fab size="medium" color="secondary" aria-label="add" onClick={this.sendMessage}><SendIcon /></Fab>
                             </ThemeProvider>

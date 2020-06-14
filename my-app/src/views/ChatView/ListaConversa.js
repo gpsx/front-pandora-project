@@ -9,22 +9,19 @@ const idUsuario = 1;
 
 export default function ListaConversa(props) {
 
-    const [key, setKey] = useState(1);
-
     return (
         <React.Fragment>
-            {props.conversas.map(({ id, mensagem, hora }) => (
+            {props.conversas.map(({ userId, mensagem, hora }, key) => (
                 <ListItem key={key}>
                     <Grid container>
-                        <Grid item xs={12}>
-                            <ListItemText align={id == idUsuario ? "right" : "left"} primary={mensagem}></ListItemText>
+                        <Grid item={true} xs={12}>
+                            <ListItemText align={userId == idUsuario ? "right" : "left"} primary={mensagem}></ListItemText>
                         </Grid>
-                        <Grid item xs={12}>
-                            <ListItemText align={id == idUsuario ? "right" : "left"} secondary={hora}></ListItemText>
+                        <Grid item={true} xs={12}>
+                            <ListItemText align={userId == idUsuario ? "right" : "left"} secondary={hora}></ListItemText>
                         </Grid>
                     </Grid>
                 </ListItem>
-
             ))}
         </React.Fragment>
     );

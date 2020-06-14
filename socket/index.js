@@ -21,7 +21,8 @@ io.on("connection", function(socket) {
     });
 
     socket.on("getUserConversation", id => {
-      userConversation = controller.userConversation()
+      console.log(id);
+      userConversation = controller.userConversation(id)
       io.to(socket.id).emit("userConversations", userConversation)
     })
 
