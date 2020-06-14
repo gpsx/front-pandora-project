@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AuthContext } from '../../../main/ProvedorAutenticacao'
 import { withRouter } from 'react-router-dom'
 import { Button, TextField } from '@material-ui/core';
 import { withStyles, createMuiTheme, ThemeProvider } from '@material-ui/core';
@@ -54,6 +55,7 @@ const theme = createMuiTheme({
 })
 
 function FormDialogEmail(props) {
+    const context = useContext(AuthContext);
     const usuario = LocalStorageService.obterItem("_usuario_logado");
     const type = LocalStorageService.getUserType();
 
@@ -82,7 +84,7 @@ function FormDialogEmail(props) {
     );
 
     function logoff() {
-        LocalStorageService.logOff();
+        context.encerrarSessao();
         props.history.push('/login');
         userService.logoff();
     }

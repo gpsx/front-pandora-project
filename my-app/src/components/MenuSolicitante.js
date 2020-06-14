@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import { AuthContext } from '../main/ProvedorAutenticacao';
 import { withStyles } from '@material-ui/core/styles';
 import { withRouter } from 'react-router-dom';
 import ExitToAppRoundedIcon from '@material-ui/icons/ExitToAppRounded';
-import LocalStorageService from '../service/localStorage';
 import userService from '../service/userService';
 import Typography from './Typography';
 import Link from '@material-ui/core/Link';
@@ -77,7 +77,7 @@ const styles = (theme) => ({
         '&:hover': {
             color: '#FFFFFF',
             boxShadow: 'none',
-            backgroundColor:"#328CC1",
+            backgroundColor: "#328CC1",
         },
         '&:active, &:focus': {
             boxShadow: 'none',
@@ -91,7 +91,7 @@ const styles = (theme) => ({
         '&:hover': {
             color: '#FFFFFF',
             boxShadow: 'none',
-            backgroundColor:"#C40233",
+            backgroundColor: "#C40233",
             border: '1px solid #C40233',
         },
         '&:active, &:focus': {
@@ -102,10 +102,12 @@ const styles = (theme) => ({
 
 function Menu(props) {
 
+    const context = useContext(AuthContext);
+
     const { classes } = props;
 
     function logoff() {
-        LocalStorageService.logOff();
+        context.encerrarSessao();
         props.history.push('/login');
         userService.logoff();
     }
@@ -148,7 +150,7 @@ function Menu(props) {
                             variant="h6"
                             underline="none"
                             className={classes.middleLink}
-                            href="/"
+                            href="/#/chat-solicitante"
                         >
                             {'Chat'}
                         </Link>
@@ -170,7 +172,7 @@ function Menu(props) {
                             component="a"
                             onClick={logoff}
                         >
-                             <ExitToAppRoundedIcon/>
+                            <ExitToAppRoundedIcon />
                         </Button>
 
                     </div>

@@ -5,6 +5,7 @@ import InputMask from 'react-input-mask';
 import IconButton from '@material-ui/core/IconButton';
 import Search from '@material-ui/icons/Search';
 import cepService from '../../../service/cepService';
+import endereco from '../../DialogView/Alteracoes/endereco';
 
 const margin = {
     paddingRight: '30px',
@@ -42,8 +43,8 @@ class FormAddress extends React.Component {
     }
 
     componentDidUpdate(prevState) {
-        if (prevState.endereco != this.state.endereco) {
-            this.state.endereco.cep = this.state.endereco.cep.replace(/[^\d]+/g, '')
+        if (prevState.endereco !== this.state.endereco) {
+            this.setState({ endereco: { ...endereco, cep: cep.relace(/[^\d]+/g, '') } });
             this.props.globalChanges("endereco", this.state.endereco);
         }
     }

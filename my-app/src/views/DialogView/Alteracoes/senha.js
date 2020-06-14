@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { withRouter } from 'react-router-dom'
 import LocalStorageService from '../../../service/localStorage'
 import alteracoesService from '../../../service/alteracoesService'
@@ -10,6 +10,7 @@ import TextField from '@material-ui/core/TextField';
 import { Dialog, DialogActions, DialogContent, DialogContentText } from '@material-ui/core';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Link from './../../../components/Link';
+import { AuthContext } from '../../../main/ProvedorAutenticacao';
 
 const styles = (theme) => ({
     tamanho: {
@@ -37,6 +38,7 @@ const theme = createMuiTheme({
 })
 
 function FormDialogSenha(props) {
+    const context = useContext(AuthContext);
     const usuario = LocalStorageService.obterItem("_usuario_logado");
     const type = LocalStorageService.getUserType();
 
@@ -69,7 +71,7 @@ function FormDialogSenha(props) {
     );
 
     function logoff() {
-        LocalStorageService.logOff();
+        context.encerrarSessao();
         props.history.push('/login');
         userService.logoff();
     }

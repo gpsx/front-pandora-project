@@ -85,7 +85,7 @@ export default function ServiceCard(props) {
       .then(response => {
         setAvaliation(response.data.toFixed(1));
       })
-  }, [])
+  }, [props.id])
 
 
   const bull = <span className={classes.bullet}>•</span>;

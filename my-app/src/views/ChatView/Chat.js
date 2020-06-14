@@ -81,8 +81,7 @@ class ChatPandora extends React.Component {
     }
 
     componentDidUpdate(prevProps){
-        if(prevProps != this.props){
-            this.setState({ title: this.props.Conversation.title })
+        if(prevProps !== this.props){
             this.setState({chatId: this.props.Conversation.chatId});
             this.setState({ conversa: this.props.Conversation.chat });
         }

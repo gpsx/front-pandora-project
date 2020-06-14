@@ -1,5 +1,4 @@
 import service from '../service/otherService'
-import servicesService from '../service/servicesService'
 
 export function listarCategorias() {
     let lista = [];

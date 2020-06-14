@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React  from 'react'
 import SolicitationCard from './../../../components/SolicitationCardSolicitante'
 import { Grid } from '@material-ui/core';
 import ImagemGenerica from './../../../assets/servicos/generico.jpg'
