@@ -62,21 +62,29 @@ class ChatPandora extends React.Component {
 
     constructor(props) {
         super(props)
-        console.log(props.Conversation.chat)
+        
+        this.state = {
+            empty: "",
+            currentMessage: "",
+            title: "",
+            chatId:'',
+            conversa: [],
+
+        }
     }
 
-    state = {
-        empty: "",
-        currentMessage: "",
-        title: "",
-        chatId: this.props.Conversation.chatId,
-        conversa: this.props.Conversation.chat,
-    }
 
     componentDidMount() {
         this.setListener()
         this.setState({ conversa: this.props.Conversation.chat });
         console.log(this.state.conversa)
+    }
+
+    componentDidUpdate(prevProps){
+        if(prevProps != this.props){
+            this.setState({chatId: this.props.Conversation.chatId});
+            this.setState({ conversa: this.props.Conversation.chat });
+        }
     }
 
 
