@@ -8,9 +8,18 @@ const AuthProvider = AuthContext.Provider;
 class ProvedorAutenticacao extends React.Component {
     state = {
         usuarioAutenticado: null,
-        isAutenticado: false,
+        isAutenticado: this.getInformation(),
         isPrestador: false,
         isSolicitante: false,
+    }
+
+    getInformation(){
+        let user = AuthService.obterUsuarioAutenticado();
+        if(user === null){
+            return false
+        }else{
+            return true;
+        }
     }
 
     iniciarSessao = (usuario) => {

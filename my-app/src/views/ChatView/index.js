@@ -7,6 +7,8 @@ import ChatPandora from './Chat';
 import io from "socket.io-client";
 import LocalStorageService from '../../service/localStorage'
 
+import Imagem from '../../assets/logo72.png'
+
 const idUsuario = LocalStorageService.obterIdUsuario();
 const socket = io("http://localhost:4001");
 
@@ -15,10 +17,8 @@ const styles = (theme) => ({
         color: 'black',
         fontFamily: 'Roboto',
         fontStyle: 'normal',
-        fontSize: '17px',
+        fontSize: '24px',
         fontWeight: '200',
-        marginTop: '12%',
-        marginLeft: '23%'
     },
     h1: {
         marginLeft: '8px',
@@ -35,12 +35,20 @@ const styles = (theme) => ({
     },
     paper: {
         display: "flex"
+    },
+    telaVazia: {
+        display: "flex",
+        height: '500px',
+    },
+    imgPandora: {
+        height: '200px',
+        width: '200px',
     }
 });
 
 function Chat(props) {
 
-    const setListeners = () =>{
+    const setListeners = () => {
         socket.on("selectedConversation", (data) => {
             let title = data.users[0].nome;
             for (let i = 0; i < data.users.length; i++) {
@@ -49,7 +57,7 @@ function Chat(props) {
                 }
             }
             console.log(data, "selectedConversation");
-            
+
             setConversation({
                 chatId: data.id,
                 title,
@@ -89,7 +97,7 @@ function Chat(props) {
     useEffect(() => {
         socket.emit("getUserConversation", idUsuario)
         setListeners()
-    },[]);
+    }, []);
 
     const changeId = (novoId) => {
         socket.emit("getConversation", novoId)
@@ -109,21 +117,31 @@ function Chat(props) {
                     >
                         <Grid item xs={4} >
                             <Paper>
-                                <Mensagens changeId={changeId.bind(this)} chats={chats} userId={1}/>
+                                <Mensagens changeId={changeId.bind(this)} chats={chats} userId={1} />
                             </Paper>
                         </Grid>
 
                         <Grid item xs={8}>
-                            <Paper className={classes.paperChat}>
-                                {id === null ? (
-                                    <Paper>
-                                        TELA VAZIA
-                                    </Paper>
-                                ) : (
+                            {id === null ? (
+                                <Paper className={classes.telaVazia}>
+                                    <Grid container direction="column" justify="center" alignItems="center" spacing={3}>
+                                        <Grid item>
+                                            <img src={Imagem} className={classes.imgPandora} />
+                                        </Grid>
+                                        <Grid item className={classes.titulo}>
+                                            Selecione uma conversa!
+                                        </Grid>
+                                        <Grid item>
+                                            Atenção: Nunca revele suas senhas e/ou números de cartão! 
+                                        </Grid>
+                                    </Grid>
+                                </Paper>
+                            ) : (
+                                    <Paper className={classes.paperChat}>
                                         <ChatPandora Conversation={conversation} />
-                                    )}
+                                    </Paper>
+                                )}
 
-                            </Paper>
                         </Grid>
                     </Grid>
                 </Grid>

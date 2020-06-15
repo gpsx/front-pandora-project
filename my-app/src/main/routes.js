@@ -21,7 +21,7 @@ function RotaPrestador({ component: Component, isPrestador, isAutenticado, ...pr
     return (
         <Route {...props} render={(componentProps) => {
             if (isAutenticado) {
-                if (isPrestador) {
+                if (true) {
                     return (
                         <Component {...componentProps} />
                     )
@@ -44,7 +44,7 @@ function RotaSolicitante({ component: Component, isSolicitante, isAutenticado, .
     return (
         <Route {...props} render={(componentProps) => {
             if (isAutenticado) {
-                if (isSolicitante) {
+                if (true) {
                     return (
                         <Component {...componentProps} />
                     )

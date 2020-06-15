@@ -62,7 +62,7 @@ export default function ServiceCard(props) {
         let array = [];
         let user1 = {
             nome: props.name,
-            id: props.id,
+            id: props.idPrestador,
             img: props.img,
         };
         let user2 = context.obterResumo();
@@ -76,6 +76,7 @@ export default function ServiceCard(props) {
 
     return (
         <div>
+
             <Card className={classes.root}>
                 <CardMedia
                     component="img"

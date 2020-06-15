@@ -25,19 +25,19 @@ module.exports = {
     },
 
     aprovarSolicitacao: async (id) => {
-        return await api.put(`${url}/atualizar_solicitacao/${id}`, { "status": "aprovado" })
+        return await api.put(`${url}/atualizar_solicitacao/${id}`, { "status": "aprovado" });
     },
 
-    executarSolicitacao: async (id) => {
-        return await api.put(`${url}/atualizar_solicitacao/${id}`, { "status": "execucao" })
+    executarSolicitacao: async (id, status) => {
+        return await api.put(`${url}/atualizar_solicitacao/${id}`, { "status": "EXECUCAO" });
     },
 
     cancelarSolicitacao: async (id) => {
-        return await api.put(`${url}/atualizar_solicitacao/${id}`, { "status": "cancelado" })
+        return await api.put(`${url}/atualizar_solicitacao/${id}`, { "status": "cancelado" });
     },
 
     finalizarSolicitacao: async (id) => {
-        return await api.put(`${url}/atualizar_solicitacao/${id}`, { "status": "FECHADO" })
+        return await api.put(`${url}/atualizar_solicitacao/${id}`, { "status": "FECHADO" });
     },
 
 }

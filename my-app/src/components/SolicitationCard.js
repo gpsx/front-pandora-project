@@ -13,7 +13,7 @@ const socket = io("http://localhost:4001");
 const useStyles = makeStyles({
   root: {
     display: "flex",
-    marginBottom: "-14px",
+    marginBottom: "-15px",
   },
   bullet: {
     display: "inline-block",
@@ -68,7 +68,7 @@ export default function ServiceCard(props) {
     let array = [];
     let user1 = {
       nome: props.name,
-      id: props.id,
+      id: props.idSolicitante,
       img: props.img,
     };
     let user2 = context.obterResumo();
@@ -85,20 +85,24 @@ export default function ServiceCard(props) {
   }
   const aprovar = () => {
     solicitacoesService.aprovarSolicitacao(props.id)
-      .then(recarregar())
+      .then(response => {
+        recarregar();
+      })
       .catch(console.log('reprovado'))
   }
 
   const executar = () => {
     solicitacoesService.executarSolicitacao(props.id)
-      .then(recarregar())
-      .catch(console.log('erro'))
+      .then(response => {
+        recarregar();
+      }).catch(err => { console.log(err.response) })
   }
 
   const cancelar = () => {
     solicitacoesService.cancelarSolicitacao(props.id)
       .then(recarregar())
       .catch(console.log('erro'))
+
   }
 
 
@@ -129,16 +133,16 @@ export default function ServiceCard(props) {
                 props.serviceState === 'SOLICITADO' ?
                   (
                     <>
-                      <Button size="small" variant="contained" color="primary" className={classes.button} onClick={aprovar}>
+                      <Button size="small" variant="contained" color="primary" className={classes.button} onClick={() => aprovar()}>
                         APROVAR
                         </Button>
-                      <Button size="small" variant="contained" color="primary" className={classes.cancel} onClick={cancelar}>
+                      <Button size="small" variant="contained" color="primary" className={classes.cancel} onClick={() => cancelar()}>
                         DESCARTAR
                         </Button>
                     </>
                   ) : props.serviceState === 'APROVADO' ?
                     (
-                      <Button size="small" variant="contained" color="primary" className={classes.button} onClick={executar}>
+                      <Button size="small" variant="contained" color="primary" className={classes.button} onClick={() => executar()}>
                         EXECUTAR
                       </Button>
                     ) : (
@@ -146,7 +150,7 @@ export default function ServiceCard(props) {
                       </>
                     )
               }
-              <Button size="small" variant="contained" color="primary" className={classes.button} onClick={createChat}>
+              <Button size="small" variant="contained" color="primary" className={classes.button} onClick={() => createChat()}>
                 Add ao chat
               </Button>
             </Box>

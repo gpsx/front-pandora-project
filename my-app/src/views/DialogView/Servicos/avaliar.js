@@ -66,7 +66,7 @@ function FormDialogAvaliar(props) {
                 console.log(response);
                 handleClickOpen();
             }).catch(err => {
-                console.log(err)
+                console.log(err.data)
             })
 
     }

@@ -73,13 +73,15 @@ function Card1(props) {
     }, []);
 
     function uploadImage(imagem) {
-        handleBackdrop();
+        setOpenBackdrop(true);
         let data = new FormData();
         data.append("image", imagem[0]);
         imageService.upload(data)
             .then(res => {
                 let imagem = res.data.data.link;
                 changeImage(imagem);
+            }).catch(err => {
+                console.log('erro ao upload da imagem')
             })
     }
 
@@ -88,10 +90,9 @@ function Card1(props) {
         alteracoesService.imgPrestador
             (alteracao, id)
             .then(response => {
-                handleBackdrop();
+                setOpenBackdrop(false);
             })
     }
-
     return (
 
         <Paper style={card}>
