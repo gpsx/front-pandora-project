@@ -4,11 +4,11 @@ import MenuPrestador from '../../components/MenuPrestador';
 import Container from '../../components/Container';
 import Mensagens from './Mensagens';
 import ChatPandora from './Chat';
-import io from "socket.io-client";
+import { socketServer } from "./../../utils/index"
 import LocalStorageService from '../../service/localStorage'
 
 const idUsuario = LocalStorageService.obterIdUsuario();
-const socket = io("http://localhost:4001");
+const socket = socketServer;
 
 const styles = (theme) => ({
     titulo: {
@@ -87,6 +87,7 @@ function Chat(props) {
     });
 
     useEffect(() => {
+        console.log(idUsuario);
         socket.emit("getUserConversation", idUsuario)
         setListeners()
     },[]);

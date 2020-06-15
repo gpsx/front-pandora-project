@@ -6,9 +6,9 @@ import { CardMedia, Divider, Box, Button } from "@material-ui/core";
 import FormDialogAvaliar from './../views/DialogView/Servicos/avaliar';
 import LocalStorageService from '../service/localStorage'
 import Alerta from '../components/Alerta'
-import io from "socket.io-client";
+import { socketServer } from "./../utils/index"
 
-const socket = io("http://localhost:4001");
+const socket = socketServer;
 
 const useStyles = makeStyles({
     root: {

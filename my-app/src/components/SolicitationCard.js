@@ -5,10 +5,9 @@ import { Typography, Card, CardContent } from "@material-ui/core";
 import { CardMedia, Divider, Box, Button } from "@material-ui/core";
 import solicitacoesService from '../service/solicitacoesService';
 import Alerta from '../components/Alerta'
-import io from "socket.io-client";
+import { socketServer } from "./../utils/index"
 
-const socket = io("http://localhost:4001");
-
+const socket = socketServer;
 
 const useStyles = makeStyles({
   root: {
