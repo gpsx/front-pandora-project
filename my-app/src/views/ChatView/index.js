@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { AuthContext } from '../../main/ProvedorAutenticacao'
 import { withStyles, Grid, Paper } from '@material-ui/core';
 import MenuPrestador from '../../components/MenuPrestador';
+import MenuSolicitante from '../../components/MenuSolicitante';
 import Container from '../../components/Container';
 import Mensagens from './Mensagens';
 import ChatPandora from './Chat';
@@ -47,6 +49,8 @@ const styles = (theme) => ({
 });
 
 function Chat(props) {
+    const context = useContext(AuthContext);
+    const userType = context.tipoUsuario();
 
     const setListeners = () => {
         socket.on("selectedConversation", (data) => {
@@ -106,7 +110,12 @@ function Chat(props) {
 
     return (
         <Container>
-            <MenuPrestador />
+            {userType === "prestador" ? (
+                <MenuPrestador />
+
+            ) : (
+                    <MenuSolicitante />
+                )}
             <Grid container direction="column" justify="flex-start">
                 <Grid item>
                     <Grid container
@@ -133,7 +142,7 @@ function Chat(props) {
                                             Selecione uma conversa!
                                         </Grid>
                                         <Grid item>
-                                            Atenção: Nunca revele suas senhas e/ou números de cartão! 
+                                            Atenção: Nunca revele suas senhas e/ou números de cartão!
                                         </Grid>
                                     </Grid>
                                 </Paper>

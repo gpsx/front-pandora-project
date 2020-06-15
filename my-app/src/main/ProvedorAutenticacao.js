@@ -7,24 +7,29 @@ const AuthProvider = AuthContext.Provider;
 
 class ProvedorAutenticacao extends React.Component {
     state = {
+        id: null,
         usuarioAutenticado: null,
         isAutenticado: this.getInformation(),
         isPrestador: false,
         isSolicitante: false,
     }
 
-    getInformation(){
+    getInformation() {
         let user = AuthService.obterUsuarioAutenticado();
-        if(user === null){
+        if (user === null) {
             return false
-        }else{
+        } else {
             return true;
         }
     }
 
     iniciarSessao = (usuario) => {
         AuthService.logar(usuario);
-        this.setState({ isAutenticado: true, usuarioAutenticado: usuario });
+        this.setState({
+            isAutenticado: true,
+            usuarioAutenticado: usuario,
+            id: usuario.id
+        });
         this.setState({ isSolicitante: usuario.solicitante ? true : false });
         this.setState({ isPrestador: usuario.solicitante ? false : true });
     }
@@ -33,7 +38,8 @@ class ProvedorAutenticacao extends React.Component {
         AuthService.removerUsuarioAutenticado();
         this.setState({
             isAutenticado: false, usuarioAutenticado: null,
-            isPrestador: false, isSolicitante: false
+            isPrestador: false, isSolicitante: false,
+            id: null,
         })
     }
 
@@ -47,6 +53,10 @@ class ProvedorAutenticacao extends React.Component {
         return resumo;
     }
 
+    tipoUsuario = () => {
+        return AuthService.tipoUsuario();
+    }
+
     render() {
         const contexto = {
             isAutenticado: this.state.isAutenticado,
@@ -54,7 +64,8 @@ class ProvedorAutenticacao extends React.Component {
             isPrestador: this.state.isPrestador,
             iniciarSessao: this.iniciarSessao,
             encerrarSessao: this.encerrarSessao,
-            obterResumo: this.obterResumo
+            obterResumo: this.obterResumo,
+            tipoUsuario: this.tipoUsuario,
         }
 
         return (

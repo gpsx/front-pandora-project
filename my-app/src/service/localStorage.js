@@ -1,4 +1,5 @@
 export default class LocalStorageService {
+
     static addItem(chave, valor) {
         localStorage.setItem(chave, JSON.stringify(valor));
     }
@@ -32,11 +33,6 @@ export default class LocalStorageService {
         } else {
             return usuario.solicitante ? "solicitante" : "prestador"
         }
-    }
-
-    static isLogado() {
-        const usuario = this.obterItem("_usuario_logado");
-        return usuario === null;
     }
 }
 

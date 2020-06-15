@@ -25,4 +25,9 @@ export default class AuthService {
         LocalStorageService.removeItem(USUARIO_LOGADO)
     }
 
+    static tipoUsuario(){
+        let user = this.obterUsuarioAutenticado();
+        return user.solicitante ? "solicitante" : "prestador"
+    }
+
 }
