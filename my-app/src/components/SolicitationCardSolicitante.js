@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Card, CardContent } from "@material-ui/core";
 import { CardMedia, Divider, Box, Button } from "@material-ui/core";
 import FormDialogAvaliar from './../views/DialogView/Servicos/avaliar';
+import LocalStorageService from '../service/localStorage';
 
 
 const useStyles = makeStyles({
@@ -45,6 +46,10 @@ const useStyles = makeStyles({
 export default function ServiceCard(props) {
 
     const classes = useStyles();
+    
+    const addConversation = ()=>{
+        console.log(LocalStorageService.obterUsuario()); 
+    }
 
     return (
         <div>
@@ -77,8 +82,8 @@ export default function ServiceCard(props) {
                                         </>
                                     )
                             }
-                            <Button size="small" variant="contained" color="primary" className={classes.button}>
-                                Chamar no Chat
+                            <Button size="small" variant="contained" color="primary" className={classes.button} onClick={addConversation()}>
+                                Adicionar ao chat
                             </Button>
                         </Box>
                     </CardContent>

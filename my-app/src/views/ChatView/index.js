@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { withStyles, Grid, Paper } from '@material-ui/core';
 import MenuPrestador from '../../components/MenuPrestador';
 import Container from '../../components/Container';
@@ -6,6 +6,7 @@ import Mensagens from './Mensagens';
 import ChatPandora from './Chat';
 import io from "socket.io-client";
 const socket = io("http://localhost:4001");
+
 const styles = (theme) => ({
     titulo: {
         color: 'black',

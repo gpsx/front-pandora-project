@@ -56,6 +56,8 @@ class MeuServico extends React.Component {
     componentDidMount() {
         service.meusServicos(this.id)
             .then(response => {
+                console.log(response.data);
+                
                 this.setState({ servicos: response.data });
             })
     }

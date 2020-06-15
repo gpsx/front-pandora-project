@@ -4,6 +4,7 @@ import { Typography, Card, CardContent } from "@material-ui/core";
 import { CardMedia, Divider, Box, Button } from "@material-ui/core";
 import solicitacoesService from '../service/solicitacoesService'
 
+
 const useStyles = makeStyles({
   root: {
     display: "flex",
@@ -118,7 +119,7 @@ export default function ServiceCard(props) {
                     )
               }
               <Button size="small" variant="contained" color="primary" className={classes.button}>
-                Chamar no Chat
+                Adicionar ao chat
               </Button>
             </Box>
           </CardContent>

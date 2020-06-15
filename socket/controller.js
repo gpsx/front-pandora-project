@@ -60,7 +60,7 @@ module.exports = {
             if (isChat) {
                 userConversations.push(msgs.conversations[i])
                 isChat = false
-            }           
+            }
         }
         return userConversations
     }
