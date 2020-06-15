@@ -48,7 +48,10 @@ function Chat(props) {
                     title = data.users[i].nome
                 }
             }
+            console.log(data, "selectedConversation");
+            
             setConversation({
+                chatId: data.id,
                 title,
                 chat: data.chat
             })
@@ -79,6 +82,7 @@ function Chat(props) {
 
     const [conversation, setConversation] = useState({
         chat: [],
+        chatId: -1,
         title: ""
     });
 
@@ -89,7 +93,6 @@ function Chat(props) {
 
     const changeId = (novoId) => {
         socket.emit("getConversation", novoId)
-        console.log("ATUALIZOU")
     }
 
     return (

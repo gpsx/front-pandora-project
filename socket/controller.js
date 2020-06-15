@@ -1,16 +1,23 @@
 let msgs = require("./data")
 console.log(msgs);
-
+let findChatId = (id) => {
+    for (let i = 0; i < msgs.conversations; i++) {
+        console.log(msgs.conversations[i]);
+        
+        if (id == msgs.conversations[i].id) {
+            return i
+        }
+    }
+    return -1
+}
 module.exports = {
     addConversation: (users) => {
         msgs.conversations.push({
-            id: this.newId(),
+            id: msgs.conversations.length,
             users,
             chat: [] 
         })
-    },
-    newId:  () => {
-        return msgs.conversations.length
+        console.log(msgs);
     },
     findByUserChatId: (id) => {
         isChat = false
@@ -35,18 +42,9 @@ module.exports = {
         }
         return -1
     },
-    findChatId: () => {
-        isChat = false
-        for (let i = 0; i < msgs.conversations; i++) {
-            if (id == msgs.conversations[i].id) {
-                return i
-            }
-        }
-        return -1
-    },
     addMessage: (message) => {
-        chatId = this.findByChatId(message.id)
-        msgs.conversations[chatId].chat.push(message)
+        console.log(message.chatId, "id");
+        msgs.conversations[message.chatId].chat.push(message)
     },
     userConversation: (id) => {
         isChat = false

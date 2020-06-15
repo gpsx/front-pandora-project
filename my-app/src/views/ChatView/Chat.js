@@ -76,38 +76,37 @@ class ChatPandora extends React.Component {
     }
 
     componentDidMount() {
+        console.log(this.props);
         this.setListener()
+        this.setState({ chatId: this.props.Conversation.chatId })
         this.setState({ title: this.props.Conversation.title })
         this.setState({ conversa: this.props.Conversation.chat });
-        console.log(this.state.conversa)
+        console.log(this.state.conversa, "conversa")
     }
 
     componentDidUpdate(prevProps){
         if(prevProps !== this.props){
-            this.setState({chatId: this.props.Conversation.chatId});
+            this.setState({ chatId: this.props.Conversation.chatId });
             this.setState({ conversa: this.props.Conversation.chat });
+            this.setState({ title: this.props.Conversation.title });
         }
     }
 
 
     setListener = () => socket.on("new-msg", (data) => {
         console.log(data);
-        let newMessage = {
-            userId: "2",
-            mensagem: data,
-            hora: new Date().toLocaleString()
-        }
-        this.setState({ conversa: [...this.state.conversa, newMessage] })
+        this.setState({ conversa: [...this.state.conversa, data] })
     })
     sendMessage = () => {
         let newMessage = {
-            userId: this.idUsuario,
+            chatId: this.state.chatId,
+            userId: idUsuario,
             mensagem: this.state.currentMessage,
             hora: new Date().toLocaleString()
         }
         this.setState({ currentMessage: "" })
         this.setState({ conversa: [...this.state.conversa, newMessage] })
-        socket.emit("msg", this.state.currentMessage)
+        socket.emit("msg", newMessage)
     }
 
     render() {
