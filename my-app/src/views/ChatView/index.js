@@ -5,6 +5,9 @@ import Container from '../../components/Container';
 import Mensagens from './Mensagens';
 import ChatPandora from './Chat';
 import io from "socket.io-client";
+import LocalStorageService from '../../service/localStorage'
+
+const idUsuario = LocalStorageService.obterIdUsuario();
 const socket = io("http://localhost:4001");
 
 const styles = (theme) => ({
@@ -40,6 +43,11 @@ function Chat(props) {
     const setListeners = () =>{
         socket.on("selectedConversation", (data) => {
             let title = data.users[0].nome;
+            for (let i = 0; i < data.users.length; i++) {
+                if (data.users[i].id != idUsuario) {
+                    title = data.users[i].nome
+                }
+            }
             setConversation({
                 title,
                 chat: data.chat
@@ -50,7 +58,7 @@ function Chat(props) {
         socket.on("userConversations", chats => {
             for (let i = 0; i < chats.length; i++) {
                 for (let j = 0; j < chats[i].users.length; j++) {
-                    if (chats[i].users[j].id != 3) {
+                    if (chats[i].users[j].id != idUsuario) {
                         chats[i].otherUser = {
                             img: chats[i].users[j].img,
                             name: chats[i].users[j].nome
@@ -75,7 +83,7 @@ function Chat(props) {
     });
 
     useEffect(() => {
-        socket.emit("getUserConversation", 1)
+        socket.emit("getUserConversation", idUsuario)
         setListeners()
     },[]);
 

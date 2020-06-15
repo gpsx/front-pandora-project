@@ -10,7 +10,9 @@ import SendIcon from '@material-ui/icons/Send';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import io from "socket.io-client";
 import ListaConversa from './ListaConversa'
+import LocalStorageService from '../../service/localStorage'
 
+const idUsuario = LocalStorageService.obterIdUsuario();
 const socket = io("http://localhost:4001");
 
 const styles = (theme) => ({
@@ -99,7 +101,7 @@ class ChatPandora extends React.Component {
     })
     sendMessage = () => {
         let newMessage = {
-            userId: "1",
+            userId: idUs,
             mensagem: this.state.currentMessage,
             hora: new Date().toLocaleString()
         }

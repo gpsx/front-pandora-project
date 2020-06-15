@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
-import LocalStorageService from '../../service/localStorage'
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Grid from '@material-ui/core/Grid';
+import LocalStorageService from '../../service/localStorage'
 
-// const idUsuario = LocalStorageService.obterIdUsuario();
-const idUsuario = 1;
+const idUsuario = LocalStorageService.obterIdUsuario();
 
 export default function ListaConversa(props) {
 
