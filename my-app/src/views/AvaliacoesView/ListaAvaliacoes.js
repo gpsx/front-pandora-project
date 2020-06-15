@@ -1,6 +1,6 @@
 import React from 'react'
-import AvaliationCard from '../../components/AvaliantionCard'
 import { Grid } from '@material-ui/core';
+import AvaliationCard from '../../components/AvaliantionCard'
 import ImagemGenerica from './../../assets/servicos/generico.jpg'
 
 export default function ListaAvaliacoes({ avaliacoes }) {

@@ -1,18 +1,16 @@
 import React from 'react';
+import { socketServer } from "./../../utils/index"
+import {AuthContext} from '../../main/ProvedorAutenticacao';
+
 import { withStyles, createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import Divider from '@material-ui/core/Divider';
-import TextField from '@material-ui/core/TextField';
-import List from '@material-ui/core/List';
+import { Paper, Grid, Divider, TextField } from '@material-ui/core';
+import { List, ListSubheader } from '@material-ui/core';
 import Fab from '@material-ui/core/Fab';
 import SendIcon from '@material-ui/icons/Send';
-import ListSubheader from '@material-ui/core/ListSubheader';
-import { socketServer } from "./../../utils/index"
+
 import ListaConversa from './ListaConversa'
 import LocalStorageService from '../../service/localStorage'
 
-const idUsuario = LocalStorageService.obterIdUsuario();
 const socket = socketServer;
 
 const styles = (theme) => ({
@@ -44,63 +42,57 @@ const theme = createMuiTheme({
         MuiFab: {
             secondary: {
                 backgroundColor: "#0B3C5D",
-                "&:hover": {
-                    backgroundColor: "#696969"
-                }
+                "&:hover": { backgroundColor: "#696969" }
             }
         },
         MuiInput: {
             underline: {
-                "&:after": {
-                    borderBottom: "2px solid #0B3C5D",
-                }
+                "&:after": { borderBottom: "2px solid #0B3C5D", }
             }
         }
     }
 });
 
 class ChatPandora extends React.Component {
-
+    idUsuario = this.context.id;
 
     constructor(props) {
         super(props)
-        
+
         this.state = {
             empty: "",
             currentMessage: "",
             title: "",
-            chatId:'',
+            chatId: '',
             conversa: [],
 
         }
     }
 
     componentDidMount() {
-        console.log(this.props);
         this.setListener()
         this.setState({ chatId: this.props.Conversation.chatId })
         this.setState({ title: this.props.Conversation.title })
         this.setState({ conversa: this.props.Conversation.chat });
-        console.log(this.state.conversa, "conversa")
     }
 
-    componentDidUpdate(prevProps){
-        if(prevProps !== this.props){
+    componentDidUpdate(prevProps) {
+        if (prevProps !== this.props) {
             this.setState({ chatId: this.props.Conversation.chatId });
             this.setState({ conversa: this.props.Conversation.chat });
             this.setState({ title: this.props.Conversation.title });
         }
     }
 
-
     setListener = () => socket.on("new-msg", (data) => {
-        console.log(data);
+
         this.setState({ conversa: [...this.state.conversa, data] })
-    })
+    });
+
     sendMessage = () => {
         let newMessage = {
             chatId: this.state.chatId,
-            userId: idUsuario,
+            userId: this.idUsuario,
             mensagem: this.state.currentMessage,
             hora: new Date().toLocaleString()
         }
@@ -110,7 +102,6 @@ class ChatPandora extends React.Component {
     }
 
     render() {
-
         const { classes } = this.props;
 
         return (
@@ -154,4 +145,5 @@ class ChatPandora extends React.Component {
     }
 }
 
+ChatPandora.contextType = AuthContext;
 export default withStyles(styles)(ChatPandora);

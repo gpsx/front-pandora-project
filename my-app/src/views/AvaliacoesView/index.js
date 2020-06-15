@@ -1,12 +1,13 @@
 import React from 'react';
 import { withStyles, Grid } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
+
 import MenuPrestador from '../../components/MenuPrestador';
 import Container from '../../components/Container';
-import Footer from '../../components/Footer';
-import avaliacoesService from '../../service/avaliacoesService'
-import LocalStorageService from '../../service/localStorage'
 import ListaAvaliacoes from './ListaAvaliacoes';
+
+import avaliacoesService from '../../service/avaliacoesService'
+import { AuthContext } from '../../main/ProvedorAutenticacao';
 
 const styles = (theme) => ({
     paper: {
@@ -27,14 +28,14 @@ const styles = (theme) => ({
 });
 
 class Avaliacoes extends React.Component {
-    id = LocalStorageService.obterIdUsuario();
+    id = this.context.id;
 
     state = {
         data: []
     }
 
     componentDidMount() {
-        avaliacoesService.obterPorPrestador(this.id)
+        avaliacoesService.byId(this.id)
             .then(response => {
                 this.setState({ data: response.data });
             })
@@ -47,7 +48,6 @@ class Avaliacoes extends React.Component {
             <Container>
                 <MenuPrestador />
                 <Grid container justify="center" direction="row" spacing={6}>
-
                     <Grid item className={classes.avaliacoes}>
                         <div className={classes.h1}>Minhas Avaliações</div>
                         {this.state.data.length > 0 ? (
@@ -59,11 +59,10 @@ class Avaliacoes extends React.Component {
                             )}
                     </Grid>
                 </Grid>
-
             </Container>
-
         );
     }
 }
 
+Avaliacoes.contextType = AuthContext;
 export default withStyles(styles)(Avaliacoes);

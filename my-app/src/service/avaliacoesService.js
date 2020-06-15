@@ -7,7 +7,8 @@ module.exports = {
         return await api.post(`${url}/novo`, avaliacao)
     },
 
-    obterPorPrestador: async (id) => {
+    byId: async (id) => {
         return await api.get(`${url}/minhas_avaliacoes/${id}`)
     },
+
 }

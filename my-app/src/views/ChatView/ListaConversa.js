@@ -1,12 +1,13 @@
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
+import { AuthContext } from '../../main/ProvedorAutenticacao';
+
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Grid from '@material-ui/core/Grid';
-import LocalStorageService from '../../service/localStorage'
-
-const idUsuario = LocalStorageService.obterIdUsuario();
 
 export default function ListaConversa(props) {
+    const context = useContext(AuthContext);
+    const idUsuario = context.id;
 
     return (
         <React.Fragment>

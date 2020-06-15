@@ -14,43 +14,31 @@ const useStyles = makeStyles((theme) => ({
   },
   subheader: {
     backgroundColor: theme.palette.background.paper,
-    height:'10%'
-  },
-  appBar: {
-    top: 'auto',
-    bottom: 0,
+    height: '10%'
   },
   grow: {
     flexGrow: 1,
   },
-  fabButton: {
-    position: 'absolute',
-    zIndex: 1,
-    top: -30,
-    left: 0,
-    right: 0,
-    margin: '0 auto',
-  },
 }));
 
-export default function Mensagens({changeId, ...props}) {
+export default function Mensagens({ changeId, ...props }) {
   const classes = useStyles();
 
   return (
     <React.Fragment>
-        <List className={classes.list}>
-          {props.chats.map((data) => 
-            (<React.Fragment key={data.id}>
-              {data.id === props.chats[0].id && <ListSubheader className={classes.subheader}>Pandora Chat</ListSubheader>}
-              <ListItem button onClick={(e) => changeId(data.id)}>
-                <ListItemAvatar>
-                  <Avatar alt="Profile Picture" src={data.otherUser.img} />
-                </ListItemAvatar>
-                <ListItemText primary={data.otherUser.name} />
-              </ListItem>
-            </React.Fragment>)
-          )}
-        </List>
+      <List className={classes.list}>
+        {props.chats.map((data) =>
+          (<React.Fragment key={data.id}>
+            {data.id === props.chats[0].id && <ListSubheader className={classes.subheader}>Pandora Chat</ListSubheader>}
+            <ListItem button onClick={(e) => changeId(data.id)}>
+              <ListItemAvatar>
+                <Avatar alt="Profile Picture" src={data.otherUser.img} />
+              </ListItemAvatar>
+              <ListItemText primary={data.otherUser.name} />
+            </ListItem>
+          </React.Fragment>)
+        )}
+      </List>
     </React.Fragment>
   );
 }

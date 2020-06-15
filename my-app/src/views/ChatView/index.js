@@ -7,11 +7,10 @@ import Container from '../../components/Container';
 import Mensagens from './Mensagens';
 import ChatPandora from './Chat';
 import { socketServer } from "./../../utils/index"
-import LocalStorageService from '../../service/localStorage'
 
 import Imagem from '../../assets/logo72.png'
 
-const idUsuario = LocalStorageService.obterIdUsuario();
+
 const socket = socketServer;
 
 const styles = (theme) => ({
@@ -22,16 +21,9 @@ const styles = (theme) => ({
         fontSize: '24px',
         fontWeight: '200',
     },
-    h1: {
-        marginLeft: '8px',
-        marginTop: '-2.8%',
-        lineHeight: '5px',
-        fontSize: '14px',
-    },
     container: {
         display: 'flex',
     },
-
     paperChat: {
         display: "flex"
     },
@@ -51,6 +43,7 @@ const styles = (theme) => ({
 function Chat(props) {
     const context = useContext(AuthContext);
     const userType = context.tipoUsuario();
+    const idUsuario = context.id;
 
     const setListeners = () => {
         socket.on("selectedConversation", (data) => {
