@@ -52,14 +52,13 @@ export default function ServiceCard(props) {
     const context = useContext(AuthContext);
     const classes = useStyles();
 
-    const { openAlert, setOpenAlert } = useState(false);
-    const { severity, setSeverity } = useState("success");
-    const { message, setMessage } = useState("Usuário adicionado ao chat!");
+    const [openAlert, setOpenAlert] = useState(false);
+    const [severity, setSeverity] = useState("success");
+    const [message, setMessage] = useState("Usuário adicionado ao chat!");
 
 
     const createChat = () => {
-        console.log(context);
-        
+
         let array = [];
         let user1 = {
             nome: props.name,
@@ -72,7 +71,7 @@ export default function ServiceCard(props) {
         array.push(user2);
         socket.emit("addConversation", array);
 
-        //setOpenAlert(true);
+        setOpenAlert(true);
     }
 
     return (
