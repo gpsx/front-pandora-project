@@ -21,7 +21,11 @@ module.exports = {
 
     filtrarPorPalavra: async (palavra) => {
         return await api.get(`${url}/busca-palavra?filtro=${palavra}`);
-    }
+    },
+
+    filtrarPorNota: async (nota) => {
+        return await api.get(`${url}/por-nota/${nota}`)
+    },
 
 
 }

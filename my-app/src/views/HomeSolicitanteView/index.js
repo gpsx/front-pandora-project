@@ -5,7 +5,7 @@ import MenuSolicitante from '../../components/MenuSolicitante.js';
 import ListaServicos from './ListaServicos.js'
 import Alert from '@material-ui/lab/Alert';
 import Filtro from './filtro'
-
+import Backdrop from '../../components/Backdrop';
 import service from '../../service/otherService'
 import servicesService from '../../service/servicesService'
 
@@ -32,16 +32,20 @@ const useStyles = theme => ({
 class HomeSolicitante extends React.Component {
 
     state = {
+        todos: [],
         servicos: [],
         alerta: false,
+        backdrop: false,
     }
 
     carregarServicos = () => {
         service.getServicosTodos()
             .then(response => {
                 this.setState({
+                    todos: response.data,
                     servicos: response.data,
-                    alerta: false
+                    alerta: false,
+                    backdrop: false,
                 })
             }).catch(err => {
                 console.log("Erro")
@@ -49,23 +53,34 @@ class HomeSolicitante extends React.Component {
     }
 
     componentDidMount() {
+        this.setState({ backdrop: true });
         this.carregarServicos();
     }
 
     filtrar = (filtro, valor) => {
+        this.setState({ backdrop: true });
         if (filtro == null) {
-            this.carregarServicos();
+            this.setState({ servicos: this.state.todos, backdrop: false });
         } else if (filtro === 'categoria') {
             this.filtroCategoria(valor);
-        }else if(filtro === 'palavra'){
+        } else if (filtro === 'palavra') {
             this.filtroTexto(valor)
+        } else if (filtro === 'nota') {
+            this.filtroRating(valor);
         }
-        console.log(filtro)
-        console.log(valor)
     }
 
-    filtroRating = (rating) => {
-
+    filtroRating = (nota) => {
+        servicesService.filtrarPorNota(nota)
+            .then(response => {
+                if (!response.data) {
+                    this.naoEncontrado();
+                    this.setState({ backdrop: false });
+                } else {
+                    this.setState({ servicos: response.data, alerta: false })
+                    this.setState({ backdrop: false });
+                }
+            })
     }
 
     filtroTexto = (texto) => {
@@ -73,8 +88,10 @@ class HomeSolicitante extends React.Component {
             .then(response => {
                 if (!response.data) {
                     this.naoEncontrado();
+                    this.setState({ backdrop: false });
                 } else {
                     this.setState({ servicos: response.data, alerta: false })
+                    this.setState({ backdrop: false });
                 }
             })
     }
@@ -84,8 +101,10 @@ class HomeSolicitante extends React.Component {
             .then(response => {
                 if (!response.data) {
                     this.naoEncontrado();
+                    this.setState({ backdrop: false });
                 } else {
                     this.setState({ servicos: response.data, alerta: false })
+                    this.setState({ backdrop: false });
                 }
             }).catch(err => {
                 console.log(err)
@@ -104,6 +123,7 @@ class HomeSolicitante extends React.Component {
             <Container className={classes.container}>
                 <MenuSolicitante />
 
+                <Backdrop open={this.state.backdrop} />
                 <Grid container justify="center" alignItems="center" direction="column" spacing={6}>
 
                     <Grid item className={classes.popular}>

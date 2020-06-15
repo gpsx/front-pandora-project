@@ -108,7 +108,7 @@ export default function Filtro(props) {
                     <div className={classes.estrelas}>
                         <Grid item>
                             <ThemeProvider theme={theme}>
-                                <Estrelinhas getValue={(e) => console.log(e)} />
+                                <Estrelinhas getValue={(e) => props.globalChanges("nota", e)} />
                             </ThemeProvider>
                         </Grid>
                     </div>
