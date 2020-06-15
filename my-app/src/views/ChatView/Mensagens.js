@@ -41,7 +41,7 @@ export default function Mensagens({changeId, ...props}) {
         <List className={classes.list}>
           {props.chats.map((data) => 
             (<React.Fragment key={data.id}>
-              {data.id === 1 && <ListSubheader className={classes.subheader}>Pandora Chat</ListSubheader>}
+              {data.id === props.chats[0].id && <ListSubheader className={classes.subheader}>Pandora Chat</ListSubheader>}
               <ListItem button onClick={(e) => changeId(data.id)}>
                 <ListItemAvatar>
                   <Avatar alt="Profile Picture" src={data.otherUser.img} />

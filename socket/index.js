@@ -6,7 +6,7 @@ io.on("connection", function(socket) {
     console.log(socket.id);
     
     socket.on("msg", function(data) {
-      console.log(data);
+      console.log(data, "newMsgrs");
       controller.addMessage(data)
       socket.broadcast.emit("new-msg", data)
     });

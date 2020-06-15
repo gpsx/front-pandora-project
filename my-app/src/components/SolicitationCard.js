@@ -146,7 +146,7 @@ export default function ServiceCard(props) {
                       </>
                     )
               }
-              <Button size="small" variant="contained" color="primary" className={classes.button} onClick={createChat()}>
+              <Button size="small" variant="contained" color="primary" className={classes.button} onClick={createChat}>
                 Adicionar ao chat
               </Button>
             </Box>
