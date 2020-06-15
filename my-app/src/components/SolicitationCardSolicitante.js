@@ -32,7 +32,7 @@ const useStyles = makeStyles({
     },
     button: {
         alignSelf: "flex-end",
-        width: "15%",
+        width: "20%",
         marginRight: '5px',
         backgroundColor: '#0B3C5D',
         '&:hover': {
@@ -40,7 +40,7 @@ const useStyles = makeStyles({
         },
     },
     margin: {
-        marginBottom: '5px',
+        marginBottom: '10px',
     },
     divider: {
         margin: 10
@@ -107,7 +107,7 @@ export default function ServiceCard(props) {
                                     )
                             }
                             <Button size="small" variant="contained" color="primary" className={classes.button} onClick={createChat()}>
-                                Adicionar ao chat
+                                Add ao chat
                             </Button>
                         </Box>
                     </CardContent>

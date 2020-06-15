@@ -89,7 +89,7 @@ export default function CustomizedTabs(props) {
                     return <CustomTab label={item.title} />;
                 })}
             </CustomTabs>
-            <SwipeableViews axis="x" index={value} onChangeIndex={handleChange}>
+            <SwipeableViews containerStyle={{height: '500px'}} axis="x" index={value} onChangeIndex={handleChange}>
                 {props.tabs.pages.map((item, i) => {
                     return (
                         <TabPanel value={value} index={i}>

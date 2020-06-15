@@ -24,7 +24,7 @@ const useStyles = makeStyles({
     fontSize: 12,
   },
   margin: {
-    marginBottom: '5px',
+    marginBottom: '10px',
   },
   cover: {
     width: 100,
@@ -59,9 +59,9 @@ export default function ServiceCard(props) {
   const context = useContext(AuthContext);
   const classes = useStyles();
 
-  const { openAlert, setOpenAlert } = useState(false);
-  const { severity, setSeverity } = useState("success");
-  const { message, setMessage } = useState("Usuário adicionado ao chat!");
+  const [openAlert, setOpenAlert] = useState(false);
+  const [severity, setSeverity] = useState("success");
+  const [message, setMessage] = useState("Usuário adicionado ao chat!");
 
 
   const createChat = () => {
@@ -147,7 +147,7 @@ export default function ServiceCard(props) {
                     )
               }
               <Button size="small" variant="contained" color="primary" className={classes.button} onClick={createChat()}>
-                Adicionar ao chat
+                Add ao chat
               </Button>
             </Box>
           </CardContent>

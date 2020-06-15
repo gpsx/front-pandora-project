@@ -83,7 +83,13 @@ export default function ServiceCard(props) {
   useEffect(() => {
     service.pegarAvaliacao(props.id)
       .then(response => {
-        setAvaliation(response.data.toFixed(1));
+        try {
+          console.log(response.data)
+          let avaliacao = response.data.toFixed(1);
+          setAvaliation(avaliacao);
+        } catch (erro) {
+          setAvaliation(3);
+        }
       })
   }, [props.id])
 

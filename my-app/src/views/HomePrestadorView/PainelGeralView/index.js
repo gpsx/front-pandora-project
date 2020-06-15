@@ -26,9 +26,17 @@ class PainelPrestador extends React.Component {
         finalizados: [],
     }
 
+    componentDidMount() {
+        this.getSolicitados();
+        this.getAprovados();
+        this.getExecucao();
+        this.getFinalizados();
+    }
+
     getSolicitados = () => {
         solicitacoesService.getSolicitados(this.id, this.tipo)
             .then(response => {
+                console.log(response.data)
                 this.setState({ solicitados: response.data })
             })
     }
@@ -52,13 +60,6 @@ class PainelPrestador extends React.Component {
             .then(response => {
                 this.setState({ finalizados: response.data })
             })
-    }
-
-    componentDidMount() {
-        this.getSolicitados();
-        this.getAprovados();
-        this.getExecucao();
-        this.getFinalizados();
     }
 
     tabs = {

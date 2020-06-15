@@ -94,8 +94,12 @@ class SolicitanteStepper extends React.Component {
       this.errorMessage(value)
     }
     if (key === "endereco") {
-      this.setState({endereco: value});
+      this.alteraEndereco(value);
     }
+  }
+
+  alteraEndereco(endereco) {
+    this.setState({ endereco });
   }
 
   getStepContent = (step) => {
@@ -118,7 +122,7 @@ class SolicitanteStepper extends React.Component {
       let erros = validarUsuario(this.state.usuario);
 
       if (erros.length === 0) {
-        this.setState({backdrop: true});
+        this.setState({ backdrop: true });
         let novoUsuario = {
           nome: this.state.usuario.nome,
           senha: this.state.usuario.senha,
@@ -134,7 +138,7 @@ class SolicitanteStepper extends React.Component {
         }
         service.registerSolicitante(novoUsuario)
           .then(response => {
-            this.setState({backdrop: false});
+            this.setState({ backdrop: false });
             this.sucessMessage();
             console.log(response.data)
             this.setState({
@@ -143,7 +147,7 @@ class SolicitanteStepper extends React.Component {
             });
 
           }).catch(erro => {
-            this.setState({backdrop: false});
+            this.setState({ backdrop: false });
             this.errorMessage(erro.response.data)
             console.log(erro.response.data)
           })
@@ -155,7 +159,7 @@ class SolicitanteStepper extends React.Component {
       }
       // Enviando serviço de cadastro de endereço
     } else if (activeStep === 1) {
-      this.setState({backdrop: true});
+      this.setState({ backdrop: true });
       service.registerEndereco({
         rua: this.state.endereco.rua,
         numero: this.state.endereco.numero,
@@ -165,7 +169,7 @@ class SolicitanteStepper extends React.Component {
         usuario: this.state.userId
 
       }).then(response => {
-        this.setState({backdrop: false});
+        this.setState({ backdrop: false });
         this.sucessMessage();
         console.log(response.data)
         this.setState({
@@ -173,7 +177,8 @@ class SolicitanteStepper extends React.Component {
         });
 
       }).catch(erro => {
-        this.setState({backdrop: false});
+        this.setState({ backdrop: false });
+        console.log(erro);
         this.errorMessage("Não foi possível cadastrar endereço")
       })
     }
@@ -230,7 +235,7 @@ class SolicitanteStepper extends React.Component {
 
     return (
       <div>
-        <Backdrop open={this.state.backdrop}/>
+        <Backdrop open={this.state.backdrop} />
         <Stepper activeStep={activeStep} connector={<QontoConnector />}>
           {steps.map((label) => {
             const props = {};

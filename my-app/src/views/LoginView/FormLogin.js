@@ -26,7 +26,7 @@ const button = {
 }
 
 class FormLogin extends React.Component {
-    
+
     state = {
         email: '',
         senha: '',
@@ -49,8 +49,7 @@ class FormLogin extends React.Component {
             }
         }).catch(erro => {
             try {
-                console.log(erro)
-                // this.errorMessage(erro.response.data)
+                this.errorMessage(erro.response.data)
             } catch (erro2) {
                 console.log(erro2);
                 this.errorMessage('Erro no servidor')

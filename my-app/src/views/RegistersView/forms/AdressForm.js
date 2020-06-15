@@ -5,7 +5,6 @@ import InputMask from 'react-input-mask';
 import IconButton from '@material-ui/core/IconButton';
 import Search from '@material-ui/icons/Search';
 import cepService from '../../../service/cepService';
-import endereco from '../../DialogView/Alteracoes/endereco';
 
 const margin = {
     paddingRight: '30px',
@@ -42,21 +41,17 @@ class FormAddress extends React.Component {
         },
     }
 
-    componentDidUpdate(prevState) {
-        if (prevState.endereco !== this.state.endereco) {
-            this.setState({ endereco: { ...endereco, cep: cep.relace(/[^\d]+/g, '') } });
-            this.props.globalChanges("endereco", this.state.endereco);
-        }
-    }
-
-    validaCnpj = () => {
-        const cepBusca = this.state.endereco.cep.replace(/[^\d]+/g, '');
-        cepService.buscarCep(cepBusca)
+    validaCep = () => {
+        let busca = this.state.endereco.cep.replace(/[^\d]+/g, '')
+        cepService.buscarCep(busca)
             .then(response => {
                 if (response.data.cep == null) {
                     this.props.globalChanges("erro", "O CEP é inválido!")
                 } else {
                     this.setState({ disabled: false, endereco: response.data })
+                    this.setState({ endereco: { ...this.state.endereco, cep: busca } });
+                    this.props.globalChanges("endereco", this.state.endereco);
+                    console.log(response.data)
                 }
             })
     }
@@ -77,7 +72,7 @@ class FormAddress extends React.Component {
                     </InputMask>
                     <IconButton
                         color="primary" aria-label="serarch" component="span"
-                        onClick={() => this.validaCnpj()}>
+                        onClick={() => this.validaCep()}>
                         <Search />
                     </IconButton>
                 </Grid>
@@ -90,7 +85,10 @@ class FormAddress extends React.Component {
                 <Grid item>
                     <h1 style={h1}>Número:</h1>
                     <Input style={input} disabled={this.state.disabled}
-                        onChange={e => { this.setState({ endereco: { ...this.state.endereco, numero: e.target.value } }) }} />
+                        onChange={e => {
+                            this.setState({ endereco: { ...this.state.endereco, numero: e.target.value } });
+                            this.props.globalChanges("endereco", this.state.endereco)
+                        }} />
                 </Grid>
 
                 <Grid item>
@@ -111,7 +109,10 @@ class FormAddress extends React.Component {
                 <Grid item>
                     <h1 style={h1}>Complemento:</h1>
                     <Input style={input} disabled={this.state.disabled}
-                        onChange={e => { this.setState({ endereco: { ...this.state.endereco, complemento: e.target.value } }) }} />
+                        onChange={e => {
+                            this.setState({ endereco: { ...this.state.endereco, complemento: e.target.value } })
+                            this.props.globalChanges("endereco", this.state.endereco)
+                        }} />
                 </Grid>
 
             </Grid >
