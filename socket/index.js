@@ -7,10 +7,12 @@ io.on("connection", function(socket) {
     
     socket.on("msg", function(data) {
       console.log(data);
+      controller.addMessage(data)
       socket.broadcast.emit("new-msg", data)
     });
 
     socket.on("addConversation", function(data) {
+      console.log(data);
       controller.addConversation(data)
     });
 

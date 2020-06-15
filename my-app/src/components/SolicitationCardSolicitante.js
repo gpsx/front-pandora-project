@@ -6,6 +6,7 @@ import { CardMedia, Divider, Box, Button } from "@material-ui/core";
 import FormDialogAvaliar from './../views/DialogView/Servicos/avaliar';
 import Alerta from '../components/Alerta'
 import io from "socket.io-client";
+import LocalStorageService from '../service/localStorage'
 
 const socket = io("http://localhost:4001");
 
