@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import AuthContext from '../main/ProvedorAutenticacao';
+import { AuthContext } from '../main/ProvedorAutenticacao';
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Card, CardContent } from "@material-ui/core";
 import { CardMedia, Divider, Box, Button } from "@material-ui/core";
@@ -146,7 +146,7 @@ export default function ServiceCard(props) {
                       </>
                     )
               }
-              <Button size="small" variant="contained" color="primary" className={classes.button}>
+              <Button size="small" variant="contained" color="primary" className={classes.button} onClick={createChat()}>
                 Adicionar ao chat
               </Button>
             </Box>

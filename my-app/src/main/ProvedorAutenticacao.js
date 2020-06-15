@@ -45,6 +45,7 @@ class ProvedorAutenticacao extends React.Component {
             isPrestador: this.state.isPrestador,
             iniciarSessao: this.iniciarSessao,
             encerrarSessao: this.encerrarSessao,
+            obterResumo: this.obterResumo
         }
 
         return (

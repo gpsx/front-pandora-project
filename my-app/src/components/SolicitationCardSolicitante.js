@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import AuthContext from '../main/ProvedorAutenticacao';
+import { AuthContext } from '../main/ProvedorAutenticacao';
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Card, CardContent } from "@material-ui/core";
 import { CardMedia, Divider, Box, Button } from "@material-ui/core";
@@ -7,7 +7,6 @@ import FormDialogAvaliar from './../views/DialogView/Servicos/avaliar';
 import LocalStorageService from '../service/localStorage'
 import Alerta from '../components/Alerta'
 import io from "socket.io-client";
-import LocalStorageService from '../service/localStorage'
 
 const socket = io("http://localhost:4001");
 
@@ -53,16 +52,14 @@ export default function ServiceCard(props) {
     const context = useContext(AuthContext);
     const classes = useStyles();
 
-    const addConversation = () => {
-        console.log(LocalStorageService.obterUsuario());
-    }
-
     const { openAlert, setOpenAlert } = useState(false);
     const { severity, setSeverity } = useState("success");
     const { message, setMessage } = useState("Usuário adicionado ao chat!");
 
 
     const createChat = () => {
+        console.log(context);
+        
         let array = [];
         let user1 = {
             nome: props.name,
@@ -75,7 +72,7 @@ export default function ServiceCard(props) {
         array.push(user2);
         socket.emit("addConversation", array);
 
-        setOpenAlert(true);
+        //setOpenAlert(true);
     }
 
     return (
@@ -109,7 +106,7 @@ export default function ServiceCard(props) {
                                         </>
                                     )
                             }
-                            <Button size="small" variant="contained" color="primary" className={classes.button} onClick={addConversation()}>
+                            <Button size="small" variant="contained" color="primary" className={classes.button} onClick={createChat()}>
                                 Adicionar ao chat
                             </Button>
                         </Box>
