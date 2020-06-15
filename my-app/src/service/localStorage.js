@@ -14,6 +14,9 @@ export default class LocalStorageService {
 
     static obterIdUsuario() {
         const usuario = this.obterItem("_usuario_logado");
+        if(usuario == null){
+            return null;
+        }
         return usuario.id
     }
 

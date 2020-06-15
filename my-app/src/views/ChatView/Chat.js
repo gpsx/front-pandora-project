@@ -101,7 +101,11 @@ class ChatPandora extends React.Component {
     })
     sendMessage = () => {
         let newMessage = {
+<<<<<<< HEAD
             userId: idUsuario,
+=======
+            userId: this.idUsuario,
+>>>>>>> a35ebf5d1b82992b2d6bfd5dd4ccf1725ce8108d
             mensagem: this.state.currentMessage,
             hora: new Date().toLocaleString()
         }

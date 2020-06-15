@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Card, CardContent } from "@material-ui/core";
 import { CardMedia, Divider, Box, Button } from "@material-ui/core";
 import FormDialogAvaliar from './../views/DialogView/Servicos/avaliar';
+import LocalStorageService from '../service/localStorage'
 import Alerta from '../components/Alerta'
 import io from "socket.io-client";
 import LocalStorageService from '../service/localStorage'
@@ -51,9 +52,9 @@ export default function ServiceCard(props) {
 
     const context = useContext(AuthContext);
     const classes = useStyles();
-    
-    const addConversation = ()=>{
-        console.log(LocalStorageService.obterUsuario()); 
+
+    const addConversation = () => {
+        console.log(LocalStorageService.obterUsuario());
     }
 
     const { openAlert, setOpenAlert } = useState(false);
