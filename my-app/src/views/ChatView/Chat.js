@@ -9,7 +9,6 @@ import Fab from '@material-ui/core/Fab';
 import SendIcon from '@material-ui/icons/Send';
 
 import ListaConversa from './ListaConversa'
-import LocalStorageService from '../../service/localStorage'
 
 const socket = socketServer;
 

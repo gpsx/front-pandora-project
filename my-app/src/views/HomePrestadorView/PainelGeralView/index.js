@@ -1,12 +1,15 @@
-import React from 'react'
-import Menu from '../../../components/MenuPrestador'
+import React from 'react';
+import {AuthContext} from '../../../main/ProvedorAutenticacao';
+
 import { Grid, withStyles } from '@material-ui/core';
-import TabPrestador from './TabPrestador'
+
+import TabPrestador from './TabPrestador';
+import Menu from '../../../components/MenuPrestador'
 import Container from '../../../components/Container';
 import Erro from '../../../components/AlertaErro'
-import localStorage from '../../../service/localStorage';
-import solicitacoesService from '../../../service/solicitacoesService';
 import ListaSolicitacoes from './ListaSolicitacoes'
+
+import solicitacoesService from '../../../service/solicitacoesService';
 
 const styles = (theme) => ({
     paper: {
@@ -16,8 +19,8 @@ const styles = (theme) => ({
 });
 
 class PainelPrestador extends React.Component {
-    id = localStorage.obterIdUsuario();
-    tipo = localStorage.getUserType();
+    id = this.context.id;
+    tipo = this.context.tipoUsuario;
 
     state = {
         solicitados: [],
@@ -138,4 +141,5 @@ class PainelPrestador extends React.Component {
 
 }
 
+PainelPrestador.contextType = AuthContext;
 export default withStyles(styles)(PainelPrestador);

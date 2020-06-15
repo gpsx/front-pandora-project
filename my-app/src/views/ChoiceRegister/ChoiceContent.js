@@ -5,14 +5,6 @@ import Button from '../../components/Button';
 import ChoiceLogo from './ChoiceLogo.js';
 
 const styles = (theme) => ({
-    h1: {
-        marginLeft: theme.spacing(29),
-        fontFamily: 'Roboto',
-        fontStyle: 'normal',
-        fontWeight: '200',
-        lineHeight: '28px',
-        fontSize: '30px',
-    },
     texto: {
         fontFamily: 'Roboto',
         fontStyle: 'normal',
@@ -25,8 +17,8 @@ const styles = (theme) => ({
     button: {
         width: theme.spacing(30.5),
         backgroundColor: '#0B3C5D',
-        marginLeft:'12px',
-        marginTop:'15px',
+        marginLeft: '12px',
+        marginTop: '15px',
         float: 'left',
         color: 'white',
         '&:hover': {

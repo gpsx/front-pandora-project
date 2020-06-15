@@ -9,7 +9,7 @@ import { SnackbarContent, Snackbar } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import { Dialog, DialogActions, DialogContent, DialogContentText } from '@material-ui/core';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import Link from './../../../components/Link';
+import Link from '../../../components/Link';
 import { AuthContext } from '../../../main/ProvedorAutenticacao';
 
 const styles = (theme) => ({

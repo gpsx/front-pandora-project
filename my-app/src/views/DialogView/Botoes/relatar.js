@@ -9,13 +9,11 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 const styles = (theme) => ({
-
     botao: {
         fontSize: '11px',
         width: '50%',
         height: '20%',
     },
-    
     botaoClose: {
         fontSize: '11px',
         width: '20%',
@@ -24,7 +22,6 @@ const styles = (theme) => ({
             backgroundColor: '#328CC1',
         },
     },
-
     tamanho: {
         width: '300px',
         height: '8%'
@@ -35,11 +32,7 @@ const styles = (theme) => ({
 const theme = createMuiTheme({
     overrides: {
         MuiInput: {
-            underline: {
-                "&:after": {
-                    borderBottom: "#0B3C5D",
-                },
-            }
+            underline: { "&:after": { borderBottom: "#0B3C5D", }, }
         },
     }
 })
@@ -66,7 +59,6 @@ function FormDialogRelatar(props) {
                 <DialogTitle id="form-dialog-title">Relatar Problema</DialogTitle >
 
                 <DialogContent>
-
                     <DialogContentText>
                         Caso houve algum problema com a nossa aplicação, que impossibilitou você de aproveitar
                         tudo o que Pandora oferece, diga de uma maneira breve para nós podermos resolver o quanto antes.
@@ -84,7 +76,6 @@ function FormDialogRelatar(props) {
                             fullWidth
                         />
                     </ThemeProvider>
-
                 </DialogContent>
 
                 <DialogActions>
@@ -92,7 +83,6 @@ function FormDialogRelatar(props) {
                     <Button className={classes.botaoClose} onClick={handleClose} color="primary">
                         Cancelar
                     </Button>
-
                     <Button className={classes.botaoClose} onClick={handleClose} color="primary">
                         Relatar
                     </Button>

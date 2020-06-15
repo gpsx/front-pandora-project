@@ -38,8 +38,7 @@ class ProvedorAutenticacao extends React.Component {
         AuthService.removerUsuarioAutenticado();
         this.setState({
             isAutenticado: false, usuarioAutenticado: null,
-            isPrestador: false, isSolicitante: false,
-            id: null,
+            isPrestador: false, isSolicitante: false, id: null,
         })
     }
 
@@ -62,6 +61,7 @@ class ProvedorAutenticacao extends React.Component {
             isAutenticado: this.state.isAutenticado,
             isSolicitante: this.state.isSolicitante,
             isPrestador: this.state.isPrestador,
+            id: this.state.id,
             iniciarSessao: this.iniciarSessao,
             encerrarSessao: this.encerrarSessao,
             obterResumo: this.obterResumo,

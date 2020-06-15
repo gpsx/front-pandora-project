@@ -1,9 +1,9 @@
 import React from 'react';
 import { Grid } from '@material-ui/core';
-import FormDialogSenha from './senha';
-import FormDialogEmail from './email';
-import FormDialogTelefone from './telefone';
-import FormDialogEndereco from './endereco';
+import FormDialogSenha from './SenhaDialog';
+import FormDialogEmail from './EmailDialog';
+import FormDialogTelefone from './TelefoneDialog';
+import FormDialogEndereco from './EnderecoDialog';
 
 export default function Alteracoes(props) {
 
@@ -19,7 +19,6 @@ export default function Alteracoes(props) {
                 {props.endereco ? (< FormDialogEndereco />) : (<></>)}
                 < FormDialogEmail />
             </Grid>
-
         </Grid >
     );
 }

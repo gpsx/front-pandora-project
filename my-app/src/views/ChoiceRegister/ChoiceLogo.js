@@ -2,7 +2,6 @@ import React from 'react'
 import { withStyles, Grid, } from '@material-ui/core';
 import LogoImg from './../../assets/logo72.png'
 
-
 const styles = (theme) => ({
     img: {
         width: '150px',

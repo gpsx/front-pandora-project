@@ -1,6 +1,8 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../../../main/ProvedorAutenticacao'
 import { withRouter } from 'react-router-dom'
+
+import Link from '../../../components/Link'
 import { Button, TextField } from '@material-ui/core';
 import { withStyles, createMuiTheme, ThemeProvider } from '@material-ui/core';
 import { SnackbarContent, Snackbar } from '@material-ui/core';
@@ -9,13 +11,12 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+
 import LocalStorageService from '../../../service/localStorage'
-import Link from '../../../components/Link'
 import alterarService from '../../../service/alteracoesService'
 import userService from '../../../service/userService'
 
 const styles = (theme) => ({
-
     link: {
         color: 'black',
         textDecoration: 'none',
@@ -29,27 +30,21 @@ const styles = (theme) => ({
             color: '#0B3C5D',
         },
     },
-
     tamanho: {
         width: '300px',
         height: '8%'
     }
-
 });
 
 const theme = createMuiTheme({
     overrides: {
         MuiInput: {
             underline: {
-                "&:after": {
-                    borderBottom: "2px solid #0B3C5D",
-                }
+                "&:after": { borderBottom: "2px solid #0B3C5D", }
             }
         },
         MuiButton: {
-            textPrimary: {
-                color: "#0B3C5D"
-            }
+            textPrimary: { color: "#0B3C5D" }
         },
     }
 })
@@ -89,7 +84,6 @@ function FormDialogEmail(props) {
         userService.logoff();
     }
 
-
     const validar = () => {
         let email = usuario.email;
         if (email !== eAntigo) {
@@ -122,19 +116,15 @@ function FormDialogEmail(props) {
             <div>
 
                 <div className={classes.tamanho}>
-
                     <Link onClick={handleClickOpen} style={{ textDecoration: 'none' }} >
                         Alterar e-mail
                     </Link>
-
                 </div>
 
                 <Dialog open={open} onClose={handleClose} fullWidth="18px" maxWidth="sm" aria-labelledby="form-dialog-title">
 
                     <DialogTitle id="form-dialog-title">Alterar o e-mail</DialogTitle >
-
                     <DialogContent>
-
                         <DialogContentText>
                             Digite o e-mail antigo.
                         </DialogContentText>
@@ -197,7 +187,6 @@ function FormDialogEmail(props) {
                             action={action}
                         />
                     </Snackbar>
-
 
                 </Dialog>
             </div>
