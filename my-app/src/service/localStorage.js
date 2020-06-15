@@ -17,6 +17,11 @@ export default class LocalStorageService {
         return usuario.id
     }
 
+    static obterUsuario() {
+        const usuario = this.obterItem("_usuario_logado");
+        return usuario
+    }
+
     static getUserType() {
         const usuario = this.obterItem("_usuario_logado");
         if (usuario === null) {

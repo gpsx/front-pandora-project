@@ -51,7 +51,7 @@ module.exports = {
     userConversation: (id) => {
         isChat = false
         userConversations = []
-        for (let i = 0; i < msgs.conversations; i++) {
+        for (let i = 0; i < msgs.conversations.length; i++) {
             for (let j = 0; j < msgs.conversations[i].users.length; j++) {
                 if (msgs.conversations[i].users[j].id == id) {
                     isChat = true

@@ -9,6 +9,7 @@ import io from "socket.io-client";
 
 const socket = io("http://localhost:4001");
 
+
 const useStyles = makeStyles({
   root: {
     display: "flex",
@@ -145,9 +146,9 @@ export default function ServiceCard(props) {
                       </>
                     )
               }
-              <Button onClick={createChat} size="small" variant="contained" color="primary" className={classes.button}>
-                Criar um Chat
-                </Button>
+              <Button size="small" variant="contained" color="primary" className={classes.button}>
+                Adicionar ao chat
+              </Button>
             </Box>
           </CardContent>
         </Box>

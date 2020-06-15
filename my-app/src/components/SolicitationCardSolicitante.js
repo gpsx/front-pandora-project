@@ -50,6 +50,10 @@ export default function ServiceCard(props) {
 
     const context = useContext(AuthContext);
     const classes = useStyles();
+    
+    const addConversation = ()=>{
+        console.log(LocalStorageService.obterUsuario()); 
+    }
 
     const { openAlert, setOpenAlert } = useState(false);
     const { severity, setSeverity } = useState("success");
@@ -103,8 +107,8 @@ export default function ServiceCard(props) {
                                         </>
                                     )
                             }
-                            <Button onaClick={createChat} size="small" variant="contained" color="primary" className={classes.button}>
-                                Criar um Chat
+                            <Button size="small" variant="contained" color="primary" className={classes.button} onClick={addConversation()}>
+                                Adicionar ao chat
                             </Button>
                         </Box>
                     </CardContent>

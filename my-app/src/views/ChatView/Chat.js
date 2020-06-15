@@ -10,7 +10,9 @@ import SendIcon from '@material-ui/icons/Send';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import io from "socket.io-client";
 import ListaConversa from './ListaConversa'
+import LocalStorageService from '../../service/localStorage'
 
+const idUsuario = LocalStorageService.obterIdUsuario();
 const socket = io("http://localhost:4001");
 
 const styles = (theme) => ({
@@ -73,9 +75,9 @@ class ChatPandora extends React.Component {
         }
     }
 
-
     componentDidMount() {
         this.setListener()
+        this.setState({ title: this.props.Conversation.title })
         this.setState({ conversa: this.props.Conversation.chat });
         console.log(this.state.conversa)
     }
@@ -91,7 +93,7 @@ class ChatPandora extends React.Component {
     setListener = () => socket.on("new-msg", (data) => {
         console.log(data);
         let newMessage = {
-            id: "2",
+            userId: "2",
             mensagem: data,
             hora: new Date().toLocaleString()
         }
@@ -99,7 +101,7 @@ class ChatPandora extends React.Component {
     })
     sendMessage = () => {
         let newMessage = {
-            id: "1",
+            userId: idUs,
             mensagem: this.state.currentMessage,
             hora: new Date().toLocaleString()
         }
@@ -130,7 +132,7 @@ class ChatPandora extends React.Component {
                     </List>
                     <Divider />
                     <Grid container style={{ padding: '20px' }}>
-                        <Grid item xs={11}>
+                        <Grid item={true} xs={11}>
                             <ThemeProvider theme={theme}>
                                 <TextField
                                     id="text"
@@ -141,7 +143,7 @@ class ChatPandora extends React.Component {
                                 />
                             </ThemeProvider>
                         </Grid>
-                        <Grid xs={1} align="right">
+                        <Grid item={true} xs={1} align="right">
                             <ThemeProvider theme={theme}>
                                 <Fab size="medium" color="secondary" aria-label="add" onClick={this.sendMessage}><SendIcon /></Fab>
                             </ThemeProvider>
