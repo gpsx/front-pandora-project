@@ -28,6 +28,16 @@ class ProvedorAutenticacao extends React.Component {
         })
     }
 
+    obterResumo = () => {
+        let user = AuthService.obterUsuarioAutenticado();
+        let resumo = {
+            nome: user.nome,
+            img: user.imagem,
+            id: user.id,
+        }
+        return resumo;
+    }
+
     render() {
         const contexto = {
             isAutenticado: this.state.isAutenticado,

@@ -12,6 +12,7 @@ export default function ListaServicos(props) {
                     id={solicitacao.id}
                     requestText={solicitacao.descricao}
                     name={solicitacao.fkSolicitante.nome}
+                    id={solicitacao.fkSolicitante.id}
                     serviceState={props.status}
                     img={solicitacao.fkSolicitante.imagem == null ? ImagemGenerica : solicitacao.fkSolicitante.imagem}
                 />

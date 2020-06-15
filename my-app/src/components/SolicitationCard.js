@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useContext, useState } from "react";
+import AuthContext from '../main/ProvedorAutenticacao';
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Card, CardContent } from "@material-ui/core";
 import { CardMedia, Divider, Box, Button } from "@material-ui/core";
-import solicitacoesService from '../service/solicitacoesService'
+import solicitacoesService from '../service/solicitacoesService';
+import Alerta from '../components/Alerta'
+import io from "socket.io-client";
+
+const socket = io("http://localhost:4001");
 
 const useStyles = makeStyles({
   root: {
@@ -50,8 +55,29 @@ const useStyles = makeStyles({
 });
 
 export default function ServiceCard(props) {
-
+  const context = useContext(AuthContext);
   const classes = useStyles();
+
+  const { openAlert, setOpenAlert } = useState(false);
+  const { severity, setSeverity } = useState("success");
+  const { message, setMessage } = useState("Usuário adicionado ao chat!");
+
+
+  const createChat = () => {
+    let array = [];
+    let user1 = {
+      nome: props.name,
+      id: props.id,
+      img: props.img,
+    };
+    let user2 = context.obterResumo();
+
+    array.push(user1);
+    array.push(user2);
+    socket.emit("addConversation", array);
+
+    setOpenAlert(true);
+  }
 
   const recarregar = () => {
     window.location.reload();
@@ -74,8 +100,10 @@ export default function ServiceCard(props) {
       .catch(console.log('erro'))
   }
 
+
   return (
     <div>
+      <Alerta close={() => setOpenAlert(false)} open={openAlert} severity={severity} message={message} />
       <Card className={classes.root}>
         <CardMedia
           component="img"
@@ -102,10 +130,10 @@ export default function ServiceCard(props) {
                     <>
                       <Button size="small" variant="contained" color="primary" className={classes.button} onClick={aprovar}>
                         APROVAR
-                      </Button>
+                        </Button>
                       <Button size="small" variant="contained" color="primary" className={classes.cancel} onClick={cancelar}>
                         DESCARTAR
-                      </Button>
+                        </Button>
                     </>
                   ) : props.serviceState === 'APROVADO' ?
                     (
@@ -117,9 +145,9 @@ export default function ServiceCard(props) {
                       </>
                     )
               }
-              <Button size="small" variant="contained" color="primary" className={classes.button}>
-                Chamar no Chat
-              </Button>
+              <Button onClick={createChat} size="small" variant="contained" color="primary" className={classes.button}>
+                Criar um Chat
+                </Button>
             </Box>
           </CardContent>
         </Box>
