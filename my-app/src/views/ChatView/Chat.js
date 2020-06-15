@@ -8,12 +8,12 @@ import List from '@material-ui/core/List';
 import Fab from '@material-ui/core/Fab';
 import SendIcon from '@material-ui/icons/Send';
 import ListSubheader from '@material-ui/core/ListSubheader';
-import io from "socket.io-client";
+import { socketServer } from "./../../utils/index"
 import ListaConversa from './ListaConversa'
 import LocalStorageService from '../../service/localStorage'
 
 const idUsuario = LocalStorageService.obterIdUsuario();
-const socket = io("http://localhost:4001");
+const socket = socketServer;
 
 const styles = (theme) => ({
     chatSection: {
