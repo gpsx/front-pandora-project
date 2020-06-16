@@ -33,11 +33,11 @@ export default function Mensagens({ changeId, ...props }) {
             {data.id === props.chats[0].id && <ListSubheader className={classes.subheader}>Pandora Chat</ListSubheader>}
             <ListItem button onClick={(e) => changeId(data.id)}>
               <ListItemAvatar>
-                Online? (
+                {data.otherUser.online ? (
                   <Avatar alt="Profile Picture" src={data.otherUser.img} />
                 ) : (
-                  <AvatarOnline><Avatar alt="Profile Picture" src={data.otherUser.online} /></AvatarOnline>
-                )
+                    <AvatarOnline><Avatar alt="Profile Picture" src={data.otherUser.online} /></AvatarOnline>
+                  )}
               </ListItemAvatar>
               <ListItemText primary={data.otherUser.name} />
             </ListItem>
