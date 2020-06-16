@@ -27,6 +27,14 @@ io.on("connection", function(socket) {
       io.to(socket.id).emit("userConversations", userConversation)
     })
 
+    socket.on("userConnect", id => {
+      console.log(id);
+    })
+
+    socket.on("userDisconnect", id => {
+      console.log(id);
+    })
+
 });
 
 http.listen(4001, function() {
