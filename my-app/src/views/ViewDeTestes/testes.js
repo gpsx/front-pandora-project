@@ -1,5 +1,5 @@
 import React from 'react'
-import Filtro from '../HomeSolicitanteView/Filtro'
+//import Filtro from '../HomeSolicitanteView/filtro.js'
 import SimpleCard from '../HomeView/Card'
 import Avatar from '@material-ui/core/Avatar'
 import ImgSueto from './../../assets/FelipeSueto.jpg'
@@ -24,7 +24,7 @@ class Testes extends React.Component {
 
         return (
             <>
-                <Filtro />
+                {/* <Filtro /> */}
                 <SimpleCard/>
                 <Avatar alt='Nicolle Cruz' src={ImgNicolle}/>
                 <Avatar alt='Giulia Maia' src={ImgGiulia}/>

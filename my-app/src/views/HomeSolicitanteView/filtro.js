@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { makeStyles, createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import Panel from '../../components/PanelCategorias';
 import Estrelinhas from '../../components/RatingStars';
-import { listarCategorias } from './../../utils/itens'
+import { listarCategorias } from '../../utils/itens'
 import { Paper, Grid, TextField, Select } from '@material-ui/core';
 import { MenuItem, FormControl } from "@material-ui/core";
 import IconButton from '@material-ui/core/IconButton';

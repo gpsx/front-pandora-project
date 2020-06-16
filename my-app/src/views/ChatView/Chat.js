@@ -1,12 +1,12 @@
 import React from 'react';
 import { socketServer } from "./../../utils/index"
-import {AuthContext} from '../../main/ProvedorAutenticacao';
-
+import { AuthContext } from '../../main/ProvedorAutenticacao';
 import { withStyles, createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { Paper, Grid, Divider, TextField } from '@material-ui/core';
 import { List, ListSubheader } from '@material-ui/core';
 import Fab from '@material-ui/core/Fab';
 import SendIcon from '@material-ui/icons/Send';
+import LocalStorage from '../../service/localStorage'
 
 import ListaConversa from './ListaConversa'
 
@@ -53,7 +53,7 @@ const theme = createMuiTheme({
 });
 
 class ChatPandora extends React.Component {
-    idUsuario = this.context.getId();
+    idUsuario = LocalStorage.obterIdUsuario();
 
     constructor(props) {
         super(props)
