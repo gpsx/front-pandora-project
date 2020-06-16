@@ -1,11 +1,12 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
+import Avatar from '@material-ui/core/Avatar';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
-import Avatar from '@material-ui/core/Avatar';
+import AvatarOnline from '../../components/AvatarOnline';
 
 const useStyles = makeStyles((theme) => ({
   list: {
@@ -32,7 +33,11 @@ export default function Mensagens({ changeId, ...props }) {
             {data.id === props.chats[0].id && <ListSubheader className={classes.subheader}>Pandora Chat</ListSubheader>}
             <ListItem button onClick={(e) => changeId(data.id)}>
               <ListItemAvatar>
-                <Avatar alt="Profile Picture" src={data.otherUser.img} />
+                Online? (
+                  <Avatar alt="Profile Picture" src={data.otherUser.img} />
+                ) : (
+                  <AvatarOnline><Avatar alt="Profile Picture" src={data.otherUser.online} /></AvatarOnline>
+                )
               </ListItemAvatar>
               <ListItemText primary={data.otherUser.name} />
             </ListItem>
