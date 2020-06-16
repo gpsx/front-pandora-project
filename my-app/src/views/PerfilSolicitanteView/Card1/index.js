@@ -55,10 +55,6 @@ function Card1(props) {
 
     const { classes } = props;
 
-    const handleBackdrop = () => {
-        setOpenBackdrop(!openBackdrop);
-    };
-
     function uploadImage(imagem) {
         setOpenBackdrop(true);
         let data = new FormData();

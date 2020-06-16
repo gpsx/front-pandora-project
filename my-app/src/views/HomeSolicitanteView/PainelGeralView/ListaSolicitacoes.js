@@ -1,10 +1,10 @@
-import React  from 'react'
+import React from 'react'
 import SolicitationCard from './../../../components/SolicitationCardSolicitante'
 import { Grid } from '@material-ui/core';
 import ImagemGenerica from './../../../assets/servicos/generico.jpg'
 
 export default function ListaServicos(props) {
-
+    
     const linhas = props.solicitacoes.map(solicitacao => {
         return (
             <Grid item>
@@ -22,7 +22,7 @@ export default function ListaServicos(props) {
 
     return (
         <Grid container direction="column"
-            spacing={0}>
+            spacing={1}>
             {linhas}
         </Grid>
     )

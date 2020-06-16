@@ -12,7 +12,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SimpleBackdrop(props) {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
 
   return (
       <Backdrop className={classes.backdrop} open={props.open} >

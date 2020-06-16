@@ -2,7 +2,6 @@ import React from 'react';
 import { withStyles, Grid } from '@material-ui/core';
 import MenuPrestador from './../../components/MenuPrestador';
 import Container from './../../components/Container'
-import Footer from './../../components/Footer';
 import Card1 from './Card1/index';
 import Card2 from './Card2/index';
 

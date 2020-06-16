@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Route, Switch, HashRouter, Redirect } from 'react-router-dom'
 import Login from '../views/LoginView'
 import PrestadorCadastro from './../views/RegistersView/Prestador'

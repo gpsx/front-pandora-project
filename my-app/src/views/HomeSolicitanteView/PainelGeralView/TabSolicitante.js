@@ -38,7 +38,7 @@ const CustomTab = withStyles(theme => ({
     root: {
         backgroundColor: "#0B3C5D",
         textTransform: "none",
-        minWidth: 72,
+        minWidth: 200,
         color: "#FFF",
         fontWeight: theme.typography.fontWeightRegular,
         marginRight: theme.spacing(4),
@@ -89,7 +89,7 @@ export default function CustomizedTabs(props) {
                     return <CustomTab label={item.title} />;
                 })}
             </CustomTabs>
-            <SwipeableViews containerStyle={{height: '500px'}} axis="x" index={value} onChangeIndex={handleChange}>
+            <SwipeableViews containerStyle={{height: '600px'}} axis="x" index={value} onChangeIndex={handleChange}>
                 {props.tabs.pages.map((item, i) => {
                     return (
                         <TabPanel value={value} index={i}>

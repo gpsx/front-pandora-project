@@ -4,7 +4,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Card, CardContent } from "@material-ui/core";
 import { CardMedia, Divider, Box, Button } from "@material-ui/core";
 import FormDialogAvaliar from './../views/DialogView/Servicos/avaliar';
-import LocalStorageService from '../service/localStorage'
 import Alerta from '../components/Alerta'
 import { socketServer } from "./../utils/index"
 
@@ -13,16 +12,17 @@ const socket = socketServer;
 const useStyles = makeStyles({
     root: {
         display: "flex",
-        marginBottom: "-14px",
+        // marginBottom: "-50px",
     },
-    bullet: {
-        display: "inline-block",
-        margin: "0 2px",
-        transform: "scale(0.8)"
+    root2: {
+        display: "flex",
+        marginTop: "-20px",
+    },
+    box: {
+        display: "flex",
     },
     title: {
         fontSize: 12,
-        margin: 0
     },
     cover: {
         width: 100,
@@ -39,9 +39,6 @@ const useStyles = makeStyles({
             backgroundColor: '#328CC1',
         },
     },
-    margin: {
-        marginBottom: '10px',
-    },
     divider: {
         margin: 10
     },
@@ -53,8 +50,8 @@ export default function ServiceCard(props) {
     const classes = useStyles();
 
     const [openAlert, setOpenAlert] = useState(false);
-    const [severity, setSeverity] = useState("success");
-    const [message, setMessage] = useState("Usuário adicionado ao chat!");
+    const [severity, setSeverity] = useState("");
+    const [message, setMessage] = useState("");
 
 
     const createChat = () => {
@@ -71,12 +68,14 @@ export default function ServiceCard(props) {
         array.push(user2);
         socket.emit("addConversation", array);
 
+        setSeverity("success");
+        setMessage("Usuário adicionado ao chat!");
         setOpenAlert(true);
     }
 
     return (
         <div>
-
+            <Alerta close={() => setOpenAlert(false)} open={openAlert} severity={severity} message={message} />
             <Card className={classes.root}>
                 <CardMedia
                     component="img"
@@ -88,15 +87,15 @@ export default function ServiceCard(props) {
                 <Divider orientation="vertical" flexItem className={classes.divider} />
                 <Box flexGrow={1}>
                     <CardContent>
-                        <Box className={classes.root} alignItems="center">
-                            <Typography className={classes.margin} variant="h5" component="h3">
+                        <Box alignItems="center">
+                            <Typography variant="h5" component="h3">
                                 {props.name}
                             </Typography>
                         </Box>
                         <Typography variant="body2" color="textSecondary" gutterBottom>
                             {props.requestText}
                         </Typography>
-                        <Box className={classes.root} flexDirection="row-reverse">
+                        <Box className={classes.box} flexDirection="row-reverse">
                             {
                                 props.serviceState === 'EXECUCAO' ?
                                     (

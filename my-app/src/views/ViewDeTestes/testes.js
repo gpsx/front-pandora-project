@@ -1,5 +1,5 @@
 import React from 'react'
-import Filtro from '../HomeSolicitanteView/filtro'
+import Filtro from '../HomeSolicitanteView/Filtro'
 import SimpleCard from '../HomeView/Card'
 import Avatar from '@material-ui/core/Avatar'
 import ImgSueto from './../../assets/FelipeSueto.jpg'

@@ -27,7 +27,7 @@ function ChangeRegister(props) {
         if (id() != null) {
             setAtualizando(true);
         }
-    }, [id])
+    }, [])
     
     return (
 

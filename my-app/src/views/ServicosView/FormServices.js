@@ -1,11 +1,13 @@
 import React from 'react';
 import ImageEdit from './ImageEdit'
 import { withRouter } from 'react-router-dom'
-import { Grid, Input, Button } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import FormDialogCategoria from '../DialogView/Servicos/categoria';
 import Panel from '../../components/PanelCategorias';
 import Backdrop from '../../components/Backdrop'
 import Alerta from '../../components/Alerta';
+import Button from '../../components/Button';
+import Input from '../../components/Input';
 import { listarCategorias } from './../../utils/itens'
 import LocalStorage from '../../service/localStorage'
 import servicesService from '../../service/servicesService';

@@ -12,12 +12,10 @@ const socket = socketServer;
 const useStyles = makeStyles({
   root: {
     display: "flex",
-    marginBottom: "-15px",
+    // marginBottom: "-15px",
   },
-  bullet: {
-    display: "inline-block",
-    margin: "0 2px",
-    transform: "scale(0.8)"
+  box:{
+    display:'flex',
   },
   title: {
     fontSize: 12,
@@ -59,8 +57,8 @@ export default function ServiceCard(props) {
   const classes = useStyles();
 
   const [openAlert, setOpenAlert] = useState(false);
-  const [severity, setSeverity] = useState("success");
-  const [message, setMessage] = useState("Usuário adicionado ao chat!");
+  const [severity, setSeverity] = useState("");
+  const [message, setMessage] = useState("");
 
 
   const createChat = () => {
@@ -76,6 +74,9 @@ export default function ServiceCard(props) {
     array.push(user2);
     socket.emit("addConversation", array);
 
+
+    setSeverity("success");
+    setMessage("Usuário adicionado ao chat!");
     setOpenAlert(true);
   }
 
@@ -119,7 +120,7 @@ export default function ServiceCard(props) {
         <Divider orientation="vertical" flexItem className={classes.divider} />
         <Box flexGrow={1}>
           <CardContent>
-            <Box className={classes.root} alignItems="center">
+            <Box alignItems="center">
               <Typography className={classes.margin} variant="h5" component="h3">
                 {props.name}
               </Typography>
@@ -127,7 +128,7 @@ export default function ServiceCard(props) {
             <Typography variant="body2" color="textSecondary" gutterBottom>
               {props.requestText}
             </Typography>
-            <Box className={classes.root} flexDirection="row-reverse">
+            <Box className={classes.box} flexDirection="row-reverse">
               {
                 props.serviceState === 'SOLICITADO' ?
                   (

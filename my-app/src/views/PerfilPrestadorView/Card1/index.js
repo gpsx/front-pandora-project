@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { makeStyles, Grid, Paper, Link } from '@material-ui/core';
+import { Grid, Paper, Link } from '@material-ui/core';
 import Portal from '@material-ui/core/Portal';
 import Alteracoes from '../../DialogView/Alteracoes/index';
 import imageService from '../../../service/image/imageService'
@@ -50,19 +50,11 @@ const color = {
     heigth: 'auto',
 }
 
-const margin = {
-
-}
-
 function Card1(props) {
     const id = localStorage.obterIdUsuario();
     const [show, setShow] = React.useState(false);
     const [openBackdrop, setOpenBackdrop] = React.useState(false);
     const portalRef = React.useRef();
-
-    const handleBackdrop = () => {
-        setOpenBackdrop(!openBackdrop);
-    };
 
     const handleClick = () => {
         setShow(!show);
@@ -105,7 +97,7 @@ function Card1(props) {
                 style={card}
             >
 
-                <Grid item style={margin}>
+                <Grid item>
                     <div style={avatar}>
                         <EditImage changeImage={uploadImage.bind(this)} />
                     </div>
