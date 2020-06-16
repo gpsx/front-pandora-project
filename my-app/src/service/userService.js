@@ -1,6 +1,5 @@
-import { socketServer } from "./../../utils/index"
 const api = require("./apiService")
-const socket = socketServer;
+const socketServer = require("../utils/index")
 
 module.exports = {
 
@@ -31,7 +30,7 @@ module.exports = {
     },
 
     logoff: async (cpf) => {
-        socket.emit("userDisconnect", cpf)
+        socketServer.emit("userDisconnect", cpf)
         return await api.get("/user");
     },
 
