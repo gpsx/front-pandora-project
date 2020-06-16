@@ -81,7 +81,7 @@ function FormDialogEmail(props) {
     function logoff() {
         context.encerrarSessao();
         props.history.push('/login');
-        userService.logoff();
+        userService.logoff(context.getCpf());
     }
 
     const validar = () => {

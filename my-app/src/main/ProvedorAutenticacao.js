@@ -60,12 +60,17 @@ class ProvedorAutenticacao extends React.Component {
         return AuthService.obterUsuarioAutenticado().id;
     }
 
+    getCpf = () => {
+        return AuthService.obterUsuarioAutenticado().cpf;
+    }
+
     render() {
         const contexto = {
             isAutenticado: this.state.isAutenticado,
             isSolicitante: this.state.isSolicitante,
             isPrestador: this.state.isPrestador,
             getId: this.getId,
+            getCpf: this.getCpf,
             iniciarSessao: this.iniciarSessao,
             encerrarSessao: this.encerrarSessao,
             obterResumo: this.obterResumo,
