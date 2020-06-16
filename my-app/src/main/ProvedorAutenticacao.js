@@ -1,5 +1,8 @@
 import React from 'react';
 import AuthService from '../service/authServicce';
+import { socketServer } from "./../utils/index"
+
+const socket = socketServer;
 
 export const AuthContext = React.createContext();
 export const AuthConsumer = AuthContext.Consumer;
@@ -32,10 +35,12 @@ class ProvedorAutenticacao extends React.Component {
         });
         this.setState({ isSolicitante: usuario.solicitante ? true : false });
         this.setState({ isPrestador: usuario.solicitante ? false : true });
+        socket.emit("userConnect", usuario.cpf);
     }
 
     encerrarSessao = () => {
         AuthService.removerUsuarioAutenticado();
+        socket.emit("userDisconnect", this.state.usuarioAutenticado.cpf);
         this.setState({
             isAutenticado: false, usuarioAutenticado: null,
             isPrestador: false, isSolicitante: false, id: null,

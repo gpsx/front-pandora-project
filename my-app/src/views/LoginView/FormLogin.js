@@ -42,6 +42,7 @@ class FormLogin extends React.Component {
             email: this.state.email,
             senha: this.state.senha
         }).then(response => {
+            console.log(response)
             this.context.iniciarSessao(response.data);
             if (response.data.solicitante) {
                 this.props.history.push('/home-solicitante')
@@ -50,6 +51,7 @@ class FormLogin extends React.Component {
             }
         }).catch(erro => {
             try {
+                console.log(erro);
                 this.errorMessage(erro.response.data)
             } catch (erro2) {
                 console.log(erro2);
