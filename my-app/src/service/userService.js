@@ -1,5 +1,5 @@
-const api = require("./apiService")
 import { socketServer } from "./../../utils/index"
+const api = require("./apiService")
 const socket = socketServer;
 
 module.exports = {
@@ -14,7 +14,7 @@ module.exports = {
 
     login: async (credentials) => {
         let user = await api.post("/user/logar", credentials)
-        socket.emit("userConnect", user.cpf);
+        await socket.emit("userConnect", user.data.cpf);
         return user;
     },
 
