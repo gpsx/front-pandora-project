@@ -12,6 +12,7 @@ import PainelPrestador from '../views/HomePrestadorView/PainelGeralView'
 import PerfilSolicitante from '../views/PerfilSolicitanteView/index'
 import PerfilPrestador from '../views/PerfilPrestadorView/index'
 import MeuServico from '../views/MeuServicoView/index'
+import Relatorio from '../views/RelatorioView/index'
 import Avaliacoes from '../views/AvaliacoesView/index'
 import ChangeRegister from '../views/ServicosView/index'
 import Chat from '../views/ChatView/index'
@@ -88,6 +89,7 @@ function Routes(props) {
                 <RotaPrestador isPrestador={props.isPrestador} isAutenticado={props.isAutenticado} path="/my-service" component={MeuServico} />
                 <RotaPrestador isPrestador={props.isPrestador} isAutenticado={props.isAutenticado} path="/my-rating" component={Avaliacoes} />
                 <RotaPrestador isPrestador={props.isPrestador} isAutenticado={props.isAutenticado} path="/chat-prestador" component={Chat} />
+                <RotaPrestador isPrestador={props.isPrestador} isAutenticado={props.isAutenticado} path="/service-report" component={Relatorio} />
                 {/* O parâmetro ID é opicional */}
                 <RotaPrestador isPrestador={props.isPrestador} isAutenticado={props.isAutenticado} path="/service/:id?" component={ChangeRegister} />
 

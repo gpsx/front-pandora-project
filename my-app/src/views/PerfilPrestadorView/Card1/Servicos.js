@@ -44,13 +44,13 @@ function Servicos(props) {
                         </Link>
                         </div>
                         <div>
-                            <Link href="#" onClick={preventDefault} style={{ textDecoration: 'none' }} className={classes.link}>
-                            Verificar serviços existentes
+                            <Link href="/#/my-service" style={{ textDecoration: 'none' }} className={classes.link}>
+                            Verificar meus serviços
                         </Link>
                         </div>
                         <div>
-                            <Link href="#" onClick={preventDefault} style={{ textDecoration: 'none' }} className={classes.link}>
-                            Serviços finalizados
+                            <Link href="/#/service-report" style={{ textDecoration: 'none' }} className={classes.link}>
+                            Ver relatório de serviços
                         </Link>
                         </div>
                     </Typography>
