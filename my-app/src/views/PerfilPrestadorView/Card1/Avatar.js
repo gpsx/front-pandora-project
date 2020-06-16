@@ -5,13 +5,11 @@ import perfil from './../../../assets/icone-teste.png'
 import Avatar from '@material-ui/core/Avatar';
 
 const styles = (theme) => ({
-
     foto: {
         display: 'inline-block',
         width: theme.spacing(16),
         height: theme.spacing(16),
     },
-
 });
 
 function Foto(props) {
@@ -26,13 +24,10 @@ function Foto(props) {
             spacing={3}>
 
             <Grid item>
-
                 <div>
                     <Avatar alt="Perfil" src={img === null ? perfil : img} className={classes.foto} />
                 </div>
-
             </Grid>
-
         </Grid>
     );
 }

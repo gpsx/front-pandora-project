@@ -7,7 +7,7 @@ import Grid from '@material-ui/core/Grid';
 
 export default function ListaConversa(props) {
     const context = useContext(AuthContext);
-    const idUsuario = context.id;
+    const idUsuario = context.getId();
 
     return (
         <React.Fragment>

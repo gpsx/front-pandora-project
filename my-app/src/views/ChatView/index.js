@@ -43,7 +43,7 @@ const styles = (theme) => ({
 function Chat(props) {
     const context = useContext(AuthContext);
     const userType = context.tipoUsuario();
-    const idUsuario = context.id;
+    const idUsuario = context.getId();
 
     const setListeners = () => {
         socket.on("selectedConversation", (data) => {

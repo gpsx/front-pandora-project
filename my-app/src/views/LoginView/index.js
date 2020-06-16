@@ -8,7 +8,6 @@ const useStyles = theme => ({
     container: {
         marginTop: '100px',
     },
-
     paper: {
         paddingTop: '18%',
         display: 'flex',
@@ -16,22 +15,6 @@ const useStyles = theme => ({
         width: '385px',
         height: '406px',
     },
-
-    img: {
-        width: '200px',
-        height: '200px',
-    },
-
-    h1: {
-        marginTop: '25px',
-        fontFamily: 'Roboto',
-        fontStyle: 'normal',
-        fontWeight: '80',
-        lineHeight: '42px',
-        fontSize: '36px',
-    },
-
-
 });
 
 class Login extends React.Component {

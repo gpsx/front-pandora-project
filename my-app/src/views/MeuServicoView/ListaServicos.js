@@ -3,7 +3,6 @@ import ServiceCard from '../../components/MyServiceCard'
 import { Grid } from '@material-ui/core';
 import ImagemGenerica from './../../assets/servicos/generico.jpg'
 
-
 export default function ListaMeusServicos(props) {
 
     const linhas = props.servicos.map(servico => {
@@ -18,7 +17,6 @@ export default function ListaMeusServicos(props) {
                     alert={props.alert.bind(this)}
                 />
             </Grid>
-
         )
     })
 

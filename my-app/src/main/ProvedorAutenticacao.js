@@ -7,7 +7,7 @@ const AuthProvider = AuthContext.Provider;
 
 class ProvedorAutenticacao extends React.Component {
     state = {
-        id: null,
+        id: 0,
         usuarioAutenticado: null,
         isAutenticado: this.getInformation(),
         isPrestador: false,
@@ -56,12 +56,16 @@ class ProvedorAutenticacao extends React.Component {
         return AuthService.tipoUsuario();
     }
 
+    getId = () => {
+        return AuthService.obterUsuarioAutenticado().id;
+    }
+
     render() {
         const contexto = {
             isAutenticado: this.state.isAutenticado,
             isSolicitante: this.state.isSolicitante,
             isPrestador: this.state.isPrestador,
-            id: this.state.id,
+            getId: this.getId,
             iniciarSessao: this.iniciarSessao,
             encerrarSessao: this.encerrarSessao,
             obterResumo: this.obterResumo,

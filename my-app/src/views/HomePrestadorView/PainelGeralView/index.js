@@ -1,5 +1,5 @@
 import React from 'react';
-import {AuthContext} from '../../../main/ProvedorAutenticacao';
+import { AuthContext } from '../../../main/ProvedorAutenticacao';
 
 import { Grid, withStyles } from '@material-ui/core';
 
@@ -19,8 +19,8 @@ const styles = (theme) => ({
 });
 
 class PainelPrestador extends React.Component {
-    id = this.context.id;
-    tipo = this.context.tipoUsuario;
+    id = this.context.getId();
+    tipo = this.context.tipoUsuario();
 
     state = {
         solicitados: [],
@@ -41,6 +41,8 @@ class PainelPrestador extends React.Component {
             .then(response => {
                 console.log(response.data)
                 this.setState({ solicitados: response.data })
+            }).catch(err => {
+                console.log(err)
             })
     }
 
@@ -48,6 +50,8 @@ class PainelPrestador extends React.Component {
         solicitacoesService.getAprovados(this.id, this.tipo)
             .then(response => {
                 this.setState({ aprovados: response.data })
+            }).catch(err => {
+                console.log(err)
             })
     }
 
@@ -55,6 +59,8 @@ class PainelPrestador extends React.Component {
         solicitacoesService.getExecucao(this.id, this.tipo)
             .then(response => {
                 this.setState({ execucao: response.data })
+            }).catch(err => {
+                console.log(err)
             })
     }
 
@@ -62,6 +68,8 @@ class PainelPrestador extends React.Component {
         solicitacoesService.getFinalizados(this.id, this.tipo)
             .then(response => {
                 this.setState({ finalizados: response.data })
+            }).catch(err => {
+                console.log(err)
             })
     }
 

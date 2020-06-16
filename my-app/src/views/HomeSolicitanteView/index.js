@@ -1,11 +1,12 @@
 import React from 'react'
-import { withStyles, Grid } from '@material-ui/core';
-import Container from '@material-ui/core/Container';
 import MenuSolicitante from '../../components/MenuSolicitante.js';
-import ListaServicos from './ListaServicos.js'
 import Alert from '@material-ui/lab/Alert';
-import Filtro from './filtro'
 import Backdrop from '../../components/Backdrop';
+import { withStyles, Grid } from '@material-ui/core';
+import { Container } from '@material-ui/core';
+import ListaServicos from './ListaServicos.js'
+import Filtro from './Filtro'
+
 import service from '../../service/otherService'
 import servicesService from '../../service/servicesService'
 
@@ -60,12 +61,15 @@ class HomeSolicitante extends React.Component {
     filtrar = (filtro, valor) => {
         this.setState({ backdrop: true });
         if (filtro == null) {
-            this.setState({ servicos: this.state.todos, backdrop: false });
+            this.setState({ servicos: this.state.todos, backdrop: false, alerta: false });
         } else if (filtro === 'categoria') {
             this.filtroCategoria(valor);
         } else if (filtro === 'palavra') {
             this.filtroTexto(valor)
         } else if (filtro === 'nota') {
+            if (valor === 0) {
+                valor = 3
+            }
             this.filtroRating(valor);
         }
     }

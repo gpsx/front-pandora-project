@@ -28,7 +28,7 @@ const styles = (theme) => ({
 });
 
 class Avaliacoes extends React.Component {
-    id = this.context.id;
+    id = this.context.getId();
 
     state = {
         data: []

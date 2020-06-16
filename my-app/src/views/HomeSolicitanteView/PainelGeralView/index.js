@@ -1,12 +1,14 @@
 import React from 'react'
+import { AuthContext } from '../../../main/ProvedorAutenticacao'
+
 import Menu from '../../../components/MenuSolicitante'
+import Erro from '../../../components/AlertaErro'
+import Container from '../../../components/Container';
 import TabSolicitante from './TabSolicitante'
 import { Grid, withStyles } from '@material-ui/core';
-import Container from '../../../components/Container';
-import Erro from '../../../components/AlertaErro'
-import solicitacoesService from '../../../service/solicitacoesService';
+
 import ListaSolicitacoes from './ListaSolicitacoes'
-import localStorage from './../../../service/localStorage'
+import solicitacoesService from '../../../service/solicitacoesService';
 
 const styles = (theme) => ({
     paper: {
@@ -16,8 +18,8 @@ const styles = (theme) => ({
 });
 
 class PainelSolicitante extends React.Component {
-    id = localStorage.obterIdUsuario();
-    tipo = localStorage.getUserType();
+    id = this.context.getId();
+    tipo = this.context.tipoUsuario();
 
     state = {
         solicitados: [],
@@ -69,7 +71,6 @@ class PainelSolicitante extends React.Component {
         this.getFinalizados();
         this.getCancelados();
     }
-
 
     tabs = {
         pages: [
@@ -159,4 +160,5 @@ class PainelSolicitante extends React.Component {
     }
 }
 
+PainelSolicitante.contextType = AuthContext;
 export default withStyles(styles)(PainelSolicitante);

@@ -2,7 +2,7 @@ import React from 'react';
 import { withStyles, Grid, Container } from '@material-ui/core';
 import MenuPrestador from './../../components/MenuPrestador';
 import BotaoAdicionar from './../../components/AddButton'
-import Alert from '@material-ui/lab/Alert';
+import AlertaErro from './../../components/AlertaErro';
 import ListaServicos from './ListaServicos'
 import service from '../../service/otherService'
 import LocalStorage from '../../service/localStorage'
@@ -22,15 +22,6 @@ const styles = (theme) => ({
     popular: {
         width: '75%',
         height: 'auto',
-    },
-    paper: {
-        width: "50%",
-        height: "400px",
-        marginLeft: "20%",
-        marginTop: "-19.5%"
-    },
-    footer: {
-        marginBottom: "-1"
     },
     h1: {
         marginLeft: '2px',
@@ -57,11 +48,10 @@ class MeuServico extends React.Component {
         service.meusServicos(this.id)
             .then(response => {
                 console.log(response.data);
-                
+
                 this.setState({ servicos: response.data });
             })
     }
-
 
     fecharAlerta() {
         this.setState({ alert: false })
@@ -93,9 +83,8 @@ class MeuServico extends React.Component {
                             <ListaServicos alert={this.alerta.bind(this)}
                                 servicos={this.state.servicos} />
                         ) : (
-                                <Alert severity="error">
-                                    Você não possui serviços cadastrados, cadastre um agora!
-                                </Alert>
+                                <AlertaErro
+                                    mensagem={"Você não possui serviços cadastrados, cadastre um agora!"} />
                             )}
 
                     </Grid>

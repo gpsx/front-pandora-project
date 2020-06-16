@@ -84,7 +84,6 @@ export default function ServiceCard(props) {
     service.pegarAvaliacao(props.id)
       .then(response => {
         try {
-          console.log(response.data)
           let avaliacao = response.data.toFixed(1);
           setAvaliation(avaliacao);
         } catch (erro) {

@@ -53,7 +53,7 @@ const theme = createMuiTheme({
 });
 
 class ChatPandora extends React.Component {
-    idUsuario = this.context.id;
+    idUsuario = this.context.getId();
 
     constructor(props) {
         super(props)
@@ -84,7 +84,6 @@ class ChatPandora extends React.Component {
     }
 
     setListener = () => socket.on("new-msg", (data) => {
-
         this.setState({ conversa: [...this.state.conversa, data] })
     });
 

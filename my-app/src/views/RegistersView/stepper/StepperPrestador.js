@@ -118,8 +118,7 @@ class StepperPrestador extends React.Component {
         //validar e-mail
         emailService.validarEmail({ "email": this.state.usuario.email })
           .then(response => {
-            let deuCerto = response.data.mx_found;
-            console.log(deuCerto)
+            let deuCerto = response.data.format_valid;
             if (!deuCerto) {
               this.setState({ backdrop: false });
               this.errorMessage("O e-mail não é um e-mail válido")

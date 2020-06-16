@@ -1,41 +1,34 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom'
-import { Grid } from '@material-ui/core';
-import Input from '../../components/Input';
-import Button from '../../components/Button';
-import FormDialogCategoria from '../DialogView/Servicos/categoria';
-import { listarCategorias } from './../../utils/itens'
 import ImageEdit from './ImageEdit'
+import { withRouter } from 'react-router-dom'
+import { Grid, Input, Button } from '@material-ui/core';
+import FormDialogCategoria from '../DialogView/Servicos/categoria';
 import Panel from '../../components/PanelCategorias';
-import LocalStorage from '../../service/localStorage'
-import imageService from '../../service/image/imageService';
-import servicesService from '../../service/servicesService';
 import Backdrop from '../../components/Backdrop'
 import Alerta from '../../components/Alerta';
+import { listarCategorias } from './../../utils/itens'
+import LocalStorage from '../../service/localStorage'
+import servicesService from '../../service/servicesService';
+import imageService from '../../service/image/imageService';
 
 const h1 = {
     fontWeight: '200',
     lineHeight: '28px',
     fontSize: '15px',
 }
-
 const titulo = {
     marginTop: '25px',
     fontWeight: '200',
     lineHeight: '28px',
     fontSize: '22px',
 }
-
 const input = {
     width: '300px',
 }
-
 const button = {
     fontSize: '15px',
     marginBottom: '20px',
 }
-
-
 
 class FormServices extends React.Component {
     id = LocalStorage.obterIdUsuario();

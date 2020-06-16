@@ -1,14 +1,15 @@
 import React from 'react';
+import { AuthContext } from '../../main/ProvedorAutenticacao';
 import { withRouter } from 'react-router-dom';
 import { Grid, Link } from '@material-ui/core';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import H1 from './../../components/forms/h1-login'
-import userService from './../../service/userService'
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
 import RecuperarSenha from '../DialogView/Servicos/RecuperarSenha'
-import { AuthContext } from '../../main/ProvedorAutenticacao';
+
+import userService from './../../service/userService'
 
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;

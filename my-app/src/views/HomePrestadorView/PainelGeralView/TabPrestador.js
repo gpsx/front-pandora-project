@@ -54,17 +54,12 @@ const CustomTab = withStyles(theme => ({
         "&:focus": {
             color: "#FFF"
         }
-    },
-    selected: {}
+    }
 }))(props => <Tab disableRipple {...props} />);
 
 const useStyles = makeStyles(theme => ({
-    root: {
-        flexGrow: 1
-    },
-    background: {
-        backgroundColor: "#0B3C5D"
-    }
+    root: { flexGrow: 1 },
+    background: { backgroundColor: "#0B3C5D" }
 }));
 
 export default function CustomizedTabs(props) {
@@ -89,7 +84,7 @@ export default function CustomizedTabs(props) {
                     return <CustomTab label={item.title} />;
                 })}
             </CustomTabs>
-            <SwipeableViews containerStyle={{height: '500px'}} axis="x" index={value} onChangeIndex={handleChange}>
+            <SwipeableViews containerStyle={{ height: '500px' }} axis="x" index={value} onChangeIndex={handleChange}>
                 {props.tabs.pages.map((item, i) => {
                     return (
                         <TabPanel value={value} index={i}>

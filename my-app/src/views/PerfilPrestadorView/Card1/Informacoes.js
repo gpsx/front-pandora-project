@@ -3,7 +3,6 @@ import { withStyles, Grid } from '@material-ui/core';
 import LocalStorageService from '../../../service/localStorage';
 
 const styles = (theme) => ({
-
     nome: {
         fontSize: '24px',
         width: '320px'
@@ -16,7 +15,6 @@ const styles = (theme) => ({
         fontWeight: '200',
         lineHeight: '22px',
     },
-
 });
 
 function Informacoes(props) {

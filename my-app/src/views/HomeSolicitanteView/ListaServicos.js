@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
+import ImagemGenerica from './../../assets/servicos/generico.jpg'
 import ServiceCard from '../../components/ServiceCard'
 import { Grid } from '@material-ui/core';
-import ImagemGenerica from './../../assets/servicos/generico.jpg'
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 
