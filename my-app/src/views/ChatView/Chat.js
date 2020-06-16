@@ -64,7 +64,6 @@ class ChatPandora extends React.Component {
             title: "",
             chatId: '',
             conversa: [],
-
         }
     }
 
