@@ -71,9 +71,9 @@ function FormDialogSenha(props) {
     );
 
     function logoff() {
+        userService.logoff(context.getCpf());
         context.encerrarSessao();
         props.history.push('/login');
-        userService.logoff(context.getCpf());
     }
 
     const verificar = () => {
