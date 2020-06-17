@@ -109,7 +109,6 @@ function Menu(props) {
     function logoff() {
         context.encerrarSessao();
         props.history.push('/login');
-        userService.logoff(context.getCpf());
     }
 
     return (

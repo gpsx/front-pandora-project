@@ -39,12 +39,12 @@ class ProvedorAutenticacao extends React.Component {
     }
 
     encerrarSessao = () => {
-        AuthService.removerUsuarioAutenticado();
         socket.emit("userDisconnect", this.state.usuarioAutenticado.cpf);
         this.setState({
             isAutenticado: false, usuarioAutenticado: null,
             isPrestador: false, isSolicitante: false, id: null,
         })
+        AuthService.removerUsuarioAutenticado();
     }
 
     obterResumo = () => {

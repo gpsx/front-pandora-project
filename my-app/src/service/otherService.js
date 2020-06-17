@@ -18,8 +18,8 @@ module.exports = {
         return await api.get(`/servicos/buscar-categoria/${id}`)
     },
 
-    cadastrarSolicitacao: async (id, descricao) => {
-        return await api.post(`/solicitacoes/nova_solicitacao/${id}`, { descricao })
+    cadastrarSolicitacao: async (idPres, idSol, descricao) => {
+        return await api.post(`/solicitacoes/nova_solicitacao/${idPres}/${idSol}`, { descricao })
     },
 
     pegarAvaliacao: async (id) => {

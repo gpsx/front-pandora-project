@@ -26,9 +26,5 @@ module.exports = {
         return await api.post("/prestadores/cadastrar", prestador)
     },
 
-    logoff: async (cpf) => {
-        return await api.get("/user");
-    },
-
 }
 

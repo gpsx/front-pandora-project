@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { AuthContext } from '../main/ProvedorAutenticacao';
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Button, Card, CardContent } from "@material-ui/core";
 import { CardMedia, Divider, Box, Avatar } from "@material-ui/core";
@@ -55,6 +56,8 @@ const useStyles = makeStyles({
 });
 
 export default function ServiceCard(props) {
+  const context = useContext(AuthContext);
+
   const [descricao, setMsg] = useState();
   const classes = useStyles();
   const [open, setOpen] = useState(false);
@@ -69,7 +72,7 @@ export default function ServiceCard(props) {
   };
 
   const sendSolicitation = () => {
-    service.cadastrarSolicitacao(props.id, descricao)
+    service.cadastrarSolicitacao(props.id, context.getId(), descricao)
       .then(response => {
         handleClose()
         props.alertar("Sua solicitação foi enviada!", "success")
