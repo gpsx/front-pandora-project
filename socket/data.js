@@ -1,5 +1,4 @@
 module.exports = {
-    conversations: [
-        
-    ]
+    conversations: [],
+    users: []
 }

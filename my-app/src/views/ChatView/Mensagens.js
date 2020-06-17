@@ -34,10 +34,10 @@ export default function Mensagens({ changeId, ...props }) {
             <ListItem button onClick={(e) => changeId(data.id)}>
               <ListItemAvatar>
                 {data.otherUser.online ? (
-                  <Avatar alt="Profile Picture" src={data.otherUser.img} />
+                  <AvatarOnline><Avatar src={data.otherUser.img} alt="Profile Picture" /></AvatarOnline>
                 ) : (
-                    <AvatarOnline><Avatar alt="Profile Picture" src={data.otherUser.online} /></AvatarOnline>
-                  )}
+                  <Avatar alt="Profile Picture" src={data.otherUser.img} />
+                )}
               </ListItemAvatar>
               <ListItemText primary={data.otherUser.name} />
             </ListItem>

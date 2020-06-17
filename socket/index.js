@@ -29,10 +29,12 @@ io.on("connection", function(socket) {
 
     socket.on("userConnect", id => {
       console.log(id);
+      //controller.setUserOnline(id)
     })
 
     socket.on("userDisconnect", id => {
-      console.log(id);
+      console.log(id, "desconectado");
+      //controller.setUserOff(id)
     })
 
 });

@@ -10,6 +10,16 @@ let findChatId = (id) => {
     }
     return -1
 }
+let findUser = (id) => {
+    for (let i = 0; i < msgs.conversations; i++) {
+        console.log(msgs.conversations[i]);
+        
+        if (id == msgs.conversations[i].id) {
+            return i
+        }
+    }
+    return -1
+}
 module.exports = {
     addConversation: (users) => {
         msgs.conversations.push({
