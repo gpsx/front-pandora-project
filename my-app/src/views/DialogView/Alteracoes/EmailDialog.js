@@ -79,7 +79,6 @@ function FormDialogEmail(props) {
     );
 
     function logoff() {
-        userService.logoff(context.getCpf());
         context.encerrarSessao();
         props.history.push('/login');
     }
