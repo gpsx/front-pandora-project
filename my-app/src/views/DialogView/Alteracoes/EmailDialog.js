@@ -14,7 +14,6 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
 import LocalStorageService from '../../../service/localStorage'
 import alterarService from '../../../service/alteracoesService'
-import userService from '../../../service/userService'
 
 const styles = (theme) => ({
     link: {

@@ -27,13 +27,13 @@ const theme = createMuiTheme({
     }
 })
 
-export default function BotaoBaixar() {
+export default function BotaoBaixar(props) {
     const classes = useStyles();
 
     return (
         <div className={classes.root}>
             <ThemeProvider theme={theme}>
-                <Fab size="medium" href="/#/" color="secondary" aria-label="add">
+                <Fab size="medium" onClick={props.fazerDownload} color="secondary" aria-label="add">
                     <GetAppIcon />
                 </Fab>
             </ThemeProvider>

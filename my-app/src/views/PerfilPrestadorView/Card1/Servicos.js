@@ -28,7 +28,6 @@ const styles = (theme) => ({
 function Servicos(props) {
 
     const { classes } = props;
-    const preventDefault = (event) => event.preventDefault();
 
     return (
         <Grid container

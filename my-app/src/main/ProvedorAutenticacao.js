@@ -39,7 +39,7 @@ class ProvedorAutenticacao extends React.Component {
     }
 
     encerrarSessao = () => {
-        socket.emit("userDisconnect", this.state.usuarioAutenticado.cpf);
+        socket.emit("userDisconnect", this.getCpf());
         this.setState({
             isAutenticado: false, usuarioAutenticado: null,
             isPrestador: false, isSolicitante: false, id: null,

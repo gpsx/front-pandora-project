@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function AvatarOnline(props) {
   const classes = useStyles();
-  const { children, value, index, ...other } = props;
+  const { children } = props;
 
   return (
     <div className={classes.root}>

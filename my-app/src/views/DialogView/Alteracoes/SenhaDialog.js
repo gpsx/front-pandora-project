@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import { withRouter } from 'react-router-dom'
 import LocalStorageService from '../../../service/localStorage'
 import alteracoesService from '../../../service/alteracoesService'
-import userService from '../../../service/userService'
 import Button from '@material-ui/core/Button';
 import { withStyles, createMuiTheme, ThemeProvider } from '@material-ui/core';
 import { SnackbarContent, Snackbar } from '@material-ui/core';

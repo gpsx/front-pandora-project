@@ -4,7 +4,6 @@ import { AuthContext } from '../main/ProvedorAutenticacao';
 import { withStyles } from '@material-ui/core/styles';
 import { withRouter } from 'react-router-dom';
 import ExitToAppRoundedIcon from '@material-ui/icons/ExitToAppRounded';
-import userService from '../service/userService';
 import Typography from './Typography';
 import Link from '@material-ui/core/Link';
 import logoImg from './../assets/logo.png';

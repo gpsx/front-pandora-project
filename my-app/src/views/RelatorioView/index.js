@@ -7,6 +7,8 @@ import BotaoBaixar from './../../components/DownloadButton'
 
 import { AuthContext } from '../../main/ProvedorAutenticacao';
 
+import fileService from '../../service/fileService';
+
 const styles = (theme) => ({
     h1: {
         marginLeft: '2px',
@@ -23,9 +25,10 @@ const styles = (theme) => ({
     },
     paper: {
         width: '100%',
-        height:'500px',
+        height: 'auto',
         maxWidth: '500px',
-        marginTop:'-3%'
+        padding: '10px',
+        marginTop: '-3%'
     }
 });
 
@@ -33,7 +36,23 @@ class Relatorio extends React.Component {
     id = this.context.getId();
 
     state = {
-        data: []
+        data: '',
+    }
+
+    componentDidMount() {
+        fileService.verArquivo(this.id)
+            .then(response => {
+                this.setState({ data: response.data });
+            }).catch(err => {
+                console.log(err.response)
+                this.setState({ data: "RELATÓRIO VAZIO" });
+            })
+    }
+
+    fazerDownload = () => {
+        window.open(
+            `http://localhost:8080/solicitacoes/gerar-arquivo/${this.id}`,
+            '_blank');
     }
 
     render() {
@@ -42,7 +61,7 @@ class Relatorio extends React.Component {
         return (
             <Container>
                 <MenuPrestador />
-                <Grid container justify="center" direction="row" spacing={6}>
+                <Grid container justify="center" alignItens="center" direction="row" spacing={6}>
 
                     <Grid item className={classes.relatorio}>
                         <div className={classes.h1}>Relatório de Serviços</div>
@@ -50,16 +69,13 @@ class Relatorio extends React.Component {
 
                     <Grid item className={classes.relatorio}>
                         <Paper elevation={3} className={classes.paper}>
-    
+                            {this.state.data}
                         </Paper>
                         <div className={classes.baixar}>
-                            <BotaoBaixar />
+                            <BotaoBaixar fazerDownload={this.fazerDownload.bind(this)} />
                         </div>
                     </Grid>
 
-                    <Grid item className={classes.relatorio}>
-                        
-                    </Grid>
                 </Grid>
             </Container>
         );
