@@ -52,7 +52,7 @@ class ProvedorAutenticacao extends React.Component {
         let resumo = {
             nome: user.nome,
             img: user.imagem,
-            id: user.id,
+            id: user.cpf,
         }
         return resumo;
     }
