@@ -4,7 +4,7 @@ export default class LocalStorageService {
         localStorage.setItem(chave, JSON.stringify(valor));
     }
 
-    static removeItem(chave){
+    static removeItem(chave) {
         localStorage.removeItem(chave);
     }
 
@@ -15,7 +15,7 @@ export default class LocalStorageService {
 
     static obterIdUsuario() {
         const usuario = this.obterItem("_usuario_logado");
-        if(usuario == null){
+        if (usuario == null) {
             return null;
         }
         return usuario.id
@@ -24,6 +24,11 @@ export default class LocalStorageService {
     static obterUsuario() {
         const usuario = this.obterItem("_usuario_logado");
         return usuario
+    }
+
+    static obterCpf() {
+        const usuario = this.obterUsuario();
+        return usuario.cpf;
     }
 
     static getUserType() {

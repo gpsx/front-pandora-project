@@ -53,7 +53,7 @@ const theme = createMuiTheme({
 });
 
 class ChatPandora extends React.Component {
-    idUsuario = LocalStorage.obterIdUsuario();
+    idUsuario = LocalStorage.obterCpf();
 
     constructor(props) {
         super(props)

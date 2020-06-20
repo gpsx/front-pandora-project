@@ -19,16 +19,17 @@ const styles = (theme) => ({
         marginLeft: "60%",
         marginBottom: '10px',
     },
-    relatorio: {
-        width: '75%',
-        height: 'auto',
-    },
-    paper: {
+    frase:{
         width: '100%',
         height: 'auto',
-        maxWidth: '500px',
+    },
+    relatorio: {
+        marginTop: '-3%',
+        heigth: 'auto',
+    },
+    paper: {
+        width: '70%',
         padding: '10px',
-        marginTop: '-3%'
     }
 });
 
@@ -42,6 +43,7 @@ class Relatorio extends React.Component {
     componentDidMount() {
         fileService.verArquivo(this.id)
             .then(response => {
+                console.log(response.data)
                 this.setState({ data: response.data });
             }).catch(err => {
                 console.log(err.response)
@@ -63,7 +65,7 @@ class Relatorio extends React.Component {
                 <MenuPrestador />
                 <Grid container justify="center" alignItens="center" direction="row" spacing={6}>
 
-                    <Grid item className={classes.relatorio}>
+                    <Grid item className={classes.frase}>
                         <div className={classes.h1}>Relatório de Serviços</div>
                     </Grid>
 

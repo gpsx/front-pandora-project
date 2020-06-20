@@ -3,7 +3,7 @@ const uri = "/solicitacoes";
 
 module.exports = {
     verArquivo: async (id) => {
-        return await api.get(`${uri}/ver-arquivo/${id}`);
+        return await api.get(`${uri}/visualizar-arquivo/${id}`);
     },
 
     download: async (id) => {

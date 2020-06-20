@@ -43,7 +43,7 @@ function Chat(props) {
 
     const context = useContext(AuthContext);
     const userType = context.tipoUsuario();
-    const idUsuario = context.getId();
+    const idUsuario = context.getCpf();
 
     const { classes } = props;
 
