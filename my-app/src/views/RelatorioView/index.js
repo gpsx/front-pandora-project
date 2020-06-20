@@ -1,5 +1,5 @@
 import React from 'react';
-import { withStyles, Grid, Paper } from '@material-ui/core';
+import { withStyles, Grid, Paper, Typography } from '@material-ui/core';
 
 import MenuPrestador from '../../components/MenuPrestador';
 import Container from '../../components/Container';
@@ -16,19 +16,18 @@ const styles = (theme) => ({
     },
     baixar: {
         position: "relative",
-        marginLeft: "60%",
-        marginBottom: '10px',
+        marginLeft: "100%",
+        marginTop: '10px',
     },
-    frase:{
+    frase: {
         width: '100%',
         height: 'auto',
     },
     relatorio: {
         marginTop: '-3%',
-        heigth: 'auto',
     },
     paper: {
-        width: '70%',
+        width: 'auto',
         padding: '10px',
     }
 });
@@ -37,14 +36,14 @@ class Relatorio extends React.Component {
     id = this.context.getId();
 
     state = {
-        data: '',
+        data: [],
     }
 
     componentDidMount() {
         fileService.verArquivo(this.id)
             .then(response => {
                 console.log(response.data)
-                this.setState({ data: response.data });
+                this.setState({ data: response.data.split("\n") });
             }).catch(err => {
                 console.log(err.response)
                 this.setState({ data: "RELATÓRIO VAZIO" });
@@ -63,16 +62,21 @@ class Relatorio extends React.Component {
         return (
             <Container>
                 <MenuPrestador />
-                <Grid container justify="center" alignItens="center" direction="row" spacing={6}>
+                <Grid container direction="row" spacing={6}>
 
                     <Grid item className={classes.frase}>
                         <div className={classes.h1}>Relatório de Serviços</div>
                     </Grid>
 
                     <Grid item className={classes.relatorio}>
-                        <Paper elevation={3} className={classes.paper}>
-                            {this.state.data}
-                        </Paper>
+                        <Grid container justify="flex-start" alignItems="flex-start" direction="column " spacing={1}>
+                            <Paper elevation={3} className={classes.paper}>
+                                {this.state.data.map((linha) => {
+                                    return (<Grid item>{linha}</Grid>);
+                                })}
+
+                            </Paper>
+                        </Grid>
                         <div className={classes.baixar}>
                             <BotaoBaixar fazerDownload={this.fazerDownload.bind(this)} />
                         </div>
