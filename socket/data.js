@@ -1,4 +1,4 @@
 module.exports = {
     conversations: [],
-    users: []
+    users: [ { id: '23830672888', online: true } ] 
 }

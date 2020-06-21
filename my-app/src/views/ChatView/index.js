@@ -81,7 +81,8 @@ function Chat(props) {
                         if (chats[i].users[j].id !== idUsuario) {
                             chats[i].otherUser = {
                                 img: chats[i].users[j].img,
-                                name: chats[i].users[j].nome
+                                name: chats[i].users[j].nome,
+                                online: chats[i].users[j].online
                             }
                         }
                     }
