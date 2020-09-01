@@ -55,6 +55,7 @@ class StepperPrestador extends React.Component {
       telefone: '',
       senha: '',
       senhaRepeticao: '',
+      cep: '',
     },
     userId: '',
     alert: {
@@ -97,7 +98,7 @@ class StepperPrestador extends React.Component {
   getStepContent = (step) => {
     switch (step) {
       case 0:
-        return <UsuarioForm globalChanges={this.globalChanges.bind(this)} />;
+        return <UsuarioForm prestador={true} globalChanges={this.globalChanges.bind(this)} />;
       case 1:
         return <FormService globalChanges={this.globalChangeServico.bind(this)} />;
       default:
@@ -131,6 +132,7 @@ class StepperPrestador extends React.Component {
                 email: this.state.usuario.email,
                 cpf: this.state.usuario.cpf,
                 telefone: this.state.usuario.telefone,
+                cep: this.state.usuario.cep
               }
               if (!(!this.state.usuario.cnpj)) {
                 novoUsuario = {

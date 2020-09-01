@@ -16,6 +16,10 @@ export function validarUsuario(usuario) {
         msgs.push("O campo senha é obrigatório")
     }
 
+    if (!usuario.cep) {
+        msgs.push("O campo cep é obrigatório")
+    }
+
     if (!usuario.senha || !usuario.senhaRepeticao) {
         msgs.push("Digite a senha duas vezes!")
     } else if (usuario.senha !== usuario.senhaRepeticao) {
@@ -37,6 +41,9 @@ export function montarUsuario(key, value, changeUser) {
     }
     if (key === "cpf") {
         changeUser.cpf = value.replace(/[^\d]+/g,'')
+    }
+    if (key === "cep") {
+        changeUser.cep = value.replace(/[^\d]+/g,'')
     }
     if (key === "telefone") {
         changeUser.telefone = value
