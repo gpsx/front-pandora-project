@@ -5,7 +5,6 @@ import Backdrop from '../../components/Backdrop';
 import { withStyles, Grid } from '@material-ui/core';
 import { Container } from '@material-ui/core';
 import ListaServicos from './ListaServicos.js'
-import Filtro from './filtro'
 
 import service from '../../service/otherService'
 import servicesService from '../../service/servicesService'
