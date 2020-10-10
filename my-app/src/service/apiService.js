@@ -1,5 +1,5 @@
 const axios = require('axios')
-const baseUrl = "http://localhost:8080"
+const baseUrl = "http://ec2-52-20-131-9.compute-1.amazonaws.com:8080"
 
 module.exports = {
     get: async (uri) => {

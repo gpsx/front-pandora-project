@@ -8,7 +8,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardActionArea from '@material-ui/core/CardActionArea';
 // Imagens
-import naoGostei from "./../../assets/naoGostei.jpg";
+import naoGostei from "./../../assets/JulianaBezerra.jpeg";
 import seguranca from "./../../assets/seguranca.jpg";
 import duvida from "./../../assets/duvida.jpg";
 
