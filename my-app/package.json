@@ -13,7 +13,7 @@
     "@testing-library/user-event": "^7.2.1",
     "add": "^2.0.6",
     "animate.css-react": "^1.0.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "bootswatch": "^4.4.1",
     "clsx": "^1.1.0",
     "crypto-js": "^4.0.0",
